@@ -41,15 +41,15 @@
                                         <div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
+                                                    <div class="modal-header mb-0">
                                                         <h5 class="modal-title">Buat Jadwal Survei</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true"><i class="fal fa-times"></i></span>
                                                         </button>
                                                     </div>
                                                     <form class="form-horizontal" method="POST" action="POST" id="form_create">
-                                                        <input type="hidden" name="id_survei" value="0">
                                                         <div class="modal-body">
+                                                            <input type="hidden" name="id_survei" value="0">
                                                             <div class="form-group">
                                                                 <div class="alert alert-danger" style="display: none;"></div>
                                                             </div>
@@ -99,9 +99,11 @@
                                                             <input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name'); ?>">
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="javascript::void" class="btn default" data-dismiss="modal">Cancel</a>
-                                                            <a class="btn btn-danger delete_calendar" style="display: none;">Delete</a>
-                                                            <button type="submit" class="btn green">Submit</button>
+                                                            <a href="javascript::void" class="btn btn-default" data-dismiss="modal">Close</a>
+                                                            <a class="btn btn-warning delete_calendar" style="display: none;">Delete</a>
+                                                            <a class="btn btn-success input_pesanan" style="display: none;">Input Pesanan</a>
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+
                                                         </div>
                                                     </form>
                                                 </div>
@@ -165,6 +167,7 @@
                 deteil(event);
                 editData(event);
                 deleteData(event);
+                linkData(event);
             }
         });
     });
@@ -302,6 +305,7 @@
         $('#create_modal textarea[name=note]').val(event.note);
         $('#create_modal select[name=color]').val(event.color);
         $('#create_modal .delete_calendar').show();
+        $('#create_modal .input_pesanan').show();
         $('#create_modal').modal('show');
     }
 
@@ -374,6 +378,12 @@
                     $('#form_create').find('.alert').html('Wrong server, please save again');
                 }
             });
+        })
+    }
+
+    function linkData(event) {
+        $('#create_modal .input_pesanan').click(function() {
+            window.location.href = 'pesanan/' + event.id_survei;
         })
     }
 </script>
