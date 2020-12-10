@@ -49,7 +49,7 @@
                                                     </div>
                                                     <form class="form-horizontal" method="POST" action="POST" id="form_create">
                                                         <div class="modal-body">
-                                                            <input type="hidden" name="id_survei" value="0">
+                                                            <input type="text" name="id_survei">
                                                             <div class="form-group">
                                                                 <div class="alert alert-danger" style="display: none;"></div>
                                                             </div>
@@ -101,7 +101,7 @@
                                                         <div class="modal-footer">
                                                             <a href="javascript::void" class="btn btn-default" data-dismiss="modal">Close</a>
                                                             <a class="btn btn-warning delete_calendar" style="display: none;">Delete</a>
-                                                            <a class="btn btn-success input_pesanan" style="display: none;">Input Pesanan</a>
+                                                            <a class="btn btn-success input_pesanan" style="display: none;">View</a>
                                                             <button type="submit" class="btn btn-primary">Simpan</button>
 
                                                         </div>
@@ -264,7 +264,7 @@
                 success: function(data) {
                     if (data.status) {
                         eventData = {
-                            id: data.id,
+                            id_survei: data.id_survei,
                             nama: $('#create_modal input[name=nama]').val(),
                             email: $('#create_modal input[name=email]').val(),
                             hp: $('#create_modal input[name=hp]').val(),
@@ -383,7 +383,7 @@
 
     function linkData(event) {
         $('#create_modal .input_pesanan').click(function() {
-            window.location.href = 'pesanan/' + event.id_survei;
+            window.location.href = 'M_survei/read/' + event.id_survei;
         })
     }
 </script>

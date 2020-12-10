@@ -42,7 +42,7 @@ class M_survei extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $this->template->load('template','m_survei/m_survei_list', $data);
+        $this->template->load('template', 'm_survei/m_survei_list', $data);
     }
 
     public function read($id)
@@ -50,18 +50,19 @@ class M_survei extends CI_Controller
         $row = $this->M_survei_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_survei' => $row->id_survei,
-		'tgl_survei' => $row->tgl_survei,
-		'nama' => $row->nama,
-		'alamat' => $row->alamat,
-		'email' => $row->email,
-		'hp' => $row->hp,
-		'note' => $row->note,
-		'color' => $row->color,
-		'created_date' => $row->created_date,
-		'users' => $row->users,
-	    );
-            $this->template->load('template','m_survei/m_survei_read', $data);
+                'id_survei' => $row->id_survei,
+                'tgl_survei' => $row->tgl_survei,
+                'nama' => $row->nama,
+                'alamat' => $row->alamat,
+                'email' => $row->email,
+                'hp' => $row->hp,
+                'note' => $row->note,
+                'color' => $row->color,
+                'created_date' => $row->created_date,
+                'users' => $row->users,
+                'pesanan' => $this->M_survei_model->get_pesanan($id),
+            );
+            $this->template->load('template', 'm_survei/m_survei_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -76,18 +77,18 @@ class M_survei extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('m_survei/create_action'),
-	    'id_survei' => set_value('id_survei'),
-	    'tgl_survei' => set_value('tgl_survei'),
-	    'nama' => set_value('nama'),
-	    'alamat' => set_value('alamat'),
-	    'email' => set_value('email'),
-	    'hp' => set_value('hp'),
-	    'note' => set_value('note'),
-	    'color' => set_value('color'),
-	    'created_date' => set_value('created_date'),
-	    'users' => set_value('users'),
-	);
-        $this->template->load('template','m_survei/m_survei_form', $data);
+            'id_survei' => set_value('id_survei'),
+            'tgl_survei' => set_value('tgl_survei'),
+            'nama' => set_value('nama'),
+            'alamat' => set_value('alamat'),
+            'email' => set_value('email'),
+            'hp' => set_value('hp'),
+            'note' => set_value('note'),
+            'color' => set_value('color'),
+            'created_date' => set_value('created_date'),
+            'users' => set_value('users'),
+        );
+        $this->template->load('template', 'm_survei/m_survei_form', $data);
     }
 
     public function create_action()
@@ -98,16 +99,16 @@ class M_survei extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'tgl_survei' => $this->input->post('tgl_survei',TRUE),
-		'nama' => $this->input->post('nama',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'hp' => $this->input->post('hp',TRUE),
-		'note' => $this->input->post('note',TRUE),
-		'color' => $this->input->post('color',TRUE),
-		'created_date' => $this->input->post('created_date',TRUE),
-		'users' => $this->input->post('users',TRUE),
-	    );
+                'tgl_survei' => $this->input->post('tgl_survei', TRUE),
+                'nama' => $this->input->post('nama', TRUE),
+                'alamat' => $this->input->post('alamat', TRUE),
+                'email' => $this->input->post('email', TRUE),
+                'hp' => $this->input->post('hp', TRUE),
+                'note' => $this->input->post('note', TRUE),
+                'color' => $this->input->post('color', TRUE),
+                'created_date' => $this->input->post('created_date', TRUE),
+                'users' => $this->input->post('users', TRUE),
+            );
 
             $this->M_survei_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
@@ -126,18 +127,18 @@ class M_survei extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('m_survei/update_action'),
-		'id_survei' => set_value('id_survei', $row->id_survei),
-		'tgl_survei' => set_value('tgl_survei', $row->tgl_survei),
-		'nama' => set_value('nama', $row->nama),
-		'alamat' => set_value('alamat', $row->alamat),
-		'email' => set_value('email', $row->email),
-		'hp' => set_value('hp', $row->hp),
-		'note' => set_value('note', $row->note),
-		'color' => set_value('color', $row->color),
-		'created_date' => set_value('created_date', $row->created_date),
-		'users' => set_value('users', $row->users),
-	    );
-            $this->template->load('template','m_survei/m_survei_form', $data);
+                'id_survei' => set_value('id_survei', $row->id_survei),
+                'tgl_survei' => set_value('tgl_survei', $row->tgl_survei),
+                'nama' => set_value('nama', $row->nama),
+                'alamat' => set_value('alamat', $row->alamat),
+                'email' => set_value('email', $row->email),
+                'hp' => set_value('hp', $row->hp),
+                'note' => set_value('note', $row->note),
+                'color' => set_value('color', $row->color),
+                'created_date' => set_value('created_date', $row->created_date),
+                'users' => set_value('users', $row->users),
+            );
+            $this->template->load('template', 'm_survei/m_survei_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -155,16 +156,16 @@ class M_survei extends CI_Controller
             $this->update($this->input->post('id_survei', TRUE));
         } else {
             $data = array(
-		'tgl_survei' => $this->input->post('tgl_survei',TRUE),
-		'nama' => $this->input->post('nama',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'hp' => $this->input->post('hp',TRUE),
-		'note' => $this->input->post('note',TRUE),
-		'color' => $this->input->post('color',TRUE),
-		'created_date' => $this->input->post('created_date',TRUE),
-		'users' => $this->input->post('users',TRUE),
-	    );
+                'tgl_survei' => $this->input->post('tgl_survei', TRUE),
+                'nama' => $this->input->post('nama', TRUE),
+                'alamat' => $this->input->post('alamat', TRUE),
+                'email' => $this->input->post('email', TRUE),
+                'hp' => $this->input->post('hp', TRUE),
+                'note' => $this->input->post('note', TRUE),
+                'color' => $this->input->post('color', TRUE),
+                'created_date' => $this->input->post('created_date', TRUE),
+                'users' => $this->input->post('users', TRUE),
+            );
 
             $this->M_survei_model->update($this->input->post('id_survei', TRUE), $data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
@@ -194,21 +195,43 @@ class M_survei extends CI_Controller
             redirect(site_url('m_survei'));
         }
     }
-
+    ///////////////////////////////////pesanan////////////////////////////////////////////////
+    public function create_pesanan()
+    {
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('t_pesanan/create_action'),
+            'id_pesanan' => set_value('id_pesanan'),
+            'no_pesanan' => set_value('no_pesanan'),
+            'id_survei' => set_value('id_survei'),
+            'id_tipe_pesanan' => set_value('id_tipe_pesanan'),
+            'id_jenis_bahan' => set_value('id_jenis_bahan'),
+            'p' => set_value('p'),
+            'l' => set_value('l'),
+            't' => set_value('t'),
+            'note' => set_value('note'),
+            'id_status' => set_value('id_status'),
+            'created_date' => set_value('created_date'),
+            'users' => set_value('users'),
+            'is_deleted' => set_value('is_deleted'),
+        );
+        $this->template->load('template', 'm_survei/m_survei_pesanan', $data);
+    }
+    ///////////////////////////////////////
     public function _rules()
     {
-	$this->form_validation->set_rules('tgl_survei', 'tgl survei', 'trim|required');
-	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
-	$this->form_validation->set_rules('email', 'email', 'trim|required');
-	$this->form_validation->set_rules('hp', 'hp', 'trim|required');
-	$this->form_validation->set_rules('note', 'note', 'trim|required');
-	$this->form_validation->set_rules('color', 'color', 'trim|required');
-	$this->form_validation->set_rules('created_date', 'created date', 'trim|required');
-	$this->form_validation->set_rules('users', 'users', 'trim|required');
+        $this->form_validation->set_rules('tgl_survei', 'tgl survei', 'trim|required');
+        $this->form_validation->set_rules('nama', 'nama', 'trim|required');
+        $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+        $this->form_validation->set_rules('email', 'email', 'trim|required');
+        $this->form_validation->set_rules('hp', 'hp', 'trim|required');
+        $this->form_validation->set_rules('note', 'note', 'trim|required');
+        $this->form_validation->set_rules('color', 'color', 'trim|required');
+        $this->form_validation->set_rules('created_date', 'created date', 'trim|required');
+        $this->form_validation->set_rules('users', 'users', 'trim|required');
 
-	$this->form_validation->set_rules('id_survei', 'id_survei', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id_survei', 'id_survei', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -233,39 +256,38 @@ class M_survei extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Tgl Survei");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama");
-	xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
-	xlsWriteLabel($tablehead, $kolomhead++, "Email");
-	xlsWriteLabel($tablehead, $kolomhead++, "Hp");
-	xlsWriteLabel($tablehead, $kolomhead++, "Note");
-	xlsWriteLabel($tablehead, $kolomhead++, "Color");
-	xlsWriteLabel($tablehead, $kolomhead++, "Created Date");
-	xlsWriteLabel($tablehead, $kolomhead++, "Users");
+        xlsWriteLabel($tablehead, $kolomhead++, "Tgl Survei");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama");
+        xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
+        xlsWriteLabel($tablehead, $kolomhead++, "Email");
+        xlsWriteLabel($tablehead, $kolomhead++, "Hp");
+        xlsWriteLabel($tablehead, $kolomhead++, "Note");
+        xlsWriteLabel($tablehead, $kolomhead++, "Color");
+        xlsWriteLabel($tablehead, $kolomhead++, "Created Date");
+        xlsWriteLabel($tablehead, $kolomhead++, "Users");
 
-	foreach ($this->M_survei_model->get_all() as $data) {
+        foreach ($this->M_survei_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->tgl_survei);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->email);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->hp);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->note);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->color);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->created_date);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->users);
+            xlsWriteLabel($tablebody, $kolombody++, $data->tgl_survei);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama);
+            xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
+            xlsWriteLabel($tablebody, $kolombody++, $data->email);
+            xlsWriteLabel($tablebody, $kolombody++, $data->hp);
+            xlsWriteLabel($tablebody, $kolombody++, $data->note);
+            xlsWriteLabel($tablebody, $kolombody++, $data->color);
+            xlsWriteLabel($tablebody, $kolombody++, $data->created_date);
+            xlsWriteLabel($tablebody, $kolombody++, $data->users);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 
         xlsEOF();
         exit();
     }
-
 }
 
 /* End of file M_survei.php */

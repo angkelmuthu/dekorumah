@@ -22,43 +22,52 @@ class M_survei_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    // get pesanan
+    function get_pesanan($id_survei)
+    {
+        $this->db->where('id_survei', $id_survei);
+        return $this->db->get('t_pesanan')->result();
+    }
+
     // get data by id
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
-    
+
     // get total rows
-    function total_rows($q = NULL) {
+    function total_rows($q = NULL)
+    {
         $this->db->like('id_survei', $q);
-	$this->db->or_like('tgl_survei', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('alamat', $q);
-	$this->db->or_like('email', $q);
-	$this->db->or_like('hp', $q);
-	$this->db->or_like('note', $q);
-	$this->db->or_like('color', $q);
-	$this->db->or_like('created_date', $q);
-	$this->db->or_like('users', $q);
-	$this->db->from($this->table);
+        $this->db->or_like('tgl_survei', $q);
+        $this->db->or_like('nama', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('email', $q);
+        $this->db->or_like('hp', $q);
+        $this->db->or_like('note', $q);
+        $this->db->or_like('color', $q);
+        $this->db->or_like('created_date', $q);
+        $this->db->or_like('users', $q);
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
+    function get_limit_data($limit, $start = 0, $q = NULL)
+    {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_survei', $q);
-	$this->db->or_like('tgl_survei', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('alamat', $q);
-	$this->db->or_like('email', $q);
-	$this->db->or_like('hp', $q);
-	$this->db->or_like('note', $q);
-	$this->db->or_like('color', $q);
-	$this->db->or_like('created_date', $q);
-	$this->db->or_like('users', $q);
-	$this->db->limit($limit, $start);
+        $this->db->or_like('tgl_survei', $q);
+        $this->db->or_like('nama', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('email', $q);
+        $this->db->or_like('hp', $q);
+        $this->db->or_like('note', $q);
+        $this->db->or_like('color', $q);
+        $this->db->or_like('created_date', $q);
+        $this->db->or_like('users', $q);
+        $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
 
@@ -81,7 +90,6 @@ class M_survei_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
-
 }
 
 /* End of file M_survei_model.php */
