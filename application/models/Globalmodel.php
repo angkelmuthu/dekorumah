@@ -7,7 +7,7 @@ class Globalmodel extends CI_Model
         if ($where) {
             $this->db->where($where);
         }
-        return $this->db->get($table)->result();
+        return $this->db->get('v_survei')->result();
     }
 
     public function insert($table, $param)

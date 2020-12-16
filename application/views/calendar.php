@@ -28,7 +28,7 @@
                                                 <div class="col-md-12">
                                                     <div class="text-center">
                                                         <div class="btn-group">
-                                                            <a href="#" class="btn btn-block btn-primary add_calendar"> Buat Jadwal Survei
+                                                            <a href="<?php echo site_url('M_survei/create') ?>" class="btn btn-block btn-primary"> Buat Jadwal Survei
                                                                 <i class="fal fa-plus"></i>
                                                             </a>
                                                         </div>
@@ -42,59 +42,54 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header mb-0">
-                                                        <h5 class="modal-title">Buat Jadwal Survei</h5>
+                                                        <h5 class="modal-title">Jadwal Survei</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true"><i class="fal fa-times"></i></span>
                                                         </button>
                                                     </div>
+
                                                     <form class="form-horizontal" method="POST" action="POST" id="form_create">
                                                         <div class="modal-body">
-                                                            <input type="text" name="id_survei">
-                                                            <div class="form-group">
-                                                                <div class="alert alert-danger" style="display: none;"></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="simpleinput">Nama Pelanggan <span class="required"> * </span></label>
-                                                                <input type="text" name="nama" class="form-control" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="simpleinput">Email Pelanggan </label>
-                                                                <input type="text" name="email" class="form-control">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label" for="simpleinput">Handphone Pelanggan <span class="required"> * </span></label>
-                                                                <input type="text" name="hp" class="form-control" required>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label class="form-label">Alamat Survei<span class="required"> * </span></label>
-                                                                <textarea name="alamat" rows="2" class="form-control" placeholder="Enter alamat" required></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="form-label">Note<span class="required"> * </span></label>
-                                                                <textarea name="note" rows="2" class="form-control" placeholder="Enter alamat" required></textarea>
-
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="color" class="form-label">Color</label>
-                                                                <select name="color" class="form-control">
-                                                                    <option value="">Choose</option>
-                                                                    <option style="color:#886ab5;" value="primary">Dark Blue</option>
-                                                                    <option style="color:#868e96;" value="secondary">Gray</option>
-                                                                    <option style="color:#1dc9b7;" value="success">Green</option>
-                                                                    <option style="color:#2196F3;" value="info">Blue</option>
-                                                                    <option style="color:#ffc241;" value="warning">Orange</option>
-                                                                    <option style="color:#fd3995;" value="danger">Red</option>
-                                                                    <option style="color:#505050;" value="dark">Dark</option>
-                                                                    <option style="color:#fff;" value="light">Light</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td width="30%">Nama</td>
+                                                                    <td width="5%">:</td>
+                                                                    <td width="65%">
+                                                                        <span id="nama"></span>
+                                                                        <!-- <input type="text" name="nama" class="form-control" required> -->
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%">Email</td>
+                                                                    <td width="5%">:</td>
+                                                                    <td width="65%"><span id="email"></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%">Handphone</td>
+                                                                    <td width="5%">:</td>
+                                                                    <td width="65%"><span id="hp"></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%">Alamat</td>
+                                                                    <td width="5%">:</td>
+                                                                    <td width="65%"><span id="alamat"></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%">Note</td>
+                                                                    <td width="5%">:</td>
+                                                                    <td width="65%"><span id="note"></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%">Sales</td>
+                                                                    <td width="5%">:</td>
+                                                                    <td width="65%"><span id="nm_sales"></span></td>
+                                                                </tr>
+                                                            </table>
+                                                            <input type="hidden" name="id_survei">
+                                                            <!-- <div class="form-group">
                                                                 <label class="form-label">Tanggal Survei</label>
                                                                 <input class="form-control" name="tgl_survei" id="example-date" type="date" name="date">
-                                                            </div>
+                                                            </div> -->
                                                             <input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>">
                                                             <input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name'); ?>">
                                                         </div>
@@ -102,7 +97,7 @@
                                                             <a href="javascript::void" class="btn btn-default" data-dismiss="modal">Close</a>
                                                             <a class="btn btn-warning delete_calendar" style="display: none;">Delete</a>
                                                             <a class="btn btn-success input_pesanan" style="display: none;">View</a>
-                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                            <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
 
                                                         </div>
                                                     </form>
@@ -298,7 +293,7 @@
         $('#create_modal input[name=id_survei]').val(event.id);
         $('#create_modal input[name=tgl_survei]').val(moment(event.start).format('YYYY-MM-DD'));
         $('#create_modal input[name=tgl_survei]').val(moment(event.end).format('YYYY-MM-DD'));
-        $('#create_modal input[name=nama]').val(event.nama);
+        //$('#create_modal #nama').data(event.nama);
         $('#create_modal input[name=email]').val(event.email);
         $('#create_modal input[name=hp]').val(event.hp);
         $('#create_modal textarea[name=alamat]').val(event.alamat);
@@ -307,6 +302,12 @@
         $('#create_modal .delete_calendar').show();
         $('#create_modal .input_pesanan').show();
         $('#create_modal').modal('show');
+        document.getElementById("nama").innerHTML = event.nama;
+        document.getElementById("email").innerHTML = event.email;
+        document.getElementById("hp").innerHTML = event.hp;
+        document.getElementById("alamat").innerHTML = event.alamat;
+        document.getElementById("note").innerHTML = event.note;
+        document.getElementById("nm_sales").innerHTML = event.nm_sales;
     }
 
     function editData(event) {

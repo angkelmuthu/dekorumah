@@ -60,6 +60,8 @@ class M_survei extends CI_Controller
                 'color' => $row->color,
                 'created_date' => $row->created_date,
                 'users' => $row->users,
+                'status' => $row->status,
+                'nm_sales' => $row->nm_sales,
                 'pesanan' => $this->M_survei_model->get_pesanan($id),
             );
             $this->template->load('template', 'm_survei/m_survei_read', $data);
@@ -87,6 +89,8 @@ class M_survei extends CI_Controller
             'color' => set_value('color'),
             'created_date' => set_value('created_date'),
             'users' => set_value('users'),
+            'id_status' => set_value('id_status'),
+            'id_sales' => set_value('id_sales'),
         );
         $this->template->load('template', 'm_survei/m_survei_form', $data);
     }
@@ -108,6 +112,8 @@ class M_survei extends CI_Controller
                 'color' => $this->input->post('color', TRUE),
                 'created_date' => $this->input->post('created_date', TRUE),
                 'users' => $this->input->post('users', TRUE),
+                'id_sales' => $this->input->post('id_sales', TRUE),
+                'id_status' => $this->input->post('id_status', TRUE),
             );
 
             $this->M_survei_model->insert($data);
@@ -137,6 +143,8 @@ class M_survei extends CI_Controller
                 'color' => set_value('color', $row->color),
                 'created_date' => set_value('created_date', $row->created_date),
                 'users' => set_value('users', $row->users),
+                'id_status' => set_value('id_status', $row->id_status),
+                'id_sales' => set_value('id_sales', $row->id_sales),
             );
             $this->template->load('template', 'm_survei/m_survei_form', $data);
         } else {
@@ -165,6 +173,8 @@ class M_survei extends CI_Controller
                 'color' => $this->input->post('color', TRUE),
                 'created_date' => $this->input->post('created_date', TRUE),
                 'users' => $this->input->post('users', TRUE),
+                'id_sales' => $this->input->post('id_sales', TRUE),
+                'id_status' => $this->input->post('id_status', TRUE),
             );
 
             $this->M_survei_model->update($this->input->post('id_survei', TRUE), $data);

@@ -19,7 +19,7 @@ class M_survei_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        return $this->db->get('v_survei')->result();
     }
 
     // get pesanan
@@ -33,7 +33,7 @@ class M_survei_model extends CI_Model
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        return $this->db->get('v_survei')->row();
     }
 
     // get total rows
@@ -46,10 +46,9 @@ class M_survei_model extends CI_Model
         $this->db->or_like('email', $q);
         $this->db->or_like('hp', $q);
         $this->db->or_like('note', $q);
-        $this->db->or_like('color', $q);
-        $this->db->or_like('created_date', $q);
-        $this->db->or_like('users', $q);
-        $this->db->from($this->table);
+        $this->db->or_like('status', $q);
+        $this->db->or_like('nm_sales', $q);
+        $this->db->from('v_survei');
         return $this->db->count_all_results();
     }
 
@@ -62,13 +61,10 @@ class M_survei_model extends CI_Model
         $this->db->or_like('nama', $q);
         $this->db->or_like('alamat', $q);
         $this->db->or_like('email', $q);
-        $this->db->or_like('hp', $q);
-        $this->db->or_like('note', $q);
-        $this->db->or_like('color', $q);
-        $this->db->or_like('created_date', $q);
-        $this->db->or_like('users', $q);
+        $this->db->or_like('status', $q);
+        $this->db->or_like('nm_sales', $q);
         $this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+        return $this->db->get('v_survei')->result();
     }
 
     // insert data

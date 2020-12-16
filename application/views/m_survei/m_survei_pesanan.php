@@ -36,15 +36,15 @@
                                     <td><?php echo select2_dinamis('id_jenis_bahan', 'm_jenis_bahan', 'id_jenis_bahan', 'nm_jenis_bahan') ?></td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>P <?php echo form_error('p') ?></td>
+                                    <td width='200'>Panjang <?php echo form_error('p') ?></td>
                                     <td><input type="text" class="form-control" name="p" id="p" placeholder="P" value="<?php echo $p; ?>" /></td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>L <?php echo form_error('l') ?></td>
+                                    <td width='200'>Lebar <?php echo form_error('l') ?></td>
                                     <td><input type="text" class="form-control" name="l" id="l" placeholder="L" value="<?php echo $l; ?>" /></td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>T <?php echo form_error('t') ?></td>
+                                    <td width='200'>Tinggi <?php echo form_error('t') ?></td>
                                     <td><input type="text" class="form-control" name="t" id="t" placeholder="T" value="<?php echo $t; ?>" /></td>
                                 </tr>
                                 <tr>
@@ -54,13 +54,13 @@
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <input type="text" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
-                                        <input type="text" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
-                                        <input type="text" name="is_deleted" value="N" />
+                                        <input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
+                                        <input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
+                                        <input type="hidden" name="is_deleted" value="N" />
                                         <input type="hidden" name="id_survei" value="<?php echo $id_survei; ?>" />
                                         <input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <a href="<?php echo site_url('t_pesanan') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td>
+                                        <a href="<?php echo site_url('m_survei/read/' . $this->uri->segment(3)) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td>
                                 </tr>
                             </table>
                         </form>

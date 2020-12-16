@@ -37,6 +37,14 @@
                                 <td>Tgl Survei</td>
                                 <td><?php echo $tgl_survei; ?></td>
                             </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td><?php echo $status; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Sales</td>
+                                <td><?php echo $nm_sales; ?></td>
+                            </tr>
                             <!-- <tr>
                                 <td>Color</td>
                                 <td><?php echo $color; ?></td>
@@ -61,7 +69,7 @@
         <div class="col-xl-8">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>Kostumer Read</h2>
+                    <h2>Data Pesanan</h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                         <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>

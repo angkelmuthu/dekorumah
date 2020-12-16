@@ -14,7 +14,7 @@ class Calendar extends CI_Controller
 
     public function index()
     {
-        $data_calendar = $this->modeldb->get_list($this->table);
+        $data_calendar = $this->modeldb->get_list('v_survei');
         $calendar = array();
         foreach ($data_calendar as $key => $val) {
             $calendar[] = array(
@@ -27,6 +27,7 @@ class Calendar extends CI_Controller
                 'start' => date_format(date_create($val->tgl_survei), "Y-m-d H:i:s"),
                 'end'  => date_format(date_create($val->tgl_survei), "Y-m-d H:i:s"),
                 'color' => $val->color,
+                'nm_sales' => $val->nm_sales,
             );
         }
 
