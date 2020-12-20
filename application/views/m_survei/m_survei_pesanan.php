@@ -25,27 +25,62 @@
                             <table class='table table-striped'>
                                 <tr>
                                     <td width='200'>No Pesanan <?php echo form_error('no_pesanan') ?></td>
-                                    <td><input type="text" class="form-control" name="no_pesanan" id="no_pesanan" placeholder="No Pesanan" value="<?php echo $no; ?>" /></td>
+                                    <td><input type="text" class="form-control" name="no_pesanan" id="no_pesanan" placeholder="No Pesanan" value="<?php echo $no; ?>" readonly /></td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Id Tipe Pesanan <?php echo form_error('id_tipe_pesanan') ?></td>
-                                    <td><?php echo select2_dinamis('id_tipe_pesanan', 'm_tipe_pesanan', 'id_tipe_pesanan', 'nm_tipe_pesanan') ?></td>
+                                    <td width='200'>Barang</td>
+                                    <td>
+                                        <select name="id_barang" id="barang" class="select2 form-control w-100">
+                                            <option value="">Select Barang</option>
+                                            <?php
+                                            foreach ($barang as $row) {
+                                                echo '<option value="' . $row->id_barang . '">' . $row->nm_barang . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Id Jenis Bahan <?php echo form_error('id_jenis_bahan') ?></td>
-                                    <td><?php echo select2_dinamis('id_jenis_bahan', 'm_jenis_bahan', 'id_jenis_bahan', 'nm_jenis_bahan') ?></td>
+                                    <td width='200'>Sub Barang <?php echo form_error('id_Barang_sub') ?></td>
+                                    <td>
+                                        <div class="ajax-loader">
+                                            <img id="loading-barangsub" style="display:none;" src="<?php echo base_url() ?>assets/smartadmin/img/loading.gif" height="40px" class="img-responsive" />
+                                        </div>
+                                        <select name="id_barang_sub" class="select2 form-control w-100" id="barang_sub" required>
+                                            <option value="">Select Sub Barang</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Panjang <?php echo form_error('p') ?></td>
-                                    <td><input type="text" class="form-control" name="p" id="p" placeholder="P" value="<?php echo $p; ?>" /></td>
+                                    <td width='200'>Barang Detail <?php echo form_error('id_barang') ?></td>
+                                    <td>
+                                        <div class="ajax-loader">
+                                            <img id="loading-barang_detail" style="display:none;" src="<?php echo base_url() ?>assets/smartadmin/img/loading.gif" height="40px" class="img-responsive" />
+                                        </div>
+                                        <select name="id_barang_detail" class="select2 form-control w-100" id="barang_detail" required>
+                                            <option value="">Select Barang Detail</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Lebar <?php echo form_error('l') ?></td>
-                                    <td><input type="text" class="form-control" name="l" id="l" placeholder="L" value="<?php echo $l; ?>" /></td>
+                                    <td width='200'>Ukuran <?php echo form_error('ukuran') ?></td>
+                                    <td><input type="text" class="form-control" name="ukuran" id="ukuran" placeholder="ukuran" value="<?php echo $ukuran; ?>" /></td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Tinggi <?php echo form_error('t') ?></td>
-                                    <td><input type="text" class="form-control" name="t" id="t" placeholder="T" value="<?php echo $t; ?>" /></td>
+                                    <td width='200'>Qty/Volume <?php echo form_error('volume') ?></td>
+                                    <td><input type="text" class="form-control" name="volume" id="volume" placeholder="Volume" value="<?php echo $volume; ?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Satuan</td>
+                                    <td><input type="text" class="form-control" name="satuan" id="satuan" placeholder="satuan" value="<?php echo $satuan; ?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Harga (satuan/volume) <?php echo form_error('volume') ?></td>
+                                    <td><input type="text" class="form-control" name="harga" id="harga" placeholder="harga" value="<?php echo $harga; ?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Total Harga</td>
+                                    <td><input type="text" class="form-control" name="total" id="total" placeholder="total" value="<?php echo $harga; ?>" readonly /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Note <?php echo form_error('note') ?></td>
@@ -76,3 +111,78 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/select2/select2.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#volume, #harga").keyup(function() {
+            var hargax = $("#harga").val();
+            var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
+            var volume = $("#volume").val();
+            var total = parseInt(harga) * volume;
+            fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+            $("#total").val(fixed);
+        });
+        $('#barang').change(function() {
+            var id_barang = $('#barang').val();
+            if (id_barang != '') {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>m_survei/fetch_barang_sub",
+                    method: "POST",
+                    data: {
+                        id_barang: id_barang
+                    },
+                    success: function(data) {
+                        $('#barang_sub').html(data);
+                        $('#barang_detail').html('<option value="">Select Detail Barang</option>');
+                    }
+                });
+            } else {
+                $('#barang_sub').html('<option value="">Select Sub Barang</option>');
+                $('#barang_detail').html('<option value="">Select barang_detail</option>');
+            }
+        });
+
+        $('#barang_sub').change(function() {
+            var id_barang = $('#barang').val();
+            var id_barang_sub = $('#barang_sub').val();
+            if (id_barang_sub != '' && id_barang != '') {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>m_survei/fetch_barang_detail",
+                    method: "POST",
+                    data: {
+                        id_barang: id_barang,
+                        id_barang_sub: id_barang_sub
+                    },
+                    success: function(data) {
+                        $('#barang_detail').html(data);
+                        $('#harga').val();
+                    }
+                });
+            } else {
+                $('#barang_detail').html('<option value="">Select barang_detail</option>');
+                $('#harga').val();
+            }
+        });
+        $('#barang_detail').change(function() {
+            var id_barang_detail = $('#barang_detail').val();
+            if (id_barang_detail != '') {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>m_survei/fetch_barang_harga",
+                    method: "POST",
+                    data: {
+                        id_barang_detail: id_barang_detail
+                    },
+                    success: function(data) {
+                        var json = data,
+                            obj = JSON.parse(json);
+                        hargax = obj.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+                        //hargax = parseInt(obj.harga).toLocaleString();
+                        $('#harga').val(hargax);
+                    }
+                });
+            } else {
+                $('#harga').val('');
+            }
+        });
+
+    });
+</script>

@@ -11,6 +11,7 @@ class M_survei extends CI_Controller
         is_login();
         $this->load->model('M_survei_model');
         $this->load->library('form_validation');
+        $this->load->library('upload');
     }
 
     public function index()
@@ -76,6 +77,7 @@ class M_survei extends CI_Controller
 
     public function create()
     {
+
         $data = array(
             'button' => 'Create',
             'action' => site_url('m_survei/create_action'),
@@ -208,24 +210,167 @@ class M_survei extends CI_Controller
     ///////////////////////////////////pesanan////////////////////////////////////////////////
     public function create_pesanan()
     {
+        //$data['unit'] = $this->M_survei_model->fetch_unit();
         $data = array(
             'button' => 'Create',
-            'action' => site_url('t_pesanan/create_action'),
+            'action' => site_url('m_survei/create_pesanan_action'),
             'id_pesanan' => set_value('id_pesanan'),
             'no_pesanan' => set_value('no_pesanan'),
             'id_survei' => set_value('id_survei'),
-            'id_tipe_pesanan' => set_value('id_tipe_pesanan'),
-            'id_jenis_bahan' => set_value('id_jenis_bahan'),
-            'p' => set_value('p'),
-            'l' => set_value('l'),
-            't' => set_value('t'),
+            'id_unit' => set_value('id_unit'),
+            'id_bahan' => set_value('id_bahan'),
+            'id_barang' => set_value('id_barang'),
+            'ukuran' => set_value('ukuran'),
+            'volume' => set_value('volume'),
+            'satuan' => set_value('satuan'),
+            'harga' => set_value('harga'),
+            'total' => set_value('total'),
             'note' => set_value('note'),
-            'id_status' => set_value('id_status'),
             'created_date' => set_value('created_date'),
             'users' => set_value('users'),
             'is_deleted' => set_value('is_deleted'),
+            'barang' => $this->M_survei_model->fetch_barang(),
         );
         $this->template->load('template', 'm_survei/m_survei_pesanan', $data);
+    }
+    public function create_pesanan_action()
+    {
+        // $this->_rules();
+
+        // if ($this->form_validation->run() == FALSE) {
+        //     $this->update($this->input->post('id_survei', TRUE));
+        // } else {
+        $data = array(
+            'no_pesanan' => $this->input->post('no_pesanan', TRUE),
+            'id_survei' => $this->input->post('id_survei', TRUE),
+            'id_barang' => $this->input->post('id_barang', TRUE),
+            'id_barang_sub' => $this->input->post('id_barang_sub', TRUE),
+            'id_barang_detail' => $this->input->post('id_barang_detail', TRUE),
+            'ukuran' => $this->input->post('ukuran', TRUE),
+            'volume' => $this->input->post('volume', TRUE),
+            'satuan' => $this->input->post('satuan', TRUE),
+            'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
+            'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'note' => $this->input->post('note', TRUE),
+            'created_date' => $this->input->post('created_date', TRUE),
+            'users' => $this->input->post('users', TRUE),
+            'is_deleted' => $this->input->post('is_deleted', TRUE),
+        );
+
+        $this->M_survei_model->insert_pesanan($data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Insert Record Success</strong></div>');
+        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+        //}
+    }
+    function fetch_barang_sub()
+    {
+        if ($this->input->post('id_barang')) {
+            echo $this->M_survei_model->fetch_barang_sub($this->input->post('id_barang'));
+        }
+    }
+    function fetch_barang_detail()
+    {
+        if ($this->input->post('id_barang_sub')) {
+            echo $this->M_survei_model->fetch_barang_detail($this->input->post('id_barang'), $this->input->post('id_barang_sub'));
+        }
+    }
+    function fetch_barang_harga()
+    {
+        $id_barang_detail = $this->input->post('id_barang_detail');
+        $data = $this->M_survei_model->fetch_barang_harga($id_barang_detail);
+        echo json_encode($data);
+    }
+    function print_spk()
+    {
+        $this->template->load('template', 'm_survei/print_spk');
+    }
+    public function upload_gambar()
+    {
+
+        if (isset($_FILES["gambar"]["name"])) {
+            $config['upload_path'] = './assets/gambar/';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('gambar')) {
+                $this->upload->display_errors();
+                return FALSE;
+            } else {
+                $data = $this->upload->data();
+                //Compress Image
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './assets/gambar/' . $data['file_name'];
+                $config['create_thumb'] = FALSE;
+                // $config['maintain_ratio'] = TRUE;
+                // $config['quality'] = '60%';
+                // $config['width'] = 800;
+                // $config['height'] = 800;
+                $config['new_image'] = './assets/gambar/' . $data['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+                $image = $data['file_name'];
+            }
+        }
+        $data = array(
+            'id_survei' => $this->input->post('id_survei', TRUE),
+            'file' => $image,
+            'note' => $this->input->post('note', TRUE),
+            'created_by' => $this->session->userdata('full_name'),
+            'created_date' => date('Y-m-d H:i:s'),
+        );
+
+        $this->M_survei_model->upload_gambar($data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Create Record Success</strong></div>');
+        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+    }
+    public function create_debit()
+    {
+        $data = array(
+            'id_survei' => $this->input->post('id_survei', TRUE),
+            'id_group' => $this->input->post('id_group', TRUE),
+            'id_group_sub' => $this->input->post('id_group_sub', TRUE),
+            'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'note' => $this->input->post('note', TRUE),
+            'created_by' => $this->session->userdata('full_name'),
+            'created_date' => date('Y-m-d H:i:s'),
+        );
+
+        $this->M_survei_model->insert_debit($data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Insert Record Success</strong></div>');
+        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+        //}
+    }
+    public function create_kredit()
+    {
+        $data = array(
+            'id_survei' => $this->input->post('id_survei', TRUE),
+            'id_group' => $this->input->post('id_group', TRUE),
+            'id_group_sub' => $this->input->post('id_group_sub', TRUE),
+            'deskripsi' => $this->input->post('deskripsi', TRUE),
+            'qty' => $this->input->post('qty', TRUE),
+            'satuan' => $this->input->post('satuan', TRUE),
+            'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
+            'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'note' => $this->input->post('note', TRUE),
+            'created_by' => $this->session->userdata('full_name'),
+            'created_date' => date('Y-m-d H:i:s'),
+        );
+
+        $this->M_survei_model->insert_debit($data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Insert Record Success</strong></div>');
+        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+        //}
     }
     ///////////////////////////////////////
     public function _rules()

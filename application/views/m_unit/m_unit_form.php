@@ -3,7 +3,7 @@
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                <h2>INPUT DATA MASTER JENIS BAHAN</h2>
+                <h2>INPUT DATA UNIT</h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                     <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -17,12 +17,11 @@
 <table class='table table-striped'>
 
 
-	    <tr><td width='200'>Nm Jenis Bahan <?php echo form_error('nm_jenis_bahan') ?></td><td><input type="text" class="form-control" name="nm_jenis_bahan" id="nm_jenis_bahan" placeholder="Nm Jenis Bahan" value="<?php echo $nm_jenis_bahan; ?>" /></td></tr>
-	    <tr><td width='200'>Harga <?php echo form_error('harga') ?></td><td><input type="number" class="form-control" name="harga" id="harga" placeholder="Harga" value="<?php echo $harga; ?>" /></td></tr>
-	    <tr><td width='200'>Aktif <?php echo form_error('aktif') ?></td><td><?php echo radiobtn_dinamis('aktif', 'm_aktif', 'aktif', 'ket') ?></td></tr>
-	    <tr><td></td><td><input type="hidden" name="id_jenis_bahan" value="<?php echo $id_jenis_bahan; ?>" /> 
+	    <tr><td width='200'>Nm Unit <?php echo form_error('nm_unit') ?></td><td><input type="text" class="form-control" name="nm_unit" id="nm_unit" placeholder="Nm Unit" value="<?php echo $nm_unit; ?>" /></td></tr>
+	    <tr><td width='200'>Aktif <?php echo form_error('aktif') ?></td><td><?php echo cmb_dinamis('aktif', 'm_aktif', 'aktif', 'ket') ?></td></tr>
+	    <tr><td></td><td><input type="hidden" name="id_unit" value="<?php echo $id_unit; ?>" /> 
 	    <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button> 
-	    <a href="<?php echo site_url('m_jenis_bahan') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td></tr>
+	    <a href="<?php echo site_url('m_unit') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td></tr>
 	</table></form>        </div>
 </div>
 

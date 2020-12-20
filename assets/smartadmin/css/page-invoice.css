@@ -93,7 +93,7 @@ div[data-size="A4"] {
     background-size: cover;
     padding: 4rem;
     position: relative;
-    height: 360mm;
+    height: 320mm;
 }
 
 @media only screen and (max-width: 992px) {

@@ -3,7 +3,7 @@
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                <h2>KELOLA DATA MASTER TIPE</h2>
+                <h2>KELOLA DATA UNIT</h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                     <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -13,12 +13,12 @@
             <div class="panel-container show">
                 <div class="panel-content">
                     <div class="text-center">
-        <?php echo anchor(site_url('m_tipe_pesanan/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
+        <?php echo anchor(site_url('m_unit/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
         <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
             <thead>
                 <tr>
                     <th width="30px">No</th>
-		    <th>Nm Tipe Pesanan</th>
+		    <th>Nm Unit</th>
 		    <th>Aktif</th>
 		    <th width="200px">Action</th>
                 </tr>
@@ -66,12 +66,12 @@
                     },
                     processing: true,
                     serverSide: true,
-                    ajax: {"url": "m_tipe_pesanan/json", "type": "POST"},
+                    ajax: {"url": "m_unit/json", "type": "POST"},
                     columns: [
                         {
-                            "data": "id_tipe_pesanan",
+                            "data": "id_unit",
                             "orderable": false
-                        },{"data": "nm_tipe_pesanan"},{"data": "aktif"},
+                        },{"data": "nm_unit"},{"data": "aktif"},
                         {
                             "data" : "action",
                             "orderable": false,
