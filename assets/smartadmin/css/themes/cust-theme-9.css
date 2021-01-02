@@ -5,10 +5,10 @@
 /* #IMPORTS ~~
 ========================================================================== */
 /*---------------------------------------------------
-    SASS ELements (based on LESS Elements 0.9 http://lesselements.com) 
+    SASS ELements (based on LESS Elements 0.9 http://lesselements.com)
   -------------------------------- -------------------
     LESS ELEMENTS made by Dmitry Fadeyev (http://fadeyev.net)
-    SASS port by Samuel Beek (http://samuelbeek.com) 
+    SASS port by Samuel Beek (http://samuelbeek.com)
   ---------------------------------------------------*/
 /*------------------------
     Usage
@@ -35,12 +35,12 @@ From this W3C document: http://www.webmasterworld.com/r.cgi?f=88&d=9769&url=http
 
 usage:
 @include text-contrast($bgcolor)
-      
-Color brightness is determined by the following formula: 
+
+Color brightness is determined by the following formula:
 ((Red value X 299) + (Green value X 587) + (Blue value X 114)) / 1000
 ------------------------*/
 /*------------------------
- color factory 
+ color factory
   eg: @include paint($blue-grey-50, bg-blue-grey-50);
 ------------------------*/
 /* backface visibility */
@@ -48,7 +48,7 @@ Color brightness is determined by the following formula:
 /*  THEME COLORs
 ========================================================================== */
 /* Looks good on chrome default color profile */
-/* looks good in sRGB but washed up on chrome default 
+/* looks good in sRGB but washed up on chrome default
 $color-primary:						#826bb0;
 $color-success:						#31cb55;
 $color-info:						#5e93ec;
@@ -151,7 +151,7 @@ http://www.standardista.com/px-to-rem-conversion-if-root-font-size-is-16px/
 /*  Z-INDEX declearation
 ========================================================================== */
 /* we adjust bootstrap z-index to be higher than our higest z-index*/
-/*  CUSTOM ICON PREFIX 
+/*  CUSTOM ICON PREFIX
 ========================================================================== */
 /*  PRINT CSS (landscape or portrait)
 ========================================================================== */
@@ -189,11 +189,11 @@ aside.page-sidebar ($nav-width, $nav-background)
 		ul.nav-menu
 			li
 				a (parent level-0..., $nav-link-color, $nav-link-hover-color, $nav-link-hover-bg-color, $nav-link-hover-left-border-color)
-					icon 
+					icon
 					span
-					collapse-sign 
-					
-				ul.nav-menu-sub-one  
+					collapse-sign
+
+				ul.nav-menu-sub-one
 					li
 						a ($nav-level-1... $nav-sub-link-height)
 							span
@@ -229,21 +229,21 @@ aside.page-sidebar ($nav-width, $nav-background)
 /* List Table */
 /*   PAGE SETTINGS
 ========================================================================== */
-/*   PAGE BREADCRUMB 
+/*   PAGE BREADCRUMB
 ========================================================================== */
-/*   PAGE COMPONENT PANELS 
+/*   PAGE COMPONENT PANELS
 ========================================================================== */
-/*   PAGE COMPONENT PROGRESSBARS 
+/*   PAGE COMPONENT PROGRESSBARS
 ========================================================================== */
-/*   PAGE COMPONENT MESSENGER 
+/*   PAGE COMPONENT MESSENGER
 ========================================================================== */
 /*   FOOTER
 ========================================================================== */
 /*   GLOBALS
 ========================================================================== */
 /* ACCESSIBILITIES */
-/* PLACEHOLDER 
-============================================= 
+/* PLACEHOLDER
+=============================================
 
 EXAMPLE:
 
@@ -272,7 +272,7 @@ RESULT:
 .page-logo, .page-sidebar, .nav-footer, .bg-brand-gradient {
   background-image: -webkit-gradient(linear, right top, left top, from(rgba(195, 122, 214, 0.18)), to(transparent));
   background-image: linear-gradient(270deg, rgba(195, 122, 214, 0.18), transparent);
-  background-color: #bf662c; }
+  background-color: #dfa837; }
 
 /*
 %shadow-hover {
@@ -540,7 +540,7 @@ html body {
     .nav-function-top .page-header {
       background-image: -webkit-gradient(linear, right top, left top, from(rgba(195, 122, 214, 0.18)), to(transparent));
       background-image: linear-gradient(270deg, rgba(195, 122, 214, 0.18), transparent);
-      background-color: #bf662c;
+      background-color: #dfa837;
       -webkit-box-shadow: 0px 0px 14px 0px rgba(200, 101, 35, 0.13);
               box-shadow: 0px 0px 14px 0px rgba(200, 101, 35, 0.13); }
       .nav-function-top .page-header .header-icon:not(.btn) > [class*='fa-']:first-child,
@@ -564,7 +564,7 @@ html body {
       .nav-function-top .page-sidebar .primary-nav .nav-menu > li > a > .collapse-sign {
         color: #e8ba9c; }
       .nav-function-top .page-sidebar .primary-nav .nav-menu > li a {
-        color: #bf662c; }
+        color: #dfa837; }
       .nav-function-top .page-sidebar .primary-nav .nav-menu > li > ul {
         background: #d3783c; }
         .nav-function-top .page-sidebar .primary-nav .nav-menu > li > ul li a {
@@ -588,18 +588,18 @@ html body {
   .nav-function-minify:not(.nav-function-top) .page-sidebar .primary-nav .nav-menu > li > a > .nav-link-text {
     background: trasparent; }
   .nav-function-minify:not(.nav-function-top) .page-sidebar .primary-nav .nav-menu > li > a + ul {
-    background-color: #bf662c; }
+    background-color: #dfa837; }
     .nav-function-minify:not(.nav-function-top) .page-sidebar .primary-nav .nav-menu > li > a + ul:before {
-      color: #bf662c; }
+      color: #dfa837; }
   .nav-function-minify:not(.nav-function-top) .page-sidebar .primary-nav:hover {
     overflow: visible; }
     .nav-function-minify:not(.nav-function-top) .page-sidebar .primary-nav:hover .nav-menu > li:hover > a {
       background: #d06f30;
       color: #fff; }
       .nav-function-minify:not(.nav-function-top) .page-sidebar .primary-nav:hover .nav-menu > li:hover > a > .nav-link-text:last-child {
-        background: #bf662c; }
+        background: #dfa837; }
         .nav-function-minify:not(.nav-function-top) .page-sidebar .primary-nav:hover .nav-menu > li:hover > a > .nav-link-text:last-child:before {
-          color: #bf662c; }
+          color: #dfa837; }
   .nav-function-minify:not(.nav-function-top) .page-header [data-class="nav-function-minify"] {
     background: dimgray;
     border-color: #4f4f4f !important;
@@ -609,11 +609,11 @@ html body {
   color: #e4ac87; }
 
 .nav-function-fixed .nav-footer {
-  background: #bf662c; }
+  background: #dfa837; }
   .nav-function-fixed .nav-footer:before {
     background: rgba(213, 128, 73, 0.2);
-    background: -webkit-gradient(linear, left top, right top, from(#bf662c), color-stop(50%, #da8f5d), color-stop(50%, #da8f5d), to(#bf662c));
-    background: linear-gradient(to right, #bf662c 0%, #da8f5d 50%, #da8f5d 50%, #bf662c 100%); }
+    background: -webkit-gradient(linear, left top, right top, from(#dfa837), color-stop(50%, #da8f5d), color-stop(50%, #da8f5d), to(#dfa837));
+    background: linear-gradient(to right, #dfa837 0%, #da8f5d 50%, #da8f5d 50%, #dfa837 100%); }
 
 @media (min-width: 992px) {
   .nav-function-minify .nav-footer {
@@ -661,9 +661,9 @@ html body {
   color: #fff;
   background-color: #e59c6c; }
 
-/* 	DEV NOTE: The reason why we had to add this layer for alert colors is because BS4 
-	does not allow you to add your own alert colors via variable control rather 
-	through a systemetic agent that changes the theme colors. 
+/* 	DEV NOTE: The reason why we had to add this layer for alert colors is because BS4
+	does not allow you to add your own alert colors via variable control rather
+	through a systemetic agent that changes the theme colors.
 
 	REF: https://github.com/twbs/bootstrap/issues/24341#issuecomment-337457218
 */

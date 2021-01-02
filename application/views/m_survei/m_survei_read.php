@@ -2,6 +2,35 @@
 <main id="js-page-content" role="main" class="page-content">
     <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
     <div class="row">
+        <div class="col-xl-12 mb-2">
+            <ul class="step d-flex flex-nowrap">
+                <li class="step-item <?php if ($id_status == 1) {
+                                            echo ' active';
+                                        }; ?>">
+                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/1'); ?>" class="">PROSPEK</a>
+                </li>
+                <li class="step-item <?php if ($id_status == 2) {
+                                            echo ' active';
+                                        }; ?>">
+                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/2'); ?>" class="">DESIGN</a>
+                </li>
+                <li class="step-item <?php if ($id_status == 3) {
+                                            echo ' active';
+                                        }; ?>">
+                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/3'); ?>" class="">PRODUKSI</a>
+                </li>
+                <li class="step-item <?php if ($id_status == 4) {
+                                            echo ' active';
+                                        }; ?>">
+                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/4'); ?>" class="">KIRIM</a>
+                </li>
+                <li class="step-item <?php if ($id_status == 5) {
+                                            echo ' active';
+                                        }; ?>">
+                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/5'); ?>" class="">SELESAI</a>
+                </li>
+            </ul>
+        </div>
         <div class="col-xl-4">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
@@ -231,10 +260,10 @@
                             <div class="tab-pane fade" id="js_change_pill_justified-3" role="tabpanel">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#debit-modal">Tambah Pembayaran (Debit)</button>
+                                        <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#debit-modal">Tambah Pengeluaran (Debit)</button>
                                     </div>
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#kredit-modal">Tambah Pengeluaran (Kredit)</button>
+                                        <button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#kredit-modal">Tambah Pembayaran (Kredit)</button>
                                     </div>
                                 </div>
 
@@ -242,7 +271,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">Pembayaran (Debit)</h5>
+                                                <h5 class="modal-title">Pengeluaran (Debit)</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true"><i class="fal fa-times"></i></span>
                                                 </button>
@@ -250,13 +279,13 @@
                                             <form action="<?php echo site_url('m_survei/create_debit') ?>" method="post" enctype="multipart/form-data">
                                                 <div class="modal-body">
                                                     <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">
-                                                    <input type="hidden" name="id_group" value="1">
+                                                    <input type="hidden" name="id_group" value="2">
                                                     <div class="form-group">
                                                         <label class="form-label" for="example-fileinput">Jenis Pembayaran</label>
                                                         <select name="id_group_sub" id="group_sub" class="select2 form-control w-100">
                                                             <option value="">Select Jenis Pembayaran</option>
                                                             <?php
-                                                            $this->db->where('id_group', '1');
+                                                            $this->db->where('id_group', '2');
                                                             $result = $this->db->get('m_group_sub')->result();
                                                             foreach ($result as $row) {
                                                                 echo '<option value="' . $row->id_group_sub . '">' . $row->nm_group_sub . '</option>';
@@ -293,13 +322,13 @@
                                             <form action="<?php echo site_url('m_survei/create_kredit') ?>" method="post" enctype="multipart/form-data">
                                                 <div class="modal-body">
                                                     <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">
-                                                    <input type="hidden" name="id_group" value="2">
+                                                    <input type="hidden" name="id_group" value="1">
                                                     <div class="form-group">
                                                         <label class="form-label" for="example-fileinput">Jenis Pengeluaran</label>
                                                         <select name="id_group_sub" id="group_sub" class="select2 form-control w-100">
                                                             <option value="">Select Jenis Pengeluaran</option>
                                                             <?php
-                                                            $this->db->where('id_group', '2');
+                                                            $this->db->where('id_group', '1');
                                                             $result = $this->db->get('m_group_sub')->result();
                                                             foreach ($result as $row) {
                                                                 echo '<option value="' . $row->id_group_sub . '">' . $row->nm_group_sub . '</option>';
@@ -393,7 +422,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

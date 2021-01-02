@@ -61,6 +61,7 @@ class M_survei extends CI_Controller
                 'color' => $row->color,
                 'created_date' => $row->created_date,
                 'users' => $row->users,
+                'id_status' => $row->id_status,
                 'status' => $row->status,
                 'nm_sales' => $row->nm_sales,
                 'pesanan' => $this->M_survei_model->get_pesanan($id),
@@ -206,6 +207,20 @@ class M_survei extends CI_Controller
             </button><strong> Record Not Found</strong></div>');
             redirect(site_url('m_survei'));
         }
+    }
+
+    public function update_status($id, $status)
+    {
+        $data = array(
+            'id_status' => $status,
+        );
+
+        $this->M_survei_model->update($id, $data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Update Record Success</strong></div>');
+        redirect(site_url('m_survei/read/' . $id));
     }
     ///////////////////////////////////pesanan////////////////////////////////////////////////
     public function create_pesanan()

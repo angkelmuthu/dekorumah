@@ -24,11 +24,13 @@
     <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/formplugins/select2/select2.bundle.css">
     <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/page-invoice.css">
     <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/costume/default.css">
-    <!-- <link id="mytheme" rel="stylesheet" href="<?php echo base_url() ?>assets/smartadmin/css/themes/cust-theme-5.css"> -->
+    <!-- <link id="mytheme" rel="stylesheet" href="<?php echo base_url() ?>assets/smartadmin/css/themes/cust-theme-9.css"> -->
     <!--<link rel="stylesheet" media="screen, print" href="css/your_styles.css">-->
 </head>
 
-<body class="mod-bg-1">
+<!-- <body class="mod-bg-1"> -->
+
+<body class="mod-bg-1 header-function-fixed nav-function-fixed nav-function-top mod-pace-custom nav-mobile-push desktop chrome webkit pace-done blur">
     <!-- DOC: script to save and load page settings -->
     <script>
         /**
