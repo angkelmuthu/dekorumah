@@ -740,7 +740,7 @@
                 <!-- BEGIN Page Footer -->
                 <footer class="page-footer" role="contentinfo">
                     <div class="d-flex align-items-center flex-1 text-muted">
-                        <span class="hidden-md-down fw-700">2020 © MCU-RSKO
+                        <span class="hidden-md-down fw-700">2021 © GALLERY DEKORUMA
                             <!-- <a href='https://www.gotbootstrap.com' class='text-primary fw-500' title='gotbootstrap.com' target='_blank'>gotbootstrap.com</a> -->
                         </span>
                     </div>

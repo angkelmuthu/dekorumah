@@ -105,10 +105,7 @@
                     <div class="panel-toolbar pr-3">
                         <ul class="nav nav-pills border-bottom-0" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#js_change_pill_justified-11" role="tab">Status</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#js_change_pill_justified-1" role="tab">Rincian Pesanan</a>
+                                <a class="nav-link active" data-toggle="tab" href="#js_change_pill_justified-1" role="tab">Rincian Pesanan</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#js_change_pill_justified-2" role="tab">Gambar</a>
@@ -125,9 +122,7 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="tab-content py-3">
-                            <div class="tab-pane fade" id="js_change_pill_justified-11" role="tabpanel">
-                            </div>
-                            <div class="tab-pane fade" id="js_change_pill_justified-1" role="tabpanel">
+                            <div class="tab-pane fade show active" id="js_change_pill_justified-1" role="tabpanel">
                                 <div class="text-center">
                                     <a href="<?php echo site_url('m_survei/create_pesanan/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Tambah Data Pesanan</a>
                                     <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Cetak SPK</a>

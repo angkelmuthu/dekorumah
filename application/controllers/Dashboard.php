@@ -59,6 +59,8 @@ class Dashboard extends CI_Controller
 
         $data = array();
         $data['get_data']   = json_encode($calendar);
+        $data['status_pesanan']   = $this->Dashboard_model->get_status();
+        $data['status_ttl']   = $this->Dashboard_model->get_status_ttl();
         $this->template->load('template', 'dashboard', $data);
     }
 

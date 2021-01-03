@@ -15,39 +15,21 @@ class Dashboard_model extends CI_Model
         parent::__construct();
     }
 
-    // // get all dash
-    // function get_all_dash()
-    // {
-    //     $date = new DateTime("now");
-    //     $curr_date = $date->format('Y-m-d ');
-    //     $this->db->select('a.kdrs,SUM(a.rj) AS rj,SUM(a.ri) AS ri,SUM(a.igd) AS igd,b.nm_rs,SUM(c.lunas) AS lunas,SUM(c.hutang) AS hutang');
-    //     $this->db->from('t_kunjungan a');
-    //     $this->db->join('m_rs b', 'b.kdrs = a.kdrs', 'left');
-    //     $this->db->join('t_pendapatan c', 'c.kdrs = a.kdrs', 'left');
-    //     $this->db->where('DATE(a.tgl)', $curr_date);
-    //     $this->db->group_by('a.kdrs');
-    //     $query = $this->db->get();
-    //     return $query->result();
-    // }
-    // // get data rs by kdrs
-    // function get_master_rs($id)
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('m_rs');
-    //     $this->db->where('kdrs', $id);
-    //     $query = $this->db->get();
-    //     return $query->result();
-    // }
-    // // get data kunjungan hari ini by kdrs
-    // function get_kunjungan_day_by($id)
-    // {
-    //     $date = new DateTime("now");
-    //     $curr_date = $date->format('Y-m-d ');
-    //     $this->db->select('*');
-    //     $this->db->from('t_kunjungan');
-    //     $this->db->where('kdrs', $id);
-    //     $this->db->where('DATE(tgl)', $curr_date);
-    //     $query = $this->db->get();
-    //     return $query->result();
-    // }
+    // get status Pesanan
+    function get_status()
+    {
+        $tahun = date('Y');
+        $this->db->where('YEAR(tgl_survei)', $tahun);
+        $this->db->where('id_status <', '5');
+        $query = $this->db->get('v_survei');
+        return $query->result();
+    }
+    function get_status_ttl()
+    {
+        $tahun = date('Y');
+        $this->db->select('SUM(IF(id_status = 1, 1,0)) AS prospek, SUM(IF(id_status = 2, 1,0)) AS design, SUM(IF(id_status = 3, 1,0)) AS produksi, SUM(IF(id_status = 4, 1,0)) AS kirim, SUM(IF(id_status = 5, 1,0)) AS selesai');
+        $this->db->where('YEAR(tgl_survei)', $tahun);
+        $query = $this->db->get('v_survei');
+        return $query->result();
+    }
 }

@@ -7,97 +7,150 @@
             <small>
             </small>
         </h1>
-        <div class="d-flex mr-4">
-            <!-- <div class="mr-2">
-                <span class="peity-donut" data-peity="{ &quot;fill&quot;: [&quot;#967bbd&quot;, &quot;#ccbfdf&quot;],  &quot;innerRadius&quot;: 14, &quot;radius&quot;: 20 }">7/10</span>
-            </div> -->
+        <!-- <div class="d-flex mr-4">
             <div>
                 <label class="fs-sm mb-0 mt-2 mt-md-0">PPENDAPATAN(KREDIT)</label>
                 <h4 class="font-weight-bold mb-0">14,134</h4>
             </div>
-        </div>
+        </div> -->
         <div class="d-flex mr-0">
-            <!-- <div class="mr-2">
-                <span class="peity-donut" data-peity="{ &quot;fill&quot;: [&quot;#2196F3&quot;, &quot;#9acffa&quot;],  &quot;innerRadius&quot;: 14, &quot;radius&quot;: 20 }">3/10</span>
-            </div> -->
             <div>
-                <label class="fs-sm mb-0 mt-2 mt-md-0">PENGELUARAN(DEBIT)</label>
-                <h4 class="font-weight-bold mb-0">14,134</h4>
+                <label class="fs-sm mb-0 mt-2 mt-md-0">Data Tahun</label>
+                <h4 class="text-right font-weight-bold mb-0"><?php echo date('Y'); ?></h4>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-xl-3">
-            <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">
-                <div class="">
-                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        21.5k
-                        <small class="m-0 l-h-n">SURVEI</small>
-                    </h3>
+        <?php foreach ($status_ttl as $ttl) { ?>
+            <div class="col-sm-6 col-xl-3">
+                <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">
+                    <div class="">
+                        <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                            <?php echo $ttl->prospek ?>
+                            <small class="m-0 l-h-n">PROSPEK</small>
+                        </h3>
+                    </div>
+                    <i class="fal fa-calendar-alt position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1" style="font-size:6rem"></i>
                 </div>
-                <i class="fal fa-calendar-alt position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n1" style="font-size:6rem"></i>
             </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="p-3 bg-warning-400 rounded overflow-hidden position-relative text-white mb-g">
-                <div class="">
-                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        $10,203
-                        <small class="m-0 l-h-n">PROSPEK</small>
-                    </h3>
+
+            <div class="col-sm-6 col-xl-3">
+                <div class="p-3 bg-warning-400 rounded overflow-hidden position-relative text-white mb-g">
+                    <div class="">
+                        <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                            <?php echo $ttl->design ?>
+                            <small class="m-0 l-h-n">DESIGN</small>
+                        </h3>
+                    </div>
+                    <i class="fal fa-file-image position-absolute pos-right pos-bottom opacity-15  mb-n1 mr-n4" style="font-size: 6rem;"></i>
                 </div>
-                <i class="fal fa-clock position-absolute pos-right pos-bottom opacity-15  mb-n1 mr-n4" style="font-size: 6rem;"></i>
             </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="p-3 bg-success-200 rounded overflow-hidden position-relative text-white mb-g">
-                <div class="">
-                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        - 103.72
-                        <small class="m-0 l-h-n">DESIGN</small>
-                    </h3>
+            <div class="col-sm-6 col-xl-3">
+                <div class="p-3 bg-success-200 rounded overflow-hidden position-relative text-white mb-g">
+                    <div class="">
+                        <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                            <?php echo $ttl->produksi ?>
+                            <small class="m-0 l-h-n">PRODUKSI</small>
+                        </h3>
+                    </div>
+                    <i class="fal fa-cogs position-absolute pos-right pos-bottom opacity-15 mb-n5 mr-n6" style="font-size: 8rem;"></i>
                 </div>
-                <i class="fal fa-file-image position-absolute pos-right pos-bottom opacity-15 mb-n5 mr-n6" style="font-size: 8rem;"></i>
             </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="p-3 bg-info-200 rounded overflow-hidden position-relative text-white mb-g">
-                <div class="">
-                    <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        +40%
-                        <small class="m-0 l-h-n">SELESAI</small>
-                    </h3>
+            <div class="col-sm-6 col-xl-3">
+                <div class="p-3 bg-info-200 rounded overflow-hidden position-relative text-white mb-g">
+                    <div class="">
+                        <h3 class="display-4 d-block l-h-n m-0 fw-500">
+                            <?php echo $ttl->selesai ?>
+                            <small class="m-0 l-h-n">SELESAI</small>
+                        </h3>
+                    </div>
+                    <i class="fal fa-thumbs-up position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4" style="font-size: 6rem;"></i>
                 </div>
-                <i class="fal fa-thumbs-up position-absolute pos-right pos-bottom opacity-15 mb-n1 mr-n4" style="font-size: 6rem;"></i>
             </div>
-        </div>
+        <?php } ?>
     </div>
     <div class="row">
-        <div class="col-xl-6">
-            <div id="panel-6" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Pie <span class="fw-300"><i>Chart</i></span>
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div id="panel-6" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Contextual <span class="fw-300"><i>classes</i></span>
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
+                        </div>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <!-- <span class="badge badge-warning">DESIGN</span> -->
+                                <table class="table table-bordered m-0">
+                                    <thead class="thead-themed">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nama Costumer</th>
+                                            <th>Nama Sales</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $i = 1;
+                                        foreach ($status_pesanan as $dt) {
+                                            if ($dt->id_status == 1) {
+                                                $color = 'bg-warning-500';
+                                            } elseif ($dt->id_status == 2) {
+                                                $color = 'bg-success-100';
+                                            } elseif ($dt->id_status == 3) {
+                                                $color = 'bg-primary-400';
+                                            } elseif ($dt->id_status == 4) {
+                                                $color = 'bg-info-500';
+                                            }
+                                        ?>
+                                            <tr class="<?php echo $color ?>">
+                                                <th scope="row"><?php echo $i; ?></th>
+                                                <td><?php echo $dt->nama ?></td>
+                                                <td><?php echo $dt->nm_sales ?></td>
+                                                <td><?php echo $dt->status ?></td>
+                                            </tr>
+                                        <?php $i++;
+                                        } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                        <div class="panel-tag">
-                            Pie charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
+                <!-- <div class="col-xl-12">
+                    <div id="panel-6" class="panel">
+                        <div class="panel-hdr">
+                            <h2>
+                                Pie <span class="fw-300"><i>Chart</i></span>
+                            </h2>
+                            <div class="panel-toolbar">
+                                <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                                <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                                <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                            </div>
                         </div>
-                        <div id="pieChart">
-                            <canvas style="width:100%; height:300px;"></canvas>
+                        <div class="panel-container show">
+                            <div class="panel-content">
+                                <div class="panel-tag">
+                                    Pie charts are probably the most commonly used chart there are. They are divided into segments, the arc of each segment shows the proportional value of each piece of data
+                                </div>
+                                <div id="pieChart">
+                                    <canvas style="width:100%; height:300px;"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
-        <div class="col-xl-6">
+        <div class="col-md-6">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
@@ -209,60 +262,60 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/statistics/chartjs/chartjs.bundle.js"></script>
 <script type="text/javascript">
     /* pie chart */
-    var pieChart = function() {
-        var config = {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: [
-                        11,
-                        16,
-                        7,
-                        3,
-                        14
-                    ],
-                    backgroundColor: [
-                        myapp_get_color.primary_200,
-                        myapp_get_color.primary_400,
-                        myapp_get_color.success_50,
-                        myapp_get_color.success_300,
-                        myapp_get_color.success_500
-                    ],
-                    label: 'My dataset' // for legend
-                }],
-                labels: [
-                    "USA",
-                    "Germany",
-                    "Austalia",
-                    "Canada",
-                    "France"
-                ]
-            },
-            options: {
-                responsive: true,
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                }
-            }
-        };
-        new Chart($("#pieChart > canvas").get(0).getContext("2d"), config);
-    }
+    // var pieChart = function() {
+    //     var config = {
+    //         type: 'pie',
+    //         data: {
+    //             datasets: [{
+    //                 data: [
+    //                     11,
+    //                     16,
+    //                     7,
+    //                     3,
+    //                     14
+    //                 ],
+    //                 backgroundColor: [
+    //                     myapp_get_color.primary_200,
+    //                     myapp_get_color.primary_400,
+    //                     myapp_get_color.success_50,
+    //                     myapp_get_color.success_300,
+    //                     myapp_get_color.success_500
+    //                 ],
+    //                 label: 'My dataset' // for legend
+    //             }],
+    //             labels: [
+    //                 "USA",
+    //                 "Germany",
+    //                 "Austalia",
+    //                 "Canada",
+    //                 "France"
+    //             ]
+    //         },
+    //         options: {
+    //             responsive: true,
+    //             legend: {
+    //                 display: true,
+    //                 position: 'bottom',
+    //             }
+    //         }
+    //     };
+    //     new Chart($("#pieChart > canvas").get(0).getContext("2d"), config);
+    // }
     /* pie chart -- end */
-    $(document).ready(function() {
-        // lineChart();
-        // areaChart();
-        // horizontalBarChart();
-        // barChart();
-        // barStacked();
-        // barHorizontalStacked();
-        // bubbleChart();
-        // barlineCombine();
-        // polarArea();
-        // radarChart();
-        pieChart();
-        // doughnutChart();
-    });
+    // $(document).ready(function() {
+    //     // lineChart();
+    //     // areaChart();
+    //     // horizontalBarChart();
+    //     // barChart();
+    //     // barStacked();
+    //     // barHorizontalStacked();
+    //     // bubbleChart();
+    //     // barlineCombine();
+    //     // polarArea();
+    //     // radarChart();
+    //     pieChart();
+    //     // doughnutChart();
+    // });
 </script>
 <script type="text/javascript">
     var get_data = '<?php echo $get_data; ?>';
