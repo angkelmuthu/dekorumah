@@ -42,6 +42,7 @@ class T_pembukuan extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
+        $data['saldo']   = $this->T_pembukuan_model->get_saldo();
         $this->template->load('template', 't_pembukuan/t_pembukuan_list', $data);
     }
 

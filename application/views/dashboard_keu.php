@@ -91,18 +91,18 @@
     /* bar chart */
     var barChart = function() {
         var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: [<?php foreach ($laba_bln as $data) {
+                            echo "'" . $data->nm_bln . "',";
+                        } ?>],
             datasets: [{
                     label: "Laba",
                     backgroundColor: myapp_get_color.success_300,
                     borderColor: myapp_get_color.success_500,
                     borderWidth: 1,
                     data: [
-                        45,
-                        75,
-                        26,
-                        23,
-                        60, -48, -9
+                        <?php foreach ($laba_bln as $data) {
+                            echo "'" . $data->laba . "',";
+                        } ?>
                     ]
                 }
                 //,
@@ -230,7 +230,7 @@
     var barlineCombine = function() {
         var barlineCombineData = {
             labels: [<?php foreach ($ttl_bln as $data) {
-                            echo "'" . $data->bln . "',";
+                            echo "'" . $data->nm_bln . "',";
                         } ?>],
             datasets: [{
                     type: 'line',

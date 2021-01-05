@@ -14,6 +14,16 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="row">
+                            <div class="col-md-12 text-right">
+                                <h2>Saldo saat ini :
+                                    <span class="badge badge-success">Rp.
+                                        <?php foreach ($saldo as $saldox) {
+                                            echo angka($saldox->laba);
+                                        } ?>
+                                    </span>
+                                </h2>
+                            </div>
+                            <hr>
                             <div class="col-md-6">
                                 <?php echo anchor(site_url('t_pembukuan/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?>
                                 <?php echo anchor(site_url('t_pembukuan/excel'), '<i class="fal fa-file-excel" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-outline-success btn-sm waves-effect waves-themed"'); ?></div>
@@ -23,7 +33,7 @@
                                         <div class="input-group">
                                             <?php
                                             if ($q <> '') {
-                                            ?>
+                                                ?>
                                                 <div class="input-group-prepend">
                                                     <a href="<?php echo site_url('t_pembukuan'); ?>" class="btn btn-danger waves-effect waves-themed">Reset</a>
                                                 </div>
@@ -57,32 +67,32 @@
                                 </thead>
                                 <tbody><?php
                                         foreach ($t_pembukuan_data as $t_pembukuan) {
-                                        ?>
+                                            ?>
                                         <tr>
                                             <td width="10px"><?php echo ++$start ?></td>
                                             <td><?php echo $t_pembukuan->created_date ?></td>
                                             <td><?php if (!empty($t_pembukuan->id_survei)) {
-                                                    echo $t_pembukuan->nm_group_sub;
-                                                } else {
-                                                    echo $t_pembukuan->note;
-                                                } ?></td>
+                                                        echo $t_pembukuan->nm_group_sub;
+                                                    } else {
+                                                        echo $t_pembukuan->note;
+                                                    } ?></td>
                                             <td><?php if (!empty($t_pembukuan->id_survei)) {
-                                                    echo 'Project - ' . $t_pembukuan->projek . ' (' . $t_pembukuan->deskripsi . ')';
-                                                } else {
-                                                    echo $t_pembukuan->deskripsi;
-                                                } ?></td>
+                                                        echo 'Project - ' . $t_pembukuan->projek . ' (' . $t_pembukuan->deskripsi . ')';
+                                                    } else {
+                                                        echo $t_pembukuan->deskripsi;
+                                                    } ?></td>
                                             <td class="text-right"><strong><?php if (isset($t_pembukuan->Debit)) {
-                                                                                echo angka($t_pembukuan->Debit);
-                                                                            } ?></strong></td>
+                                                                                    echo angka($t_pembukuan->Debit);
+                                                                                } ?></strong></td>
                                             <td class="text-right"><strong><?php if (isset($t_pembukuan->Kredit)) {
-                                                                                echo angka($t_pembukuan->Kredit);
-                                                                            } ?></strong></td>
+                                                                                    echo angka($t_pembukuan->Kredit);
+                                                                                } ?></strong></td>
                                             <td style="text-align:center" width="200px">
                                                 <?php
-                                                echo anchor(site_url('t_pembukuan/update/' . $t_pembukuan->id_buku), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs waves-effect waves-themed"');
-                                                echo '  ';
-                                                echo
-                                                    '<button type="button" class="btn btn-danger btn-xs waves-effect waves-themed" data-toggle="modal" data-target="#default-example-modal-sm' . $t_pembukuan->id_buku . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
+                                                    echo anchor(site_url('t_pembukuan/update/' . $t_pembukuan->id_buku), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs waves-effect waves-themed"');
+                                                    echo '  ';
+                                                    echo
+                                                        '<button type="button" class="btn btn-danger btn-xs waves-effect waves-themed" data-toggle="modal" data-target="#default-example-modal-sm' . $t_pembukuan->id_buku . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
     <div class="modal fade" id="default-example-modal-sm' . $t_pembukuan->id_buku . '" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -102,11 +112,11 @@
         </div>
     </div>
 </div>';
-                                                ?>
+                                                    ?>
                                             </td>
                                         </tr>
                                     <?php
-                                        }
+                                    }
                                     ?>
                                 </tbody>
                             </table>

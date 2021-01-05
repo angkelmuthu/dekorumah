@@ -51,7 +51,7 @@ class T_pembukuan_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
-        $this->db->order_by($this->id, $this->order);
+        $this->db->order_by('created_date', $this->order);
         $this->db->like('id_buku', $q);
         $this->db->or_like('id_survei', $q);
         $this->db->or_like('id_group', $q);
@@ -86,6 +86,12 @@ class T_pembukuan_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+    function get_saldo()
+    {
+        $this->db->select('SUM(kredit)-SUM(debit) as laba');
+        $query = $this->db->get('v_laporan_laba');
+        return $query->result();
     }
 }
 
