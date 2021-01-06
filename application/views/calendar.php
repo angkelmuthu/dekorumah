@@ -23,7 +23,7 @@
                             <div class="col-md-12">
                                 <div class="portlet light bordered">
                                     <div class="portlet-body">
-                                        <div class="table-toolbar">
+                                        <!-- <div class="table-toolbar">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="text-center">
@@ -35,7 +35,7 @@
                                                     </div><br><br>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <!-- place -->
                                         <div id="calendarIO"></div>
                                         <div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
