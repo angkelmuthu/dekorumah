@@ -32,4 +32,12 @@ class Dashboard_model extends CI_Model
         $query = $this->db->get('v_survei');
         return $query->result();
     }
+    function get_status_list($status)
+    {
+        $tahun = date('Y');
+        $this->db->where('id_status', $status);
+        $this->db->where('YEAR(tgl_survei)', $tahun);
+        $query = $this->db->get('v_survei');
+        return $query->result();
+    }
 }

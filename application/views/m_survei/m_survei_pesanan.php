@@ -63,20 +63,55 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Ukuran <?php echo form_error('ukuran') ?></td>
-                                    <td><input type="text" class="form-control" name="ukuran" id="ukuran" placeholder="ukuran" value="<?php echo $ukuran; ?>" /></td>
-                                </tr>
-                                <tr>
-                                    <td width='200'>Qty/Volume <?php echo form_error('volume') ?></td>
-                                    <td><input type="text" class="form-control" name="volume" id="volume" placeholder="Volume" value="<?php echo $volume; ?>" /></td>
-                                </tr>
-                                <tr>
                                     <td width='200'>Satuan</td>
-                                    <td><input type="text" class="form-control" name="satuan" id="satuan" placeholder="satuan" value="<?php echo $satuan; ?>" /></td>
+                                    <td>
+                                        <select name="id_satuan" class="select2 form-control w-100" id="satuan" required>
+                                            <option value="">Pilih Satuan</option>
+                                            <?php
+                                            $this->db->where('aktif', 'Y');
+                                            $result = $this->db->get('m_satuan')->result();
+                                            foreach ($result as $dt) {
+                                                echo '<option value="' . $dt->id_satuan . '">' . $dt->satuan . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </td>
                                 </tr>
+                                <div>
+                                    <tr id="req" style="display: none;">
+                                        <td width='200'>Qty <?php echo form_error('qty') ?></td>
+                                        <td><input type="text" class="form-control" name="qty" id="qty" placeholder="qty" value="<?php echo $qty; ?>" /></td>
+                                    </tr>
+                                </div>
                                 <tr>
-                                    <td width='200'>Harga (satuan/volume) <?php echo form_error('volume') ?></td>
-                                    <td><input type="text" class="form-control" name="harga" id="harga" placeholder="harga" value="<?php echo $harga; ?>" /></td>
+                                    <td width='200'>Ukuran <?php echo form_error('ukuran') ?></td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="md-form">
+                                                    <input type="text" id="panjang" name="panjang" value="<?php echo $panjang; ?>" class="form-control" required>
+                                                    <label for="panjang" class="">Panjang</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="md-form">
+                                                    <input type="text" id="lebar" name="lebar" value="<?php echo $lebar; ?>" class="form-control" required>
+                                                    <label for="lebar" class="">Lebar</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="md-form">
+                                                    <input type="text" id="tinggi" name="tinggi" value="<?php echo $tinggi; ?>" class="form-control" required>
+                                                    <label for="tinggi" class="">Tinggi</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td width='200'>Harga (satuan) <?php echo form_error('volume') ?></td>
+                                    <td><input type="text" class="form-control" name="harga" id="harga" placeholder="harga" value="<?php echo $harga; ?>" required /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Total Harga</td>
@@ -113,14 +148,57 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
 <script>
     $(document).ready(function() {
-        $("#volume, #harga").keyup(function() {
-            var hargax = $("#harga").val();
-            var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
-            var volume = $("#volume").val();
-            var total = parseInt(harga) * volume;
-            fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
-            $("#total").val(fixed);
+        $('#satuan').change(function() {
+            var id_satuan = $('#satuan').val();
+            if (id_satuan == 1) {
+                $("#req").hide();
+                $("#panjang, #harga").keyup(function() {
+                    var hargax = $("#harga").val();
+                    var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
+                    var panjang = $("#panjang").val();
+                    var total = parseInt(harga) * panjang;
+                    fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+                    $("#total").val(fixed);
+                });
+            } else if (id_satuan == 2) {
+                $("#req").hide();
+                $("#panjang,#tinggi, #harga").keyup(function() {
+                    var hargax = $("#harga").val();
+                    var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
+                    var panjang = $("#panjang").val();
+                    var tinggi = $("#tinggi").val();
+                    var volume = panjang * tinggi;
+                    var total = parseInt(harga) * volume;
+                    fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+                    $("#total").val(fixed);
+                });
+            } else if (id_satuan == 3) {
+                $("#req").hide();
+                $("#panjang,#lebar,#tinggi, #harga").keyup(function() {
+                    var hargax = $("#harga").val();
+                    var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
+                    var panjang = $("#panjang").val();
+                    var lebar = $("#lebar").val();
+                    var tinggi = $("#tinggi").val();
+                    var volume = panjang * lebar * tinggi;
+                    var total = parseInt(harga) * volume;
+                    fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+                    $("#total").val(fixed);
+                });
+            } else {
+                $("#req").show();
+                $("#qty, #harga").keyup(function() {
+                    var hargax = $("#harga").val();
+                    var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
+                    var volume = $("#qty").val();
+                    var total = parseInt(harga) * volume;
+                    fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+                    $("#total").val(fixed);
+                });
+            }
         });
+
+
         $('#barang').change(function() {
             var id_barang = $('#barang').val();
             if (id_barang != '') {

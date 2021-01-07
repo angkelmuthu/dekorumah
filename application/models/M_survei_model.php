@@ -39,6 +39,8 @@ class M_survei_model extends CI_Model
     // get total rows
     function total_rows($q = NULL)
     {
+        $this->db->where('no_pesanan IS NULL');
+        $this->db->group_start();
         $this->db->like('id_survei', $q);
         $this->db->or_like('tgl_survei', $q);
         $this->db->or_like('nama', $q);
@@ -48,6 +50,7 @@ class M_survei_model extends CI_Model
         $this->db->or_like('note', $q);
         $this->db->or_like('status', $q);
         $this->db->or_like('nm_sales', $q);
+        $this->db->group_end();
         $this->db->from('v_survei');
         return $this->db->count_all_results();
     }
@@ -55,6 +58,8 @@ class M_survei_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
+        $this->db->where('no_pesanan IS NULL');
+        $this->db->group_start();
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_survei', $q);
         $this->db->or_like('tgl_survei', $q);
@@ -63,6 +68,45 @@ class M_survei_model extends CI_Model
         $this->db->or_like('email', $q);
         $this->db->or_like('status', $q);
         $this->db->or_like('nm_sales', $q);
+        $this->db->group_end();
+        $this->db->limit($limit, $start);
+        return $this->db->get('v_survei')->result();
+    }
+
+    /////pesanan///////////
+    // get total rows
+    function total_rows2($q = NULL)
+    {
+        $this->db->where('no_pesanan IS NOT NULL');
+        $this->db->group_start();
+        $this->db->like('id_survei', $q);
+        $this->db->or_like('tgl_survei', $q);
+        $this->db->or_like('nama', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('email', $q);
+        $this->db->or_like('hp', $q);
+        $this->db->or_like('note', $q);
+        $this->db->or_like('status', $q);
+        $this->db->or_like('nm_sales', $q);
+        $this->db->group_end();
+        $this->db->from('v_survei');
+        return $this->db->count_all_results();
+    }
+
+    // get data with limit and search
+    function get_limit_data2($limit, $start = 0, $q = NULL)
+    {
+        $this->db->where('no_pesanan IS NOT NULL');
+        $this->db->group_start();
+        $this->db->order_by($this->id, $this->order);
+        $this->db->like('id_survei', $q);
+        $this->db->or_like('tgl_survei', $q);
+        $this->db->or_like('nama', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('email', $q);
+        $this->db->or_like('status', $q);
+        $this->db->or_like('nm_sales', $q);
+        $this->db->group_end();
         $this->db->limit($limit, $start);
         return $this->db->get('v_survei')->result();
     }

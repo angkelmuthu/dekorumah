@@ -17,32 +17,33 @@
                                 <tr>
                                     <td width='200'>Tgl Survei <?php echo form_error('tgl_survei') ?></td>
                                     <td>
-                                        <input class="form-control" name="tgl_survei" id="tgl_survei" type="date">
+                                        <input class="form-control" name="tgl_survei" id="tgl_survei" type="date" required>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Nama <?php echo form_error('nama') ?></td>
-                                    <td><input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?>" /></td>
+                                    <td><input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?>" required /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Alamat <?php echo form_error('alamat') ?></td>
-                                    <td> <textarea class="form-control" non_pks="3" name="alamat" id="alamat" placeholder="Alamat"><?php echo $alamat; ?></textarea></td>
+                                    <td> <textarea class="form-control" non_pks="3" name="alamat" id="alamat" placeholder="Alamat" required><?php echo $alamat; ?></textarea></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Email <?php echo form_error('email') ?></td>
-                                    <td><input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" /></td>
+                                    <td><input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" required /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Hp <?php echo form_error('hp') ?></td>
-                                    <td><input type="number" class="form-control" name="hp" id="hp" placeholder="Hp" value="<?php echo $hp; ?>" /></td>
+                                    <td><input type="number" class="form-control" name="hp" id="hp" placeholder="Hp" value="<?php echo $hp; ?>" required /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Note <?php echo form_error('note') ?></td>
-                                    <td> <textarea class="form-control" non_pks="3" name="note" id="note" placeholder="Note"><?php echo $note; ?></textarea></td>
+                                    <td> <textarea class="form-control" non_pks="3" name="note" id="note" placeholder="Note" required><?php echo $note; ?></textarea></td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td width='200'>Color <?php echo form_error('color') ?></td>
-                                    <td><select name="color" class="form-control">
+                                    <td>
+                                        <select name="color" class="form-control" required>
                                             <option value="">Choose</option>
                                             <option style="color:#886ab5;" value="primary">Dark Blue</option>
                                             <option style="color:#868e96;" value="secondary">Gray</option>
@@ -52,8 +53,9 @@
                                             <option style="color:#fd3995;" value="danger">Red</option>
                                             <option style="color:#505050;" value="dark">Dark</option>
                                             <option style="color:#fff;" value="light">Light</option>
-                                        </select></td>
-                                </tr>
+                                        </select>
+                                    </td>
+                                </tr> -->
                                 <tr>
                                     <td width='200'>Sales <?php echo form_error('sales') ?></td>
                                     <td><?php echo select2_dinamis('id_sales', 'm_sales', 'id_sales', 'nm_sales') ?></td>
@@ -61,9 +63,10 @@
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <input type="text" name="users" value="<?php echo $this->session->userdata('full_name') ?>" />
-                                        <input type="text" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
+                                        <input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name') ?>" />
+                                        <input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
                                         <input type="hidden" name="id_status" value="1" />
+                                        <input type="hidden" name="color" value="primary" />
                                         <input type="hidden" name="id_survei" value="<?php echo $id_survei; ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
                                         <a href="<?php echo site_url('m_survei') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td>

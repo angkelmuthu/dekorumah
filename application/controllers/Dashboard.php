@@ -30,14 +30,12 @@ class Dashboard extends CI_Controller
     //     );
     //     $this->template->load('template', 'dash_detail', $masterrs);
     // }
-    // public function detail($id)
-    // {
-    //     $row = $this->Dashboard_model->get_kunjungan_day_by($id);
-    //     $kjngn_day = array(
-    //         'kjngn_day' => $row,
-    //     );
-    //     $this->template->load('template', 'dash_detail', $kjngn_day);
-    // }
+    public function status($status)
+    {
+        //$row = $this->Dashboard_model->get_status_list($status);
+        $data['status'] = $this->Dashboard_model->get_status_list($status);
+        $this->template->load('template', 'status', $data);
+    }
     public function index()
     {
         $data_calendar = $this->modeldb->get_list('v_survei');

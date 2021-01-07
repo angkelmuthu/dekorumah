@@ -22,12 +22,7 @@
                 <li class="step-item <?php if ($id_status == 4) {
                                             echo ' active';
                                         }; ?>">
-                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/4'); ?>" class="">KIRIM</a>
-                </li>
-                <li class="step-item <?php if ($id_status == 5) {
-                                            echo ' active';
-                                        }; ?>">
-                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/5'); ?>" class="">SELESAI</a>
+                    <a href="<?php echo site_url('m_survei/update_status/' . $this->uri->segment(3) . '/4'); ?>" class="">SELESAI</a>
                 </li>
             </ul>
         </div>
@@ -173,12 +168,21 @@
                                             $this->db->where('id_barang_sub', $dt2->id_barang_sub);
                                             $result = $this->db->get('v_pesanan')->result();
                                             foreach ($result as $dt3) {
+                                                if ($dt3->id_satuan == 1) {
+                                                    $qty = $dt3->panjang;
+                                                } elseif ($dt3->id_satuan == 2) {
+                                                    $qty = $dt3->panjang * $dt3->tinggi;
+                                                } elseif ($dt3->id_satuan == 3) {
+                                                    $qty = $dt3->panjang * $dt3->lebar * $dt3->tinggi;
+                                                } else {
+                                                    $qty = $dt3->qty;
+                                                }
                                             ?>
                                                 <tr>
                                                     <td></td>
                                                     <td>- <?php echo $dt3->nm_barang_detail ?></td>
-                                                    <td class="text-center"><?php echo $dt3->ukuran ?></td>
-                                                    <td class="text-center"><?php echo $dt3->volume ?></td>
+                                                    <td class="text-center">PxLxT (<?php echo $dt3->panjang ?>x<?php echo $dt3->lebar ?>x<?php echo $dt3->tinggi ?>)</td>
+                                                    <td class="text-center"><?php echo $qty ?></td>
                                                     <td class="text-center"><?php echo $dt3->satuan ?></td>
                                                     <td class="text-right"><?php echo angka($dt3->harga) ?></td>
                                                     <td class="text-right"><?php echo angka($dt3->total) ?></td>

@@ -46,6 +46,38 @@ class M_survei extends CI_Controller
         $this->template->load('template', 'm_survei/m_survei_list', $data);
     }
 
+    public function pesanan()
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->uri->segment(3));
+
+        if ($q <> '') {
+            $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'index.php/m_survei/pesanan/index.html?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'index.php/m_survei/pesanan/index/';
+            $config['first_url'] = base_url() . 'index.php/m_survei/pesanan/index/';
+        }
+
+        $config['per_page'] = 10;
+        $config['page_query_string'] = FALSE;
+        $config['total_rows'] = $this->M_survei_model->total_rows2($q);
+        $m_survei = $this->M_survei_model->get_limit_data2($config['per_page'], $start, $q);
+        $config['full_tag_open'] = '<ul class="pagination justify-content-center">';
+        $config['full_tag_close'] = '</ul>';
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'm_survei_data' => $m_survei,
+            'q' => $q,
+            'pagination' => $this->pagination->create_links(),
+            'total_rows' => $config['total_rows'],
+            'start' => $start,
+        );
+        $this->template->load('template', 'm_survei/m_survei_deal', $data);
+    }
+
     public function read($id)
     {
         $row = $this->M_survei_model->get_by_id($id);
@@ -235,9 +267,11 @@ class M_survei extends CI_Controller
             'id_unit' => set_value('id_unit'),
             'id_bahan' => set_value('id_bahan'),
             'id_barang' => set_value('id_barang'),
-            'ukuran' => set_value('ukuran'),
-            'volume' => set_value('volume'),
-            'satuan' => set_value('satuan'),
+            'panjang' => set_value('panjang'),
+            'lebar' => set_value('lebar'),
+            'tinggi' => set_value('tinggi'),
+            'qty' => set_value('qty'),
+            'id_satuan' => set_value('id_satuan'),
             'harga' => set_value('harga'),
             'total' => set_value('total'),
             'note' => set_value('note'),
@@ -261,9 +295,11 @@ class M_survei extends CI_Controller
             'id_barang' => $this->input->post('id_barang', TRUE),
             'id_barang_sub' => $this->input->post('id_barang_sub', TRUE),
             'id_barang_detail' => $this->input->post('id_barang_detail', TRUE),
-            'ukuran' => $this->input->post('ukuran', TRUE),
-            'volume' => $this->input->post('volume', TRUE),
-            'satuan' => $this->input->post('satuan', TRUE),
+            'panjang' => $this->input->post('panjang', TRUE),
+            'lebar' => $this->input->post('lebar', TRUE),
+            'tinggi' => $this->input->post('tinggi', TRUE),
+            'qty' => $this->input->post('qty', TRUE),
+            'id_satuan' => $this->input->post('id_satuan', TRUE),
             'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
             'total' => str_replace('.', '', $this->input->post('total', TRUE)),
             'note' => $this->input->post('note', TRUE),

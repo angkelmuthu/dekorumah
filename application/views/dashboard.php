@@ -22,7 +22,7 @@
     </div>
     <div class="row">
         <?php foreach ($status_ttl as $ttl) { ?>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-3" onclick="location.href='<?php echo site_url('Dashboard/status/1'); ?>'">
                 <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">
                     <div class="">
                         <h3 class="display-4 d-block l-h-n m-0 fw-500">
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-3" onclick="location.href='<?php echo site_url('Dashboard/status/2'); ?>'">
                 <div class="p-3 bg-warning-400 rounded overflow-hidden position-relative text-white mb-g">
                     <div class="">
                         <h3 class="display-4 d-block l-h-n m-0 fw-500">
@@ -45,7 +45,7 @@
                     <i class="fal fa-file-image position-absolute pos-right pos-bottom opacity-15  mb-n1 mr-n4" style="font-size: 6rem;"></i>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-3" onclick="location.href='<?php echo site_url('Dashboard/status/3'); ?>'">
                 <div class="p-3 bg-success-200 rounded overflow-hidden position-relative text-white mb-g">
                     <div class="">
                         <h3 class="display-4 d-block l-h-n m-0 fw-500">
@@ -56,7 +56,7 @@
                     <i class="fal fa-cogs position-absolute pos-right pos-bottom opacity-15 mb-n5 mr-n6" style="font-size: 8rem;"></i>
                 </div>
             </div>
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-3" onclick="location.href='<?php echo site_url('Dashboard/status/4'); ?>'">
                 <div class="p-3 bg-info-200 rounded overflow-hidden position-relative text-white mb-g">
                     <div class="">
                         <h3 class="display-4 d-block l-h-n m-0 fw-500">

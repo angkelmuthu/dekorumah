@@ -95,7 +95,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a href="javascript::void" class="btn btn-default" data-dismiss="modal">Close</a>
-                                                            <a class="btn btn-warning delete_calendar" style="display: none;">Delete</a>
+                                                            <!-- <a class="btn btn-warning delete_calendar" style="display: none;">Delete</a> -->
                                                             <a class="btn btn-success input_pesanan" style="display: none;">View</a>
                                                             <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
 
