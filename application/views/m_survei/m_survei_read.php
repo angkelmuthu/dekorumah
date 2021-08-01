@@ -126,7 +126,7 @@
                                     <thead class="thead-themed">
                                         <tr>
                                             <th>No.</th>
-                                            <th>Item Barang & Spesifikasi</th>
+                                            <th>Item produk & Spesifikasi</th>
                                             <th class="text-center">Ukuran</th>
                                             <th class="text-center">volume</th>
                                             <th class="text-center">Satuan</th>
@@ -138,34 +138,34 @@
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $this->db->select('id_barang,nm_barang');
+                                        $this->db->select('id_produk,nm_produk');
                                         $this->db->where('id_survei', $this->uri->segment(3));
-                                        $this->db->group_by('id_barang');
+                                        $this->db->group_by('id_produk');
                                         $result = $this->db->get('v_pesanan')->result();
                                         foreach ($result as $dt) {
                                         ?>
                                             <tr>
                                                 <td><?php echo $no ?></td>
                                                 <td colspan="7">
-                                                    <h5><?php echo $dt->nm_barang ?></h5>
+                                                    <h5><?php echo $dt->nm_produk ?></h5>
                                                 </td>
                                             </tr>
                                             <?php
-                                            $this->db->select('id_barang_sub,nm_barang_sub,sum(total) as total');
+                                            $this->db->select('id_produk_sub,nm_produk_sub,sum(total) as total');
                                             $this->db->where('id_survei', $this->uri->segment(3));
-                                            $this->db->where('id_barang', $dt->id_barang);
-                                            $this->db->group_by('id_barang_sub');
+                                            $this->db->where('id_produk', $dt->id_produk);
+                                            $this->db->group_by('id_produk_sub');
                                             $result = $this->db->get('v_pesanan')->result();
                                             foreach ($result as $dt2) {
                                             ?>
                                                 <tr>
                                                     <td></td>
-                                                    <td colspan="6"><strong><?php echo $dt2->nm_barang_sub ?></strong></td>
+                                                    <td colspan="6"><strong><?php echo $dt2->nm_produk_sub ?></strong></td>
                                                     <td class="text-right"><strong><?php echo angka($dt2->total) ?></strong></td>
                                                 </tr>
                                             <?php }
                                             $this->db->where('id_survei', $this->uri->segment(3));
-                                            $this->db->where('id_barang_sub', $dt2->id_barang_sub);
+                                            $this->db->where('id_produk_sub', $dt2->id_produk_sub);
                                             $result = $this->db->get('v_pesanan')->result();
                                             foreach ($result as $dt3) {
                                                 if ($dt3->id_satuan == 1) {
@@ -180,7 +180,7 @@
                                             ?>
                                                 <tr>
                                                     <td></td>
-                                                    <td>- <?php echo $dt3->nm_barang_detail ?></td>
+                                                    <td>- <?php echo $dt3->nm_produk_detail ?></td>
                                                     <td class="text-center">PxLxT (<?php echo $dt3->panjang ?>x<?php echo $dt3->lebar ?>x<?php echo $dt3->tinggi ?>)</td>
                                                     <td class="text-center"><?php echo $qty ?></td>
                                                     <td class="text-center"><?php echo $dt3->satuan ?></td>

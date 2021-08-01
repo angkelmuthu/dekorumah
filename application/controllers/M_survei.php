@@ -241,6 +241,26 @@ class M_survei extends CI_Controller
         }
     }
 
+    public function delete_pesanan($id_invoice, $id)
+    {
+        $row = $this->M_survei_model->get_by_id_pesanan($id);
+
+        if ($row) {
+            $this->M_survei_model->delete_pesanan($id);
+            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Delete Record Success</strong></div>');
+            redirect(site_url('t_invoice/read/' . $id_invoice));
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Record Not Found</strong></div>');
+            redirect(site_url('t_invoice/read/' . $id_invoice));
+        }
+    }
+
     public function update_status($id, $status)
     {
         $data = array(
@@ -266,7 +286,7 @@ class M_survei extends CI_Controller
             'id_survei' => set_value('id_survei'),
             'id_unit' => set_value('id_unit'),
             'id_bahan' => set_value('id_bahan'),
-            'id_barang' => set_value('id_barang'),
+            'id_produk' => set_value('id_produk'),
             'panjang' => set_value('panjang'),
             'lebar' => set_value('lebar'),
             'tinggi' => set_value('tinggi'),
@@ -278,7 +298,7 @@ class M_survei extends CI_Controller
             'created_date' => set_value('created_date'),
             'users' => set_value('users'),
             'is_deleted' => set_value('is_deleted'),
-            'barang' => $this->M_survei_model->fetch_barang(),
+            'produk' => $this->M_survei_model->fetch_produk(),
         );
         $this->template->load('template', 'm_survei/m_survei_pesanan', $data);
     }
@@ -290,11 +310,11 @@ class M_survei extends CI_Controller
         //     $this->update($this->input->post('id_survei', TRUE));
         // } else {
         $data = array(
-            'no_pesanan' => $this->input->post('no_pesanan', TRUE),
+            //'no_pesanan' => $this->input->post('no_pesanan', TRUE),
             'id_survei' => $this->input->post('id_survei', TRUE),
-            'id_barang' => $this->input->post('id_barang', TRUE),
-            'id_barang_sub' => $this->input->post('id_barang_sub', TRUE),
-            'id_barang_detail' => $this->input->post('id_barang_detail', TRUE),
+            'id_produk' => $this->input->post('id_produk', TRUE),
+            'id_produk_sub' => $this->input->post('id_produk_sub', TRUE),
+            'id_produk_detail' => $this->input->post('id_produk_detail', TRUE),
             'panjang' => $this->input->post('panjang', TRUE),
             'lebar' => $this->input->post('lebar', TRUE),
             'tinggi' => $this->input->post('tinggi', TRUE),
@@ -313,25 +333,25 @@ class M_survei extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Insert Record Success</strong></div>');
-        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_survei')));
         //}
     }
-    function fetch_barang_sub()
+    function fetch_produk_sub()
     {
-        if ($this->input->post('id_barang')) {
-            echo $this->M_survei_model->fetch_barang_sub($this->input->post('id_barang'));
+        if ($this->input->post('id_produk')) {
+            echo $this->M_survei_model->fetch_produk_sub($this->input->post('id_produk'));
         }
     }
-    function fetch_barang_detail()
+    function fetch_produk_detail()
     {
-        if ($this->input->post('id_barang_sub')) {
-            echo $this->M_survei_model->fetch_barang_detail($this->input->post('id_barang'), $this->input->post('id_barang_sub'));
+        if ($this->input->post('id_produk_sub')) {
+            echo $this->M_survei_model->fetch_produk_detail($this->input->post('id_produk'), $this->input->post('id_produk_sub'));
         }
     }
-    function fetch_barang_harga()
+    function fetch_produk_harga()
     {
-        $id_barang_detail = $this->input->post('id_barang_detail');
-        $data = $this->M_survei_model->fetch_barang_harga($id_barang_detail);
+        $id_produk_detail = $this->input->post('id_produk_detail');
+        $data = $this->M_survei_model->fetch_produk_harga($id_produk_detail);
         echo json_encode($data);
     }
     function print_spk()
@@ -377,7 +397,7 @@ class M_survei extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Create Record Success</strong></div>');
-        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_survei')));
     }
     public function create_debit()
     {
@@ -396,7 +416,7 @@ class M_survei extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Insert Record Success</strong></div>');
-        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_survei')));
         //}
     }
     public function create_kredit()
@@ -406,9 +426,9 @@ class M_survei extends CI_Controller
             'id_group' => $this->input->post('id_group', TRUE),
             'id_group_sub' => $this->input->post('id_group_sub', TRUE),
             'deskripsi' => $this->input->post('deskripsi', TRUE),
-            'qty' => $this->input->post('qty', TRUE),
-            'satuan' => $this->input->post('satuan', TRUE),
-            'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
+            //'qty' => $this->input->post('qty', TRUE),
+            //'satuan' => $this->input->post('satuan', TRUE),
+            //'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
             'total' => str_replace('.', '', $this->input->post('total', TRUE)),
             'note' => $this->input->post('note', TRUE),
             'created_by' => $this->session->userdata('full_name'),
@@ -420,7 +440,7 @@ class M_survei extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Insert Record Success</strong></div>');
-        redirect(site_url('m_survei/read/' . $this->input->post('id_survei')));
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_survei')));
         //}
     }
     ///////////////////////////////////////

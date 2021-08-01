@@ -1,0 +1,614 @@
+<link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/miscellaneous/lightgallery/lightgallery.bundle.css">
+<main id="js-page-content" role="main" class="page-content">
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>Invoice Read</h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>No Invoice</td>
+                                <td><b><?php echo $no_invoice; ?></b></td>
+                                <td>Tgl Invoice</td>
+                                <td><b><?php echo $tgl_invoice; ?></b></td>
+                                <td>Status</td>
+                                <td><b><?php echo $status; ?></b></td>
+                            </tr>
+                            <tr>
+                                <td>Pelanggan</td>
+                                <td><b><?php echo $nama; ?></b></td>
+                                <td>Email</td>
+                                <td><b><?php echo $email; ?></b></td>
+                                <td>No. HP</td>
+                                <td><b><?php echo $hp; ?></b></td>
+                            </tr>
+                            <tr>
+                                <td>Alamat</td>
+                                <td colspan="5"><b><?php echo $alamat; ?></b></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div id="panel-2" class="panel panel-collapsed">
+                <div class="panel-hdr text-success">
+                    <h2>
+                        Pembayaran <span class="fw-300"><i>Debit</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    </div>
+                </div>
+                <div class="panel-container collapse">
+                    <div class="panel-content">
+                        <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#debit-modal">Tambah Pembayaran (Debit)</button>
+
+                        <table id="example" class="table table-bordered table-striped mt-2">
+                            <thead class="thead-themed">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Tanggal</th>
+                                    <th class="text-center">Group</th>
+                                    <!-- <th class="text-center">Deskripsi</th> -->
+                                    <th class="text-center">Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+
+
+                                $no = 1;
+                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $this->db->where('id_group', '2');
+                                $this->db->order_by('created_date');
+                                $result = $this->db->get('v_pembukuan_new')->result();
+                                foreach ($result as $dt) {
+                                    $break = urlencode("\n");
+                                    $wa1 = '*Terima Kasih*';
+                                    $wa2 = 'Pembayaran ' . $dt->nm_group_sub . ' untuk pesanan *' . $no_invoice . '* atas nama *' . strtoupper($nama) . '* dengan nominal *Rp. ' . angka($dt->total) . '* sudah kami terima.';
+                                    $pesan = $wa1 . $break . $wa2;
+                                ?>
+                                    <tr>
+                                        <td><?php echo $no ?></td>
+                                        <td><?php echo $dt->created_date ?></td>
+                                        <td><?php echo $dt->nm_group_sub ?></td>
+                                        <!-- <td><?php echo $dt->deskripsi ?></td> -->
+                                        <td class="text-right"><strong> <?php echo angka($dt->total); ?></strong></td>
+                                        <td>
+                                            <a href="<?php echo site_url('t_pembukuan/delete/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
+                                            <a href="https://api.whatsapp.com/send?phone=62<?php echo $hp ?>&text=<?php echo $pesan ?>" target="_blank" class=" btn btn-success btn-xs"><i class="fal fa-paper-plane" aria-hidden="true"></i> WA</a>
+                                        </td>
+                                    </tr>
+                                <?php $no++;
+                                }
+                                $this->db->select('sum(total) as xdebit');
+                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $this->db->where('id_group', '2');
+                                $result = $this->db->get('v_pembukuan_new')->row();
+                                $ttl_payment = $result->xdebit;
+                                ?>
+                                <tr>
+                                    <td colspan="3" class="text-right"><strong>TOTAL</strong></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_payment) ?></strong></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="modal fade" id="debit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Pengeluaran (Debit)</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    <form action="<?php echo site_url('m_survei/create_debit') ?>" method="post" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">
+                                            <input type="hidden" name="id_group" value="2">
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Jenis Pembayaran</label>
+                                                <select name="id_group_sub" id="group_sub" class="select2 form-control w-100">
+                                                    <option value="">Select Jenis Pembayaran</option>
+                                                    <?php
+                                                    $this->db->where('id_group', '2');
+                                                    $result = $this->db->get('m_group_sub')->result();
+                                                    foreach ($result as $row) {
+                                                        echo '<option value="' . $row->id_group_sub . '">' . $row->nm_group_sub . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Nominal</label>
+                                                <input type="number" class="form-control" name="total">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Note</label>
+                                                <textarea class="form-control" name="note"><?php echo $no_invoice . ' a/n ' . $nama ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div id="panel-2" class="panel panel-collapsed">
+                <div class="panel-hdr text-success">
+                    <h2>
+                        Pesanan <span class="fw-300"><i>Detail</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    </div>
+                </div>
+                <div class="panel-container collapse">
+                    <div class="panel-content">
+                        <div class="text-center">
+                            <a href="<?php echo site_url('m_survei/create_pesanan/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Tambah Data Pesanan</a>
+                            <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Surat Penawaran</a>
+                        </div>
+                        <table id="example" class="table table-bordered table-striped">
+                            <thead class="thead-themed">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Item produk & Spesifikasi</th>
+                                    <th class="text-center">Ukuran</th>
+                                    <th class="text-center">volume</th>
+                                    <th class="text-center">Satuan</th>
+                                    <th class="text-center">Harga (Rp)</th>
+                                    <th class="text-center">Total (Rp)</th>
+                                    <th class="text-center">Grand Total (Rp)</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                $this->db->select('id_produk,nm_produk');
+                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $this->db->group_by('id_produk');
+                                $result = $this->db->get('v_pesanan')->result();
+                                foreach ($result as $dt) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $no ?></td>
+                                        <td colspan="8">
+                                            <h5><?php echo $dt->nm_produk ?></h5>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    $this->db->select('id_produk_sub,nm_produk_sub,sum(total) as total');
+                                    $this->db->where('id_survei', $this->uri->segment(3));
+                                    $this->db->where('id_produk', $dt->id_produk);
+                                    $this->db->group_by('id_produk_sub');
+                                    $result = $this->db->get('v_pesanan')->result();
+                                    foreach ($result as $dt2) {
+                                    ?>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="6"><strong><?php echo $dt2->nm_produk_sub ?></strong></td>
+                                            <td class="text-right"><strong><?php echo angka($dt2->total) ?></strong></td>
+                                        </tr>
+                                    <?php }
+                                    $this->db->where('id_survei', $this->uri->segment(3));
+                                    $this->db->where('id_produk_sub', $dt2->id_produk_sub);
+                                    $result = $this->db->get('v_pesanan')->result();
+                                    foreach ($result as $dt3) {
+                                        if ($dt3->id_satuan == 1) {
+                                            $qty = $dt3->panjang;
+                                        } elseif ($dt3->id_satuan == 2) {
+                                            $qty = $dt3->panjang * $dt3->tinggi;
+                                        } elseif ($dt3->id_satuan == 3) {
+                                            $qty = $dt3->panjang * $dt3->lebar * $dt3->tinggi;
+                                        } else {
+                                            $qty = $dt3->qty;
+                                        }
+                                    ?>
+                                        <tr>
+                                            <td></td>
+                                            <td>- <?php echo $dt3->nm_produk_detail ?></td>
+                                            <td class="text-center">PxLxT (<?php echo $dt3->panjang ?>x<?php echo $dt3->lebar ?>x<?php echo $dt3->tinggi ?>)</td>
+                                            <td class="text-center"><?php echo $qty ?></td>
+                                            <td class="text-center"><?php echo $dt3->satuan ?></td>
+                                            <td class="text-right"><?php echo angka($dt3->harga) ?></td>
+                                            <td class="text-right"><?php echo angka($dt3->total) ?></td>
+                                            <td></td>
+                                            <td><a href="<?php echo site_url('m_survei/delete_pesanan/' . $dt3->id_survei . '/' . $dt3->id_pesanan) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
+                                        </tr>
+                                <?php }
+                                    $no++;
+                                }
+                                $this->db->select('sum(total) as grand');
+                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $result = $this->db->get('v_pesanan')->row();
+                                $ttl_pesanan = $result->grand;
+                                ?>
+                                <tr>
+                                    <td colspan="7" class="text-right"><strong>TOTAL</strong></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_pesanan) ?></strong></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div id="panel-2" class="panel panel-collapsed">
+                <div class="panel-hdr text-success">
+                    <h2>
+                        Desain <span class="fw-300"><i>Gambar</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    </div>
+                </div>
+                <div class="panel-container collapse">
+                    <div class="panel-content">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#default-example-modal">Upload Gambar</button>
+
+                        <div class="modal fade" id="default-example-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">UPLOAD GAMBAR</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    <form action="<?php echo site_url('m_survei/upload_gambar') ?>" method="post" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Default file input</label>
+                                                <input type="file" class="form-control-file" name="gambar">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Note</label>
+                                                <textarea class="form-control" name="note"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php
+                        $this->db->where('id_survei', $this->uri->segment(3));
+                        $query = $this->db->get('t_file');
+                        $row = $query->result();
+                        $num = $query->num_rows();
+                        if ($num > 0) {
+                            echo '<div id="js-lightgallery">';
+                            foreach ($row as $dt) { ?>
+                                <!-- <a class="" href="<?php echo base_url() ?>assets/gambar/<?php echo $dt->file ?>">
+                                        <img class="img-responsive" src="<?php echo base_url() ?>assets/gambar/<?php echo $dt->file ?>" alt="<?php echo $dt->note ?>">
+                                    </a> -->
+                                <a class="" href="<?php echo base_url() ?>assets/gambar/<?php echo $dt->file ?>" data-sub-html="<?php echo $dt->note ?>">
+                                    <img class="img-responsive" src="<?php echo base_url() ?>assets/gambar/<?php echo $dt->file ?>" alt="image">
+                                </a>
+                            <?php }
+                            echo '</div>';
+                        } else { ?>
+                            <div class="text-center"><span class="alert alert-warning">Belum ada file yang diupload</span></div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div id="panel-2" class="panel panel-collapsed">
+                <div class="panel-hdr text-success">
+                    <h2>
+                        Bahan <span class="fw-300"><i>Material</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    </div>
+                </div>
+                <div class="panel-container collapse">
+                    <div class="panel-content">
+                        <div class="text-center">
+                            <a href="<?php echo site_url('t_material/create/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Tambah Data Bahan Material</a>
+                        </div>
+                        <table id="example" class="table table-bordered table-striped">
+                            <thead class="thead-themed">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Barang Material</th>
+                                    <th class="text-center">Qty</th>
+                                    <th class="text-center">Harga (Rp)</th>
+                                    <th class="text-center">Total (Rp)</th>
+                                    <th>Create By</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                $this->db->where('id_invoice', $this->uri->segment(3));
+                                $result = $this->db->get('v_material')->result();
+                                foreach ($result as $dt) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $dt->barang ?></td>
+                                        <td><?php echo $dt->qty ?></td>
+                                        <td><?php echo angka($dt->harga_satuan) ?></td>
+                                        <td><?php echo angka($dt->total) ?></td>
+                                        <td><?php echo $dt->full_name ?></td>
+                                        <td><a href="<?php echo site_url('t_material/delete/' . $dt->id_invoice . '/' . $dt->id_material) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
+                                    </tr>
+                                <?php }
+                                $this->db->select('sum(total) as grand');
+                                $this->db->where('id_invoice', $this->uri->segment(3));
+                                $result = $this->db->get('t_material')->row();
+                                $ttl_material = $result->grand;
+                                ?>
+                                <tr>
+                                    <td colspan="4" class="text-right"><strong>TOTAL</strong></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_material) ?></strong></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div id="panel-2" class="panel panel-collapsed">
+                <div class="panel-hdr text-success">
+                    <h2>
+                        Biaya Lain-lain <span class="fw-300"><i>Kredit</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    </div>
+                </div>
+                <div class="panel-container collapse">
+                    <div class="panel-content">
+                        <button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#kredit-modal">Tambah Pembayaran (Kredit)</button>
+
+                        <table id="example" class="table table-bordered table-striped mt-2">
+                            <thead class="thead-themed">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Tanggal</th>
+                                    <th class="text-center">Group</th>
+                                    <th class="text-center">Deskripsi</th>
+                                    <th class="text-center">Total</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $this->db->where('id_group', '1');
+                                $this->db->order_by('created_date');
+                                $result = $this->db->get('v_pembukuan_new')->result();
+                                foreach ($result as $dt) {
+                                ?>
+                                    <tr>
+                                        <td><?php echo $no ?></td>
+                                        <td><?php echo $dt->created_date ?></td>
+                                        <td><?php echo $dt->nm_group_sub ?></td>
+                                        <td><?php echo $dt->deskripsi ?></td>
+                                        <td class="text-right"><strong> <?php echo angka($dt->total); ?></strong></td>
+                                        <td><a href="<?php echo site_url('t_pembukuan/delete/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
+                                    </tr>
+                                <?php $no++;
+                                }
+                                $this->db->select('sum(total) as xdebit');
+                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $this->db->where('id_group', '1');
+                                $result = $this->db->get('v_pembukuan_new')->row();
+                                $ttl_biaya = $result->xdebit;
+                                ?>
+                                <tr>
+                                    <td colspan="4" class="text-right"><strong>TOTAL</strong></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_biaya) ?></strong></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="modal fade" id="kredit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Pengeluaran (Kredit)</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    <form action="<?php echo site_url('m_survei/create_kredit') ?>" method="post" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">
+                                            <input type="hidden" name="id_group" value="1">
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Jenis Pengeluaran</label>
+                                                <select name="id_group_sub" id="group_sub" class="select2 form-control w-100">
+                                                    <option value="">Select Jenis Pengeluaran</option>
+                                                    <?php
+                                                    $this->db->where('id_group', '1');
+                                                    $result = $this->db->get('m_group_sub')->result();
+                                                    foreach ($result as $row) {
+                                                        echo '<option value="' . $row->id_group_sub . '">' . $row->nm_group_sub . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Dekripsi Pengeluaran</label>
+                                                <input type="text" class="form-control" name="deskripsi">
+                                            </div>
+                                            <!-- <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Qty</label>
+                                                <input type="number" class="form-control" name="qty">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Satuan</label>
+                                                <input type="text" class="form-control" name="satuan">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Harga Satuan</label>
+                                                <input type="number" class="form-control" name="harga">
+                                            </div> -->
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Total</label>
+                                                <input type="number" class="form-control" name="total">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="example-fileinput">Note</label>
+                                                <textarea class="form-control" name="note"><?php echo $no_invoice . ' a/n ' . $nama ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div id="panel-2" class="panel panel-collapsed">
+                <div class="panel-hdr text-success">
+                    <h2>
+                        Laba <span class="fw-300"><i>Rugi</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    </div>
+                </div>
+                <div class="panel-container collapse">
+                    <div class="panel-content">
+                        <table id="example" class="table table-striped mt-2">
+                            <tbody>
+                                <?php
+                                $debit = $ttl_payment;
+                                $kredit = $ttl_biaya + $ttl_material;
+                                $margin = $debit - $kredit;
+                                ?>
+                                <!-- <tr>
+                                    <td>Total Pesanan</td>
+                                    <td></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_pesanan) ?></strong></td>
+                                </tr> -->
+                                <?php
+                                $no = 1;
+                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $this->db->where('id_group', '2');
+                                $this->db->order_by('created_date');
+                                $result = $this->db->get('v_pembukuan_new')->result();
+                                foreach ($result as $dt) { ?>
+                                    <tr>
+                                        <td>- <?php echo $dt->nm_group_sub ?></td>
+                                        <!-- <td><?php echo $dt->deskripsi ?></td> -->
+                                        <td class="text-right"><strong> <?php echo angka($dt->total); ?></strong></td>
+                                        <td></td>
+                                    </tr>
+                                <?php } ?>
+                                <tr>
+                                    <td><strong>Total Pendapatan</strong></td>
+                                    <td></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_payment) ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td>- Biaya Material</td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_material) ?></strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>- Biaya Lain-lain</td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_biaya) ?></strong></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Total Beban</strong></td>
+                                    <td></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_biaya + $ttl_material) ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Laba (Rugi)</strong></td>
+                                    <td></td>
+                                    <td class="text-right"><strong><?php echo angka($margin) ?></strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin/js/miscellaneous/lightgallery/lightgallery.bundle.js"></script>
+<script>
+    $(document).ready(function() {
+        var $initScope = $('#js-lightgallery');
+        if ($initScope.length) {
+            $initScope.justifiedGallery({
+                border: -1,
+                rowHeight: 150,
+                margins: 8,
+                waitThumbnailsLoad: true,
+                randomize: false,
+            }).on('jg.complete', function() {
+                $initScope.lightGallery({
+                    thumbnail: true,
+                    animateThumb: true,
+                    showThumbByDefault: true,
+                });
+            });
+        };
+        $initScope.on('onAfterOpen.lg', function(event) {
+            $('body').addClass("overflow-hidden");
+        });
+        $initScope.on('onCloseAfter.lg', function(event) {
+            $('body').removeClass("overflow-hidden");
+        });
+    });
+</script>

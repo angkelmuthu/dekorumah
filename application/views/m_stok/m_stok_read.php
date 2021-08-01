@@ -3,7 +3,7 @@
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                <h2>Barang Detail Read</h2>
+                <h2>Stok Barang Read</h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                     <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -13,12 +13,12 @@
             <div class="panel-container show">
                 <div class="panel-content">
         <table class="table table-striped">
-	    <tr><td>Nm Barang Detail</td><td><?php echo $nm_barang_detail; ?></td></tr>
 	    <tr><td>Id Barang</td><td><?php echo $id_barang; ?></td></tr>
-	    <tr><td>Id Barang Sub</td><td><?php echo $id_barang_sub; ?></td></tr>
-	    <tr><td>Harga</td><td><?php echo $harga; ?></td></tr>
-	    <tr><td>Aktif</td><td><?php echo $aktif; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('m_barang_detail') ?>" class="btn btn-primary waves-effect waves-themed">Kembali</a></td></tr>
+	    <tr><td>Harga Satuan</td><td><?php echo $harga_satuan; ?></td></tr>
+	    <tr><td>Stok</td><td><?php echo $stok; ?></td></tr>
+	    <tr><td>Id User</td><td><?php echo $id_user; ?></td></tr>
+	    <tr><td>Update Date</td><td><?php echo $update_date; ?></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('m_stok') ?>" class="btn btn-primary waves-effect waves-themed">Kembali</a></td></tr>
 	</table>
 </div>
 </div>

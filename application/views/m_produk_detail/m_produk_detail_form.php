@@ -3,7 +3,7 @@
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>INPUT DATA BARANG DETAIL</h2>
+                    <h2>INPUT DATA produk DETAIL</h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                         <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -16,32 +16,32 @@
 
                             <table class='table table-striped'>
                                 <tr>
-                                    <td width='200'>Barang <?php echo form_error('id_barang') ?></td>
+                                    <td width='200'>produk <?php echo form_error('id_produk') ?></td>
                                     <td>
-                                        <select name="id_barang" id="barang" class="select2 form-control w-100">
-                                            <option value="">Select Barang</option>
+                                        <select name="id_produk" id="produk" class="select2 form-control w-100">
+                                            <option value="">Select produk</option>
                                             <?php
-                                            foreach ($barang as $row) {
-                                                echo '<option value="' . $row->id_barang . '">' . $row->nm_barang . '</option>';
+                                            foreach ($produk as $row) {
+                                                echo '<option value="' . $row->id_produk . '">' . $row->nm_produk . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Sub Barang <?php echo form_error('id_barang_sub') ?></td>
+                                    <td width='200'>Sub produk <?php echo form_error('id_produk_sub') ?></td>
                                     <td>
                                         <div class="ajax-loader">
-                                            <img id="loading-barangsub" style="display:none;" src="<?php echo base_url() ?>assets/smartadmin/img/loading.gif" height="40px" class="img-responsive" />
+                                            <img id="loading-produksub" style="display:none;" src="<?php echo base_url() ?>assets/smartadmin/img/loading.gif" height="40px" class="img-responsive" />
                                         </div>
-                                        <select name="id_barang_sub" class="select2 form-control w-100" id="barang_sub" required>
-                                            <option value="">Select Sub Barang</option>
+                                        <select name="id_produk_sub" class="select2 form-control w-100" id="produk_sub" required>
+                                            <option value="">Select Sub produk</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Detail Barang <?php echo form_error('nm_barang_detail') ?></td>
-                                    <td><input type="text" class="form-control" name="nm_barang_detail" id="nm_barang_detail" placeholder="Nm Barang Detail" value="<?php echo $nm_barang_detail; ?>" /></td>
+                                    <td width='200'>Detail produk <?php echo form_error('nm_produk_detail') ?></td>
+                                    <td><input type="text" class="form-control" name="nm_produk_detail" id="nm_produk_detail" placeholder="Nm produk Detail" value="<?php echo $nm_produk_detail; ?>" /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Harga <?php echo form_error('harga') ?></td>
@@ -53,9 +53,10 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td><input type="hidden" name="id_barang_detail" value="<?php echo $id_barang_detail; ?>" />
+                                    <td><input type="hidden" name="id_produk_detail" value="<?php echo $id_produk_detail; ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <a href="<?php echo site_url('m_barang_detail') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td>
+                                        <a href="<?php echo site_url('m_produk_detail') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
+                                    </td>
                                 </tr>
                             </table>
                         </form>
@@ -73,21 +74,21 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
 <script>
     $(document).ready(function() {
-        $('#barang').change(function() {
-            var id_barang = $('#barang').val();
-            if (id_barang != '') {
+        $('#produk').change(function() {
+            var id_produk = $('#produk').val();
+            if (id_produk != '') {
                 $.ajax({
-                    url: "<?php echo base_url(); ?>M_barang_detail/fetch_barang_sub",
+                    url: "<?php echo base_url(); ?>M_produk_detail/fetch_produk_sub",
                     method: "POST",
                     data: {
-                        id_barang: id_barang
+                        id_produk: id_produk
                     },
                     success: function(data) {
-                        $('#barang_sub').html(data);
+                        $('#produk_sub').html(data);
                     }
                 });
             } else {
-                $('#barang_sub').html('<option value="">Select Sub Barang</option>');
+                $('#produk_sub').html('<option value="">Select Sub produk</option>');
             }
         });
     });

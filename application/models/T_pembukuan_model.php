@@ -18,8 +18,8 @@ class T_pembukuan_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        $this->db->order_by('created_date', $this->order);
+        return $this->db->get('v_laporan_buku_new')->result();
     }
 
     // get data by id

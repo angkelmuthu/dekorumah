@@ -76,10 +76,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'rsko-jakarta.com',
-	'username' => 'u7793908_sinapon',
-	'password' => 'Didikreasi81',
-	'database' => 'u7793908_dekorumah',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => 'root',
+	'database' => 'app_gallerydekoruma',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

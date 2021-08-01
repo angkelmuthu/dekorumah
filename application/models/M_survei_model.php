@@ -36,6 +36,12 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_survei')->row();
     }
 
+    function get_by_id_pesanan($id)
+    {
+        $this->db->where('id_pesanan', $id);
+        return $this->db->get('t_pesanan')->row();
+    }
+
     // get total rows
     function total_rows($q = NULL)
     {
@@ -143,42 +149,48 @@ class M_survei_model extends CI_Model
         $this->db->delete($this->table);
     }
 
-    function fetch_barang()
+    function delete_pesanan($id)
+    {
+        $this->db->where('id_pesanan', $id);
+        $this->db->delete('t_pesanan');
+    }
+
+    function fetch_produk()
     {
         $this->db->where('aktif', 'Y');
-        $this->db->order_by('nm_barang', 'ASC');
-        $query = $this->db->get("m_barang");
+        $this->db->order_by('nm_produk', 'ASC');
+        $query = $this->db->get("m_produk");
         return $query->result();
     }
-    function fetch_barang_sub($id_barang)
+    function fetch_produk_sub($id_produk)
     {
-        $this->db->where('id_barang', $id_barang);
-        $this->db->group_by('id_barang_sub');
-        $this->db->order_by('nm_barang_sub', 'ASC');
-        $query = $this->db->get('m_barang_sub');
-        $output = '<option value="">Select Sub Barang</option>';
+        $this->db->where('id_produk', $id_produk);
+        $this->db->group_by('id_produk_sub');
+        $this->db->order_by('nm_produk_sub', 'ASC');
+        $query = $this->db->get('m_produk_sub');
+        $output = '<option value="">Select Sub produk</option>';
         foreach ($query->result() as $row) {
-            $output .= '<option value="' . $row->id_barang_sub . '">' . $row->nm_barang_sub . '</option>';
+            $output .= '<option value="' . $row->id_produk_sub . '">' . $row->nm_produk_sub . '</option>';
         }
         return $output;
     }
-    function fetch_barang_detail($id_barang, $id_barang_sub)
+    function fetch_produk_detail($id_produk, $id_produk_sub)
     {
-        $this->db->where('id_barang', $id_barang);
-        $this->db->where('id_barang_sub', $id_barang_sub);
-        $this->db->group_by('id_barang_detail');
-        $this->db->order_by('nm_barang_detail', 'ASC');
-        $query = $this->db->get('v_barang');
-        $output = '<option value="">Select barang_detail</option>';
+        $this->db->where('id_produk', $id_produk);
+        $this->db->where('id_produk_sub', $id_produk_sub);
+        $this->db->group_by('id_produk_detail');
+        $this->db->order_by('nm_produk_detail', 'ASC');
+        $query = $this->db->get('v_produk');
+        $output = '<option value="">Select produk_detail</option>';
         foreach ($query->result() as $row) {
-            $output .= '<option value="' . $row->id_barang_detail . '">' . $row->nm_barang_detail . '</option>';
+            $output .= '<option value="' . $row->id_produk_detail . '">' . $row->nm_produk_detail . '</option>';
         }
         return $output;
     }
-    function fetch_barang_harga($id_barang_detail)
+    function fetch_produk_harga($id_produk_detail)
     {
-        $this->db->where('id_barang_detail', $id_barang_detail);
-        $query = $this->db->get('v_barang');
+        $this->db->where('id_produk_detail', $id_produk_detail);
+        $query = $this->db->get('v_produk');
         foreach ($query->result() as $row) {
             $hasil = array(
                 'harga' => $row->harga,

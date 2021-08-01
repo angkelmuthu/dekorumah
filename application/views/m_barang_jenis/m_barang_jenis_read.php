@@ -3,7 +3,7 @@
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                <h2>Barang Sub Read</h2>
+                <h2>Jenis Barang Read</h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                     <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -13,10 +13,9 @@
             <div class="panel-container show">
                 <div class="panel-content">
         <table class="table table-striped">
-	    <tr><td>Nm Barang Sub</td><td><?php echo $nm_barang_sub; ?></td></tr>
-	    <tr><td>Id Barang</td><td><?php echo $id_barang; ?></td></tr>
+	    <tr><td>Barang Jenis</td><td><?php echo $barang_jenis; ?></td></tr>
 	    <tr><td>Aktif</td><td><?php echo $aktif; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('m_barang_sub') ?>" class="btn btn-primary waves-effect waves-themed">Kembali</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('m_barang_jenis') ?>" class="btn btn-primary waves-effect waves-themed">Kembali</a></td></tr>
 	</table>
 </div>
 </div>

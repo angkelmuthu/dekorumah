@@ -3,7 +3,7 @@
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                <h2>INPUT DATA BARANG SUB</h2>
+                <h2>INPUT DATA JENIS BARANG</h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                     <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -17,12 +17,11 @@
 <table class='table table-striped'>
 
 
-	    <tr><td width='200'>Nm Barang Sub <?php echo form_error('nm_barang_sub') ?></td><td><input type="text" class="form-control" name="nm_barang_sub" id="nm_barang_sub" placeholder="Nm Barang Sub" value="<?php echo $nm_barang_sub; ?>" /></td></tr>
-	    <tr><td width='200'>Id Barang <?php echo form_error('id_barang') ?></td><td><?php echo select2_dinamis('id_barang', 'm_barang', 'id_barang', 'nm_barang') ?></td></tr>
+	    <tr><td width='200'>Barang Jenis <?php echo form_error('barang_jenis') ?></td><td><input type="text" class="form-control" name="barang_jenis" id="barang_jenis" placeholder="Barang Jenis" value="<?php echo $barang_jenis; ?>" /></td></tr>
 	    <tr><td width='200'>Aktif <?php echo form_error('aktif') ?></td><td><?php echo cmb_dinamis('aktif', 'm_aktif', 'aktif', 'ket') ?></td></tr>
-	    <tr><td></td><td><input type="hidden" name="id_barang_sub" value="<?php echo $id_barang_sub; ?>" /> 
+	    <tr><td></td><td><input type="hidden" name="id_barang_jenis" value="<?php echo $id_barang_jenis; ?>" /> 
 	    <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button> 
-	    <a href="<?php echo site_url('m_barang_sub') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td></tr>
+	    <a href="<?php echo site_url('m_barang_jenis') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td></tr>
 	</table></form>        </div>
 </div>
 

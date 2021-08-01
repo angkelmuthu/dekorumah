@@ -3,7 +3,7 @@
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>KELOLA DATA BARANG SUB</h2>
+                    <h2>KELOLA DATA T_INVOICE</h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                         <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -13,14 +13,18 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="text-center">
-                            <?php echo anchor(site_url('m_barang_sub/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
+                            <?php echo anchor(site_url('t_invoice/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?>
+                            <?php echo anchor(site_url('t_invoice/excel'), '<i class="fal fa-file-excel" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-outline-success btn-sm waves-effect waves-themed"'); ?></div>
                         <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
                             <thead>
                                 <tr>
                                     <th width="30px">No</th>
-                                    <th>Nm Barang Sub</th>
-                                    <th>Id Barang</th>
-                                    <th>Aktif</th>
+                                    <th>No Invoice</th>
+                                    <th>Tgl Invoice</th>
+                                    <th>Pelanggan</th>
+                                    <!-- <th>Users</th> -->
+                                    <th>Create Date</th>
+                                    <th>Status</th>
                                     <th width="200px">Action</th>
                                 </tr>
                             </thead>
@@ -67,18 +71,24 @@
             processing: true,
             serverSide: true,
             ajax: {
-                "url": "m_barang_sub/json",
+                "url": "t_invoice/json",
                 "type": "POST"
             },
             columns: [{
-                    "data": "id_barang_sub",
+                    "data": "id",
                     "orderable": false
                 }, {
-                    "data": "nm_barang_sub"
+                    "data": "no_invoice"
                 }, {
-                    "data": "nm_barang"
+                    "data": "tgl_invoice"
                 }, {
-                    "data": "aktif"
+                    "data": "nama"
+                    // }, {
+                    //     "data": "users"
+                }, {
+                    "data": "create_date"
+                }, {
+                    "data": "status"
                 },
                 {
                     "data": "action",
