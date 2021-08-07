@@ -22,7 +22,7 @@
                                     <th>No Invoice</th>
                                     <th>Tgl Invoice</th>
                                     <th>Pelanggan</th>
-                                    <!-- <th>Users</th> -->
+                                    <th>Sales</th>
                                     <th>Create Date</th>
                                     <th>Status</th>
                                     <th width="200px">Action</th>
@@ -83,8 +83,8 @@
                     "data": "tgl_invoice"
                 }, {
                     "data": "nama"
-                    // }, {
-                    //     "data": "users"
+                }, {
+                    "data": "nm_sales"
                 }, {
                     "data": "create_date"
                 }, {

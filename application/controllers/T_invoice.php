@@ -40,6 +40,7 @@ class T_invoice extends CI_Controller
                 'users' => $row->users,
                 'create_date' => $row->create_date,
                 'status' => $row->status,
+                'nm_sales' => $row->nm_sales,
             );
             $this->template->load('template', 't_invoice/t_invoice_read', $data);
         } else {
@@ -49,6 +50,12 @@ class T_invoice extends CI_Controller
             </button><strong> Record Not Found</strong></div>');
             redirect(site_url('t_invoice'));
         }
+    }
+
+    public function kwitansi($id)
+    {
+
+        $this->load->view('t_invoice/pdf_pembayaran');
     }
 
     public function create()
@@ -81,6 +88,7 @@ class T_invoice extends CI_Controller
                 'users' => $this->input->post('users', TRUE),
                 'create_date' => $this->input->post('create_date', TRUE),
                 'status' => $this->input->post('status', TRUE),
+                'id_sales' => $this->input->post('id_sales', TRUE),
             );
 
             $this->T_invoice_model->insert($data);
@@ -107,6 +115,7 @@ class T_invoice extends CI_Controller
                 'users' => set_value('users', $row->users),
                 'create_date' => set_value('create_date', $row->create_date),
                 'status' => set_value('status', $row->status),
+                'id_sales' => set_value('id_sales', $row->id_sales),
             );
             $this->template->load('template', 't_invoice/t_invoice_form', $data);
         } else {
@@ -132,6 +141,7 @@ class T_invoice extends CI_Controller
                 'users' => $this->input->post('users', TRUE),
                 'create_date' => $this->input->post('create_date', TRUE),
                 'status' => $this->input->post('status', TRUE),
+                'id_sales' => $this->input->post('id_sales', TRUE),
             );
 
             $this->T_invoice_model->update($this->input->post('id', TRUE), $data);
@@ -171,6 +181,7 @@ class T_invoice extends CI_Controller
         $this->form_validation->set_rules('users', 'users', 'trim|required');
         $this->form_validation->set_rules('create_date', 'create date', 'trim|required');
         $this->form_validation->set_rules('status', 'status', 'trim|required');
+        $this->form_validation->set_rules('id_sales', 'id sales', 'trim|required');
 
         $this->form_validation->set_rules('id', 'id', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

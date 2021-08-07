@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        Gallery Dekorumah
+        Gallery Dekoruma
     </title>
     <meta name="description" content="Page Titile">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

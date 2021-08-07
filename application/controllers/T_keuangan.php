@@ -13,38 +13,54 @@ class T_keuangan extends CI_Controller
         $this->load->library('form_validation');
     }
 
+    // public function index()
+    // {
+    //     $q = urldecode($this->input->get('q', TRUE));
+    //     $start = intval($this->uri->segment(3));
+
+    //     if ($q <> '') {
+    //         $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
+    //         $config['first_url'] = base_url() . 'index.php/t_keuangan/index.html?q=' . urlencode($q);
+    //     } else {
+    //         $config['base_url'] = base_url() . 'index.php/t_keuangan/index/';
+    //         $config['first_url'] = base_url() . 'index.php/t_keuangan/index/';
+    //     }
+
+    //     $config['per_page'] = 10;
+    //     $config['page_query_string'] = FALSE;
+    //     $config['total_rows'] = $this->T_keuangan_model->total_rows($q);
+    //     $t_keuangan = $this->T_keuangan_model->get_limit_data($config['per_page'], $start, $q);
+    //     $config['full_tag_open'] = '<ul class="pagination justify-content-center">';
+    //     $config['full_tag_close'] = '</ul>';
+    //     $this->load->library('pagination');
+    //     $this->pagination->initialize($config);
+
+    //     $data = array(
+    //         't_keuangan_data' => $t_keuangan,
+    //         'q' => $q,
+    //         'pagination' => $this->pagination->create_links(),
+    //         'total_rows' => $config['total_rows'],
+    //         'start' => $start,
+    //     );
+    //     $this->template->load('template', 't_keuangan/t_keuangan_list', $data);
+    // }
     public function index()
     {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->uri->segment(3));
-
-        if ($q <> '') {
-            $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/t_keuangan/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'index.php/t_keuangan/index/';
-            $config['first_url'] = base_url() . 'index.php/t_keuangan/index/';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->T_keuangan_model->total_rows($q);
-        $t_keuangan = $this->T_keuangan_model->get_limit_data($config['per_page'], $start, $q);
-        $config['full_tag_open'] = '<ul class="pagination justify-content-center">';
-        $config['full_tag_close'] = '</ul>';
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
-        $data = array(
-            't_keuangan_data' => $t_keuangan,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
-        );
+        $data['list'] = $this->T_keuangan_model->get_all();
         $this->template->load('template', 't_keuangan/t_keuangan_list', $data);
     }
 
+    public function laporan_projek()
+    {
+        $data['laporan'] = $this->T_keuangan_model->get_lapprojek();
+        $this->template->load('template', 't_keuangan/laporan_project', $data);
+    }
+
+    public function json()
+    {
+        header('Content-Type: application/json');
+        echo $this->T_keuangan_model->json();
+    }
     public function read($id)
     {
         $row = $this->T_keuangan_model->get_by_id($id);

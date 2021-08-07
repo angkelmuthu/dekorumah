@@ -1,3 +1,7 @@
+<?php
+$this->db->where('id', $this->uri->segment(3));
+$row = $this->db->get('v_invoice')->row();
+?>
 <main id="js-page-content" role="main" class="page-content">
     <div class="container">
         <a href="#" class="btn btn-block btn-primary" data-action="app-print" title="Print page">
@@ -15,31 +19,24 @@
                     </div>
                 </div>
             </div>
+            <br><br>
             <div class="row">
                 <div class="col-sm-5 d-flex">
                     <div class="table-responsive">
                         <table class="table table-clean table-sm align-self-end">
                             <tbody>
                                 <tr>
-                                    <td width="35%">
-                                        Nama Pemesan
-                                    </td>
-                                    <td width="5%">
-                                        :
-                                    </td>
-                                    <td width="60%">
-
-                                    </td>
+                                    <td width="35%">Nama Pemesan</td>
+                                    <td width="5%">:</td>
+                                    <td width="60%"><?php echo $row->nama ?></td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        Alamat
-                                    </td>
+                                    <td>Alamat</td>
                                     <td>
                                         :
                                     </td>
                                     <td>
-
+                                        <?php echo $row->alamat ?>
                                     </td>
                                 </tr>
                             </tbody>
@@ -65,88 +62,101 @@
 
                 <div class="col-sm-12">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped mt-5">
+                        <table id="example" class="table table-bordered table-striped" style="font-size:12px;line-height: 0.9;">
                             <thead class="thead-themed">
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Item produk & Spesifikasi</th>
-                                    <th class="text-center">Ukuran</th>
-                                    <th class="text-center">volume</th>
-                                    <th class="text-center">Satuan</th>
-                                    <th class="text-center">Harga (Rp)</th>
-                                    <th class="text-center">Total (Rp)</th>
-                                    <th class="text-center">Grand Total (Rp)</th>
+                                    <th rowspan="2">No.</th>
+                                    <th rowspan="2">Item Barang & Spesifikasi</th>
+                                    <th colspan="5" class="text-center">Ukuran</th>
+                                    <th rowspan="2" class="text-center">Harga</th>
+                                    <th rowspan="2" class="text-center">Jumlah</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Panjang</th>
+                                    <th class="text-center">Lebar</th>
+                                    <th class="text-center">Tinggi</th>
+                                    <th class="text-center">Sum</th>
+                                    <th class="text-center">Unit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $no = 1;
                                 $this->db->select('id_produk,nm_produk');
-                                $this->db->where('id_survei', $this->uri->segment(3));
+                                $this->db->where('id_invoice', $this->uri->segment(3));
                                 $this->db->group_by('id_produk');
                                 $result = $this->db->get('v_pesanan')->result();
                                 foreach ($result as $dt) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $no ?></td>
-                                        <td colspan="7">
-                                            <h5><?php echo $dt->nm_produk ?></h5>
-                                        </td>
+                                        <td><?php echo $no++; ?></td>
+                                        <td colspan="9"><?php echo $dt->nm_produk ?></td>
                                     </tr>
                                     <?php
-                                    $this->db->select('id_produk_sub,nm_produk_sub,sum(total) as total');
-                                    $this->db->where('id_survei', $this->uri->segment(3));
+                                    $no2 = 1;
+                                    //$this->db->select('id_produk_sub,nm_produk_sub,sum(total) as total');
+                                    $this->db->where('id_invoice', $this->uri->segment(3));
                                     $this->db->where('id_produk', $dt->id_produk);
-                                    $this->db->group_by('id_produk_sub');
+                                    //$this->db->group_by('id_produk_sub');
                                     $result = $this->db->get('v_pesanan')->result();
                                     foreach ($result as $dt2) {
-                                    ?>
-                                        <tr>
-                                            <td></td>
-                                            <td colspan="6"><strong><?php echo $dt2->nm_produk_sub ?></strong></td>
-                                            <td class="text-right"><strong><?php echo angka($dt2->total) ?></strong></td>
-                                        </tr>
-                                    <?php }
-                                    $this->db->where('id_survei', $this->uri->segment(3));
-                                    $this->db->where('id_produk_sub', $dt2->id_produk_sub);
-                                    $result = $this->db->get('v_pesanan')->result();
-                                    foreach ($result as $dt3) {
-                                        if ($dt3->id_satuan == 1) {
-                                            $qty = $dt3->panjang;
-                                        } elseif ($dt3->id_satuan == 2) {
-                                            $qty = $dt3->panjang * $dt3->tinggi;
-                                        } elseif ($dt3->id_satuan == 3) {
-                                            $qty = $dt3->panjang * $dt3->lebar * $dt3->tinggi;
+                                        if ($dt2->id_satuan == 1) {
+                                            $qty = $dt2->panjang;
+                                        } elseif ($dt2->id_satuan == 2) {
+                                            $qty = $dt2->panjang * $dt2->tinggi;
+                                        } elseif ($dt2->id_satuan == 3) {
+                                            $qty = $dt2->panjang * $dt2->lebar * $dt2->tinggi;
                                         } else {
-                                            $qty = $dt3->qty;
+                                            $qty = $dt2->qty;
                                         }
                                     ?>
                                         <tr>
                                             <td></td>
-                                            <td>- <?php echo $dt3->nm_produk_detail ?></td>
-                                            <td class="text-center">PxLxT (<?php echo $dt3->panjang ?>x<?php echo $dt3->lebar ?>x<?php echo $dt3->tinggi ?>)</td>
+                                            <td><strong><?php echo $no2++ . '. '; ?><?php echo $dt2->nm_produk_sub ?></strong></td>
                                             <td class="text-center"><?php echo $qty ?></td>
-                                            <td class="text-center"><?php echo $dt3->satuan ?></td>
-                                            <td class="text-right"><?php echo angka($dt3->harga) ?></td>
-                                            <td class="text-right"><?php echo angka($dt3->total) ?></td>
-                                            <td></td>
+                                            <td class="text-center"><?php echo $dt2->lebar ?></td>
+                                            <td class="text-center"><?php echo $dt2->tinggi ?></td>
+                                            <td class="text-center"><?php echo $qty ?></td>
+                                            <td class="text-center"><?php echo $dt2->satuan ?></td>
+                                            <td class="text-right"><?php echo angka($dt2->harga) ?></td>
+                                            <td class="text-right"><?php echo angka($dt2->total) ?></td>
                                         </tr>
-                                    <?php }
-                                    $no++;
+                                        <?php
+                                        $no3 = 'a';
+                                        $this->db->where('id_pesanan', $dt2->id_pesanan);
+                                        $result = $this->db->get('v_pesanan_detail')->result();
+                                        foreach ($result as $dt3) {
+                                        ?>
+                                            <tr>
+                                                <td></td>
+                                                <td><?php echo '&nbsp&nbsp&nbsp' . $no3++ . '. '; ?><?php echo $dt3->nm_produk_detail ?></td>
+                                                <td colspan="7"></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                    }
+                                    $this->db->select('nm_produk,sum(total) as ttl_produk');
+                                    $this->db->where('id_invoice', $this->uri->segment(3));
+                                    $this->db->where('id_produk', $dt->id_produk);
+                                    $result = $this->db->get('v_pesanan')->result();
+                                    foreach ($result as $dtx) {
+                                        ?>
+                                        <tr>
+                                            <td colspan="8" class="text-right"><strong>Total <?php echo $dtx->nm_produk ?></strong></td>
+                                            <td class="text-right"><strong><?php echo angka($dtx->ttl_produk) ?></strong></td>
+                                        </tr>
+                                <?php
+                                    }
                                 }
                                 $this->db->select('sum(total) as grand');
-                                $this->db->where('id_survei', $this->uri->segment(3));
-                                $result = $this->db->get('v_pesanan')->result();
-                                foreach ($result as $ttl) {
-                                    ?>
-                                    <tr>
-                                        <td colspan="7" class="text-right"><strong>TOTAL</strong></td>
-                                        <td class="text-right"><strong><?php echo angka($ttl->grand) ?></strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="8">Terbilang : <strong><i><?php echo terbilang($ttl->grand) ?> rupiah.</i></strong></td>
-                                    </tr>
-                                <?php } ?>
+                                $this->db->where('id_invoice', $this->uri->segment(3));
+                                $result = $this->db->get('v_pesanan')->row();
+                                $ttl_pesanan = $result->grand;
+                                ?>
+                                <tr>
+                                    <td colspan="8" class="text-right"><strong>TOTAL</strong></td>
+                                    <td class="text-right"><strong><?php echo angka($ttl_pesanan) ?></strong></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -188,7 +198,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-5 d-flex">
-                    <div class="table-responsive">
+                    <!-- <div class="table-responsive">
                         <table class="table table-clean table-sm align-self-end">
                             <tbody>
                                 <tr class="text-center">
@@ -200,12 +210,11 @@
                                     <td><br><br><br>
                                         <?php echo $this->session->userdata('full_name')
                                         ?>
-                                        <!-- (...................................) -->
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </div> -->
                 </div>
                 <div class="col-sm-2 d-flex"></div>
                 <div class="col-sm-5 d-flex">
@@ -214,14 +223,16 @@
                             <tbody>
                                 <tr class="text-center">
                                     <td>
-                                        Gallery Dekorumah
+                                        Jakarta,
                                     </td>
                                 </tr>
                                 <tr class="text-center">
-                                    <td><br><br><br>
-                                        <?php echo $this->session->userdata('full_name')
-                                        ?>
+                                    <td>
+                                        <img width="150" height="100" src="<?php echo base_url() ?>assets/ttd.png">
                                     </td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td><b>Syahrul Ramadhan</b></td>
                                 </tr>
                             </tbody>
                         </table>

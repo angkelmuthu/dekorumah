@@ -363,7 +363,7 @@ class M_survei extends CI_Controller
 
         if (isset($_FILES["gambar"]["name"])) {
             $config['upload_path'] = './assets/gambar/';
-            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['allowed_types'] = 'pdf';
             $this->upload->initialize($config);
             if (!$this->upload->do_upload('gambar')) {
                 $this->upload->display_errors();
@@ -399,6 +399,27 @@ class M_survei extends CI_Controller
             </button><strong> Create Record Success</strong></div>');
         redirect(site_url('t_invoice/read/' . $this->input->post('id_survei')));
     }
+
+    public function delete_gambar($id_invoice, $id)
+    {
+        $row = $this->M_survei_model->get_gambar($id);
+
+        if ($row) {
+            $this->M_survei_model->delete_gambar($id);
+            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Delete Record Success</strong></div>');
+            redirect(site_url('t_invoice/read/' . $id_invoice));
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Record Not Found</strong></div>');
+            redirect(site_url('t_invoice/read/' . $id_invoice));
+        }
+    }
+
     public function create_debit()
     {
         $data = array(

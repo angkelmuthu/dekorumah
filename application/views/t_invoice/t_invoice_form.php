@@ -51,6 +51,10 @@
                                     <td><?php echo select2_dinamis('status', 'm_status_invoice', 'id_status', 'status') ?></td>
                                 </tr>
                                 <tr>
+                                    <td width='200'>Sales <?php echo form_error('sales') ?></td>
+                                    <td><?php echo select2_dinamis('id_sales', 'm_sales', 'id_sales', 'nm_sales') ?></td>
+                                </tr>
+                                <tr>
                                     <td></td>
                                     <input type="hidden" name="users" value="<?php echo $this->session->userdata('id_users') ?>" readonly />
                                     <input type="hidden" name="create_date" value="<?php echo date('Y-m-d H:s:i'); ?>" /></td>

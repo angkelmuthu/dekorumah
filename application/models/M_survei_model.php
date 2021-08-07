@@ -29,6 +29,12 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_pesanan')->result();
     }
 
+    function get_gambar($id)
+    {
+        $this->db->where('id_file', $id);
+        return $this->db->get('t_file')->result();
+    }
+
     // get data by id
     function get_by_id($id)
     {
@@ -153,6 +159,11 @@ class M_survei_model extends CI_Model
     {
         $this->db->where('id_pesanan', $id);
         $this->db->delete('t_pesanan');
+    }
+    function delete_gambar($id)
+    {
+        $this->db->where('id_file', $id);
+        $this->db->delete('t_file');
     }
 
     function fetch_produk()

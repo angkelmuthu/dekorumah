@@ -16,13 +16,30 @@ class T_keuangan_model extends CI_Model
         parent::__construct();
     }
 
+    function json()
+    {
+        $this->datatables->select('id_buku,note,created_date,created_by,debit,kredit');
+        $this->datatables->from('v_keuangan');
+        //add this line for join
+        //$this->datatables->join('table2', 't_invoice.field = table2.field');
+        $this->datatables->add_column('action', anchor(site_url('t_keuangan/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs waves-effect waves-themed')) . "
+            " . anchor(site_url('t_keuangan/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-xs waves-effect waves-themed')) . "
+                " . anchor(site_url('t_keuangan/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-xs waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        return $this->datatables->generate();
+    }
+
     // get all
     function get_all()
     {
-        $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        $this->db->order_by('created_date', 'DESC');
+        return $this->db->get('v_keuangan')->result();
     }
 
+    function get_lapprojek()
+    {
+        $this->db->order_by('create_date', 'DESC');
+        return $this->db->get('v_laporan_projek')->result();
+    }
     // get data by id
     function get_by_id($id)
     {

@@ -29,7 +29,7 @@ class T_invoice_model extends CI_Model
         nama,
         alamat,
         email,
-        hp');
+        hp,nm_sales');
         $this->datatables->from('v_invoice');
         //add this line for join
         //$this->datatables->join('table2', 't_invoice.field = table2.field');
@@ -48,6 +48,12 @@ class T_invoice_model extends CI_Model
 
     // get data by id
     function get_by_id($id)
+    {
+        $this->db->where($this->id, $id);
+        return $this->db->get('v_invoice')->row();
+    }
+
+    function get_pembayaran($id)
     {
         $this->db->where($this->id, $id);
         return $this->db->get('v_invoice')->row();

@@ -3,7 +3,7 @@
     <div class="col-xl-12">
         <div id="panel-1" class="panel">
             <div class="panel-hdr">
-                <h2>KELOLA DATA PRODUK DETAIL</h2>
+                <h2>KELOLA DATA PESANAN</h2>
                 <div class="panel-toolbar">
                     <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                     <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -13,13 +13,24 @@
             <div class="panel-container show">
                 <div class="panel-content">
                     <div class="text-center">
-        <?php echo anchor(site_url('m_produk_detail/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
+        <?php echo anchor(site_url('t_pesanan/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
         <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
             <thead>
                 <tr>
                     <th width="30px">No</th>
-		    <th>Nm Produk Detail</th>
-		    <th>Aktif</th>
+		    <th>Id Invoice</th>
+		    <th>Id Produk</th>
+		    <th>Id Produk Sub</th>
+		    <th>Qty</th>
+		    <th>Panjang</th>
+		    <th>Lebar</th>
+		    <th>Tinggi</th>
+		    <th>Id Satuan</th>
+		    <th>Harga</th>
+		    <th>Total</th>
+		    <th>Note</th>
+		    <th>Created Date</th>
+		    <th>Users</th>
 		    <th width="200px">Action</th>
                 </tr>
             </thead>
@@ -66,12 +77,12 @@
                     },
                     processing: true,
                     serverSide: true,
-                    ajax: {"url": "m_produk_detail/json", "type": "POST"},
+                    ajax: {"url": "t_pesanan/json", "type": "POST"},
                     columns: [
                         {
-                            "data": "id_produk_detail",
+                            "data": "id_pesanan",
                             "orderable": false
-                        },{"data": "nm_produk_detail"},{"data": "aktif"},
+                        },{"data": "id_invoice"},{"data": "id_produk"},{"data": "id_produk_sub"},{"data": "qty"},{"data": "panjang"},{"data": "lebar"},{"data": "tinggi"},{"data": "id_satuan"},{"data": "harga"},{"data": "total"},{"data": "note"},{"data": "created_date"},{"data": "users"},
                         {
                             "data" : "action",
                             "orderable": false,
