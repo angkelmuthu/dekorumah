@@ -17,7 +17,7 @@ $result3 = $this->db->get('m_desk')->row();
                 <div class="col-sm-12">
                     <div class="d-flex align-items-center mb-0">
                         <h2 class="keep-print-font fw-500 mb-0 text-primary flex-1 position-relative">
-                            <img src="<?php echo base_url() ?>assets/smartadmin/img/dekorumah.png">
+                            <img src="<?php echo base_url() ?>assets/dekoruma.png">
                             <small class="text-muted mb-0 fs-xs"><br>
                                 <?php echo $result3->deskripsi; ?>
                             </small>
