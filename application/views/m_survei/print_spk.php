@@ -1,19 +1,19 @@
+<?php
+$this->db->where('id', $this->uri->segment('3'));
+$row = $this->db->get('v_invoice')->row();
+?>
 <main id="js-page-content" role="main" class="page-content">
     <div class="container">
         <a href="#" class="btn btn-block btn-primary" data-action="app-print" title="Print page">
             <i class="fal fa-print"></i> PRINT
         </a>
         <br><br>
-        <?php
-        $this->db->where('id', $this->uri->segment('3'));
-        $row = $this->db->get('v_invoice')->row();
-        ?>
         <div data-size="A4">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="d-flex align-items-center mb-0">
                         <h2 class="keep-print-font fw-500 mb-0 text-primary flex-1 position-relative">
-                            <img src="<?php echo base_url() ?>assets/smartadmin/img/dekorumah.png">
+                            <img src="<?php echo base_url() ?>assets/dekorumah.png">
                             <h3><strong>RINCIAN PENAWARAN HARGA</strong><br>Spesifikasi dan Dimensi</h3>
                         </h2>
                     </div>
@@ -176,35 +176,16 @@
                         </ol>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5 d-flex">
-                    <!-- <div class="table-responsive">
-                        <table class="table table-clean table-sm align-self-end">
-                            <tbody>
-                                <tr class="text-center">
-                                    <td>
-                                        Pemesan
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td><br><br><br>
-                                        <?php echo $this->session->userdata('full_name')
-                                        ?>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>
-                </div> -->
+                <div class="col-sm-5">
                 </div>
-                <div class="col-sm-2 d-flex"></div>
-                <div class="col-sm-5 d-flex">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-5">
                     <div class="table-responsive">
                         <table class="table table-clean table-sm align-self-end">
                             <tbody>
                                 <tr class="text-center">
                                     <td>
-                                        Jakarta,
+                                        Jakarta, <?php echo tanggal($row->tgl_invoice) ?>
                                     </td>
                                 </tr>
                                 <tr class="text-center">

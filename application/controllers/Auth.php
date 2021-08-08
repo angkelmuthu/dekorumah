@@ -6,7 +6,7 @@ class Auth extends CI_Controller
 
     function index()
     {
-        $this->load->view('auth/login');
+        $this->load->view('auth/login8');
     }
 
     function cheklogin()
