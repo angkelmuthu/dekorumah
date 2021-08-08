@@ -13,7 +13,7 @@ $row = $this->db->get('v_invoice')->row();
                 <div class="col-sm-12">
                     <div class="d-flex align-items-center mb-0">
                         <h2 class="keep-print-font fw-500 mb-0 text-primary flex-1 position-relative">
-                            <img src="<?php echo base_url() ?>assets/dekorumah.png">
+                            <img src="<?php echo base_url() ?>assets/dekoruma.png">
                             <h3><strong>RINCIAN PENAWARAN HARGA</strong><br>Spesifikasi dan Dimensi</h3>
                         </h2>
                     </div>
