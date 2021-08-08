@@ -52,10 +52,10 @@ class T_invoice extends CI_Controller
         }
     }
 
-    public function kwitansi($id)
+    public function kwitansi()
     {
-
-        $this->load->view('t_invoice/pdf_pembayaran');
+        $this->template->load('template', 't_invoice/pdf_pembayaran');
+        //$this->load->view('t_invoice/pdf_pembayaran');
     }
 
     public function create()

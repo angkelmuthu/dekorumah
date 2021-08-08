@@ -16,14 +16,15 @@ class T_material_model extends CI_Model
     }
 
     // datatables
-    function json() {
+    function json()
+    {
         $this->datatables->select('id_material,id_invoice,id_barang,qty,harga_satuan,total,id_user,create_date');
         $this->datatables->from('t_material');
         //add this line for join
         //$this->datatables->join('table2', 't_material.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('t_material/read/$1'),'<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed'))." 
-            ".anchor(site_url('t_material/update/$1'),'<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm waves-effect waves-themed'))." 
-                ".anchor(site_url('t_material/delete/$1'),'<i class="fal fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_material');
+        $this->datatables->add_column('action', anchor(site_url('t_material/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed')) . "
+            " . anchor(site_url('t_material/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm waves-effect waves-themed')) . "
+                " . anchor(site_url('t_material/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_material');
         return $this->datatables->generate();
     }
 
@@ -40,33 +41,35 @@ class T_material_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
-    
+
     // get total rows
-    function total_rows($q = NULL) {
+    function total_rows($q = NULL)
+    {
         $this->db->like('id_material', $q);
-	$this->db->or_like('id_invoice', $q);
-	$this->db->or_like('id_barang', $q);
-	$this->db->or_like('qty', $q);
-	$this->db->or_like('harga_satuan', $q);
-	$this->db->or_like('total', $q);
-	$this->db->or_like('id_user', $q);
-	$this->db->or_like('create_date', $q);
-	$this->db->from($this->table);
+        $this->db->or_like('id_invoice', $q);
+        $this->db->or_like('id_barang', $q);
+        $this->db->or_like('qty', $q);
+        $this->db->or_like('harga_satuan', $q);
+        $this->db->or_like('total', $q);
+        $this->db->or_like('id_user', $q);
+        $this->db->or_like('create_date', $q);
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
+    function get_limit_data($limit, $start = 0, $q = NULL)
+    {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_material', $q);
-	$this->db->or_like('id_invoice', $q);
-	$this->db->or_like('id_barang', $q);
-	$this->db->or_like('qty', $q);
-	$this->db->or_like('harga_satuan', $q);
-	$this->db->or_like('total', $q);
-	$this->db->or_like('id_user', $q);
-	$this->db->or_like('create_date', $q);
-	$this->db->limit($limit, $start);
+        $this->db->or_like('id_invoice', $q);
+        $this->db->or_like('id_barang', $q);
+        $this->db->or_like('qty', $q);
+        $this->db->or_like('harga_satuan', $q);
+        $this->db->or_like('total', $q);
+        $this->db->or_like('id_user', $q);
+        $this->db->or_like('create_date', $q);
+        $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
 
@@ -83,6 +86,12 @@ class T_material_model extends CI_Model
         $this->db->update($this->table, $data);
     }
 
+    function update_stok($id, $data)
+    {
+        $this->db->where('id_barang', $id);
+        $this->db->update('m_barang', $data);
+    }
+
     // delete data
     function delete($id)
     {
@@ -90,6 +99,37 @@ class T_material_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function fetch_barang_jenis()
+    {
+        $this->db->where('aktif', 'Y');
+        $this->db->order_by('barang_jenis', 'ASC');
+        $query = $this->db->get("m_barang_jenis");
+        return $query->result();
+    }
+    function fetch_barang($id_barang_jenis)
+    {
+        $this->db->where('id_barang_jenis', $id_barang_jenis);
+        $this->db->order_by('barang', 'ASC');
+        $query = $this->db->get('m_barang');
+        $output = '<option value="">Select Barang</option>';
+        foreach ($query->result() as $row) {
+            $output .= '<option value="' . $row->id_barang . '">' . $row->barang . '  (' . $row->stok . ' unit)</option>';
+        }
+        return $output;
+    }
+
+    function fetch_barang_harga($id_barang)
+    {
+        $this->db->where('id_barang', $id_barang);
+        $query = $this->db->get('m_barang');
+        foreach ($query->result() as $row) {
+            $hasil = array(
+                'harga' => $row->harga_satuan,
+                'stok' => $row->stok,
+            );
+        }
+        return $hasil;
+    }
 }
 
 /* End of file T_material_model.php */

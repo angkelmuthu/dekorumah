@@ -62,34 +62,42 @@ class T_material extends CI_Controller
             'total' => set_value('total'),
             'id_user' => set_value('id_user'),
             'create_date' => set_value('create_date'),
+            'barang_jenis' => $this->T_material_model->fetch_barang_jenis(),
         );
         $this->template->load('template', 't_material/t_material_form', $data);
     }
 
     public function create_action()
     {
-        $this->_rules();
+        // $this->_rules();
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-                'id_invoice' => $this->input->post('id_invoice', TRUE),
-                'id_barang' => $this->input->post('id_barang', TRUE),
-                'qty' => $this->input->post('qty', TRUE),
-                'harga_satuan' => $this->input->post('harga_satuan', TRUE),
-                'total' => $this->input->post('total', TRUE),
-                'id_user' => $this->input->post('id_user', TRUE),
-                'create_date' => $this->input->post('create_date', TRUE),
-            );
+        // if ($this->form_validation->run() == FALSE) {
+        //     $this->create();
+        // } else {
+        $data = array(
+            'id_invoice' => $this->input->post('id_invoice', TRUE),
+            'id_barang' => $this->input->post('id_barang', TRUE),
+            'qty' => $this->input->post('qty', TRUE),
+            'harga_satuan' => str_replace('.', '', $this->input->post('harga_satuan', TRUE)),
+            'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'id_user' => $this->input->post('id_user', TRUE),
+            'create_date' => $this->input->post('create_date', TRUE),
+        );
 
-            $this->T_material_model->insert($data);
-            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+        $this->T_material_model->insert($data);
+
+        $stok = $this->input->post('stok') - $this->input->post('qty');
+        $data_stok = array(
+            'stok' => $stok,
+        );
+        $this->T_material_model->update_stok($this->input->post('id_barang', TRUE), $data_stok);
+
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Create Record Success 2</strong></div>');
-            redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice')));
-        }
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice')));
+        //}
     }
 
     public function update($id)
@@ -165,19 +173,34 @@ class T_material extends CI_Controller
         }
     }
 
+    function fetch_barang()
+    {
+        if ($this->input->post('id_barang_jenis')) {
+            echo $this->T_material_model->fetch_barang($this->input->post('id_barang_jenis'));
+        }
+    }
+    function fetch_barang_harga()
+    {
+        $id_barang = $this->input->post('id_barang');
+        $data = $this->T_material_model->fetch_barang_harga($id_barang);
+        echo json_encode($data);
+    }
+
+
     public function _rules()
     {
         $this->form_validation->set_rules('id_invoice', 'id invoice', 'trim|required');
         $this->form_validation->set_rules('id_barang', 'id barang', 'trim|required');
-        $this->form_validation->set_rules('qty', 'qty', 'trim|required');
-        $this->form_validation->set_rules('harga_satuan', 'harga satuan', 'trim|required');
-        $this->form_validation->set_rules('total', 'total', 'trim|required');
-        $this->form_validation->set_rules('id_user', 'id user', 'trim|required');
-        $this->form_validation->set_rules('create_date', 'create date', 'trim|required');
+        // $this->form_validation->set_rules('qty', 'qty', 'trim|required');
+        // $this->form_validation->set_rules('harga_satuan', 'harga satuan', 'trim|required');
+        // $this->form_validation->set_rules('total', 'total', 'trim|required');
+        // $this->form_validation->set_rules('id_user', 'id user', 'trim|required');
+        //$this->form_validation->set_rules('create_date', 'create date', 'trim|required');
 
         $this->form_validation->set_rules('id_material', 'id_material', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
+
 
     public function excel()
     {

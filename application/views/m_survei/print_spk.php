@@ -1,13 +1,13 @@
-<?php
-$this->db->where('id', $this->uri->segment(3));
-$row = $this->db->get('v_invoice')->row();
-?>
 <main id="js-page-content" role="main" class="page-content">
     <div class="container">
         <a href="#" class="btn btn-block btn-primary" data-action="app-print" title="Print page">
             <i class="fal fa-print"></i> PRINT
         </a>
         <br><br>
+        <?php
+        $this->db->where('id', $this->uri->segment('3'));
+        $row = $this->db->get('v_invoice')->row();
+        ?>
         <div data-size="A4">
             <div class="row">
                 <div class="col-sm-12">
@@ -162,25 +162,6 @@ $row = $this->db->get('v_invoice')->row();
                     </div>
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-sm-6">
-
-                </div>
-                <div class="col-sm-4 ml-sm-auto">
-                    <table class="table table-clean">
-                        <tbody>
-                            <tr class="table-scale-border-top border-left-0 border-right-0 border-bottom-0">
-                                <td class="text-left keep-print-font">
-                                    <h4 class="m-0 fw-700 h2 keep-print-font color-primary-700">Total</h4>
-                                </td>
-                                <td class="text-right keep-print-font">
-                                    <h4 class="m-0 fw-700 h2 keep-print-font">Rp. </h4>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div> -->
             <div class="row">
                 <div class="col-sm-12">
                     <div class="panel-tag p-2 mb-2" style="font-size:10px;">

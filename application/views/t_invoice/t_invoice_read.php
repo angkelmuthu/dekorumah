@@ -58,6 +58,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Tanggal</th>
+                                    <th>Kwitansi</th>
                                     <th class="text-center">Group</th>
                                     <!-- <th class="text-center">Deskripsi</th> -->
                                     <th class="text-center">Total</th>
@@ -81,14 +82,16 @@
                                 ?>
                                     <tr>
                                         <td><?php echo $no ?></td>
+
                                         <td><?php echo $dt->created_date ?></td>
+                                        <td><?php echo $no_invoice . '-' . $dt->id_buku ?></td>
                                         <td><?php echo $dt->nm_group_sub ?></td>
                                         <!-- <td><?php echo $dt->deskripsi ?></td> -->
                                         <td class="text-right"><strong> <?php echo angka($dt->total); ?></strong></td>
                                         <td>
                                             <a href="<?php echo site_url('t_pembukuan/delete/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
                                             <a href="https://api.whatsapp.com/send?phone=62<?php echo $hp ?>&text=<?php echo $pesan ?>" target="_blank" class=" btn btn-success btn-xs"><i class="fal fa-paper-plane" aria-hidden="true"></i> WA</a>
-                                            <a href="<?php echo site_url('t_invoice/kwitansi/' . $dt->id_survei . '/' . $dt->id_buku) ?>" target="_blank" class=" btn btn-success btn-xs"><i class="fal fa-paper-plane" aria-hidden="true"></i> PDF</a>
+                                            <a href="<?php echo site_url('t_invoice/kwitansi/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-info btn-xs">Print</a>
                                         </td>
                                     </tr>
                                 <?php $no++;
