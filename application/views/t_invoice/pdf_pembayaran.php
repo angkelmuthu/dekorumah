@@ -51,7 +51,7 @@ $result3 = $this->db->get('m_desk')->row();
                                     <h4>Untuk Pembayaran</h4>
                                 </td>
                                 <td>
-                                    <h4><b><?php echo $result->status ?></b></h4>
+                                    <h4><b><?php echo $result2->nm_group_sub ?></b></h4>
                                 </td>
                             </tr>
                         </table>
@@ -82,11 +82,11 @@ $result3 = $this->db->get('m_desk')->row();
                                 </tr>
                                 <tr class="text-center">
                                     <td>
-                                        <img width="150" height="100" src="<?php echo base_url() ?>assets/ttd.png">
+                                        <img width="150" height="71" src="<?php echo base_url() ?>assets/ttd.png">
                                     </td>
                                 </tr>
                                 <tr class="text-center">
-                                    <td><b>Syahrul Ramadhan</b></td>
+                                    <td><b>Nia Septiani</b></td>
                                 </tr>
                             </tbody>
                         </table>
