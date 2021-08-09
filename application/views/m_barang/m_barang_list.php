@@ -14,7 +14,7 @@
                     <div class="panel-content">
                         <div class="text-center">
                             <?php echo anchor(site_url('m_barang/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?>
-                            <?php echo anchor(site_url('m_barang/excel'), '<i class="fal fa-file-excel" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-outline-success btn-sm waves-effect waves-themed"'); ?></div>
+                        </div>
                         <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
                             <thead>
                                 <tr>
@@ -101,6 +101,10 @@
             ],
             order: [
                 [0, 'desc']
+            ],
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
             ],
             rowCallback: function(row, data, iDisplayIndex) {
                 var info = this.fnPagingInfo();

@@ -16,7 +16,10 @@
 
                             <table class='table table-striped'>
 
-
+                                <tr>
+                                    <td width='200'>Barang Jenis <?php echo form_error('id_barang_jenis') ?></td>
+                                    <td><?php echo select2_dinamis('id_barang_jenis', 'm_barang_jenis', 'id_barang_jenis', 'barang_jenis') ?></td>
+                                </tr>
                                 <tr>
                                     <td width='200'>Barang <?php echo form_error('barang') ?></td>
                                     <td><input type="text" class="form-control" name="barang" id="barang" placeholder="Barang" value="<?php echo $barang; ?>" /></td>
@@ -25,10 +28,7 @@
                                     <td width='200'>Deskripsi <?php echo form_error('deskripsi') ?></td>
                                     <td> <textarea class="form-control" non_pks="3" name="deskripsi" id="deskripsi" placeholder="Deskripsi"><?php echo $deskripsi; ?></textarea></td>
                                 </tr>
-                                <tr>
-                                    <td width='200'>Id Barang Jenis <?php echo form_error('id_barang_jenis') ?></td>
-                                    <td><?php echo select2_dinamis('id_barang_jenis', 'm_barang_jenis', 'id_barang_jenis', 'barang_jenis') ?></td>
-                                </tr>
+
                                 <tr>
                                     <td width='200'>Harga Satuan <?php echo form_error('harga_satuan') ?></td>
                                     <td><input type="number" class="form-control" name="harga_satuan" id="harga_satuan" placeholder="Harga Satuan" value="<?php echo $harga_satuan; ?>" /></td>
