@@ -57,6 +57,11 @@ class T_invoice extends CI_Controller
         $this->template->load('template', 't_invoice/pdf_pembayaran');
         //$this->load->view('t_invoice/pdf_pembayaran');
     }
+    public function print_invoice()
+    {
+        $this->template->load('template', 't_invoice/print_invoice');
+        //$this->load->view('t_invoice/pdf_pembayaran');
+    }
 
     public function create()
     {

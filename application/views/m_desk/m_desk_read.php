@@ -13,7 +13,11 @@
             <div class="panel-container show">
                 <div class="panel-content">
         <table class="table table-striped">
-	    <tr><td>Deskripsi</td><td><?php echo $deskripsi; ?></td></tr>
+	    <tr><td>Tlp</td><td><?php echo $tlp; ?></td></tr>
+	    <tr><td>Wa</td><td><?php echo $wa; ?></td></tr>
+	    <tr><td>Facebook</td><td><?php echo $facebook; ?></td></tr>
+	    <tr><td>Instagram</td><td><?php echo $instagram; ?></td></tr>
+	    <tr><td>Alamat</td><td><?php echo $alamat; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('m_desk') ?>" class="btn btn-primary waves-effect waves-themed">Kembali</a></td></tr>
 	</table>
 </div>

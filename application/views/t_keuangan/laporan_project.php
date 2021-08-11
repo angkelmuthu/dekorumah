@@ -56,10 +56,10 @@
                                         </td>
                                         <td class="text-right">
                                             <?php
-                                            if ($laba > 0) {
+                                            if ($laba > 0 && $biaya > 0) {
                                                 echo '<b>' . angka(($laba / $biaya) * 100) . '%</b>';
                                             } else {
-                                                echo '<b>0</b>';
+                                                echo '<b>-</b>';
                                             } ?>
                                         </td>
                                     </tr>

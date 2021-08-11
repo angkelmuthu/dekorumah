@@ -37,9 +37,42 @@
                                 <td><b><?php echo $nm_sales; ?></b></td>
                             </tr>
                         </table>
+                        <div class="text-center mt-2">
+                            <!-- <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Surat Penawaran</a> -->
+                            <?php
+                            $this->db->where('id_survei', $this->uri->segment(3));
+                            $this->db->where('id_group', '2');
+                            $this->db->where('id_group_sub', '3');
+                            $query = $this->db->get('t_pembukuan');
+                            $num = $query->num_rows();
+                            if ($num > 0) {
+                            ?>
+                                <a href="<?php echo site_url('t_invoice/print_invoice/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Print Invoice</a>
+                            <?php } else { ?>
+                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#default-example-modal">Print Invoice</button>
+
+                                <div class="modal fade" id="default-example-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Perhatian !!</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Pelunasan pembayaran belum diinput</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="col-xl-12">

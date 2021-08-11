@@ -19,10 +19,35 @@ $result3 = $this->db->get('m_desk')->row();
                         <h2 class="keep-print-font fw-500 mb-0 text-primary flex-1 position-relative">
                             <img src="<?php echo base_url() ?>assets/dekoruma.png">
                             <small class="text-muted mb-0 fs-xs"><br>
-                                <?php echo $result3->deskripsi; ?>
                             </small>
-                            <h3><strong>KWITANSI </strong><br><?php echo $result->no_invoice . '-' . $result2->id_buku ?></h3>
+                            <h3><strong>TANDA TERIMA </strong></h3>
                         </h2>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table table-clean table-sm align-self-end">
+                            <tbody>
+
+                                <?php
+                                if (!empty($result3->tlp)) {
+                                    echo '<tr><td width="5%"><i class="fal fa-phone-square text-muted mr-2"></i></td><td>' . $result3->tlp . '</td></tr>';
+                                }
+                                if (!empty($result3->wa)) {
+                                    echo '<tr><td width="5%"><i class="fal fa-mobile-alt text-muted mr-2"></i></td><td>' . $result3->wa . '</td></tr>';
+                                }
+                                if (!empty($result3->facebook)) {
+                                    echo '<tr><td width="5%"><i class="fab fa-facebook-square text-muted mr-2"></i></td><td>' . $result3->facebook . '</td></tr>';
+                                }
+                                if (!empty($result3->instagram)) {
+                                    echo '<tr><td width="5%"><i class="fab fa-instagram text-muted mr-2"></i></td><td>' . $result3->instagram . '</td></tr>';
+                                }
+                                if (!empty($result3->alamat)) {
+                                    echo '<tr><td width="5%"><i class="fal fa-map-marker-alt text-muted mr-2"></i></td><td>' . $result3->alamat . '</td></tr>';
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

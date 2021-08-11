@@ -1,4 +1,3 @@
-<link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/formplugins/summernote/summernote.css">
 <main id="js-page-content" role="main" class="page-content">
     <div class="row">
         <div class="col-xl-12">
@@ -19,8 +18,24 @@
 
 
                                 <tr>
-                                    <td width='200'>Deskripsi <?php echo form_error('deskripsi') ?></td>
-                                    <td> <textarea class="form-control summernote" non_pks="3" name="deskripsi" id="deskripsi" placeholder="Deskripsi"><?php echo $deskripsi; ?></textarea></td>
+                                    <td width='200'>Tlp <?php echo form_error('tlp') ?></td>
+                                    <td><input type="text" class="form-control" name="tlp" id="tlp" placeholder="Tlp" value="<?php echo $tlp; ?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Wa <?php echo form_error('wa') ?></td>
+                                    <td><input type="text" class="form-control" name="wa" id="wa" placeholder="Wa" value="<?php echo $wa; ?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Facebook <?php echo form_error('facebook') ?></td>
+                                    <td><input type="text" class="form-control" name="facebook" id="facebook" placeholder="Facebook" value="<?php echo $facebook; ?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Instagram <?php echo form_error('instagram') ?></td>
+                                    <td><input type="text" class="form-control" name="instagram" id="instagram" placeholder="Instagram" value="<?php echo $instagram; ?>" /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Alamat <?php echo form_error('alamat') ?></td>
+                                    <td><input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat" value="<?php echo $alamat; ?>" /></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -43,9 +58,3 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/select2/select2.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/summernote/summernote.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.summernote').summernote();
-    });
-</script>

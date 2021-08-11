@@ -16,7 +16,11 @@
                             <thead>
                                 <tr>
                                     <th width="30px">No</th>
-                                    <th>Deskripsi</th>
+                                    <th>Tlp</th>
+                                    <th>Wa</th>
+                                    <th>Facebook</th>
+                                    <th>Instagram</th>
+                                    <th>Alamat</th>
                                     <th width="200px">Action</th>
                                 </tr>
                             </thead>
@@ -70,7 +74,15 @@
                     "data": "id",
                     "orderable": false
                 }, {
-                    "data": "deskripsi"
+                    "data": "tlp"
+                }, {
+                    "data": "wa"
+                }, {
+                    "data": "facebook"
+                }, {
+                    "data": "instagram"
+                }, {
+                    "data": "alamat"
                 },
                 {
                     "data": "action",

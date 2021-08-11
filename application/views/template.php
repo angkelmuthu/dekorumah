@@ -24,6 +24,8 @@
     <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/formplugins/select2/select2.bundle.css">
     <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/page-invoice.css">
     <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/costume/default.css">
+    <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/fa-solid.css">
+    <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/fa-brands.css">
     <!-- <link id="mytheme" rel="stylesheet" href="<?php echo base_url() ?>assets/smartadmin/css/themes/cust-theme-9.css"> -->
     <!--<link rel="stylesheet" media="screen, print" href="css/your_styles.css">-->
 </head>
