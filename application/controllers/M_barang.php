@@ -10,16 +10,18 @@ class M_barang extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('M_barang_model');
-        $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('form_validation');
+        $this->load->library('datatables');
     }
 
     public function index()
     {
-        $this->template->load('template','m_barang/m_barang_list');
+        $data['list'] = $this->M_barang_model->get_all();
+        $this->template->load('template', 'm_barang/m_barang_list', $data);
     }
 
-    public function json() {
+    public function json()
+    {
         header('Content-Type: application/json');
         echo $this->M_barang_model->json();
     }
@@ -29,16 +31,17 @@ class M_barang extends CI_Controller
         $row = $this->M_barang_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_barang' => $row->id_barang,
-		'barang' => $row->barang,
-		'deskripsi' => $row->deskripsi,
-		'id_barang_jenis' => $row->id_barang_jenis,
-		'harga_satuan' => $row->harga_satuan,
-		'stok' => $row->stok,
-		'id_user' => $row->id_user,
-		'update_date' => $row->update_date,
-	    );
-            $this->template->load('template','m_barang/m_barang_read', $data);
+                'id_barang' => $row->id_barang,
+                'barang' => $row->barang,
+                'deskripsi' => $row->deskripsi,
+                'id_barang_jenis' => $row->id_barang_jenis,
+                'harga_satuan' => $row->harga_satuan,
+                'id_gudang' => $row->id_gudang,
+                'stok' => $row->stok,
+                'id_user' => $row->id_user,
+                'update_date' => $row->update_date,
+            );
+            $this->template->load('template', 'm_barang/m_barang_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -53,16 +56,17 @@ class M_barang extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('m_barang/create_action'),
-	    'id_barang' => set_value('id_barang'),
-	    'barang' => set_value('barang'),
-	    'deskripsi' => set_value('deskripsi'),
-	    'id_barang_jenis' => set_value('id_barang_jenis'),
-	    'harga_satuan' => set_value('harga_satuan'),
-	    'stok' => set_value('stok'),
-	    'id_user' => set_value('id_user'),
-	    'update_date' => set_value('update_date'),
-	);
-        $this->template->load('template','m_barang/m_barang_form', $data);
+            'id_barang' => set_value('id_barang'),
+            'barang' => set_value('barang'),
+            'deskripsi' => set_value('deskripsi'),
+            'id_barang_jenis' => set_value('id_barang_jenis'),
+            'harga_satuan' => set_value('harga_satuan'),
+            'id_gudang' => set_value('id_gudang'),
+            'stok' => set_value('stok'),
+            'id_user' => set_value('id_user'),
+            'update_date' => set_value('update_date'),
+        );
+        $this->template->load('template', 'm_barang/m_barang_form', $data);
     }
 
     public function create_action()
@@ -73,14 +77,15 @@ class M_barang extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'barang' => $this->input->post('barang',TRUE),
-		'deskripsi' => $this->input->post('deskripsi',TRUE),
-		'id_barang_jenis' => $this->input->post('id_barang_jenis',TRUE),
-		'harga_satuan' => $this->input->post('harga_satuan',TRUE),
-		'stok' => $this->input->post('stok',TRUE),
-		'id_user' => $this->input->post('id_user',TRUE),
-		'update_date' => $this->input->post('update_date',TRUE),
-	    );
+                'barang' => $this->input->post('barang', TRUE),
+                'deskripsi' => $this->input->post('deskripsi', TRUE),
+                'id_barang_jenis' => $this->input->post('id_barang_jenis', TRUE),
+                'harga_satuan' => $this->input->post('harga_satuan', TRUE),
+                'id_gudang' => $this->input->post('id_gudang', TRUE),
+                'stok' => $this->input->post('stok', TRUE),
+                'id_user' => $this->input->post('id_user', TRUE),
+                'update_date' => $this->input->post('update_date', TRUE),
+            );
 
             $this->M_barang_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
@@ -99,16 +104,17 @@ class M_barang extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('m_barang/update_action'),
-		'id_barang' => set_value('id_barang', $row->id_barang),
-		'barang' => set_value('barang', $row->barang),
-		'deskripsi' => set_value('deskripsi', $row->deskripsi),
-		'id_barang_jenis' => set_value('id_barang_jenis', $row->id_barang_jenis),
-		'harga_satuan' => set_value('harga_satuan', $row->harga_satuan),
-		'stok' => set_value('stok', $row->stok),
-		'id_user' => set_value('id_user', $row->id_user),
-		'update_date' => set_value('update_date', $row->update_date),
-	    );
-            $this->template->load('template','m_barang/m_barang_form', $data);
+                'id_barang' => set_value('id_barang', $row->id_barang),
+                'barang' => set_value('barang', $row->barang),
+                'deskripsi' => set_value('deskripsi', $row->deskripsi),
+                'id_barang_jenis' => set_value('id_barang_jenis', $row->id_barang_jenis),
+                'harga_satuan' => set_value('harga_satuan', $row->harga_satuan),
+                'id_gudang' => set_value('id_gudang', $row->id_gudang),
+                'stok' => set_value('stok', $row->stok),
+                'id_user' => set_value('id_user', $row->id_user),
+                'update_date' => set_value('update_date', $row->update_date),
+            );
+            $this->template->load('template', 'm_barang/m_barang_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -116,6 +122,22 @@ class M_barang extends CI_Controller
             </button><strong> Record Not Found</strong></div>');
             redirect(site_url('m_barang'));
         }
+    }
+    public function update_stok()
+    {
+        $stok = $this->input->post('stok_ada') + $this->input->post('stok_tambah');
+        $data = array(
+            'stok' => $stok,
+            'id_user' => $this->input->post('id_user', TRUE),
+            'update_date' => $this->input->post('update_date', TRUE),
+        );
+
+        $this->M_barang_model->update($this->input->post('id_barang', TRUE), $data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Update Record Success</strong></div>');
+        redirect(site_url('m_barang'));
     }
 
     public function update_action()
@@ -126,14 +148,15 @@ class M_barang extends CI_Controller
             $this->update($this->input->post('id_barang', TRUE));
         } else {
             $data = array(
-		'barang' => $this->input->post('barang',TRUE),
-		'deskripsi' => $this->input->post('deskripsi',TRUE),
-		'id_barang_jenis' => $this->input->post('id_barang_jenis',TRUE),
-		'harga_satuan' => $this->input->post('harga_satuan',TRUE),
-		'stok' => $this->input->post('stok',TRUE),
-		'id_user' => $this->input->post('id_user',TRUE),
-		'update_date' => $this->input->post('update_date',TRUE),
-	    );
+                'barang' => $this->input->post('barang', TRUE),
+                'deskripsi' => $this->input->post('deskripsi', TRUE),
+                'id_barang_jenis' => $this->input->post('id_barang_jenis', TRUE),
+                'harga_satuan' => $this->input->post('harga_satuan', TRUE),
+                'id_gudang' => $this->input->post('id_gudang', TRUE),
+                'stok' => $this->input->post('stok', TRUE),
+                'id_user' => $this->input->post('id_user', TRUE),
+                'update_date' => $this->input->post('update_date', TRUE),
+            );
 
             $this->M_barang_model->update($this->input->post('id_barang', TRUE), $data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
@@ -166,16 +189,17 @@ class M_barang extends CI_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('barang', 'barang', 'trim|required');
-	$this->form_validation->set_rules('deskripsi', 'deskripsi', 'trim|required');
-	$this->form_validation->set_rules('id_barang_jenis', 'id barang jenis', 'trim|required');
-	$this->form_validation->set_rules('harga_satuan', 'harga satuan', 'trim|required');
-	$this->form_validation->set_rules('stok', 'stok', 'trim|required');
-	$this->form_validation->set_rules('id_user', 'id user', 'trim|required');
-	$this->form_validation->set_rules('update_date', 'update date', 'trim|required');
+        $this->form_validation->set_rules('barang', 'barang', 'trim|required');
+        $this->form_validation->set_rules('deskripsi', 'deskripsi', 'trim|required');
+        $this->form_validation->set_rules('id_barang_jenis', 'id barang jenis', 'trim|required');
+        $this->form_validation->set_rules('harga_satuan', 'harga satuan', 'trim|required');
+        $this->form_validation->set_rules('id_gudang', 'id gudang', 'trim|required');
+        $this->form_validation->set_rules('stok', 'stok', 'trim|required');
+        $this->form_validation->set_rules('id_user', 'id user', 'trim|required');
+        $this->form_validation->set_rules('update_date', 'update date', 'trim|required');
 
-	$this->form_validation->set_rules('id_barang', 'id_barang', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id_barang', 'id_barang', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -200,35 +224,34 @@ class M_barang extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Barang");
-	xlsWriteLabel($tablehead, $kolomhead++, "Deskripsi");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Barang Jenis");
-	xlsWriteLabel($tablehead, $kolomhead++, "Harga Satuan");
-	xlsWriteLabel($tablehead, $kolomhead++, "Stok");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id User");
-	xlsWriteLabel($tablehead, $kolomhead++, "Update Date");
+        xlsWriteLabel($tablehead, $kolomhead++, "Barang");
+        xlsWriteLabel($tablehead, $kolomhead++, "Deskripsi");
+        xlsWriteLabel($tablehead, $kolomhead++, "Id Barang Jenis");
+        xlsWriteLabel($tablehead, $kolomhead++, "Harga Satuan");
+        xlsWriteLabel($tablehead, $kolomhead++, "Stok");
+        xlsWriteLabel($tablehead, $kolomhead++, "Id User");
+        xlsWriteLabel($tablehead, $kolomhead++, "Update Date");
 
-	foreach ($this->M_barang_model->get_all() as $data) {
+        foreach ($this->M_barang_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->barang);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->deskripsi);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_barang_jenis);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->harga_satuan);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->stok);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->id_user);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->update_date);
+            xlsWriteLabel($tablebody, $kolombody++, $data->barang);
+            xlsWriteLabel($tablebody, $kolombody++, $data->deskripsi);
+            xlsWriteNumber($tablebody, $kolombody++, $data->id_barang_jenis);
+            xlsWriteNumber($tablebody, $kolombody++, $data->harga_satuan);
+            xlsWriteNumber($tablebody, $kolombody++, $data->stok);
+            xlsWriteNumber($tablebody, $kolombody++, $data->id_user);
+            xlsWriteLabel($tablebody, $kolombody++, $data->update_date);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 
         xlsEOF();
         exit();
     }
-
 }
 
 /* End of file M_barang.php */

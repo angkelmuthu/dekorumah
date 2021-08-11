@@ -31,8 +31,8 @@ class M_barang_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        $this->db->order_by('stok', $this->order);
+        return $this->db->get('v_barang')->result();
     }
 
     // get data by id
