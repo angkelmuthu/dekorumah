@@ -153,10 +153,15 @@ class T_material extends CI_Controller
         }
     }
 
-    public function delete($id_invoice, $id)
+    public function delete($id_invoice, $id, $id_barang)
     {
         $row = $this->T_material_model->get_by_id($id);
-
+        $row2 = $this->T_material_model->get_stok($id_barang);
+        $stok = $row2->stok + $row->qty;
+        $data_stok = array(
+            'stok' => $stok,
+        );
+        $this->T_material_model->update_stok($id_barang, $data_stok);
         if ($row) {
             $this->T_material_model->delete($id);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">

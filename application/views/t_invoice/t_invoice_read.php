@@ -451,7 +451,7 @@
                                         <td><?php echo angka($dt->harga_satuan) ?></td>
                                         <td><?php echo angka($dt->total) ?></td>
                                         <td><?php echo $dt->full_name ?></td>
-                                        <td><a href="<?php echo site_url('t_material/delete/' . $dt->id_invoice . '/' . $dt->id_material) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
+                                        <td><a href="<?php echo site_url('t_material/delete/' . $dt->id_invoice . '/' . $dt->id_material . '/' . $dt->id_barang) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
                                     </tr>
                                 <?php }
                                 $this->db->select('sum(total) as grand');

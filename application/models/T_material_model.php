@@ -41,6 +41,11 @@ class T_material_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+    function get_stok($id)
+    {
+        $this->db->where('id_barang', $id);
+        return $this->db->get('m_barang')->row();
+    }
 
     // get total rows
     function total_rows($q = NULL)
