@@ -59,18 +59,21 @@
                                     <td width='200'>Total Harga</td>
                                     <td><input type="text" class="form-control" name="total" id="total" placeholder="total" value="<?php echo $total; ?>" readonly required /></td>
                                 </tr>
+                                <tr>
+                                    <td width='200'>Note <?php echo form_error('note') ?></td>
+                                    <td><textarea class="form-control" name="note" id="note"><?php echo $note; ?></textarea></td>
+                                </tr>
                                 <!-- <tr>
                                     <td width='200'>Total <?php echo form_error('total') ?></td>
                                     <td><input type="number" class="form-control" name="total" id="total" placeholder="Total" value="<?php echo $total; ?>" /></td>
                                 </tr> -->
                                 <tr>
                                     <td></td>
-                                    <td><input type="hidden" name="id_material" value="<?php echo $id_material; ?>" />
-                                        <input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment('3'); ?>" />
+                                    <td><input type="hidden" name="id_material_tukang" value="<?php echo $id_material_tukang; ?>" />
                                         <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('full_name') ?>" />
                                         <input type="hidden" name="create_date" value="<?php echo date('Y-m-d H:s:i'); ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <a href="<?php echo site_url('t_invoice/read/' . $this->uri->segment('3')) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
+                                        <a href="<?php echo site_url('t_material_tukang') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
                                     </td>
                                 </tr>
                             </table>
