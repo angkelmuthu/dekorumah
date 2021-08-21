@@ -60,7 +60,8 @@
                                                                     <input type="hidden" name="id_barang" value="<?php echo $dt->id_barang ?>">
                                                                     <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_users') ?>" />
                                                                     <input type="hidden" name="update_date" value="<?php echo date('Y-m-d H:s:i'); ?>" />
-
+                                                                    <label class="form-label text-muted" for="simpleinput-disabled">Barang</label>
+                                                                    <input type="text" name="brg" class="form-control" value="<?php echo $dt->barang ?>" readonly>
                                                                     <label class="form-label text-muted" for="simpleinput-disabled">Stok Saat ini</label>
                                                                     <input type="text" name="stok_ada" class="form-control" value="<?php echo $dt->stok ?>" readonly>
                                                                 </div>

@@ -68,7 +68,7 @@ class T_invoice_model extends CI_Model
         $this->db->or_like('id_pelanggan', $q);
         $this->db->or_like('users', $q);
         $this->db->or_like('create_date', $q);
-        $this->db->or_like('status', $q);
+        $this->db->or_like('id_status', $q);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -83,7 +83,7 @@ class T_invoice_model extends CI_Model
         $this->db->or_like('id_pelanggan', $q);
         $this->db->or_like('users', $q);
         $this->db->or_like('create_date', $q);
-        $this->db->or_like('status', $q);
+        $this->db->or_like('id_status', $q);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

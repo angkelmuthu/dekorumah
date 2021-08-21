@@ -43,16 +43,19 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>Pelanggan <?php echo form_error('id_pelanggan') ?></td>
-                                    <td><?php echo select2_dinamis('id_pelanggan', 'm_pelanggan', 'id_pelanggan', 'nama') ?></td>
+                                    <td><?php echo select2_update('id_pelanggan', 'm_pelanggan', 'id_pelanggan', 'nama', $id_pelanggan, '', '') ?></td>
+
                                 </tr>
 
                                 <tr>
-                                    <td width='200'>Status <?php echo form_error('status') ?></td>
-                                    <td><?php echo select2_dinamis('status', 'm_status_invoice', 'id_status', 'status') ?></td>
+                                    <td width='200'>Status <?php echo form_error('id_status') ?></td>
+                                    <td>
+                                        <?php echo select2_update('id_status', 'm_status_invoice', 'id_status', 'status', $id_status, '', '') ?></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Sales <?php echo form_error('sales') ?></td>
-                                    <td><?php echo select2_dinamis('id_sales', 'm_sales', 'id_sales', 'nm_sales') ?></td>
+                                    <td>
+                                        <?php echo select2_update('id_sales', 'm_sales', 'id_sales', 'nm_sales', $id_sales, 'aktif="Y"', '') ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>

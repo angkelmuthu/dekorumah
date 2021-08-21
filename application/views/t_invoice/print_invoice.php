@@ -30,19 +30,19 @@ $desk = $this->db->get('m_desk')->row();
 
                                 <?php
                                 if (!empty($desk->tlp)) {
-                                    echo '<tr><td width="5%"><i class="fal fa-phone-square text-muted mr-2"></i></td><td>' . $desk->tlp . '</td></tr>';
+                                    echo '<tr><td width="5%">Telp</td><td>: ' . $desk->tlp . '</td></tr>';
                                 }
                                 if (!empty($desk->wa)) {
-                                    echo '<tr><td width="5%"><i class="fal fa-mobile-alt text-muted mr-2"></i></td><td>' . $desk->wa . '</td></tr>';
+                                    echo '<tr><td width="5%">Whatsapp</td><td>: ' . $desk->wa . '</td></tr>';
                                 }
                                 if (!empty($desk->facebook)) {
-                                    echo '<tr><td width="5%"><i class="fab fa-facebook-square text-muted mr-2"></i></td><td>' . $desk->facebook . '</td></tr>';
+                                    echo '<tr><td width="5%">Facebook</td><td>: ' . $desk->facebook . '</td></tr>';
                                 }
                                 if (!empty($desk->instagram)) {
-                                    echo '<tr><td width="5%"><i class="fab fa-instagram text-muted mr-2"></i></td><td>' . $desk->instagram . '</td></tr>';
+                                    echo '<tr><td width="5%">Instagram</td><td>: ' . $desk->instagram . '</td></tr>';
                                 }
                                 if (!empty($desk->alamat)) {
-                                    echo '<tr><td width="5%"><i class="fal fa-map-marker-alt text-muted mr-2"></i></td><td>' . $desk->alamat . '</td></tr>';
+                                    echo '<tr><td width="5%">Alamat</td><td>: ' . $desk->alamat . '</td></tr>';
                                 }
                                 ?>
                             </tbody>

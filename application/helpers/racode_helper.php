@@ -93,6 +93,7 @@ function select2_update($name, $table, $pk, $field, $selected = null, $where = n
         $ci->db->order_by($order);
     }
     $data = $ci->db->get($table)->result();
+    $select2 .= "<option></option>";
     foreach ($data as $d) {
         $select2 .= "<option value='" . $d->$pk . "'";
         $select2 .= $selected == $d->$pk ? " selected='selected'" : '';

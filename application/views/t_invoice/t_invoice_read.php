@@ -111,8 +111,9 @@
                                     $break = urlencode("\n");
                                     $wa1 = '*Terima Kasih*';
                                     $wa2 = 'Pembayaran ' . $dt->nm_group_sub . ' untuk pesanan *' . $no_invoice . '* atas nama *' . strtoupper($nama) . '* dengan nominal *Rp. ' . angka($dt->total) . '* sudah kami terima.';
-                                    $wa3 = 'Hormat kami Gallery Decoruma';
-                                    $pesan = $wa1 . $break . $wa2 . $break . $wa3;
+                                    $wa3 = 'Hormat kami';
+                                    $wa4 = 'gallery dekoruma';
+                                    $pesan = $wa1 . $break . $wa2 . $break . $wa3 . $break . $wa4;
                                 ?>
                                     <tr>
                                         <td><?php echo $no ?></td>
