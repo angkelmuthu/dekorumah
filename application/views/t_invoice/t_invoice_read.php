@@ -430,6 +430,7 @@
                                     <th>No.</th>
                                     <th class="text-center">Gudang</th>
                                     <th>Barang Material</th>
+                                    <th>Note</th>
                                     <th class="text-center">Qty</th>
                                     <th class="text-center">Harga (Rp)</th>
                                     <th class="text-center">Total (Rp)</th>
@@ -448,6 +449,7 @@
                                         <td><?php echo $no++; ?></td>
                                         <td class="text-center"><?php echo $dt->gudang ?></td>
                                         <td><?php echo $dt->barang ?></td>
+                                        <td><?php echo $dt->note ?></td>
                                         <td><?php echo $dt->qty ?></td>
                                         <td><?php echo angka($dt->harga_satuan) ?></td>
                                         <td><?php echo angka($dt->total) ?></td>
@@ -461,7 +463,7 @@
                                 $ttl_material = $result->grand;
                                 ?>
                                 <tr>
-                                    <td colspan="5" class="text-right"><strong>TOTAL</strong></td>
+                                    <td colspan="6" class="text-right"><strong>TOTAL</strong></td>
                                     <td class="text-right"><strong><?php echo angka($ttl_material) ?></strong></td>
                                     <td></td>
                                 </tr>

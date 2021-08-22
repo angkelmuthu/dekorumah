@@ -44,7 +44,8 @@
                                 <tr>
                                     <td></td>
                                     <td><input type="hidden" name="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
-                                        <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
+                                        <button type="submit" name="flag" value="N" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
+                                        <button type="submit" name="flag" value="Y" class="btn btn-success waves-effect waves-themed"><i class="fal fa-save"></i> Simpan & Buat Invoice</button>
                                         <a href="<?php echo site_url('m_pelanggan') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
                                     </td>
                                 </tr>

@@ -93,7 +93,8 @@ class T_invoice extends CI_Controller
                 'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
                 'users' => $this->input->post('users', TRUE),
                 'create_date' => $this->input->post('create_date', TRUE),
-                'id_status' => $this->input->post('id_status', TRUE),
+                //'id_status' => $this->input->post('id_status', TRUE),
+                'id_status' => '0',
                 'id_sales' => $this->input->post('id_sales', TRUE),
             );
 
@@ -120,7 +121,7 @@ class T_invoice extends CI_Controller
                 'id_pelanggan' => set_value('id_pelanggan', $row->id_pelanggan),
                 'users' => set_value('users', $row->users),
                 'create_date' => set_value('create_date', $row->create_date),
-                'id_status' => set_value('id_status', $row->id_status),
+                //'id_status' => set_value('id_status', $row->id_status),
                 'id_sales' => set_value('id_sales', $row->id_sales),
             );
             $this->template->load('template', 't_invoice/t_invoice_form', $data);

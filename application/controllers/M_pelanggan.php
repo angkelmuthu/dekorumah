@@ -10,16 +10,17 @@ class M_pelanggan extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('M_pelanggan_model');
-        $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('form_validation');
+        $this->load->library('datatables');
     }
 
     public function index()
     {
-        $this->template->load('template','m_pelanggan/m_pelanggan_list');
+        $this->template->load('template', 'm_pelanggan/m_pelanggan_list');
     }
 
-    public function json() {
+    public function json()
+    {
         header('Content-Type: application/json');
         echo $this->M_pelanggan_model->json();
     }
@@ -29,15 +30,15 @@ class M_pelanggan extends CI_Controller
         $row = $this->M_pelanggan_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_pelanggan' => $row->id_pelanggan,
-		'nama' => $row->nama,
-		'alamat' => $row->alamat,
-		'email' => $row->email,
-		'hp' => $row->hp,
-		'created_date' => $row->created_date,
-		'users' => $row->users,
-	    );
-            $this->template->load('template','m_pelanggan/m_pelanggan_read', $data);
+                'id_pelanggan' => $row->id_pelanggan,
+                'nama' => $row->nama,
+                'alamat' => $row->alamat,
+                'email' => $row->email,
+                'hp' => $row->hp,
+                'created_date' => $row->created_date,
+                'users' => $row->users,
+            );
+            $this->template->load('template', 'm_pelanggan/m_pelanggan_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -52,15 +53,15 @@ class M_pelanggan extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('m_pelanggan/create_action'),
-	    'id_pelanggan' => set_value('id_pelanggan'),
-	    'nama' => set_value('nama'),
-	    'alamat' => set_value('alamat'),
-	    'email' => set_value('email'),
-	    'hp' => set_value('hp'),
-	    'created_date' => set_value('created_date'),
-	    'users' => set_value('users'),
-	);
-        $this->template->load('template','m_pelanggan/m_pelanggan_form', $data);
+            'id_pelanggan' => set_value('id_pelanggan'),
+            'nama' => set_value('nama'),
+            'alamat' => set_value('alamat'),
+            'email' => set_value('email'),
+            'hp' => set_value('hp'),
+            'created_date' => set_value('created_date'),
+            'users' => set_value('users'),
+        );
+        $this->template->load('template', 'm_pelanggan/m_pelanggan_form', $data);
     }
 
     public function create_action()
@@ -71,20 +72,24 @@ class M_pelanggan extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'hp' => $this->input->post('hp',TRUE),
-		'created_date' => $this->input->post('created_date',TRUE),
-		'users' => $this->input->post('users',TRUE),
-	    );
+                'nama' => $this->input->post('nama', TRUE),
+                'alamat' => $this->input->post('alamat', TRUE),
+                'email' => $this->input->post('email', TRUE),
+                'hp' => $this->input->post('hp', TRUE),
+                'created_date' => $this->input->post('created_date', TRUE),
+                'users' => $this->input->post('users', TRUE),
+            );
 
             $this->M_pelanggan_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Create Record Success 2</strong></div>');
-            redirect(site_url('m_pelanggan'));
+            if ($this->input->post('flag') == 'N') {
+                redirect(site_url('m_pelanggan'));
+            } else {
+                redirect(site_url('t_invoice/create/' . $this->input->post('nama')));
+            }
         }
     }
 
@@ -96,15 +101,15 @@ class M_pelanggan extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('m_pelanggan/update_action'),
-		'id_pelanggan' => set_value('id_pelanggan', $row->id_pelanggan),
-		'nama' => set_value('nama', $row->nama),
-		'alamat' => set_value('alamat', $row->alamat),
-		'email' => set_value('email', $row->email),
-		'hp' => set_value('hp', $row->hp),
-		'created_date' => set_value('created_date', $row->created_date),
-		'users' => set_value('users', $row->users),
-	    );
-            $this->template->load('template','m_pelanggan/m_pelanggan_form', $data);
+                'id_pelanggan' => set_value('id_pelanggan', $row->id_pelanggan),
+                'nama' => set_value('nama', $row->nama),
+                'alamat' => set_value('alamat', $row->alamat),
+                'email' => set_value('email', $row->email),
+                'hp' => set_value('hp', $row->hp),
+                'created_date' => set_value('created_date', $row->created_date),
+                'users' => set_value('users', $row->users),
+            );
+            $this->template->load('template', 'm_pelanggan/m_pelanggan_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -122,13 +127,13 @@ class M_pelanggan extends CI_Controller
             $this->update($this->input->post('id_pelanggan', TRUE));
         } else {
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'hp' => $this->input->post('hp',TRUE),
-		'created_date' => $this->input->post('created_date',TRUE),
-		'users' => $this->input->post('users',TRUE),
-	    );
+                'nama' => $this->input->post('nama', TRUE),
+                'alamat' => $this->input->post('alamat', TRUE),
+                'email' => $this->input->post('email', TRUE),
+                'hp' => $this->input->post('hp', TRUE),
+                'created_date' => $this->input->post('created_date', TRUE),
+                'users' => $this->input->post('users', TRUE),
+            );
 
             $this->M_pelanggan_model->update($this->input->post('id_pelanggan', TRUE), $data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
@@ -161,15 +166,15 @@ class M_pelanggan extends CI_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
-	$this->form_validation->set_rules('email', 'email', 'trim|required');
-	$this->form_validation->set_rules('hp', 'hp', 'trim|required');
-	$this->form_validation->set_rules('created_date', 'created date', 'trim|required');
-	$this->form_validation->set_rules('users', 'users', 'trim|required');
+        $this->form_validation->set_rules('nama', 'nama', 'trim|required');
+        $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+        $this->form_validation->set_rules('email', 'email', 'trim|required');
+        $this->form_validation->set_rules('hp', 'hp', 'trim|required');
+        $this->form_validation->set_rules('created_date', 'created date', 'trim|required');
+        $this->form_validation->set_rules('users', 'users', 'trim|required');
 
-	$this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
@@ -194,33 +199,32 @@ class M_pelanggan extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama");
-	xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
-	xlsWriteLabel($tablehead, $kolomhead++, "Email");
-	xlsWriteLabel($tablehead, $kolomhead++, "Hp");
-	xlsWriteLabel($tablehead, $kolomhead++, "Created Date");
-	xlsWriteLabel($tablehead, $kolomhead++, "Users");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama");
+        xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
+        xlsWriteLabel($tablehead, $kolomhead++, "Email");
+        xlsWriteLabel($tablehead, $kolomhead++, "Hp");
+        xlsWriteLabel($tablehead, $kolomhead++, "Created Date");
+        xlsWriteLabel($tablehead, $kolomhead++, "Users");
 
-	foreach ($this->M_pelanggan_model->get_all() as $data) {
+        foreach ($this->M_pelanggan_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->email);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->hp);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->created_date);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->users);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama);
+            xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
+            xlsWriteLabel($tablebody, $kolombody++, $data->email);
+            xlsWriteLabel($tablebody, $kolombody++, $data->hp);
+            xlsWriteLabel($tablebody, $kolombody++, $data->created_date);
+            xlsWriteLabel($tablebody, $kolombody++, $data->users);
 
-	    $tablebody++;
+            $tablebody++;
             $nourut++;
         }
 
         xlsEOF();
         exit();
     }
-
 }
 
 /* End of file M_pelanggan.php */

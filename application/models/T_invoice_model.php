@@ -23,7 +23,6 @@ class T_invoice_model extends CI_Model
         tgl_invoice,
         users,
         create_date,
-        id_status,
         status,
         id_pelanggan,
         nama,

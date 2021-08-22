@@ -30,19 +30,19 @@ $desk = $this->db->get('m_desk')->row();
 
                                 <?php
                                 if (!empty($desk->tlp)) {
-                                    echo '<tr><td width="5%">Telp</td><td>: ' . $desk->tlp . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/tlp.png"></td><td>: ' . $desk->tlp . '</td></tr>';
                                 }
                                 if (!empty($desk->wa)) {
-                                    echo '<tr><td width="5%">Whatsapp</td><td>: ' . $desk->wa . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/wa.png"></td><td>: ' . $desk->wa . '</td></tr>';
                                 }
                                 if (!empty($desk->facebook)) {
-                                    echo '<tr><td width="5%">Facebook</td><td>: ' . $desk->facebook . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/fb.png"></td><td>: ' . $desk->facebook . '</td></tr>';
                                 }
                                 if (!empty($desk->instagram)) {
-                                    echo '<tr><td width="5%">Instagram</td><td>: ' . $desk->instagram . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/ig.png"></td><td>: ' . $desk->instagram . '</td></tr>';
                                 }
                                 if (!empty($desk->alamat)) {
-                                    echo '<tr><td width="5%">Alamat</td><td>: ' . $desk->alamat . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/map.png"></td><td>: ' . $desk->alamat . '</td></tr>';
                                 }
                                 ?>
                             </tbody>

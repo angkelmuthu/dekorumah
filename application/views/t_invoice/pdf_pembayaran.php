@@ -5,6 +5,7 @@ $result = $this->db->get('v_invoice')->row();
 $this->db->where('id_buku', $this->uri->segment(4));
 $result2 = $this->db->get('v_pembukuan_new')->row();
 $result3 = $this->db->get('m_desk')->row();
+
 ?>
 <main id="js-page-content" role="main" class="page-content">
     <div class="container">
@@ -31,19 +32,19 @@ $result3 = $this->db->get('m_desk')->row();
 
                                 <?php
                                 if (!empty($result3->tlp)) {
-                                    echo '<tr><td width="5%"><i class="fal fa-phone-square text-muted mr-2"></i></td><td>' . $result3->tlp . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/tlp.png"></td><td>' . $result3->tlp . '</td></tr>';
                                 }
                                 if (!empty($result3->wa)) {
-                                    echo '<tr><td width="5%"><i class="fal fa-mobile-alt text-muted mr-2"></i></td><td>' . $result3->wa . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/wa.png"></td><td>' . $result3->wa . '</td></tr>';
                                 }
                                 if (!empty($result3->facebook)) {
-                                    echo '<tr><td width="5%"><i class="fab fa-facebook-square text-muted mr-2"></i></td><td>' . $result3->facebook . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/fb.png"></td><td>' . $result3->facebook . '</td></tr>';
                                 }
                                 if (!empty($result3->instagram)) {
-                                    echo '<tr><td width="5%"><i class="fab fa-instagram text-muted mr-2"></i></td><td>' . $result3->instagram . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/ig.png"></td><td>' . $result3->instagram . '</td></tr>';
                                 }
                                 if (!empty($result3->alamat)) {
-                                    echo '<tr><td width="5%"><i class="fal fa-map-marker-alt text-muted mr-2"></i></td><td>' . $result3->alamat . '</td></tr>';
+                                    echo '<tr><td width="5%"><img width="15" src="' . base_url() . 'assets/map.png"></td><td>' . $result3->alamat . '</td></tr>';
                                 }
                                 ?>
                             </tbody>

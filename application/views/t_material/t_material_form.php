@@ -18,17 +18,19 @@
                                 <tr>
                                     <td width='200'>Jenis Barang</td>
                                     <td>
-                                        <select name="id_barang_jenis" id="barang_jenis" class="select2 form-control w-100">
+                                        <select name="id_barang" id="barang" class="select2 form-control w-100" required>
                                             <option value="">Select Barang Jenis</option>
                                             <?php
+                                            $this->db->order_by('barang_jenis,barang ASC');
+                                            $barang_jenis = $this->db->get('v_barang')->result();
                                             foreach ($barang_jenis as $row) {
-                                                echo '<option value="' . $row->id_barang_jenis . '">' . $row->barang_jenis . '</option>';
+                                                echo '<option value="' . $row->id_barang . '">' . $row->barang_jenis . ' - ' . $row->barang . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td width='200'>Barang <?php echo form_error('id_barang') ?></td>
                                     <td>
                                         <div class="ajax-loader">
@@ -38,7 +40,7 @@
                                             <option value="">Select Barang</option>
                                         </select>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td width='200'>Stok</td>
                                     <td><input type="number" class="form-control" name="stok" id="stok" placeholder="stok" value="" readonly /></td>
@@ -53,11 +55,15 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>Qty <?php echo form_error('qty') ?></td>
-                                    <td><input type="number" class="form-control" name="qty" id="qty" placeholder="Qty" value="<?php echo $qty; ?>" required /></td>
+                                    <td><input type="text" class="form-control" name="qty" id="qty" placeholder="Qty" value="<?php echo $qty; ?>" required /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Total Harga</td>
                                     <td><input type="text" class="form-control" name="total" id="total" placeholder="total" value="<?php echo $total; ?>" readonly required /></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Note</td>
+                                    <td><input type="text" class="form-control" name="note" id="note" placeholder="note" value="<?php echo $note; ?>" /></td>
                                 </tr>
                                 <!-- <tr>
                                     <td width='200'>Total <?php echo form_error('total') ?></td>

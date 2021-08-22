@@ -38,6 +38,7 @@ class T_material extends CI_Controller
                 'total' => $row->total,
                 'id_user' => $row->id_user,
                 'create_date' => $row->create_date,
+                'note' => $row->note,
             );
             $this->template->load('template', 't_material/t_material_read', $data);
         } else {
@@ -62,6 +63,7 @@ class T_material extends CI_Controller
             'total' => set_value('total'),
             'id_user' => set_value('id_user'),
             'create_date' => set_value('create_date'),
+            'note' => set_value('note'),
             'barang_jenis' => $this->T_material_model->fetch_barang_jenis(),
         );
         $this->template->load('template', 't_material/t_material_form', $data);
@@ -82,6 +84,7 @@ class T_material extends CI_Controller
             'total' => str_replace('.', '', $this->input->post('total', TRUE)),
             'id_user' => $this->input->post('id_user', TRUE),
             'create_date' => $this->input->post('create_date', TRUE),
+            'note' => $this->input->post('note', TRUE),
         );
 
         $this->T_material_model->insert($data);
@@ -117,6 +120,7 @@ class T_material extends CI_Controller
                 'total' => set_value('total', $row->total),
                 'id_user' => set_value('id_user', $row->id_user),
                 'create_date' => set_value('create_date', $row->create_date),
+                'note' => set_value('note', $row->note),
             );
             $this->template->load('template', 't_material/t_material_form', $data);
         } else {
@@ -143,6 +147,7 @@ class T_material extends CI_Controller
                 'total' => $this->input->post('total', TRUE),
                 'id_user' => $this->input->post('id_user', TRUE),
                 'create_date' => $this->input->post('create_date', TRUE),
+                'note' => $this->input->post('note', TRUE),
             );
 
             $this->T_material_model->update($this->input->post('id_material', TRUE), $data);

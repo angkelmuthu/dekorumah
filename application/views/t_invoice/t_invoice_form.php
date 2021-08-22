@@ -30,7 +30,19 @@
                                 } else {
                                     $gen = $no_invoice;
                                 }
-
+                                if ($button == 'Create') {
+                                    if (!empty($this->uri->segment('3'))) {
+                                        $flag = $this->uri->segment('3');
+                                        $this->db->where('nama', $flag);
+                                        $q = $this->db->get('m_pelanggan');
+                                        $row = $q->row();
+                                        $id_pelangganx = $row->id_pelanggan;
+                                    } else {
+                                        $id_pelangganx = '';
+                                    }
+                                } else {
+                                    $id_pelangganx = $id_pelanggan;
+                                }
                                 ?>
 
                                 <tr>
@@ -43,15 +55,15 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>Pelanggan <?php echo form_error('id_pelanggan') ?></td>
-                                    <td><?php echo select2_update('id_pelanggan', 'm_pelanggan', 'id_pelanggan', 'nama', $id_pelanggan, '', '') ?></td>
+                                    <td><?php echo select2_update('id_pelanggan', 'm_pelanggan', 'id_pelanggan', 'nama', $id_pelangganx, '', '') ?></td>
 
                                 </tr>
 
-                                <tr>
+                                <!-- <tr>
                                     <td width='200'>Status <?php echo form_error('id_status') ?></td>
                                     <td>
                                         <?php echo select2_update('id_status', 'm_status_invoice', 'id_status', 'status', $id_status, '', '') ?></td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td width='200'>Sales <?php echo form_error('sales') ?></td>
                                     <td>
