@@ -56,8 +56,8 @@
                                         </td>
                                         <td class="text-right">
                                             <?php
-                                            if ($laba > 0 && $biaya > 0) {
-                                                echo '<b>' . angka(($laba / $biaya) * 100) . '%</b>';
+                                            if ($pro->payment > 0 && $biaya > 0) {
+                                                echo '<b>' . angka($laba / $pro->payment * 100) . '%</b>';
                                             } else {
                                                 echo '<b>-</b>';
                                             } ?>

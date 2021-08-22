@@ -11,13 +11,13 @@ class Auth extends CI_Controller
 
     function cheklogin()
     {
-        $email      = $this->input->post('full_name');
+        $email      = $this->input->post('email');
         //$password   = $this->input->post('password');
         $password = $this->input->post('password', TRUE);
         $hashPass = password_hash($password, PASSWORD_DEFAULT);
         $test     = password_verify($password, $hashPass);
         // query chek users
-        $this->db->where('full_name', $email);
+        $this->db->where('email', $email);
         //$this->db->where('password',  $test);
         $users       = $this->db->get('tbl_user');
         if ($users->num_rows() > 0) {

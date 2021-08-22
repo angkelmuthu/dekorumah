@@ -20,7 +20,7 @@
                                 <td>Tgl Invoice</td>
                                 <td><b><?php echo $tgl_invoice; ?></b></td>
                                 <td>Status</td>
-                                <td><b><?php echo $status; ?></b></td>
+                                <td><b><?php echo $id_status; ?></b></td>
                             </tr>
                             <tr>
                                 <td>Pelanggan</td>
