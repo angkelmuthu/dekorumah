@@ -16,14 +16,19 @@ class M_pelanggan_model extends CI_Model
     }
 
     // datatables
-    function json() {
+    function json()
+    {
         $this->datatables->select('id_pelanggan,nama,alamat,email,hp,created_date,users');
         $this->datatables->from('m_pelanggan');
         //add this line for join
         //$this->datatables->join('table2', 'm_pelanggan.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('m_pelanggan/read/$1'),'<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed'))." 
-            ".anchor(site_url('m_pelanggan/update/$1'),'<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm waves-effect waves-themed'))." 
-                ".anchor(site_url('m_pelanggan/delete/$1'),'<i class="fal fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_pelanggan');
+        if ($this->session->userdata('id_user_level') == 1) {
+            $this->datatables->add_column('action', anchor(site_url('m_pelanggan/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed')) . "
+            " . anchor(site_url('m_pelanggan/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm waves-effect waves-themed')) . "
+                " . anchor(site_url('m_pelanggan/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_pelanggan');
+        } else {
+            $this->datatables->add_column('action', anchor(site_url('m_pelanggan/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed')), 'id_pelanggan');
+        }
         return $this->datatables->generate();
     }
 
@@ -40,31 +45,33 @@ class M_pelanggan_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
-    
+
     // get total rows
-    function total_rows($q = NULL) {
+    function total_rows($q = NULL)
+    {
         $this->db->like('id_pelanggan', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('alamat', $q);
-	$this->db->or_like('email', $q);
-	$this->db->or_like('hp', $q);
-	$this->db->or_like('created_date', $q);
-	$this->db->or_like('users', $q);
-	$this->db->from($this->table);
+        $this->db->or_like('nama', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('email', $q);
+        $this->db->or_like('hp', $q);
+        $this->db->or_like('created_date', $q);
+        $this->db->or_like('users', $q);
+        $this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
+    function get_limit_data($limit, $start = 0, $q = NULL)
+    {
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_pelanggan', $q);
-	$this->db->or_like('nama', $q);
-	$this->db->or_like('alamat', $q);
-	$this->db->or_like('email', $q);
-	$this->db->or_like('hp', $q);
-	$this->db->or_like('created_date', $q);
-	$this->db->or_like('users', $q);
-	$this->db->limit($limit, $start);
+        $this->db->or_like('nama', $q);
+        $this->db->or_like('alamat', $q);
+        $this->db->or_like('email', $q);
+        $this->db->or_like('hp', $q);
+        $this->db->or_like('created_date', $q);
+        $this->db->or_like('users', $q);
+        $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
 
@@ -87,7 +94,6 @@ class M_pelanggan_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
-
 }
 
 /* End of file M_pelanggan_model.php */

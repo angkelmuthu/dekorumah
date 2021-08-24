@@ -13,7 +13,10 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="text-center">
-                            <?php echo anchor(site_url('m_barang/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?>
+                            <?php
+                            if ($this->session->userdata('id_user_level') == 1) {
+                                echo anchor(site_url('m_barang/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"');
+                            } ?>
                         </div>
                         <table class="table table-bordered table-hover table-striped w-100" id="myTable">
                             <thead>
@@ -79,12 +82,14 @@
                                                 </div>
                                             </div>
                                             <?php
+
                                             echo anchor(site_url('m_barang/read/' . $dt->id_barang), '<i class="fal fa-eye" aria-hidden="true"></i>', 'class="btn btn-info btn-xs"');
-                                            echo '  ';
-                                            echo anchor(site_url('m_barang/update/' . $dt->id_barang), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs"');
-                                            echo '  ';
-                                            echo
-                                            '<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#default-example-modal-sm' . $dt->id_barang . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
+                                            if ($this->session->userdata('id_user_level') == 1) {
+                                                echo '  ';
+                                                echo anchor(site_url('m_barang/update/' . $dt->id_barang), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs"');
+                                                echo '  ';
+                                                echo
+                                                '<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#default-example-modal-sm' . $dt->id_barang . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
     <div class="modal fade" id="default-example-modal-sm' . $dt->id_barang . '" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -104,7 +109,7 @@
         </div>
     </div>
 </div>';
-                                            ?>
+                                            } ?>
                                         </td>
                                     </tr>
                                 <?php } ?>

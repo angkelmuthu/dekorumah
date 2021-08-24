@@ -30,7 +30,7 @@ class T_material_tukang extends CI_Controller
         $row = $this->T_material_tukang_model->get_by_id($id);
         if ($row) {
             $data = array(
-                'id_material_tukang' => $row->id_material_tukang,
+                'id_material' => $row->id_material,
                 'id_barang' => $row->id_barang,
                 'qty' => $row->qty,
                 'harga_satuan' => $row->harga_satuan,
@@ -54,7 +54,7 @@ class T_material_tukang extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('t_material_tukang/create_action'),
-            'id_material_tukang' => set_value('id_material_tukang'),
+            'id_material' => set_value('id_material'),
             'note' => set_value('note'),
             'id_barang' => set_value('id_barang'),
             'qty' => set_value('qty'),
@@ -109,7 +109,7 @@ class T_material_tukang extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('t_material_tukang/update_action'),
-                'id_material_tukang' => set_value('id_material_tukang', $row->id_material_tukang),
+                'id_material' => set_value('id_material', $row->id_material),
                 'note' => set_value('note', $row->note),
                 'id_barang' => set_value('id_barang', $row->id_barang),
                 'qty' => set_value('qty', $row->qty),

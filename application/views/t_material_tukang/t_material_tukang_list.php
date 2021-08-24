@@ -24,9 +24,9 @@
                                     <th>Harga Satuan</th>
                                     <th>Total</th>
                                     <th>Note</th>
-                                    <th>Id User</th>
+                                    <th>User</th>
                                     <th>Create Date</th>
-                                    <th width="200px">Action</th>
+                                    <th width="100px">Action</th>
                                 </tr>
                             </thead>
 

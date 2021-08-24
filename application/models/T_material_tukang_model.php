@@ -22,9 +22,12 @@ class T_material_tukang_model extends CI_Model
         $this->datatables->from('v_material_tukang');
         //add this line for join
         //$this->datatables->join('table2', 't_material_tukang.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('t_material_tukang/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed')) . "
-            " . anchor(site_url('t_material_tukang/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm waves-effect waves-themed')) . "
-                " . anchor(site_url('t_material_tukang/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_material');
+        if ($this->session->userdata('id_user_level') == 1) {
+            $this->datatables->add_column('action', anchor(site_url('t_material_tukang/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs')) . "
+            " . anchor(site_url('t_material_tukang/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-xs" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_material');
+        } else {
+            $this->datatables->add_column('action', anchor(site_url('t_material_tukang/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs')), 'id_material');
+        }
         return $this->datatables->generate();
     }
 

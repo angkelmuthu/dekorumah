@@ -32,9 +32,13 @@ class T_invoice_model extends CI_Model
         $this->datatables->from('v_invoice');
         //add this line for join
         //$this->datatables->join('table2', 't_invoice.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('t_invoice/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs waves-effect waves-themed')) . "
+        if ($this->session->userdata('id_user_level') == 1) {
+            $this->datatables->add_column('action', anchor(site_url('t_invoice/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs waves-effect waves-themed')) . "
             " . anchor(site_url('t_invoice/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-xs waves-effect waves-themed')) . "
                 " . anchor(site_url('t_invoice/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-xs waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
+        } else {
+            $this->datatables->add_column('action', anchor(site_url('t_invoice/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs waves-effect waves-themed')), 'id');
+        }
         return $this->datatables->generate();
     }
 

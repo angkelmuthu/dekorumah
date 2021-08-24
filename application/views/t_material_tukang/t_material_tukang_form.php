@@ -16,19 +16,21 @@
 
                             <table class='table table-striped'>
                                 <tr>
-                                    <td width='200'>Jenis Barang</td>
+                                    <td width='200'>Barang <?php echo form_error('id_barang') ?></td>
                                     <td>
-                                        <select name="id_barang_jenis" id="barang_jenis" class="select2 form-control w-100">
+                                        <select name="id_barang" id="id_barang" class="select2 form-control w-100" required>
                                             <option value="">Select Barang Jenis</option>
                                             <?php
+                                            $this->db->order_by('barang_jenis,barang ASC');
+                                            $barang_jenis = $this->db->get('v_barang')->result();
                                             foreach ($barang_jenis as $row) {
-                                                echo '<option value="' . $row->id_barang_jenis . '">' . $row->barang_jenis . '</option>';
+                                                echo '<option value="' . $row->id_barang . '">' . $row->barang_jenis . ' - ' . $row->barang . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td width='200'>Barang <?php echo form_error('id_barang') ?></td>
                                     <td>
                                         <div class="ajax-loader">
@@ -38,7 +40,7 @@
                                             <option value="">Select Barang</option>
                                         </select>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td width='200'>Stok</td>
                                     <td><input type="number" class="form-control" name="stok" id="stok" placeholder="stok" value="" readonly /></td>
@@ -69,7 +71,7 @@
                                 </tr> -->
                                 <tr>
                                     <td></td>
-                                    <td><input type="hidden" name="id_material_tukang" value="<?php echo $id_material_tukang; ?>" />
+                                    <td><input type="hidden" name="id_material" value="<?php echo $id_material; ?>" />
                                         <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('full_name') ?>" />
                                         <input type="hidden" name="create_date" value="<?php echo date('Y-m-d H:s:i'); ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
@@ -92,7 +94,7 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
 <script>
     $(document).ready(function() {
-        $('#barang').change(function() {
+        $('#id_barang').change(function() {
             $("#qty, #harga_satuan").keyup(function() {
                 var hargax = $("#harga_satuan").val();
                 var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
@@ -144,22 +146,22 @@
                         id_barang_jenis: id_barang_jenis
                     },
                     success: function(data) {
-                        $('#barang').html(data);
+                        $('#id_barang').html(data);
                         //$('#produk_detail').html('<option value="">Select Detail produk</option>');
                     }
                 });
             } else {
-                $('#barang').html('<option value="">Select Barang</option>');
+                $('#id_barang').html('<option value="">Select Barang</option>');
                 //$('#produk_detail').html('<option value="">Select produk_detail</option>');
             }
         });
 
-        $('#barang').change(function() {
-            var id_barang = $('#barang').val();
+        $('#id_barang').change(function() {
+            var id_barang = $('#id_barang').val();
             var id_barang_jenis = $('#barang_jenis').val();
             if (id_barang_jenis != '' && id_barang != '') {
                 $.ajax({
-                    url: "<?php echo base_url(); ?>t_material/fetch_barang_harga",
+                    url: "<?php echo base_url(); ?>t_material_tukang/fetch_barang_harga",
                     method: "POST",
                     data: {
                         id_barang: id_barang,
