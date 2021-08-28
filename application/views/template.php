@@ -715,6 +715,9 @@
                                     <span data-i18n="drpdwn.print">Print</span>
                                     <i class="float-right text-muted fw-n">Ctrl + P</i>
                                 </a>
+                                <a href="<?php echo site_url('user/ganti_pass') ?>" class="dropdown-item">
+                                    <span>Ganti Password</span>
+                                </a>
                                 <!-- <div class="dropdown-multilevel dropdown-multilevel-left">
                                     <div class="dropdown-item">
                                         Language

@@ -187,7 +187,7 @@ class T_invoice extends CI_Controller
         $this->form_validation->set_rules('id_pelanggan', 'id pelanggan', 'trim|required');
         $this->form_validation->set_rules('users', 'users', 'trim|required');
         $this->form_validation->set_rules('create_date', 'create date', 'trim|required');
-        $this->form_validation->set_rules('id_status', 'id_status', 'trim|required');
+        //$this->form_validation->set_rules('id_status', 'id_status', 'trim|required');
         $this->form_validation->set_rules('id_sales', 'id sales', 'trim|required');
 
         $this->form_validation->set_rules('id', 'id', 'trim');

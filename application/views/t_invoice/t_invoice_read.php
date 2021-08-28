@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <?php if ($this->session->userdata('id_user_level') == 1) { ?>
+        <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 5) { ?>
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr text-success">
@@ -210,7 +210,9 @@
                             <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 5) { ?>
                                 <a href="<?php echo site_url('t_pesanan/create/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Tambah Data Pesanan</a>
                             <?php } ?>
-                            <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Surat Penawaran</a>
+                            <?php if ($this->session->userdata('id_user_level') != 3) { ?>
+                                <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Surat Penawaran</a>
+                            <?php } ?>
                         </div>
                         <table id="example" class="table table-bordered table-striped">
                             <thead class="thead-themed">
@@ -461,8 +463,12 @@
                                             <td><?php echo $dt->qty ?></td>
                                             <td><?php echo angka($dt->harga_satuan) ?></td>
                                             <td><?php echo angka($dt->total) ?></td>
-                                            <td><?php echo $dt->full_name ?></td>
-                                            <td><a href="<?php echo site_url('t_material/delete/' . $dt->id_invoice . '/' . $dt->id_material . '/' . $dt->id_barang) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
+                                            <td><?php echo $dt->id_user ?></td>
+                                            <td>
+                                                <?php if ($this->session->userdata('id_user_level') != 3) { ?>
+                                                    <a href="<?php echo site_url('t_material/delete/' . $dt->id_invoice . '/' . $dt->id_material . '/' . $dt->id_barang) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
+                                                <?php } ?>
+                                            </td>
                                         </tr>
                                     <?php }
                                     $this->db->select('sum(total) as grand');
