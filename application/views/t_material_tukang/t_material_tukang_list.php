@@ -14,24 +14,26 @@
                     <div class="panel-content">
                         <div class="text-center">
                             <?php echo anchor(site_url('t_material_tukang/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
-                        <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
-                            <thead>
-                                <tr>
-                                    <th width="30px">No</th>
-                                    <th>Jenis Barang</th>
-                                    <th>Barang</th>
-                                    <th>Qty</th>
-                                    <th>Harga Satuan</th>
-                                    <th>Total</th>
-                                    <th>Tukang</th>
-                                    <th>Note</th>
-                                    <th>User</th>
-                                    <th>Create Date</th>
-                                    <th width="100px">Action</th>
-                                </tr>
-                            </thead>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
+                                <thead>
+                                    <tr>
+                                        <th width="30px">No</th>
+                                        <th>Jenis Barang</th>
+                                        <th>Barang</th>
+                                        <th>Qty</th>
+                                        <th>Harga Satuan</th>
+                                        <th>Total</th>
+                                        <th>Tukang</th>
+                                        <th>Note</th>
+                                        <th>User</th>
+                                        <th>Create Date</th>
+                                        <th width="100px">Action</th>
+                                    </tr>
+                                </thead>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -451,6 +451,7 @@ class M_survei extends CI_Controller
             //'satuan' => $this->input->post('satuan', TRUE),
             //'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
             'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'nm_tukang' => $this->input->post('nm_tukang', TRUE),
             'note' => $this->input->post('note', TRUE),
             'created_by' => $this->session->userdata('full_name'),
             'created_date' => date('Y-m-d H:i:s'),

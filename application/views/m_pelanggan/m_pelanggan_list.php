@@ -18,21 +18,23 @@
                                 <?php echo anchor(site_url('m_pelanggan/excel'), '<i class="fal fa-file-excel" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-outline-success btn-sm waves-effect waves-themed"'); ?>
                             <?php } ?>
                         </div>
-                        <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
-                            <thead>
-                                <tr>
-                                    <th width="30px">No</th>
-                                    <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>Email</th>
-                                    <th>Hp</th>
-                                    <th>Created Date</th>
-                                    <th>Users</th>
-                                    <th width="200px">Action</th>
-                                </tr>
-                            </thead>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped w-100" id="dt-basic-example">
+                                <thead>
+                                    <tr>
+                                        <th width="30px">No</th>
+                                        <th>Nama</th>
+                                        <th>Alamat</th>
+                                        <th>Email</th>
+                                        <th>Hp</th>
+                                        <th>Created Date</th>
+                                        <th>Users</th>
+                                        <th width="200px">Action</th>
+                                    </tr>
+                                </thead>
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@
                                 <td>Tgl Invoice</td>
                                 <td><b><?php echo $tgl_invoice; ?></b></td>
                                 <td>Status</td>
-                                <td><b><?php echo $id_status; ?></b></td>
+                                <td><b><?php echo $status; ?></b></td>
                             </tr>
                             <tr>
                                 <td>Pelanggan</td>
@@ -50,7 +50,7 @@
                             ?>
                                     <!-- <a href="<?php echo site_url('t_invoice/print_invoice/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Print Invoice</a> -->
                                 <?php } else { ?>
-                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#default-example-modal">Print Invoice</button>
+                                    <!-- <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#default-example-modal">Print Invoice</button> -->
 
                                     <div class="modal fade" id="default-example-modal" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -440,11 +440,13 @@
                                         <th>No.</th>
                                         <th class="text-center">Gudang</th>
                                         <th>Barang Material</th>
+                                        <th>Tukang</th>
                                         <th>Note</th>
                                         <th class="text-center">Qty</th>
                                         <th class="text-center">Harga (Rp)</th>
                                         <th class="text-center">Total (Rp)</th>
                                         <th>Create By</th>
+                                        <th>Create Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -459,11 +461,13 @@
                                             <td><?php echo $no++; ?></td>
                                             <td class="text-center"><?php echo $dt->gudang ?></td>
                                             <td><?php echo $dt->barang ?></td>
+                                            <td><?php echo $dt->nm_tukang ?></td>
                                             <td><?php echo $dt->note ?></td>
                                             <td><?php echo $dt->qty ?></td>
                                             <td><?php echo angka($dt->harga_satuan) ?></td>
                                             <td><?php echo angka($dt->total) ?></td>
                                             <td><?php echo $dt->id_user ?></td>
+                                            <td><?php echo $dt->create_date ?></td>
                                             <td>
                                                 <?php if ($this->session->userdata('id_user_level') != 3) { ?>
                                                     <a href="<?php echo site_url('t_material/delete/' . $dt->id_invoice . '/' . $dt->id_material . '/' . $dt->id_barang) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
@@ -506,6 +510,7 @@
                                         <th>No.</th>
                                         <th>Tanggal</th>
                                         <th class="text-center">Group</th>
+                                        <th class="text-center">Tukang</th>
                                         <th class="text-center">Deskripsi</th>
                                         <th class="text-center">Total</th>
                                         <th>Action</th>
@@ -524,6 +529,7 @@
                                             <td><?php echo $no ?></td>
                                             <td><?php echo $dt->created_date ?></td>
                                             <td><?php echo $dt->nm_group_sub ?></td>
+                                            <td><?php echo $dt->nm_tukang ?></td>
                                             <td><?php echo $dt->deskripsi ?></td>
                                             <td class="text-right"><strong> <?php echo angka($dt->total); ?></strong></td>
                                             <td><a href="<?php echo site_url('t_pembukuan/delete/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
@@ -589,6 +595,10 @@
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-fileinput">Total</label>
                                                     <input type="number" class="form-control" name="total">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="example-fileinput">Tukang</label>
+                                                    <?php echo select2_update('nm_tukang', 'm_sales', 'nm_sales', 'nm_sales', '', 'group="TUKANG" and aktif="Y"', '') ?></td>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-fileinput">Note</label>

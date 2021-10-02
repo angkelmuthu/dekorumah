@@ -18,7 +18,7 @@ class T_material_model extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id_material,id_invoice,id_barang,qty,harga_satuan,total,id_user,create_date');
+        $this->datatables->select('id_material,id_invoice,id_barang,qty,harga_satuan,total,nm_tukang,id_user,create_date');
         $this->datatables->from('t_material');
         //add this line for join
         //$this->datatables->join('table2', 't_material.field = table2.field');

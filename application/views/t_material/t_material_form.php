@@ -62,6 +62,11 @@
                                     <td><input type="text" class="form-control" name="total" id="total" placeholder="total" value="<?php echo $total; ?>" readonly required /></td>
                                 </tr>
                                 <tr>
+                                    <td width='200'>Tukang <?php echo form_error('sales') ?></td>
+                                    <td>
+                                        <?php echo select2_update('nm_tukang', 'm_sales', 'nm_sales', 'nm_sales', $nm_tukang, 'group="TUKANG" and aktif="Y"', '') ?></td>
+                                </tr>
+                                <tr>
                                     <td width='200'>Note</td>
                                     <td><input type="text" class="form-control" name="note" id="note" placeholder="note" value="<?php echo $note; ?>" required /></td>
                                 </tr>

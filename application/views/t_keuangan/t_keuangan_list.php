@@ -42,48 +42,49 @@
                         <div class="text-center">
                             <?php echo anchor(site_url('t_keuangan/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?>
                         </div>
-                        <table class="table table-bordered table-hover table-striped w-100" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th width="30px">No</th>
-                                    <th>Tanggal</th>
-                                    <th>Deskripsi</th>
-                                    <th>Note</th>
-                                    <th>Debit</th>
-                                    <th>Kredit</th>
-                                    <th>Created By</th>
-                                    <th width="200px">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($list as $t_keuangan) {
-                                ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped w-100" id="myTable">
+                                <thead>
                                     <tr>
-                                        <td width="10px"><?php echo $no++; ?></td>
-                                        <td><?php echo tanggaljam($t_keuangan->created_date) ?></td>
-                                        <td><?php echo $t_keuangan->deskripsi ?></td>
-                                        <td><?php echo $t_keuangan->note ?></td>
-                                        <td class="text-right">
-                                            <?php if (!empty($t_keuangan->debit)) {
-                                                echo '<b>' . angka($t_keuangan->debit) . '</b>';
-                                            } ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php if (!empty($t_keuangan->kredit)) {
-                                                echo '<b>' . angka($t_keuangan->kredit) . '</b>';
-                                            } ?>
-                                        </td>
-                                        <td><?php echo $t_keuangan->created_by ?></td>
-                                        <td style="text-align:center" width="200px">
-                                            <?php
-                                            echo anchor(site_url('t_keuangan/read/' . $t_keuangan->id_buku), '<i class="fal fa-eye" aria-hidden="true"></i>', 'class="btn btn-info btn-xs waves-effect waves-themed"');
-                                            echo '  ';
-                                            echo anchor(site_url('t_keuangan/update/' . $t_keuangan->id_buku), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs waves-effect waves-themed"');
-                                            echo '  ';
-                                            echo
-                                            '<button type="button" class="btn btn-danger btn-xs waves-effect waves-themed" data-toggle="modal" data-target="#default-example-modal-sm' . $t_keuangan->id_buku . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
+                                        <th width="30px">No</th>
+                                        <th>Tanggal</th>
+                                        <th>Deskripsi</th>
+                                        <th>Note</th>
+                                        <th>Debit</th>
+                                        <th>Kredit</th>
+                                        <th>Created By</th>
+                                        <th width="200px">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($list as $t_keuangan) {
+                                    ?>
+                                        <tr>
+                                            <td width="10px"><?php echo $no++; ?></td>
+                                            <td><?php echo tanggaljam($t_keuangan->created_date) ?></td>
+                                            <td><?php echo $t_keuangan->deskripsi ?></td>
+                                            <td><?php echo $t_keuangan->note ?></td>
+                                            <td class="text-right">
+                                                <?php if (!empty($t_keuangan->debit)) {
+                                                    echo '<b>' . angka($t_keuangan->debit) . '</b>';
+                                                } ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?php if (!empty($t_keuangan->kredit)) {
+                                                    echo '<b>' . angka($t_keuangan->kredit) . '</b>';
+                                                } ?>
+                                            </td>
+                                            <td><?php echo $t_keuangan->created_by ?></td>
+                                            <td style="text-align:center" width="200px">
+                                                <?php
+                                                echo anchor(site_url('t_keuangan/read/' . $t_keuangan->id_buku), '<i class="fal fa-eye" aria-hidden="true"></i>', 'class="btn btn-info btn-xs waves-effect waves-themed"');
+                                                echo '  ';
+                                                echo anchor(site_url('t_keuangan/update/' . $t_keuangan->id_buku), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs waves-effect waves-themed"');
+                                                echo '  ';
+                                                echo
+                                                '<button type="button" class="btn btn-danger btn-xs waves-effect waves-themed" data-toggle="modal" data-target="#default-example-modal-sm' . $t_keuangan->id_buku . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
     <div class="modal fade" id="default-example-modal-sm' . $t_keuangan->id_buku . '" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -103,14 +104,15 @@
         </div>
     </div>
 </div>';
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

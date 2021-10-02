@@ -40,6 +40,7 @@ class T_invoice extends CI_Controller
                 'users' => $row->users,
                 'create_date' => $row->create_date,
                 'id_status' => $row->id_status,
+                'status' => $row->status,
                 'nm_sales' => $row->nm_sales,
             );
             $this->template->load('template', 't_invoice/t_invoice_read', $data);
