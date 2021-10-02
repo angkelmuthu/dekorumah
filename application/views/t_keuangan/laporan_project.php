@@ -12,64 +12,72 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <table class="table table-bordered table-hover table-striped w-100" id="myTable">
-                            <thead>
-                                <tr>
-                                    <th width="30px">No</th>
-                                    <th>No Invoice</th>
-                                    <th>Tgl Invoice</th>
-                                    <th>Pemesan</th>
-                                    <th>Penawaran</th>
-                                    <th>Pembayaran</th>
-                                    <th>Biaya Material</th>
-                                    <th>Biaya Lain</th>
-                                    <th>Laba/Rugi</th>
-                                    <th>Persentase</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                foreach ($laporan as $pro) {
-                                    $biaya = $pro->material + $pro->biaya;
-                                    $laba = $pro->payment - $biaya;
-                                ?>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped w-100" id="myTable">
+                                <thead>
                                     <tr>
-                                        <td width="10px"><?php echo $no++; ?></td>
-                                        <td><?php echo $pro->no_invoice ?></td>
-                                        <td><?php echo tanggaljam($pro->tgl_invoice) ?></td>
-                                        <td><?php echo $pro->nama ?></td>
-                                        <td class="text-right">
-                                            <?php echo '<b>' . angka($pro->projek) . '</b>'; ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php echo '<b>' . angka($pro->payment) . '</b>'; ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php echo '<b>' . angka($pro->material) . '</b>'; ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php echo '<b>' . angka($pro->biaya) . '</b>'; ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php echo '<b>' . angka($laba) . '</b>'; ?>
-                                        </td>
-                                        <td class="text-right">
-                                            <?php
-                                            if ($pro->payment > 0 && $biaya > 0) {
-                                                echo '<b>' . angka($laba / $pro->payment * 100) . '%</b>';
-                                            } else {
-                                                echo '<b>-</b>';
-                                            } ?>
-                                        </td>
-                                        <td><?php echo $pro->status ?></td>
+                                        <th width="30px">No</th>
+                                        <th>No Invoice</th>
+                                        <th>Tgl Invoice</th>
+                                        <th>Pemesan</th>
+                                        <th>Penawaran</th>
+                                        <th>Pembayaran</th>
+                                        <th>Tgl DP</th>
+                                        <th>Tgl Lunas</th>
+                                        <th>Biaya Material</th>
+                                        <th>Biaya Lain</th>
+                                        <th>Laba/Rugi</th>
+                                        <th>Persentase</th>
+                                        <th>Status</th>
+                                        <th></th>
                                     </tr>
-                                <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($laporan as $pro) {
+                                        $biaya = $pro->material + $pro->biaya;
+                                        $laba = $pro->payment - $biaya;
+                                    ?>
+                                        <tr>
+                                            <td width="10px"><?php echo $no++; ?></td>
+                                            <td><?php echo $pro->no_invoice ?></td>
+                                            <td><?php echo tanggaljam($pro->tgl_invoice) ?></td>
+                                            <td><?php echo $pro->nama ?></td>
+                                            <td class="text-right">
+                                                <?php echo '<b>' . angka($pro->projek) . '</b>'; ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?php echo '<b>' . angka($pro->payment) . '</b>'; ?>
+                                            </td>
+                                            <td><?php echo $pro->tgl_dp ?></td>
+                                            <td><?php echo $pro->tgl_lunas ?></td>
+                                            <td class="text-right">
+                                                <?php echo '<b>' . angka($pro->material) . '</b>'; ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?php echo '<b>' . angka($pro->biaya) . '</b>'; ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?php echo '<b>' . angka($laba) . '</b>'; ?>
+                                            </td>
+                                            <td class="text-right">
+                                                <?php
+                                                if ($pro->payment > 0 && $biaya > 0) {
+                                                    echo '<b>' . angka($laba / $pro->payment * 100) . '%</b>';
+                                                } else {
+                                                    echo '<b>-</b>';
+                                                } ?>
+                                            </td>
+                                            <td><?php echo $pro->status ?></td>
+                                            <td><a class="btn btn-xs btn-primary" href="<?php echo site_url('t_invoice/read/' . $pro->id) ?>"><i class="fal fa-eye"></i></a> </td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,7 +92,7 @@
     $(document).ready(function() {
         $('#myTable').DataTable({
             lengthMenu: [10, 20, 50, 100, 200, 500],
-            responsive: true,
+            //responsive: true,
             dom:
                 /*	--- Layout Structure
                 	--- Options

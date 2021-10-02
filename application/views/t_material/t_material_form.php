@@ -43,11 +43,11 @@
                                 </tr> -->
                                 <tr>
                                     <td width='200'>Stok</td>
-                                    <td><input type="number" class="form-control" name="stok" id="stok" placeholder="stok" value="" readonly /></td>
+                                    <td><input type="number" class="form-control" name="stok" id="stok" placeholder="stok" value="" readonly required /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Gudang</td>
-                                    <td><input type="text" class="form-control" name="gudang" id="gudang" placeholder="gudang" value="" readonly /></td>
+                                    <td><input type="text" class="form-control" name="gudang" id="gudang" placeholder="gudang" value="" readonly required /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Harga (satuan) <?php echo form_error('harga_satuan') ?></td>
@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>Note</td>
-                                    <td><input type="text" class="form-control" name="note" id="note" placeholder="note" value="<?php echo $note; ?>" /></td>
+                                    <td><input type="text" class="form-control" name="note" id="note" placeholder="note" value="<?php echo $note; ?>" required /></td>
                                 </tr>
                                 <!-- <tr>
                                     <td width='200'>Total <?php echo form_error('total') ?></td>

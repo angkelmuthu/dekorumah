@@ -4,7 +4,7 @@
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>Invoice Read</h2>
+                    <h2>INVOICE</h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                         <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -48,7 +48,7 @@
                                 $num = $query->num_rows();
                                 if ($num > 0) {
                             ?>
-                                    <a href="<?php echo site_url('t_invoice/print_invoice/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Print Invoice</a>
+                                    <!-- <a href="<?php echo site_url('t_invoice/print_invoice/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Print Invoice</a> -->
                                 <?php } else { ?>
                                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#default-example-modal">Print Invoice</button>
 

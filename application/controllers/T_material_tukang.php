@@ -35,6 +35,7 @@ class T_material_tukang extends CI_Controller
                 'qty' => $row->qty,
                 'harga_satuan' => $row->harga_satuan,
                 'total' => $row->total,
+                'id_sales' => $row->id_sales,
                 'note' => $row->note,
                 'id_user' => $row->id_user,
                 'create_date' => $row->create_date,
@@ -60,6 +61,7 @@ class T_material_tukang extends CI_Controller
             'qty' => set_value('qty'),
             'harga_satuan' => set_value('harga_satuan'),
             'total' => set_value('total'),
+            'id_sales' => set_value('id_sales'),
             'id_user' => set_value('id_user'),
             'create_date' => set_value('create_date'),
             'barang_jenis' => $this->T_material_tukang_model->fetch_barang_jenis(),
@@ -80,6 +82,7 @@ class T_material_tukang extends CI_Controller
             'qty' => $this->input->post('qty', TRUE),
             'harga_satuan' => str_replace('.', '', $this->input->post('harga_satuan', TRUE)),
             'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'id_sales' => $this->input->post('id_sales', TRUE),
             'id_user' => $this->input->post('id_user', TRUE),
             'create_date' => $this->input->post('create_date', TRUE),
         );
@@ -115,6 +118,7 @@ class T_material_tukang extends CI_Controller
                 'qty' => set_value('qty', $row->qty),
                 'harga_satuan' => set_value('harga_satuan', $row->harga_satuan),
                 'total' => set_value('total', $row->total),
+                'id_sales' => set_value('id_sales', $row->id_sales),
                 'id_user' => set_value('id_user', $row->id_user),
                 'create_date' => set_value('create_date', $row->create_date),
             );
@@ -141,6 +145,7 @@ class T_material_tukang extends CI_Controller
                 'qty' => $this->input->post('qty', TRUE),
                 'harga_satuan' => $this->input->post('harga_satuan', TRUE),
                 'total' => $this->input->post('total', TRUE),
+                'id_sales' => $this->input->post('id_sales', TRUE),
                 'id_user' => $this->input->post('id_user', TRUE),
                 'create_date' => $this->input->post('create_date', TRUE),
             );

@@ -23,6 +23,7 @@
                                     <th>Qty</th>
                                     <th>Harga Satuan</th>
                                     <th>Total</th>
+                                    <th>Tukang</th>
                                     <th>Note</th>
                                     <th>User</th>
                                     <th>Create Date</th>
@@ -88,6 +89,8 @@
                     "data": "harga_satuan"
                 }, {
                     "data": "total"
+                }, {
+                    "data": "nm_sales"
                 }, {
                     "data": "note"
                 }, {

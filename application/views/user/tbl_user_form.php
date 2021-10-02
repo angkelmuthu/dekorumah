@@ -26,7 +26,8 @@
                                     <td width='200'>Email <?php echo form_error('email') ?></td>
                                     <td>
 
-                                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" /></td>
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" />
+                                    </td>
                                 </tr>
 
                                 <?php
@@ -62,7 +63,8 @@
                                     <td></td>
                                     <td><input type="hidden" name="id_users" value="<?php echo $id_users; ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <a href="<?php echo site_url('user') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td>
+                                        <a href="<?php echo site_url('user') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
+                                    </td>
                                 </tr>
                             </table>
                         </form>
