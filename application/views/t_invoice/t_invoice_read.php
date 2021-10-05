@@ -19,8 +19,8 @@
                                 <td><b><?php echo $no_invoice; ?></b></td>
                                 <td>Tgl Invoice</td>
                                 <td><b><?php echo $tgl_invoice; ?></b></td>
-                                <td>Status</td>
-                                <td><b><?php echo $status; ?></b></td>
+                                <td>Progress</td>
+                                <td><b><?php echo $progress; ?></b></td>
                             </tr>
                             <tr>
                                 <td>Pelanggan</td>

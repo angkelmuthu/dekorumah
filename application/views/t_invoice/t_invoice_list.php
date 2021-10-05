@@ -27,6 +27,9 @@
                                         <th>Pelanggan</th>
                                         <th>Sales</th>
                                         <th>Create Date</th>
+                                        <th>Tanggal DP</th>
+                                        <th>Progress</th>
+                                        <th>Tanggal Lunas</th>
                                         <th>Status</th>
                                         <th width="200px">Action</th>
                                     </tr>
@@ -79,27 +82,110 @@
                 "type": "POST"
             },
             columns: [{
-                    "data": "id",
-                    "orderable": false
-                }, {
-                    "data": "no_invoice"
-                }, {
-                    "data": "tgl_invoice"
-                }, {
-                    "data": "nama"
-                }, {
-                    "data": "nm_sales"
-                }, {
-                    "data": "create_date"
-                }, {
-                    "data": "status"
+                "data": "id",
+                "orderable": false
+            }, {
+                "data": "no_invoice"
+            }, {
+                "data": "tgl_invoice"
+            }, {
+                "data": "nama"
+            }, {
+                "data": "nm_sales"
+            }, {
+                "data": "create_date"
+            }, {
+                "data": "tgl_dp"
+            }, {
+                "data": "progress"
+            }, {
+                "data": "tgl_lunas"
+            }, {
+                data: null,
+                render: function(data, type, row) {
+                    if (row.status === 'SELESAI') {
+                        return '<button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#exampleModal' + row.id + '">' + row.status + '</button>' +
+                            '<div class="modal fade" id="exampleModal' + row.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                            '<div class="modal-content">' +
+                            '<div class="modal-header">' +
+                            '<h5 class="modal-title" id="test2">Update Status Invoice</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                            '</div><form action="<?php echo base_url(); ?>t_invoice/update_status" method="post">' +
+                            '<div class="modal-body">' +
+                            '<div class="form-group">' +
+                            '<input type="hidden" name="id" value="' + row.id + '">' +
+                            '<label class="form-label" for="example-select">Status Invoice</label>' +
+                            '<select name="id_status" class="form-control">' +
+                            '<option value="0">Ready</option>' +
+                            '<option value="1">Selesai</option>' +
+                            '<option value="2">Batal</option>' +
+                            '</select>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                            '<button type="submit" class="btn btn-primary">Save changes</button>' +
+                            '</div></form></div></div></div>';
+                    } else if (row.status === 'BATAL') {
+                        return '<button type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#exampleModal' + row.id + '">' + row.status + '</button>' +
+                            '<div class="modal fade" id="exampleModal' + row.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                            '<div class="modal-content">' +
+                            '<div class="modal-header">' +
+                            '<h5 class="modal-title" id="test2">Update Status Invoice</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                            '</div><form action="<?php echo base_url(); ?>t_invoice/update_status" method="post">' +
+                            '<div class="modal-body">' +
+                            '<div class="form-group">' +
+                            '<input type="hidden" name="id" value="' + row.id + '">' +
+                            '<label class="form-label" for="example-select">Status Invoice</label>' +
+                            '<select name="id_status" class="form-control">' +
+                            '<option value="0">Ready</option>' +
+                            '<option value="1">Selesai</option>' +
+                            '<option value="2">Batal</option>' +
+                            '</select>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                            '<button type="submit" class="btn btn-primary">Save changes</button>' +
+                            '</div></form></div></div></div>';
+                    } else {
+                        return '<button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#exampleModal' + row.id + '">' + row.status + '</button>' +
+                            '<div class="modal fade" id="exampleModal' + row.id + '" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">' +
+                            '<div class="modal-dialog" role="document">' +
+                            '<div class="modal-content">' +
+                            '<div class="modal-header">' +
+                            '<h5 class="modal-title" id="test2">Update Status Invoice</h5>' +
+                            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                            '</div><form action="<?php echo base_url(); ?>t_invoice/update_status" method="post">' +
+                            '<div class="modal-body">' +
+                            '<div class="form-group">' +
+                            '<input type="hidden" name="id" value="' + row.id + '">' +
+                            '<label class="form-label" for="example-select">Status Invoice</label>' +
+                            '<select name="id_status" class="form-control">' +
+                            '<option value="0">Ready</option>' +
+                            '<option value="1">Selesai</option>' +
+                            '<option value="2">Batal</option>' +
+                            '</select>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="modal-footer">' +
+                            '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>' +
+                            '<button type="submit" class="btn btn-primary">Save changes</button>' +
+                            '</div></form></div></div></div>';
+                    }
                 },
-                {
-                    "data": "action",
-                    "orderable": false,
-                    "className": "text-center"
-                }
-            ],
+                "orderable": false,
+                "className": "text-center",
+                "searchable": false,
+
+            }, {
+                "data": "action",
+                "orderable": false,
+                "className": "text-center"
+            }],
             order: [
                 [0, 'desc']
             ],

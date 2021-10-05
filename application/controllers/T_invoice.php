@@ -39,8 +39,8 @@ class T_invoice extends CI_Controller
                 'alamat' => $row->alamat,
                 'users' => $row->users,
                 'create_date' => $row->create_date,
-                'id_status' => $row->id_status,
                 'status' => $row->status,
+                'progress' => $row->progress,
                 'nm_sales' => $row->nm_sales,
             );
             $this->template->load('template', 't_invoice/t_invoice_read', $data);
@@ -159,6 +159,19 @@ class T_invoice extends CI_Controller
             </button><strong> Update Record Success</strong></div>');
             redirect(site_url('t_invoice'));
         }
+    }
+    public function update_status()
+    {
+        $data = array(
+            'id_status' => $this->input->post('id_status', TRUE),
+        );
+
+        $this->T_invoice_model->update($this->input->post('id', TRUE), $data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Update Record Success</strong></div>');
+        redirect(site_url('t_invoice'));
     }
 
     public function delete($id)
