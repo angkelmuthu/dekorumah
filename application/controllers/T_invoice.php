@@ -64,6 +64,11 @@ class T_invoice extends CI_Controller
         //$this->load->view('t_invoice/pdf_pembayaran');
     }
 
+    public function email()
+    {
+        $this->load->view('t_invoice/email');
+    }
+
     public function create()
     {
         $data = array(
