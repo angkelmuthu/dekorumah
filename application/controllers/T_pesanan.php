@@ -74,49 +74,34 @@ class T_pesanan extends CI_Controller
             'note' => set_value('note'),
             'created_date' => set_value('created_date'),
             'users' => set_value('users'),
-            'produk' => $this->T_pesanan_model->fetch_produk(),
         );
         $this->template->load('template', 't_pesanan/t_pesanan_form', $data);
     }
 
     public function create_action()
     {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-                'id_pesanan' => $this->input->post('id_pesanan', TRUE),
-                'id_invoice' => $this->input->post('id_invoice', TRUE),
-                'id_produk' => $this->input->post('id_produk', TRUE),
-                'id_produk_sub' => $this->input->post('id_produk_sub', TRUE),
-                'qty' => $this->input->post('qty', TRUE),
-                'panjang' => $this->input->post('panjang', TRUE),
-                'lebar' => $this->input->post('lebar', TRUE),
-                'tinggi' => $this->input->post('tinggi', TRUE),
-                'id_satuan' => $this->input->post('id_satuan', TRUE),
-                'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
-                'total' => str_replace('.', '', $this->input->post('total', TRUE)),
-                'note' => $this->input->post('note', TRUE),
-                'created_date' => $this->input->post('created_date', TRUE),
-                'users' => $this->input->post('users', TRUE),
-            );
-            $produk_detail = $this->input->post('produk_detail');
-            foreach ($produk_detail as $pr) {
-                $datax = array(
-                    'id_pesanan' => $this->input->post('id_pesanan'),
-                    'id_produk_detail' => $pr
-                );
-                $this->db->insert('t_pesanan_detail', $datax);
-            }
-            $this->T_pesanan_model->insert($data);
-            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+        $data = array(
+            'id_pesanan' => $this->input->post('id_pesanan', TRUE),
+            'id_invoice' => $this->input->post('id_invoice', TRUE),
+            'id_kategori' => $this->input->post('id_kategori', TRUE),
+            'id_paket' => $this->input->post('id_paket', TRUE),
+            'qty' => $this->input->post('qty', TRUE),
+            'panjang' => $this->input->post('panjang', TRUE),
+            'lebar' => $this->input->post('lebar', TRUE),
+            'tinggi' => $this->input->post('tinggi', TRUE),
+            'id_satuan' => $this->input->post('id_satuan', TRUE),
+            'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
+            'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'note' => $this->input->post('note', TRUE),
+            'created_date' => $this->input->post('created_date', TRUE),
+            'users' => $this->input->post('users', TRUE),
+        );
+        $this->T_pesanan_model->insert($data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Create Record Success 2</strong></div>');
-            redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice', TRUE)));
-        }
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice', TRUE)));
     }
 
     public function update($id)
@@ -203,26 +188,19 @@ class T_pesanan extends CI_Controller
             redirect(site_url('t_pesanan'));
         }
     }
-
-    function fetch_produk_sub()
+    function fetch_paket()
     {
-        if ($this->input->post('id_produk')) {
-            echo $this->T_pesanan_model->fetch_produk_sub($this->input->post('id_produk'));
-        }
-    }
-    function fetch_produk_detail()
-    {
-        if ($this->input->post('id_produk_sub')) {
-            echo $this->T_pesanan_model->fetch_produk_detail($this->input->post('id_produk'), $this->input->post('id_produk_sub'));
-        }
-    }
-    function fetch_produk_harga()
-    {
-        $id_produk_sub = $this->input->post('id_produk_sub');
-        $data = $this->T_pesanan_model->fetch_produk_harga($id_produk_sub);
+        $id_kategori = $this->input->post('id_kategori');
+        $data = $this->T_pesanan_model->fetch_paket($id_kategori);
         echo json_encode($data);
     }
 
+    function fetch_paket_harga()
+    {
+        $id_paket = $this->input->post('id_paket');
+        $data = $this->T_pesanan_model->fetch_paket_harga($id_paket);
+        echo json_encode($data);
+    }
 
     public function _rules()
     {

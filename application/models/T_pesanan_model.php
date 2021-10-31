@@ -109,49 +109,78 @@ class T_pesanan_model extends CI_Model
         $this->db->delete($this->table);
     }
 
-    function fetch_produk()
+    function fetch_paket($id_kategori)
     {
-        $this->db->where('aktif', 'Y');
-        $this->db->order_by('nm_produk', 'ASC');
-        $query = $this->db->get("m_produk");
-        return $query->result();
-    }
-    function fetch_produk_sub($id_produk)
-    {
-        $this->db->where('id_produk', $id_produk);
-        $this->db->group_by('id_produk_sub');
-        $this->db->order_by('nm_produk_sub', 'ASC');
-        $query = $this->db->get('m_produk_sub');
-        $output = '<option value="">Select Sub produk</option>';
+        $this->db->where('id_kategori', $id_kategori);
+        $query = $this->db->get('m_produk_paket');
         foreach ($query->result() as $row) {
-            $output .= '<option value="' . $row->id_produk_sub . '">' . $row->nm_produk_sub . '</option>';
-        }
-        return $output;
-    }
-    function fetch_produk_detail($id_produk, $id_produk_sub)
-    {
-        $this->db->where('id_produk', $id_produk);
-        $this->db->where('id_produk_sub', $id_produk_sub);
-        $this->db->group_by('id_produk_detail');
-        $this->db->order_by('nm_produk_detail', 'ASC');
-        $query = $this->db->get('v_produk');
-        $output = '<option value="">Select produk_detail</option>';
-        foreach ($query->result() as $row) {
-            $output .= '<option value="' . $row->id_produk_detail . '">' . $row->nm_produk_detail . '</option>';
-        }
-        return $output;
-    }
-    function fetch_produk_harga($id_produk_sub)
-    {
-        $this->db->where('id_produk_sub', $id_produk_sub);
-        $query = $this->db->get('m_produk_sub');
-        foreach ($query->result() as $row) {
-            $hasil = array(
+            $hasil[] = array(
+                'id_paket' => $row->id_paket,
+                'nm_paket' => $row->nm_paket,
+                'deskripsi' => $row->deskripsi,
                 'harga' => $row->harga,
             );
         }
         return $hasil;
     }
+
+    function fetch_paket_harga($id_paket)
+    {
+        $this->db->where('id_paket', $id_paket);
+        $query = $this->db->get('m_produk_paket');
+        foreach ($query->result() as $row) {
+            $hasil = array(
+                'id_kategori' => $row->id_kategori,
+                'id_paket' => $row->id_paket,
+                'harga' => $row->harga,
+            );
+        }
+        return $hasil;
+    }
+
+    // function fetch_produk()
+    // {
+    //     $this->db->where('aktif', 'Y');
+    //     $this->db->order_by('nm_produk', 'ASC');
+    //     $query = $this->db->get("m_produk");
+    //     return $query->result();
+    // }
+    // function fetch_produk_sub($id_produk)
+    // {
+    //     $this->db->where('id_produk', $id_produk);
+    //     $this->db->group_by('id_produk_sub');
+    //     $this->db->order_by('nm_produk_sub', 'ASC');
+    //     $query = $this->db->get('m_produk_sub');
+    //     $output = '<option value="">Select Sub produk</option>';
+    //     foreach ($query->result() as $row) {
+    //         $output .= '<option value="' . $row->id_produk_sub . '">' . $row->nm_produk_sub . '</option>';
+    //     }
+    //     return $output;
+    // }
+    // function fetch_produk_detail($id_produk, $id_produk_sub)
+    // {
+    //     $this->db->where('id_produk', $id_produk);
+    //     $this->db->where('id_produk_sub', $id_produk_sub);
+    //     $this->db->group_by('id_produk_detail');
+    //     $this->db->order_by('nm_produk_detail', 'ASC');
+    //     $query = $this->db->get('v_produk');
+    //     $output = '<option value="">Select produk_detail</option>';
+    //     foreach ($query->result() as $row) {
+    //         $output .= '<option value="' . $row->id_produk_detail . '">' . $row->nm_produk_detail . '</option>';
+    //     }
+    //     return $output;
+    // }
+    // function fetch_produk_harga($id_produk_sub)
+    // {
+    //     $this->db->where('id_produk_sub', $id_produk_sub);
+    //     $query = $this->db->get('m_produk_sub');
+    //     foreach ($query->result() as $row) {
+    //         $hasil = array(
+    //             'harga' => $row->harga,
+    //         );
+    //     }
+    //     return $hasil;
+    // }
 }
 
 /* End of file T_pesanan_model.php */

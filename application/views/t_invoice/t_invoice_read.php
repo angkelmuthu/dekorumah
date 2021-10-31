@@ -214,7 +214,7 @@
                                 <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Surat Penawaran</a>
                             <?php } ?>
                         </div>
-                        <table id="example" class="table table-bordered table-striped">
+                        <table id="example" class="table table-sm table-bordered table-striped">
                             <thead class="thead-themed">
                                 <tr>
                                     <th rowspan="2">No.</th>
@@ -235,23 +235,23 @@
                             <tbody>
                                 <?php
                                 $no = 1;
-                                $this->db->select('id_produk,nm_produk');
+                                $this->db->select('id_kategori,kategori');
                                 $this->db->where('id_invoice', $this->uri->segment(3));
-                                $this->db->group_by('id_produk');
+                                $this->db->group_by('id_kategori');
                                 $result = $this->db->get('v_pesanan')->result();
                                 foreach ($result as $dt) {
                                 ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td colspan="9">
-                                            <h5><?php echo $dt->nm_produk ?></h5>
+                                            <h5><?php echo $dt->kategori ?></h5>
                                         </td>
                                     </tr>
                                     <?php
                                     $no2 = 1;
                                     //$this->db->select('id_produk_sub,nm_produk_sub,sum(total) as total');
                                     $this->db->where('id_invoice', $this->uri->segment(3));
-                                    $this->db->where('id_produk', $dt->id_produk);
+                                    $this->db->where('id_kategori', $dt->id_kategori);
                                     //$this->db->group_by('id_produk_sub');
                                     $result = $this->db->get('v_pesanan')->result();
                                     foreach ($result as $dt2) {
@@ -267,7 +267,7 @@
                                     ?>
                                         <tr>
                                             <td></td>
-                                            <td><strong><?php echo $no2++ . '. '; ?><?php echo $dt2->nm_produk_sub ?></strong></td>
+                                            <td><strong><?php echo $no2++ . '. '; ?><?php echo $dt2->nm_paket ?></strong><?php echo $dt2->deskripsi ?><br><?php echo $dt2->note ?></td>
                                             <td class="text-center"><?php echo $qty ?></td>
                                             <td class="text-center"><?php echo $dt2->lebar ?></td>
                                             <td class="text-center"><?php echo $dt2->tinggi ?></td>
@@ -277,35 +277,23 @@
                                             <td class="text-right"><?php echo angka($dt2->total) ?></td>
                                             <td><a href="<?php echo site_url('m_survei/delete_pesanan/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
                                         </tr>
-                                        <?php
-                                        $no3 = 'a';
-                                        $this->db->where('id_pesanan', $dt2->id_pesanan);
-                                        $result = $this->db->get('v_pesanan_detail')->result();
-                                        foreach ($result as $dt3) {
-                                        ?>
-                                            <tr>
-                                                <td></td>
-                                                <td><?php echo '&nbsp&nbsp&nbsp' . $no3++ . '. '; ?><?php echo $dt3->nm_produk_detail ?></td>
-                                                <td colspan="8"></td>
-                                            </tr>
-                                        <?php
-                                        }
+                                    <?php
                                     }
-                                    $this->db->select('nm_produk,sum(total) as ttl_produk');
-                                    $this->db->where('id_invoice', $this->uri->segment(3));
-                                    $this->db->where('id_produk', $dt->id_produk);
-                                    $result = $this->db->get('v_pesanan')->result();
-                                    foreach ($result as $dtx) {
-                                        ?>
-                                        <tr>
+                                    // $this->db->select('kategori,sum(total) as ttl_produk');
+                                    // $this->db->where('id_invoice', $this->uri->segment(3));
+                                    // $this->db->where('id_kategori', $dt->id_kategori);
+                                    // $result = $this->db->get('v_pesanan')->result();
+                                    // foreach ($result as $dtx) {
+                                    ?>
+                                    <!-- <tr>
                                             <td></td>
                                             <td colspan="6"></td>
-                                            <td class="text-right"><strong>Total <?php echo $dtx->nm_produk ?></strong></td>
+                                            <td class="text-right"><strong>Total <?php echo $dtx->kategori ?></strong></td>
                                             <td class="text-right"><strong><?php echo angka($dtx->ttl_produk) ?></strong></td>
                                             <td></td>
-                                        </tr>
+                                        </tr> -->
                                 <?php
-                                    }
+                                    //}
                                 }
                                 $this->db->select('sum(total) as grand');
                                 $this->db->where('id_invoice', $this->uri->segment(3));
