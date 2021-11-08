@@ -29,6 +29,28 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_pesanan')->result();
     }
 
+    // get pesanan
+    function get_pesanan_group($id_survei)
+    {
+        $this->db->select('*,count(id_pesanan) as qty, sum(total) as ttl');
+        $this->db->where('id_invoice', $id_survei);
+        $this->db->group_by('id_kategori');
+        return $this->db->get('v_pesanan')->result();
+    }
+
+    function get_pesanan_group_ttl($id_survei)
+    {
+        $this->db->select('sum(total) as ttl');
+        $this->db->where('id_invoice', $id_survei);
+        return $this->db->get('v_pesanan')->row();
+    }
+    // get pesanan
+    function get_invoice($id_survei)
+    {
+        $this->db->where('id', $id_survei);
+        return $this->db->get('v_invoice')->row();
+    }
+
     function get_gambar($id)
     {
         $this->db->where('id_file', $id);

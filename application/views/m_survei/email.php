@@ -169,7 +169,7 @@
                                                             <!-- company name -->
                                                             <tr>
                                                                 <td data-color="Customer Text" data-size="Customer Title" mc:edit="invoice-5" align="right" style="font-family: 'Open Sans', Arial, sans-serif; font-size:16px; color:#3b3b3b; line-height:26px; font-weight: bold;">
-                                                                    <singleline label="company name">John doe</singleline>
+                                                                    <singleline label="company name"><?php echo $nama ?></singleline>
                                                                 </td>
                                                             </tr>
                                                             <!-- end company name -->
@@ -179,9 +179,8 @@
                                                             <!-- address -->
                                                             <tr>
                                                                 <td data-color="Customer Text" data-size="Address" mc:edit="invoice-6" align="right" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#7f8c8d; line-height:26px;">
-                                                                    <multiline label="address">PO Box 16122 Collins Street
-                                                                        <br> West Victoria 8007 Australia
-                                                                        <br> Job number : <span style="color:#3b3b3b"> <strong>AB12345</strong> </span>
+                                                                    <multiline label="address">
+                                                                        <?php echo $alamat ?>
                                                                     </multiline>
                                                                 </td>
                                                             </tr>
@@ -221,16 +220,13 @@
                                         <tbody>
                                             <tr>
                                                 <td data-size="Title" data-color="Title" mc:edit="invoice-7" width="263" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#3b3b3b; line-height:26px; text-transform:uppercase;">
-                                                    <singleline label="title-1">description</singleline>
-                                                </td>
-                                                <td data-size="Title" data-color="Title" mc:edit="invoice-8" width="87" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#3b3b3b; line-height:26px; text-transform:uppercase;">
-                                                    <singleline label="title-2">PRICE</singleline>
+                                                    <singleline label="title-1">Description</singleline>
                                                 </td>
                                                 <td data-size="Title" data-color="Title" mc:edit="invoice-9" width="87" align="center" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#3b3b3b; line-height:26px; text-transform:uppercase;">
-                                                    <singleline label="title-3">AMOUNT</singleline>
+                                                    <singleline label="title-3">QTY</singleline>
                                                 </td>
                                                 <td data-size="Title" data-color="Title" mc:edit="invoice-10" width="87" align="right" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:13px; color:#3b3b3b; line-height:26px; text-transform:uppercase;">
-                                                    <singleline label="title-4">TOTAL</singleline>
+                                                    <singleline label="title-4">AMOUNT</singleline>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -248,66 +244,49 @@
         </tbody>
     </table>
 
-
-    <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
-        <tbody>
-            <tr>
-                <td align="center">
-                    <table width="600" style="max-width: 600px;" class="table-full" border="0" cellspacing="0" cellpadding="0">
-                        <tbody>
-                            <tr>
-                                <td height="35"></td>
-                            </tr>
-                            <tr>
-                                <td align="center">
-                                    <table width="100%" class="table-inner" border="0" cellspacing="0" cellpadding="0">
-                                        <tbody>
-                                            <tr>
-                                                <td data-size="list" data-color="list" mc:edit="invoice-11" width="263" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                    <singleline label="list-1">Web design</singleline>
-                                                </td>
-                                                <td data-size="list" data-color="list" mc:edit="invoice-12" width="87" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                    <singleline label="list-2">$25</singleline>
-                                                </td>
-                                                <td data-size="list" data-color="list" mc:edit="invoice-13" width="87" align="center" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                    <singleline label="list-3">18</singleline>
-                                                </td>
-                                                <td data-size="list" data-color="list" mc:edit="invoice-14" width="87" align="right" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                    <singleline label="list-4">$450</singleline>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td data-border-size="List Border" data-border-color="List Border" height="5" style="border-bottom:1px solid #ecf0f1;"></td>
-                            </tr>
-                            <tr>
-                                <td height="5"></td>
-                            </tr>
-                            <!-- detail -->
-                            <tr>
-                                <td align="center">
-                                    <table class="table-inner" width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-                                        <tbody>
-                                            <tr>
-                                                <td data-size="list" data-color="list" mc:edit="invoice-15" align="left" style="font-family: 'Open Sans', Arial, sans-serif; font-size:12px; color:#7f8c8d; line-height:26px;">
-                                                    <multiline labe="detail">Web Design and front end development.</multiline>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                            <!-- end detail -->
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
+    <?php foreach ($list as $dt) { ?>
+        <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td align="center">
+                        <table width="600" style="max-width: 600px;" class="table-full" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td height="5"></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <table width="100%" class="table-inner" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td data-size="list" data-color="list" mc:edit="invoice-11" width="263" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
+                                                        <singleline label="list-1"><?php echo $dt->kategori ?></singleline>
+                                                    </td>
+                                                    <td data-size="list" data-color="list" mc:edit="invoice-13" width="87" align="center" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
+                                                        <singleline label="list-3"><?php echo $dt->qty ?></singleline>
+                                                    </td>
+                                                    <td data-size="list" data-color="list" mc:edit="invoice-14" width="87" align="right" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
+                                                        <singleline label="list-4">Rp. <?php echo angka($dt->ttl) ?></singleline>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-border-size="List Border" data-border-color="List Border" height="5" style="border-bottom:1px solid #ecf0f1;"></td>
+                                </tr>
+                                <tr>
+                                    <td height="5"></td>
+                                </tr>
+                                <!-- detail -->
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    <?php } ?>
 
     <table class="full" data-module="total" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="total" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
         <tbody>
@@ -327,7 +306,7 @@
                             </tr>
                             <tr>
                                 <td align="center">
-                                    <table width="400" class="table-full" align="left" border="0" cellpadding="0" cellspacing="0">
+                                    <!-- <table width="400" class="table-full" align="left" border="0" cellpadding="0" cellspacing="0">
                                         <tbody>
                                             <tr>
                                                 <td data-bgcolor="Texs BG" bgcolor="#f8f8f8" align="center">
@@ -354,7 +333,7 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table> -->
                                     <!--[if (gte mso 9)|(IE)]></td><td><![endif]-->
                                     <table width="200" class="table-full" border="0" align="right" cellpadding="0" cellspacing="0">
                                         <tbody>
@@ -372,7 +351,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td data-size="Total Sum" data-color="Total Text" mc:edit="invoice-19" style="font-family: 'Open Sans', Arial, sans-serif; font-size:24px; color:#3b3b3b;  font-weight: bold;">
-                                                                    <singleline label="price">$1,150 USD</singleline>
+                                                                    <singleline label="price">Rp. <?php echo angka($ttl) ?></singleline>
                                                                 </td>
                                                             </tr>
                                                             <tr>
