@@ -444,10 +444,11 @@ class M_survei extends CI_Controller
         //}
     }
 
-    public function sendMail($id_invoice)
+    public function mail($id_invoice, $id_buku, $id_group_sub)
     {
         $row = $this->M_survei_model->get_invoice($id_invoice);
         $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
+        $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_buku, $id_group_sub);
         $data = array(
             'no_invoice' => $row->no_invoice,
             'tgl_invoice' => $row->tgl_invoice,
@@ -459,6 +460,32 @@ class M_survei extends CI_Controller
             'email' => $row->email,
             'hp' => $row->hp,
             'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
+            'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_buku, $id_group_sub),
+            'bayar_ttl' => $row3->ttl,
+            'ttl' => $row2->ttl,
+        );
+
+        $this->load->view('m_survei/email', $data);
+    }
+
+    public function sendMail($id_invoice, $id_buku, $id_group_sub)
+    {
+        $row = $this->M_survei_model->get_invoice($id_invoice);
+        $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
+        $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_buku, $id_group_sub);
+        $data = array(
+            'no_invoice' => $row->no_invoice,
+            'tgl_invoice' => $row->tgl_invoice,
+            'users' => $row->users,
+            'create_date' => $row->create_date,
+            'id_pelanggan' => $row->id_pelanggan,
+            'nama' => $row->nama,
+            'alamat' => $row->alamat,
+            'email' => $row->email,
+            'hp' => $row->hp,
+            'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
+            'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_buku, $id_group_sub),
+            'bayar_ttl' => $row3->ttl,
             'ttl' => $row2->ttl,
         );
 
@@ -482,7 +509,7 @@ class M_survei extends CI_Controller
         $this->load->library('email', $config);
 
         // Email dan nama pengirim
-        $this->email->from('admin@gallerydekoruma.com', 'gallerydekoruma');
+        $this->email->from('admin@gallerydekoruma.com', 'gallerydekoruma1');
 
         // Email penerima
         $this->email->to('om.rifaiachmad@gmail.com'); // Ganti dengan email tujuan

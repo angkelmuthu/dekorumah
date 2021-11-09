@@ -38,6 +38,36 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_pesanan')->result();
     }
 
+    function get_bayar($id_invoice, $id_buku, $id_group_sub)
+    {
+        //$this->db->select('*,count(id_pesanan) as qty, sum(total) as ttl');
+        if ($id_group_sub == 3) {
+            $this->db->where_in('id_group_sub', ['1', '2', '3']);
+        } elseif ($id_group_sub == 2) {
+            $this->db->where_in('id_group_sub', ['1', '2']);
+        } else {
+            $this->db->where('id_group_sub', $id_group_sub);
+        }
+        $this->db->where('id_survei', $id_invoice);
+        return $this->db->get('v_pembukuan_new')->result();
+    }
+
+    function get_bayar_ttl($id_invoice, $id_buku, $id_group_sub)
+    {
+        $this->db->select('*,sum(total) as ttl');
+        if ($id_group_sub == 3) {
+            $this->db->where_in('id_group_sub', ['1', '2', '3']);
+        } elseif ($id_group_sub == 2) {
+            $this->db->where_in('id_group_sub', ['1', '2']);
+        } else {
+            $this->db->where('id_group_sub', $id_group_sub);
+        }
+        $this->db->group_by('id_survei');
+        $this->db->where('id_survei', $id_invoice);
+        return $this->db->get('v_pembukuan_new')->row();
+    }
+
+
     function get_pesanan_group_ttl($id_survei)
     {
         $this->db->select('sum(total) as ttl');
