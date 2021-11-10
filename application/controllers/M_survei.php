@@ -420,7 +420,7 @@ class M_survei extends CI_Controller
         }
     }
 
-    public function create_debit()
+    public function create_debit($id_invoice, $id_buku, $id_group_sub)
     {
         $data = array(
             'id_survei' => $this->input->post('id_survei', TRUE),
@@ -434,18 +434,7 @@ class M_survei extends CI_Controller
 
         $this->M_survei_model->insert_debit($data);
 
-
-
-        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-            </button><strong> Insert Record Success</strong></div>');
-        redirect(site_url('t_invoice/read/' . $this->input->post('id_survei')));
-        //}
-    }
-
-    public function mail($id_invoice, $id_buku, $id_group_sub)
-    {
+        //send mail
         $row = $this->M_survei_model->get_invoice($id_invoice);
         $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
         $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_buku, $id_group_sub);
@@ -459,30 +448,7 @@ class M_survei extends CI_Controller
             'alamat' => $row->alamat,
             'email' => $row->email,
             'hp' => $row->hp,
-            'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
-            'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_buku, $id_group_sub),
-            'bayar_ttl' => $row3->ttl,
-            'ttl' => $row2->ttl,
-        );
-
-        $this->load->view('m_survei/email', $data);
-    }
-
-    public function sendMail($id_invoice, $id_buku, $id_group_sub)
-    {
-        $row = $this->M_survei_model->get_invoice($id_invoice);
-        $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
-        $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_buku, $id_group_sub);
-        $data = array(
-            'no_invoice' => $row->no_invoice,
-            'tgl_invoice' => $row->tgl_invoice,
-            'users' => $row->users,
-            'create_date' => $row->create_date,
-            'id_pelanggan' => $row->id_pelanggan,
-            'nama' => $row->nama,
-            'alamat' => $row->alamat,
-            'email' => $row->email,
-            'hp' => $row->hp,
+            'ketentuan' => $this->input->post('ketentuan', TRUE),
             'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
             'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_buku, $id_group_sub),
             'bayar_ttl' => $row3->ttl,
@@ -509,10 +475,108 @@ class M_survei extends CI_Controller
         $this->load->library('email', $config);
 
         // Email dan nama pengirim
-        $this->email->from('admin@gallerydekoruma.com', 'gallerydekoruma1');
+        $this->email->from('admin@gallerydekoruma.com', 'gallerydekoruma');
 
         // Email penerima
-        $this->email->to('om.rifaiachmad@gmail.com'); // Ganti dengan email tujuan
+        $this->email->to($this->input->post('email')); // Ganti dengan email tujuan
+        $this->email->cc('gdekoruma@gmail.com');
+
+        // Subject email
+        $this->email->subject('Invoice');
+
+        // Isi email
+        $this->email->message($isi);
+
+        // Tampilkan pesan sukses atau error
+        if ($this->email->send()) {
+            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Insert Record Success</strong></div>');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Notifikasi gagal dikirim</strong></div>');
+            //echo $this->email->print_debugger();
+        }
+
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_survei')));
+        //}
+    }
+
+    public function mail($id_invoice, $id_buku, $id_group_sub)
+    {
+        $row = $this->M_survei_model->get_invoice($id_invoice);
+        $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
+        $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_buku, $id_group_sub);
+        $data = array(
+            'no_invoice' => $row->no_invoice,
+            'tgl_invoice' => $row->tgl_invoice,
+            'users' => $row->users,
+            'create_date' => $row->create_date,
+            'id_pelanggan' => $row->id_pelanggan,
+            'nama' => $row->nama,
+            'alamat' => $row->alamat,
+            'email' => $row->email,
+            'hp' => $row->hp,
+            'ketentuan' => $this->input->post('ketentuan', TRUE),
+            'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
+            'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_buku, $id_group_sub),
+            'bayar_ttl' => $row3->ttl,
+            'ttl' => $row2->ttl,
+        );
+
+        $this->load->view('m_survei/email', $data);
+    }
+
+    public function sendMail($id_invoice, $id_buku, $id_group_sub)
+    {
+        $row = $this->M_survei_model->get_invoice($id_invoice);
+        $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
+        $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_buku, $id_group_sub);
+        $data = array(
+            'no_invoice' => $row->no_invoice,
+            'tgl_invoice' => $row->tgl_invoice,
+            'users' => $row->users,
+            'create_date' => $row->create_date,
+            'id_pelanggan' => $row->id_pelanggan,
+            'nama' => $row->nama,
+            'alamat' => $row->alamat,
+            'email' => $row->email,
+            'hp' => $row->hp,
+            'ketentuan' => $this->input->post('ketentuan', TRUE),
+            'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
+            'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_buku, $id_group_sub),
+            'bayar_ttl' => $row3->ttl,
+            'ttl' => $row2->ttl,
+        );
+
+        $isi = $this->load->view('m_survei/email', $data, true);
+
+        // Konfigurasi email
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'mail.gallerydekoruma.com',
+            'smtp_user' => 'admin@gallerydekoruma.com',  // Email gmail
+            'smtp_pass'   => 'dekoruma071',  // Password gmail
+            'smtp_crypto' => 'ssl',
+            'smtp_port'   => 465,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+
+        // Load library email dan konfigurasinya
+        $this->load->library('email', $config);
+
+        // Email dan nama pengirim
+        $this->email->from('admin@gallerydekoruma.com', 'gallerydekoruma');
+
+        // Email penerima
+        $this->email->to($this->input->post('email')); // Ganti dengan email tujuan
+        $this->email->cc('angkel.muthu@gmail.com');
 
         // Lampiran email, isi dengan url/path file
         //$this->email->attach('https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');

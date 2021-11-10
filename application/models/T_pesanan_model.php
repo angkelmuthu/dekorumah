@@ -109,29 +109,45 @@ class T_pesanan_model extends CI_Model
         $this->db->delete($this->table);
     }
 
-    function fetch_paket($id_kategori)
+    // function fetch_paket($id_kategori)
+    // {
+    //     $this->db->where('id_kategori', $id_kategori);
+    //     $query = $this->db->get('m_produk_paket');
+    //     foreach ($query->result() as $row) {
+    //         $hasil[] = array(
+    //             'id_paket' => $row->id_paket,
+    //             'nm_paket' => $row->nm_paket,
+    //             'deskripsi' => $row->deskripsi,
+    //             'harga' => $row->harga,
+    //         );
+    //     }
+    //     return $hasil;
+    // }
+
+    function get_paket($id_kategori)
     {
         $this->db->where('id_kategori', $id_kategori);
+        $this->db->where('aktif', 'y');
+        $this->db->order_by('nm_paket', 'ASC');
         $query = $this->db->get('m_produk_paket');
+        $output = '<option value="">Select Produk</option>';
         foreach ($query->result() as $row) {
-            $hasil[] = array(
-                'id_paket' => $row->id_paket,
-                'nm_paket' => $row->nm_paket,
-                'deskripsi' => $row->deskripsi,
-                'harga' => $row->harga,
-            );
+            $output .= '<option value="' . $row->id_paket . '">' . $row->nm_paket . '</option>';
         }
-        return $hasil;
+        return $output;
     }
 
     function fetch_paket_harga($id_paket)
     {
         $this->db->where('id_paket', $id_paket);
+        $this->db->where('aktif', 'y');
         $query = $this->db->get('m_produk_paket');
         foreach ($query->result() as $row) {
             $hasil = array(
-                'id_kategori' => $row->id_kategori,
                 'id_paket' => $row->id_paket,
+                'id_kategori' => $row->id_kategori,
+                'nm_paket' => $row->nm_paket,
+                'deskripsi' => $row->deskripsi,
                 'harga' => $row->harga,
             );
         }

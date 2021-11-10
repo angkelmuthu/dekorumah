@@ -15,7 +15,7 @@
 
 						<div class="form-group">
 							<label class="form-label" for="simpleinput">Kategori Produk</label>
-							<select name="id_kategori" id="id_kategori" class="select2 form-control w-100" required>
+							<select name="id_kategori" id="kategori" class="select2 form-control w-100" required>
 								<option value="">Select Kategori</option>
 								<?php
 								$this->db->where('aktif', 'y');
@@ -26,13 +26,18 @@
 								?>
 							</select>
 						</div>
+						<div class="form-group">
+							<label class="form-label" for="simpleinput">Produk</label>
+							<div class="ajax-loader">
+								<img id="loading-produk" style="display:none;" src="<?php echo base_url() ?>assets/smartadmin/img/loading.gif" height="40px" class="img-responsive" />
+							</div>
+							<select name="id_paket" class="select2 form-control w-100" id="paket" required>
+								<option value=''>Select Produk</option>
+							</select>
+						</div>
 						<div id="divinput">
+							<div id="detail"></div>
 							<form action="<?php echo $action; ?>" method="post" id="rdbtn">
-								<div class="demo">
-									<fieldset id="detail" class="rating">
-									</fieldset>
-								</div>
-
 								<table class='table table-striped'>
 									<tr>
 										<td width='200'>Satuan</td>
@@ -84,7 +89,8 @@
 									<tr>
 										<td width='200'>Harga (satuan) <?php echo form_error('volume') ?></td>
 										<td>
-											<input type="hidden" name="id_kategori" id="id_kategorixx" value="" required />
+											<input type="hidden" name="id_kategori" id="id_kategori" value="" required />
+											<input type="hidden" name="id_paket" id="id_paket" value="" required />
 											<input type="text" class="form-control" name="harga" id="hargaxx" placeholder="harga" value="<?php echo $harga; ?>" required />
 										</td>
 									</tr>
@@ -135,40 +141,100 @@
 <script>
 	$(document).ready(function() {
 		document.getElementById('divinput').style.display = 'none';
-		$('#id_kategori').change(function(e) {
-			var kategori = $('#id_kategori').val();
-			if (kategori != '') {
+		$('#kategori').change(function() {
+			var id_kategori = $('#kategori').val();
+			if (id_kategori != '') {
 				$.ajax({
 					url: "<?php echo base_url(); ?>t_pesanan/fetch_paket",
-					cache: false,
 					method: "POST",
 					data: {
-						id_kategori: kategori
+						id_kategori: id_kategori,
+					},
+					beforeSend: function() {
+						$("#loading-paket").show();
 					},
 					success: function(data) {
-						let html = "";
-						document.getElementById('divinput').style.display = 'block';
-						var json = data;
-						obj = JSON.parse(json);
-						$.each(obj, function(i, item) {
-							html += '<div class="custom-control custom-radio custom-control-inline">' +
-								'<input type="radio" class="batch custom-control-input" id="batch' + item.id_paket + '" name="id_paket" value="' + item.id_paket + '" required>' +
-								'<label class="custom-control-label" for="batch' + item.id_paket + '">' +
-								'<div class="card">' +
-								'<ul class="list-group list-group-flush">' +
-								'<li class="list-group-item">' + item.nm_paket + '</li>' +
-								'<li class="list-group-item">' + item.deskripsi + '</li>' +
-								'<li class="list-group-item"><h3><span class="badge badge-primary float-right ml-3">Rp. ' + parseInt(item.harga).toLocaleString() + '</span></h3></li>' +
-								'</ul>' +
-								'</div>' +
-								'</label>' +
-								'</div>';
-						})
-						$("#detail").html(html);
+						$('#paket').html(data);
 					},
+					complete: function() {
+						$('#loading-paket').hide();
+					}
 				});
+			} else {
+				$('#paket').html('<option value="">Select Paket</option>');
 			}
 		});
+		$('#paket').change(function() {
+			var id_paket = $('#paket').val();
+			if (id_paket != '') {
+				$.ajax({
+					url: "<?php echo base_url(); ?>t_pesanan/fetch_paket_harga",
+					method: "POST",
+					data: {
+						id_paket: id_paket,
+					},
+					beforeSend: function() {
+						$("#loading-program").show();
+					},
+					success: function(data) {
+						document.getElementById('divinput').style.display = 'block';
+						var json = data,
+							obj = JSON.parse(json);
+						$('#id_kategori').val(obj.id_kategori);
+						$('#id_paket').val(obj.id_paket);
+						$('#hargaxx').val(obj.harga);
+						html = '<div class="card mb-5">' +
+							'<div class="card-body">' +
+							'<h5 class="card-title">' + obj.nm_paket + '</h5>' + obj.deskripsi + '</div>' +
+							'<div class="card-footer">' +
+							'<h3>Rp. ' + parseInt(obj.harga).toLocaleString() + '</h3>' +
+							'</div>' +
+							'</div>';
+						$("#detail").html(html);
+					},
+					complete: function() {
+						$('#loading-program').hide();
+					}
+				});
+			} else {
+				$('#program').html('<option value="">Select Program</option>');
+			}
+		});
+
+		// $('#id_kategori').change(function(e) {
+		// 	var kategori = $('#id_kategori').val();
+		// 	if (kategori != '') {
+		// 		$.ajax({
+		// 			url: "<?php echo base_url(); ?>t_pesanan/fetch_paket",
+		// 			cache: false,
+		// 			method: "POST",
+		// 			data: {
+		// 				id_kategori: kategori
+		// 			},
+		// 			success: function(data) {
+		// 				let html = "";
+		// 				document.getElementById('divinput').style.display = 'block';
+		// 				var json = data;
+		// 				obj = JSON.parse(json);
+		// 				$.each(obj, function(i, item) {
+		// 					html += '<div class="custom-control custom-radio custom-control-inline">' +
+		// 						'<input type="radio" class="batch custom-control-input" id="batch' + item.id_paket + '" name="id_paket" value="' + item.id_paket + '" required>' +
+		// 						'<label class="custom-control-label" for="batch' + item.id_paket + '">' +
+		// 						'<div class="card">' +
+		// 						'<ul class="list-group list-group-flush">' +
+		// 						'<li class="list-group-item">' + item.nm_paket + '</li>' +
+		// 						'<li class="list-group-item">' + item.deskripsi + '</li>' +
+		// 						'<li class="list-group-item"><h3><span class="badge badge-primary float-right ml-3">Rp. ' + parseInt(item.harga).toLocaleString() + '</span></h3></li>' +
+		// 						'</ul>' +
+		// 						'</div>' +
+		// 						'</label>' +
+		// 						'</div>';
+		// 				})
+		// 				$("#detail").html(html);
+		// 			},
+		// 		});
+		// 	}
+		// });
 
 		$('#rdbtn').change(function() {
 			paket = $("input[name='id_paket']:checked").val();

@@ -459,19 +459,8 @@
                         <! Banner Row -->
                             <table role="presentation" bgcolor="#EAF0F6" width="100%" style="margin-top: 5px;">
                                 <tr>
-                                    <td style="padding: 5px 10px;font-size:14px;">
-                                        <p><b>Free</b></p>
-                                        <p>dadafdf dafdaf dafdaf dadaf dafdafd dafdaf
-                                            dafdafdafda date_default_timezone_getfdafdafadf
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 5px 10px;font-size:14px;">
-                                        <p><b>Syarat & Ketentuan</b></p>
-                                        <p>dadafdf dafdaf dafdaf dadaf dafdafd dafdaf
-                                            dafdafdafda date_default_timezone_getfdafdafadf
-                                        </p>
+                                    <td style="padding: 10px 10px;font-size:12px;">
+                                        <?php echo $ketentuan ?>
                                     </td>
                                 </tr>
                             </table>

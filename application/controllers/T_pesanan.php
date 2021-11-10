@@ -188,11 +188,18 @@ class T_pesanan extends CI_Controller
             redirect(site_url('t_pesanan'));
         }
     }
+    // function fetch_paket()
+    // {
+    //     $id_kategori = $this->input->post('id_kategori');
+    //     $data = $this->T_pesanan_model->fetch_paket($id_kategori);
+    //     echo json_encode($data);
+    // }
+
     function fetch_paket()
     {
-        $id_kategori = $this->input->post('id_kategori');
-        $data = $this->T_pesanan_model->fetch_paket($id_kategori);
-        echo json_encode($data);
+        if ($this->input->post('id_kategori')) {
+            echo $this->T_pesanan_model->get_paket($this->input->post('id_kategori'));
+        }
     }
 
     function fetch_paket_harga()
