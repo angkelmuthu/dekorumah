@@ -420,8 +420,10 @@ class M_survei extends CI_Controller
         }
     }
 
-    public function create_debit($id_invoice, $id_buku, $id_group_sub)
+    public function create_debit()
     {
+        $id_invoice = $this->input->post('id_survei');
+        $id_group_sub = $this->input->post('id_group_sub');
         $data = array(
             'id_survei' => $this->input->post('id_survei', TRUE),
             'id_group' => $this->input->post('id_group', TRUE),
@@ -437,7 +439,7 @@ class M_survei extends CI_Controller
         //send mail
         $row = $this->M_survei_model->get_invoice($id_invoice);
         $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
-        $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_buku, $id_group_sub);
+        $row3 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_group_sub);
         $data = array(
             'no_invoice' => $row->no_invoice,
             'tgl_invoice' => $row->tgl_invoice,
@@ -450,7 +452,7 @@ class M_survei extends CI_Controller
             'hp' => $row->hp,
             'ketentuan' => $this->input->post('ketentuan', TRUE),
             'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
-            'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_buku, $id_group_sub),
+            'bayar' => $this->M_survei_model->get_bayar($id_invoice, $id_group_sub),
             'bayar_ttl' => $row3->ttl,
             'ttl' => $row2->ttl,
         );

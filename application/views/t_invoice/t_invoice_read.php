@@ -134,6 +134,7 @@
                                                 <a href="<?php echo site_url('t_invoice/kwitansi/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-info btn-xs">Print</a>
                                             </td>
                                         </tr>
+
                                     <?php $no++;
                                     }
                                     $this->db->select('sum(total) as xdebit');
@@ -159,7 +160,7 @@
                                                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
                                             </button>
                                         </div>
-                                        <form action="<?php echo site_url('m_survei/create_debit/' . $dt->id_survei . '/' . $dt->id_buku . '/' . $dt->id_group_sub) ?>" method="post" enctype="multipart/form-data">
+                                        <form action="<?php echo site_url('m_survei/create_debit') ?>" method="post" enctype="multipart/form-data">
 
                                             <div class="modal-body">
                                                 <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">

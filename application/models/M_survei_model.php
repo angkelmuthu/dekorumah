@@ -38,7 +38,7 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_pesanan')->result();
     }
 
-    function get_bayar($id_invoice, $id_buku, $id_group_sub)
+    function get_bayar($id_invoice, $id_group_sub)
     {
         //$this->db->select('*,count(id_pesanan) as qty, sum(total) as ttl');
         if ($id_group_sub == 3) {
@@ -52,7 +52,7 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_pembukuan_new')->result();
     }
 
-    function get_bayar_ttl($id_invoice, $id_buku, $id_group_sub)
+    function get_bayar_ttl($id_invoice, $id_group_sub)
     {
         $this->db->select('*,sum(total) as ttl');
         if ($id_group_sub == 3) {
