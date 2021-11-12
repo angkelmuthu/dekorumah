@@ -139,7 +139,47 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td align="center">
+                                        <table width="600" style="max-width: 600px;" class="table-full" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td height="5"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center">
+                                                        <table width="100%" class="table-inner" border="0" cellspacing="0" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td data-size="list" data-color="list" mc:edit="invoice-11" width="263" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
+                                                                        <singleline label="list-1"><?php echo $nm_bayar ?></singleline>
+                                                                    </td>
+                                                                    <td data-size="list" data-color="list" mc:edit="invoice-13" width="87" align="center" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
+                                                                        <singleline label="list-3"></singleline>
+                                                                    </td>
+                                                                    <td data-size="list" data-color="list" mc:edit="invoice-14" width="87" align="right" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
+                                                                        <singleline label="list-4">Rp. <?php echo angka($total_bayar) ?></singleline>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td data-border-size="List Border" data-border-color="List Border" height="5" style="border-bottom:1px solid #ecf0f1;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="5"></td>
+                                                </tr>
+                                                <!-- detail -->
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <?php foreach ($list as $row) { ?>
                             <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
                                 <tbody>
@@ -156,13 +196,13 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td data-size="list" data-color="list" mc:edit="invoice-11" width="263" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                                            <singleline label="list-1"><?php echo $row->kategori ?></singleline>
+                                                                            <singleline label="list-1">- <?php echo $row->kategori ?></singleline>
                                                                         </td>
                                                                         <td data-size="list" data-color="list" mc:edit="invoice-13" width="87" align="center" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
                                                                             <singleline label="list-3"><?php echo $row->qty ?></singleline>
                                                                         </td>
                                                                         <td data-size="list" data-color="list" mc:edit="invoice-14" width="87" align="right" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                                            <singleline label="list-4">Rp. <?php echo angka($row->ttl) ?></singleline>
+                                                                            <singleline label="list-4"></singleline>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -240,10 +280,10 @@
                                                                         <singleline label="list-1"></singleline>
                                                                     </td>
                                                                     <td data-size="list" data-color="list" mc:edit="invoice-13" width="87" align="left" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                                        <singleline label="list-3">Subtotal</singleline>
+                                                                        <singleline label="list-3">Total</singleline>
                                                                     </td>
                                                                     <td data-size="list" data-color="list" mc:edit="invoice-14" width="87" align="right" valign="top" style="font-family: 'Open Sans', Arial, sans-serif; font-size:14px; color:#3b3b3b; line-height:26px;  font-weight: bold;">
-                                                                        <singleline label="list-4"><?php echo angka($ttl) ?> &nbsp;</singleline>
+                                                                        <singleline label="list-4">Rp. <?php echo angka($total_bayar) ?> </singleline>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -308,7 +348,7 @@
                         </table> -->
                         <?php //} 
                         ?>
-                        <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
+                        <!-- <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
                                 <tr>
                                     <td align="center">
@@ -342,12 +382,12 @@
                                                 <tr>
                                                     <td height="5"></td>
                                                 </tr>
-                                                <!-- detail -->
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                             
+                        </tbody>
+                        </table>
+                        </td>
+                        </tr>
+                        </tbody>
                         </table>
                         <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
@@ -383,13 +423,13 @@
                                                 <tr>
                                                     <td height="5"></td>
                                                 </tr>
-                                                <!-- detail -->
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                               
+                        </tbody>
                         </table>
+                        </td>
+                        </tr>
+                        </tbody>
+                        </table> -->
                         <table class="full" data-module="list" data-bgcolor="Main BG" mc:repeatable="layout" mc:hideable="" mc:variant="list" align="center" width="100%" bgcolor="#FFFFFF" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
                                 <tr>

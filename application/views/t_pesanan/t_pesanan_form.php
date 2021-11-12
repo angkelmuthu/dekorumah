@@ -35,6 +35,17 @@
 								<option value=''>Select Produk</option>
 							</select>
 						</div>
+						<div id="asal">
+							<form action="<?php echo site_url('t_pesanan/create_action_sementara') ?>" method="post">
+								<input type="hidden" name="id_kategorix" id="id_kategorix" required />
+								<input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
+								<input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
+								<input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
+								<input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
+								<button type=" submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> Simpan</button>
+								<a href="<?php echo site_url('t_invoice/read/' . $this->uri->segment(3)) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
+							</form>
+						</div>
 						<div id="divinput">
 							<div id="detail"></div>
 							<form action="<?php echo $action; ?>" method="post" id="rdbtn">
@@ -155,6 +166,7 @@
 					},
 					success: function(data) {
 						$('#paket').html(data);
+						$('#id_kategorix').val(id_kategori);
 					},
 					complete: function() {
 						$('#loading-paket').hide();
@@ -177,6 +189,7 @@
 						$("#loading-program").show();
 					},
 					success: function(data) {
+						document.getElementById('asal').style.display = 'none';
 						document.getElementById('divinput').style.display = 'block';
 						var json = data,
 							obj = JSON.parse(json);

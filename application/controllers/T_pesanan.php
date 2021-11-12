@@ -104,6 +104,23 @@ class T_pesanan extends CI_Controller
         redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice', TRUE)));
     }
 
+    public function create_action_sementara()
+    {
+        $data = array(
+            'id_pesanan' => $this->input->post('id_pesanan', TRUE),
+            'id_invoice' => $this->input->post('id_invoice', TRUE),
+            'id_kategori' => $this->input->post('id_kategorix', TRUE),
+            'created_date' => $this->input->post('created_date', TRUE),
+            'users' => $this->input->post('users', TRUE),
+        );
+        $this->T_pesanan_model->insert($data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Create Record Success 2</strong></div>');
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice', TRUE)));
+    }
+
     public function update($id)
     {
         $row = $this->T_pesanan_model->get_by_id($id);
