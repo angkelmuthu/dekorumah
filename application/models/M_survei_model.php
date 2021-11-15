@@ -46,6 +46,12 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_pembukuan_new')->row();
     }
 
+    function get_note()
+    {
+        return $this->db->get('m_desk')->row();
+    }
+
+
     function get_bayar_ttl($id_invoice, $id_group_sub)
     {
         $this->db->select('*,sum(total) as ttl');

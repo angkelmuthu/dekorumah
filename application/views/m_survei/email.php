@@ -13,6 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style type="text/css">
+        body {
+            -webkit-print-color-adjust: exact;
+        }
+
         a {
             text-decoration: underline;
             color: inherit;
@@ -61,6 +65,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #CBD6E2;
+        }
+
+        @media print {
+
+            body.printing * {
+                display: block;
+            }
         }
     </style>
 
@@ -505,6 +516,9 @@
                                 </tr>
                             </table>
         </div>
+        <script>
+            window.print();
+        </script>
 </body>
 
 </html>

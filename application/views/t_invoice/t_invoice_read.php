@@ -1,6 +1,6 @@
 <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/miscellaneous/lightgallery/lightgallery.bundle.css">
-<link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/formplugins/summernote/summernote.css">
 <main id="js-page-content" role="main" class="page-content">
+    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
@@ -78,160 +78,6 @@
                 </div>
             </div>
         </div>
-        <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 5) { ?>
-            <div class="col-xl-12">
-                <div id="panel-1" class="panel">
-                    <div class="panel-hdr text-success">
-                        <h2>
-                            Pembayaran <span class="fw-300"><i>Debit</i></span>
-                        </h2>
-                    </div>
-                    <div class="panel-container">
-                        <div class="panel-content">
-                            <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#debit-modal">Tambah Pembayaran (Debit)</button>
-
-                            <table id="example" class="table table-bordered table-striped mt-2">
-                                <thead class="thead-themed">
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Tanggal</th>
-                                        <th>Kwitansi</th>
-                                        <th class="text-center">Group</th>
-                                        <!-- <th class="text-center">Deskripsi</th> -->
-                                        <th class="text-center">Total</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-
-
-                                    $no = 1;
-                                    $this->db->where('id_survei', $this->uri->segment(3));
-                                    $this->db->where('id_group', '2');
-                                    $this->db->order_by('created_date');
-                                    $result = $this->db->get('v_pembukuan_new')->result();
-                                    foreach ($result as $dt) {
-                                        $break = urlencode("\n");
-                                        $wa1 = '*Terima Kasih*';
-                                        $wa2 = 'Pembayaran ' . $dt->nm_group_sub . ' untuk pesanan *' . $no_invoice . '* atas nama *' . strtoupper($nama) . '* dengan nominal *Rp. ' . angka($dt->total) . '* sudah kami terima.';
-                                        $wa3 = 'Hormat kami';
-                                        $wa4 = 'gallery dekoruma';
-                                        $pesan = $wa1 . $break . $wa2 . $break . $wa3 . $break . $wa4;
-                                    ?>
-                                        <tr>
-                                            <td><?php echo $no ?></td>
-
-                                            <td><?php echo $dt->created_date ?></td>
-                                            <td><?php echo $no_invoice . '-' . $dt->id_buku ?></td>
-                                            <td><?php echo $dt->nm_group_sub ?></td>
-                                            <!-- <td><?php echo $dt->deskripsi ?></td> -->
-                                            <td class="text-right"><strong> <?php echo angka($dt->total); ?></strong></td>
-                                            <td>
-                                                <!-- <a href="<?php echo site_url('m_survei/sendMail/' . $dt->id_survei . '/' . $dt->id_buku . '/' . $dt->id_group_sub) ?>" class=" btn btn-danger btn-xs">mail</a> -->
-                                                <a href="<?php echo site_url('t_pembukuan/delete/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
-                                                <!-- <a href="https://api.whatsapp.com/send?phone=62<?php echo $hp ?>&text=<?php echo $pesan ?>" target="_blank" class=" btn btn-success btn-xs"><i class="fal fa-paper-plane" aria-hidden="true"></i> WA</a> -->
-                                                <a href="<?php echo site_url('t_invoice/kwitansi/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-info btn-xs">Print</a>
-                                            </td>
-                                        </tr>
-
-                                    <?php $no++;
-                                    }
-                                    $this->db->select('sum(total) as xdebit');
-                                    $this->db->where('id_survei', $this->uri->segment(3));
-                                    $this->db->where('id_group', '2');
-                                    $result = $this->db->get('v_pembukuan_new')->row();
-                                    $ttl_payment = $result->xdebit;
-                                    ?>
-                                    <tr>
-                                        <td colspan="3" class="text-right"><strong>TOTAL</strong></td>
-                                        <td class="text-right"><strong><?php echo angka($ttl_payment) ?></strong></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div class="modal fade" id="debit-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Pengeluaran (Debit)</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                                            </button>
-                                        </div>
-                                        <form action="<?php echo site_url('m_survei/create_debit') ?>" method="post" enctype="multipart/form-data">
-
-                                            <div class="modal-body">
-                                                <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">
-                                                <input type="hidden" name="id_group" value="2">
-                                                <div class="form-group">
-                                                    <label class="form-label" for="example-fileinput">Jenis Pembayaran</label>
-                                                    <select name="id_group_sub" id="group_sub" class="select2 form-control w-100">
-                                                        <option value="">Select Jenis Pembayaran</option>
-                                                        <?php
-                                                        $this->db->where('id_group', '2');
-                                                        $result = $this->db->get('m_group_sub')->result();
-                                                        foreach ($result as $row) {
-                                                            echo '<option value="' . $row->id_group_sub . '">' . $row->nm_group_sub . '</option>';
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="form-label" for="example-fileinput">Nominal</label>
-                                                    <input type="number" class="form-control" name="total">
-                                                </div>
-                                                <!-- <div class="form-group">
-                                                    <label class="form-label" for="example-fileinput">Note</label>
-                                                    <textarea class="form-control" name="note"><?php echo $no_invoice . ' a/n ' . $nama ?></textarea>
-                                                </div> -->
-                                                <input type="hidden" name="note" value="<?php echo $no_invoice . ' a/n ' . $nama ?>">
-                                                <div class="card m-auto border">
-                                                    <div class="card-header py-2">
-                                                        <div class="card-title">
-                                                            Notifikasi Email & Whastapp
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <table class="table table-clean table-sm">
-                                                            <tr>
-                                                                <td>Email</td>
-                                                                <td><input type="email" class="form-control" name="email" value="<?php echo $email ?>"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Hp</td>
-                                                                <td><input type=" number" class="form-control" name="hp" value="<?php echo '62' . $hp ?>"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan=" 2">Syarat & Ketentuan</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2">
-                                                                    <textarea class="form-control summernote" name="ketentuan">
-                                                                    <div><b>BCA</b></div><div><b>4070225439 </b></div><div><b>A/N Nia Septiani</b></div><div><b><br></b></div><div><b>Note :</b></div><ul><li>Pembayaran dengan Cek/Giro/Transfer harus atas nama Nia Septiani</li><li>Pembayaran dengan Cek/Giro/Transfer dianggap sah setelah cair pada rekening kami</li><li>Invoice ini berlaku sebagai bukti pembayaran yang sah</li><li>Uang yang sudah dibayarkan tidak dapat dikembalikan</li></ul>
-                                                                    </textarea>
-                                                                    <!-- <p style="text-align: justify; "><b>Free</b></p><ul><li style="text-align: justify; ">Design 3D</li></ul><p style="text-align: justify; "><b>Syarat &amp; Ketentuan</b></p><ol><li style="text-align: justify; ">Harga yang tercantum disini TIDAK MENGIKAT dan disebut MENGIKAT setelah dilakukan pengukuran dan juga dengan design yang telah disetujui.</li><li style="text-align: justify; ">Uang tanda jadi 10%&nbsp; dari total project dengan minimum Rp. 2.000.000,- dan apabila terjadi pembatalan maka dikenakan denda 50%&nbsp; dari uang tanda jadi.</li><li style="text-align: justify; ">Gambar 3D dikirim dalam waktu 7 hari setelah&nbsp;<span style="letter-spacing: 0.1px;">dibayarkan</span>&nbsp;uang tanda jadi dengan BATASAN REVISI 3 kali.</li><li style="text-align: justify; ">Proses produksi dikerjakan dalam waktu 30 hari dari dilakukan pembayaran DP 50% total project.</li><li style="text-align: justify; ">Pembayaran Pelunasan dilakukan sebelum instalasi berjalan, dan proses intalasi berjalan 1-3 hari dilokasi.</li><li style="text-align: justify; ">Apabila ada item lain yang tidak tercantum dalam spesifikasi diatas maka biaya material atau jasa akan dibenbankan ke Pemesan.</li><li style="text-align: justify; ">Garansi service dan jasa selama 3 bulan.</li></ol> -->
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr text-success">
@@ -347,6 +193,151 @@
                 </div>
             </div>
         </div>
+        <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 5) { ?>
+            <div class="col-xl-12">
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr text-success">
+                        <h2>
+                            Pembayaran <span class="fw-300"><i>Debit</i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <button type="button" class="btn btn-block btn-info" data-toggle="modal" data-target="#debit-modal">Tambah Pembayaran (Debit)</button>
+
+                            <table id="example" class="table table-bordered table-striped mt-2">
+                                <thead class="thead-themed">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Tanggal</th>
+                                        <th>Kwitansi</th>
+                                        <th class="text-center">Group</th>
+                                        <!-- <th class="text-center">Deskripsi</th> -->
+                                        <th class="text-center">Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+
+
+                                    $no = 1;
+                                    $this->db->where('id_survei', $this->uri->segment(3));
+                                    $this->db->where('id_group', '2');
+                                    $this->db->order_by('created_date');
+                                    $result = $this->db->get('v_pembukuan_new')->result();
+                                    foreach ($result as $dt) {
+                                        $break = urlencode("\n");
+                                        $wa1 = '*Terima Kasih*';
+                                        $wa2 = 'Pembayaran ' . $dt->nm_group_sub . ' untuk pesanan *' . $no_invoice . '* atas nama *' . strtoupper($nama) . '* dengan nominal *Rp. ' . angka($dt->total) . '* sudah kami terima.';
+                                        $wa3 = 'Hormat kami';
+                                        $wa4 = 'gallery dekoruma';
+                                        $pesan = $wa1 . $break . $wa2 . $break . $wa3 . $break . $wa4;
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $no ?></td>
+
+                                            <td><?php echo $dt->created_date ?></td>
+                                            <td><?php echo $no_invoice . '-' . $dt->id_buku ?></td>
+                                            <td><?php echo $dt->nm_group_sub ?></td>
+                                            <!-- <td><?php echo $dt->deskripsi ?></td> -->
+                                            <td class="text-right"><strong> <?php echo angka($dt->total); ?></strong></td>
+                                            <td>
+                                                <!-- <a href="<?php echo site_url('m_survei/sendMail/' . $dt->id_survei . '/' . $dt->id_buku . '/' . $dt->id_group_sub) ?>" class=" btn btn-danger btn-xs">mail</a> -->
+                                                <a href="<?php echo site_url('t_pembukuan/delete/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
+                                                <!-- <a href="https://api.whatsapp.com/send?phone=62<?php echo $hp ?>&text=<?php echo $pesan ?>" target="_blank" class=" btn btn-success btn-xs"><i class="fal fa-paper-plane" aria-hidden="true"></i> WA</a> -->
+                                                <!-- <a href="<?php echo site_url('t_invoice/kwitansi/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-info btn-xs">Print</a> -->
+                                                <a href="<?php echo site_url('m_survei/printmail/' . $dt->id_survei . '/' . $dt->id_group_sub) ?>" class=" btn btn-info btn-xs" target="_blank">Print</a>
+                                            </td>
+                                        </tr>
+
+                                    <?php $no++;
+                                    }
+                                    $this->db->select('sum(total) as xdebit');
+                                    $this->db->where('id_survei', $this->uri->segment(3));
+                                    $this->db->where('id_group', '2');
+                                    $result = $this->db->get('v_pembukuan_new')->row();
+                                    $ttl_payment = $result->xdebit;
+                                    ?>
+                                    <tr>
+                                        <td colspan="3" class="text-right"><strong>TOTAL</strong></td>
+                                        <td class="text-right"><strong><?php echo angka($ttl_payment) ?></strong></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="modal fade" id="debit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Pengeluaran (Debit)</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                            </button>
+                                        </div>
+                                        <form action="<?php echo site_url('m_survei/create_debit') ?>" method="post" enctype="multipart/form-data">
+
+                                            <div class="modal-body">
+                                                <input type="hidden" name="id_survei" value="<?php echo $this->uri->segment(3) ?>">
+                                                <input type="hidden" name="id_group" value="2">
+                                                <div class="form-group">
+                                                    <label class="form-label" for="example-fileinput">Jenis Pembayaran</label>
+                                                    <select name="id_group_sub" id="group_sub" class="select2 form-control w-100">
+                                                        <option value="">Select Jenis Pembayaran</option>
+                                                        <?php
+                                                        $this->db->where('id_group', '2');
+                                                        $result = $this->db->get('m_group_sub')->result();
+                                                        foreach ($result as $row) {
+                                                            echo '<option value="' . $row->id_group_sub . '">' . $row->nm_group_sub . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="form-label" for="example-fileinput">Nominal</label>
+                                                    <input type="number" class="form-control" name="total">
+                                                </div>
+                                                <!-- <div class="form-group">
+                                                    <label class="form-label" for="example-fileinput">Note</label>
+                                                    <textarea class="form-control" name="note"><?php echo $no_invoice . ' a/n ' . $nama ?></textarea>
+                                                </div> -->
+                                                <input type="hidden" name="note" value="<?php echo $no_invoice . ' a/n ' . $nama ?>">
+                                                <div class="card m-auto border">
+                                                    <div class="card-header py-2">
+                                                        <div class="card-title">
+                                                            Notifikasi Email & WhatsApp
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-clean table-sm">
+                                                            <tr>
+                                                                <td>Email</td>
+                                                                <td><input type="email" class="form-control" name="email" value="<?php echo $email ?>"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Hp</td>
+                                                                <td><input type=" number" class="form-control" name="hp" value="<?php echo '62' . $hp ?>"></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr text-success">
@@ -718,22 +709,7 @@
 </main>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/summernote/summernote.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/miscellaneous/lightgallery/lightgallery.bundle.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.summernote').summernote({
-            toolbar: [
-                //[groupname, [button list]]
-
-                ['style', ['bold', 'italic', 'underline', 'clear']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['view', ['codeview']],
-            ]
-        });
-    });
-</script>
 <script>
     $(document).ready(function() {
         var $initScope = $('#js-lightgallery');

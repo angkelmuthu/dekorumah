@@ -36,6 +36,8 @@ class M_desk extends CI_Controller
                 'facebook' => $row->facebook,
                 'instagram' => $row->instagram,
                 'alamat' => $row->alamat,
+                'note_bayar' => $row->note_bayar,
+                'note_final' => $row->note_final,
             );
             $this->template->load('template', 'm_desk/m_desk_read', $data);
         } else {
@@ -58,6 +60,8 @@ class M_desk extends CI_Controller
             'facebook' => set_value('facebook'),
             'instagram' => set_value('instagram'),
             'alamat' => set_value('alamat'),
+            'note_bayar' => set_value('note_bayar'),
+            'note_final' => set_value('note_final'),
         );
         $this->template->load('template', 'm_desk/m_desk_form', $data);
     }
@@ -75,6 +79,8 @@ class M_desk extends CI_Controller
                 'facebook' => $this->input->post('facebook', TRUE),
                 'instagram' => $this->input->post('instagram', TRUE),
                 'alamat' => $this->input->post('alamat', TRUE),
+                'note_bayar' => $this->input->post('note_bayar', TRUE),
+                'note_final' => $this->input->post('note_final', TRUE),
             );
 
             $this->M_desk_model->insert($data);
@@ -100,6 +106,8 @@ class M_desk extends CI_Controller
                 'facebook' => set_value('facebook', $row->facebook),
                 'instagram' => set_value('instagram', $row->instagram),
                 'alamat' => set_value('alamat', $row->alamat),
+                'note_bayar' => set_value('note_bayar', $row->note_bayar),
+                'note_final' => set_value('note_final', $row->note_final),
             );
             $this->template->load('template', 'm_desk/m_desk_form', $data);
         } else {
@@ -124,6 +132,8 @@ class M_desk extends CI_Controller
                 'facebook' => $this->input->post('facebook', TRUE),
                 'instagram' => $this->input->post('instagram', TRUE),
                 'alamat' => $this->input->post('alamat', TRUE),
+                'note_bayar' => $this->input->post('note_bayar', TRUE),
+                'note_final' => $this->input->post('note_final', TRUE),
             );
 
             $this->M_desk_model->update($this->input->post('id', TRUE), $data);

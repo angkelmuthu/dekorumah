@@ -1,3 +1,4 @@
+<link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/formplugins/summernote/summernote.css">
 <main id="js-page-content" role="main" class="page-content">
     <div class="row">
         <div class="col-xl-12">
@@ -38,6 +39,14 @@
                                     <td><input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat" value="<?php echo $alamat; ?>" /></td>
                                 </tr>
                                 <tr>
+                                    <td width='200'>Note Pembayaran <?php echo form_error('note_bayar') ?></td>
+                                    <td><textarea id="summernote" name="note_bayar" class="summernote"><?php echo $note_bayar; ?></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td width='200'>Note Pesanan Final <?php echo form_error('note_final') ?></td>
+                                    <td><textarea id="summernote" name="note_final" class="summernote"><?php echo $note_final; ?></textarea></td>
+                                </tr>
+                                <tr>
                                     <td></td>
                                     <td><input type="hidden" name="id" value="<?php echo $id; ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
@@ -58,3 +67,18 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/select2/select2.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/summernote/summernote.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.summernote').summernote({
+            toolbar: [
+                //[groupname, [button list]]
+
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['view', ['codeview']],
+            ]
+        });
+    });
+</script>
