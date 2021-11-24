@@ -156,7 +156,10 @@
                                             <td class="text-center"><?php echo $dt2->satuan ?></td>
                                             <td class="text-right"><?php echo angka($dt2->harga) ?></td>
                                             <td class="text-right"><?php echo angka($dt2->total) ?></td>
-                                            <td><a href="<?php echo site_url('m_survei/delete_pesanan/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a></td>
+                                            <td>
+                                                <a href="<?php echo site_url('m_survei/update/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a>
+                                                <a href="<?php echo site_url('m_survei/delete_pesanan/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
+                                            </td>
                                         </tr>
                                     <?php
                                     }

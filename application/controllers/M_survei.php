@@ -446,7 +446,7 @@ class M_survei extends CI_Controller
             'no_invoice' => $row->no_invoice,
             'tgl_invoice' => $row->tgl_invoice,
             'users' => $row->users,
-            'create_date' => $row->create_date,
+            'create_date' => $row3->created_date,
             'id_pelanggan' => $row->id_pelanggan,
             'nama' => $row->nama,
             'alamat' => $row->alamat,
@@ -469,9 +469,12 @@ class M_survei extends CI_Controller
             // 'smtp_host' => 'mail.gallerydekoruma.com',
             // 'smtp_user' => 'admin@gallerydekoruma.com',
             // 'smtp_pass'   => 'H9hHGcW4j2L0',
+            // 'smtp_host' => 'smtp.gmail.com',
+            // 'smtp_user' => 'gdekoruma@gmail.com',
+            // 'smtp_pass'   => 'Winner09',
             'smtp_host' => 'smtp.gmail.com',
-            'smtp_user' => 'gdekoruma@gmail.com',
-            'smtp_pass'   => 'Winner09',
+            'smtp_user' => 'angkel.muthu@gmail.com',
+            'smtp_pass'   => 'Vai073071',
             'smtp_crypto' => 'ssl',
             'smtp_port'   => 465,
             'crlf'    => "\r\n",
@@ -482,7 +485,8 @@ class M_survei extends CI_Controller
         $this->load->library('email', $config);
 
         // Email dan nama pengirim
-        $this->email->from('gdekoruma@gmail.com', 'gallerydekoruma');
+        $this->email->from('angkel.muthu@gmail.com', 'gallerydekoruma');
+        //$this->email->from('gdekoruma@gmail.com', 'gallerydekoruma');
 
         // Email penerima
         $this->email->to($this->input->post('email')); // Ganti dengan email tujuan
@@ -524,7 +528,7 @@ class M_survei extends CI_Controller
             'no_invoice' => $row->no_invoice,
             'tgl_invoice' => $row->tgl_invoice,
             'users' => $row->users,
-            'create_date' => $row->create_date,
+            'create_date' => $row3->created_date,
             'id_pelanggan' => $row->id_pelanggan,
             'nama' => $row->nama,
             'alamat' => $row->alamat,
