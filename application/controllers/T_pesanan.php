@@ -121,18 +121,18 @@ class T_pesanan extends CI_Controller
         redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice', TRUE)));
     }
 
-    public function update($id)
+    public function update($id_survei, $id)
     {
         $row = $this->T_pesanan_model->get_by_id($id);
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
+                'button' => 'Create',
                 'action' => site_url('t_pesanan/update_action'),
                 'id_pesanan' => set_value('id_pesanan', $row->id_pesanan),
                 'id_invoice' => set_value('id_invoice', $row->id_invoice),
-                'id_produk' => set_value('id_produk', $row->id_produk),
-                'id_produk_sub' => set_value('id_produk_sub', $row->id_produk_sub),
+                'id_paket' => set_value('id_paket', $row->id_paket),
+                'id_kategori' => set_value('id_kategori', $row->id_kategori),
                 'qty' => set_value('qty', $row->qty),
                 'panjang' => set_value('panjang', $row->panjang),
                 'lebar' => set_value('lebar', $row->lebar),
@@ -156,34 +156,29 @@ class T_pesanan extends CI_Controller
 
     public function update_action()
     {
-        $this->_rules();
+        $data = array(
+            'id_pesanan' => $this->input->post('id_pesanan', TRUE),
+            'id_invoice' => $this->input->post('id_invoice', TRUE),
+            'id_kategori' => $this->input->post('id_kategori', TRUE),
+            'id_paket' => $this->input->post('id_paket', TRUE),
+            'qty' => $this->input->post('qty', TRUE),
+            'panjang' => $this->input->post('panjang', TRUE),
+            'lebar' => $this->input->post('lebar', TRUE),
+            'tinggi' => $this->input->post('tinggi', TRUE),
+            'id_satuan' => $this->input->post('id_satuan', TRUE),
+            'harga' => str_replace('.', '', $this->input->post('harga', TRUE)),
+            'total' => str_replace('.', '', $this->input->post('total', TRUE)),
+            'note' => $this->input->post('note', TRUE),
+            'created_date' => $this->input->post('created_date', TRUE),
+            'users' => $this->input->post('users', TRUE),
+        );
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_pesanan', TRUE));
-        } else {
-            $data = array(
-                'id_invoice' => $this->input->post('id_invoice', TRUE),
-                'id_produk' => $this->input->post('id_produk', TRUE),
-                'id_produk_sub' => $this->input->post('id_produk_sub', TRUE),
-                'qty' => $this->input->post('qty', TRUE),
-                'panjang' => $this->input->post('panjang', TRUE),
-                'lebar' => $this->input->post('lebar', TRUE),
-                'tinggi' => $this->input->post('tinggi', TRUE),
-                'id_satuan' => $this->input->post('id_satuan', TRUE),
-                'harga' => $this->input->post('harga', TRUE),
-                'total' => $this->input->post('total', TRUE),
-                'note' => $this->input->post('note', TRUE),
-                'created_date' => $this->input->post('created_date', TRUE),
-                'users' => $this->input->post('users', TRUE),
-            );
-
-            $this->T_pesanan_model->update($this->input->post('id_pesanan', TRUE), $data);
-            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+        $this->T_pesanan_model->update($this->input->post('id_pesanan', TRUE), $data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Update Record Success</strong></div>');
-            redirect(site_url('t_pesanan'));
-        }
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice', TRUE)));
     }
 
     public function delete($id)
