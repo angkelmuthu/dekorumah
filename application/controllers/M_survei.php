@@ -475,8 +475,8 @@ class M_survei extends CI_Controller
             'smtp_host' => 'smtp.gmail.com',
             'smtp_user' => 'angkel.muthu@gmail.com',
             'smtp_pass'   => 'Vai073071',
-            'smtp_crypto' => 'ssl',
-            'smtp_port'   => 465,
+            'smtp_crypto' => 'tls',
+            'smtp_port'   => 587,
             'crlf'    => "\r\n",
             'newline' => "\r\n"
         ];
