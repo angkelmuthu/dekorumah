@@ -466,15 +466,15 @@ class M_survei extends CI_Controller
             'mailtype'  => 'html',
             'charset'   => 'utf-8',
             'protocol'  => 'smtp',
-            // 'smtp_host' => 'mail.gallerydekoruma.com',
-            // 'smtp_user' => 'admin@gallerydekoruma.com',
-            // 'smtp_pass'   => 'H9hHGcW4j2L0',
+            'smtp_host' => 'mail.gallerydekoruma.com',
+            'smtp_user' => 'admin@gallerydekoruma.com',
+            'smtp_pass'   => 'H9hHGcW4j2L0',
             // 'smtp_host' => 'smtp.gmail.com',
             // 'smtp_user' => 'gdekoruma@gmail.com',
             // 'smtp_pass'   => 'Winner09',
-            'smtp_host' => 'smtp.gmail.com',
-            'smtp_user' => 'angkel.muthu@gmail.com',
-            'smtp_pass'   => 'Vai073071',
+            // 'smtp_host' => 'smtp.gmail.com',
+            // 'smtp_user' => 'angkel.muthu@gmail.com',
+            // 'smtp_pass'   => 'Vai073071',
             'smtp_crypto' => 'tls',
             'smtp_port'   => 587,
             'crlf'    => "\r\n",
@@ -485,8 +485,9 @@ class M_survei extends CI_Controller
         $this->load->library('email', $config);
 
         // Email dan nama pengirim
-        $this->email->from('angkel.muthu@gmail.com', 'gallerydekoruma');
+        //$this->email->from('angkel.muthu@gmail.com', 'gallerydekoruma');
         //$this->email->from('gdekoruma@gmail.com', 'gallerydekoruma');
+        $this->email->from('admin@gallerydekoruma.com', 'gallerydekoruma');
 
         // Email penerima
         $this->email->to($this->input->post('email')); // Ganti dengan email tujuan
