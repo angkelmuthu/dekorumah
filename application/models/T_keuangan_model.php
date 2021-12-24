@@ -22,6 +22,7 @@ class T_keuangan_model extends CI_Model
         $this->datatables->from('v_keuangan');
         //add this line for join
         //$this->datatables->join('table2', 't_invoice.field = table2.field');
+        $this->datatables->order_by('created_date', 'DESC');
         $this->datatables->add_column('action', anchor(site_url('t_keuangan/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-xs waves-effect waves-themed')) . "
             " . anchor(site_url('t_keuangan/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-xs waves-effect waves-themed')) . "
                 " . anchor(site_url('t_keuangan/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-xs waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id');
