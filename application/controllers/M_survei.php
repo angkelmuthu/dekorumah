@@ -439,7 +439,7 @@ class M_survei extends CI_Controller
         //send mail
         $row = $this->M_survei_model->get_invoice($id_invoice);
         $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
-        $row3 = $this->M_survei_model->get_bayar($id_invoice, $id_group_sub);
+        $row3 = $this->M_survei_model->get_bayar($id_invoice, $id_group_sub, str_replace('.', '', $this->input->post('total', TRUE)));
         $row4 = $this->M_survei_model->get_note();
         //$row4 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_group_sub);
         $data = array(
@@ -517,12 +517,12 @@ class M_survei extends CI_Controller
         //}
     }
 
-    public function printmail($id_invoice, $id_group_sub)
+    public function printmail($id_invoice, $id_group_sub, $id_buku)
     {
         //send mail
         $row = $this->M_survei_model->get_invoice($id_invoice);
         $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
-        $row3 = $this->M_survei_model->get_bayar($id_invoice, $id_group_sub);
+        $row3 = $this->M_survei_model->get_bayar($id_invoice, $id_group_sub, $id_buku);
         $row4 = $this->M_survei_model->get_note();
         //$row4 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_group_sub);
         $data = array(

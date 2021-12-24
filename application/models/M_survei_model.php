@@ -38,11 +38,13 @@ class M_survei_model extends CI_Model
         return $this->db->get('v_pesanan')->result();
     }
 
-    function get_bayar($id_invoice, $id_group_sub)
+    function get_bayar($id_invoice, $id_group_sub, $total)
     {
         //$this->db->select('*,count(id_pesanan) as qty, sum(total) as ttl');
+        //$this->db->where('id_buku', $id_buku);
         $this->db->where('id_group_sub', $id_group_sub);
         $this->db->where('id_survei', $id_invoice);
+        $this->db->where('total', $total);
         return $this->db->get('v_pembukuan_new')->row();
     }
 

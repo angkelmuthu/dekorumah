@@ -250,7 +250,7 @@
                                                 <a href="<?php echo site_url('t_pembukuan/delete/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
                                                 <!-- <a href="https://api.whatsapp.com/send?phone=62<?php echo $hp ?>&text=<?php echo $pesan ?>" target="_blank" class=" btn btn-success btn-xs"><i class="fal fa-paper-plane" aria-hidden="true"></i> WA</a> -->
                                                 <!-- <a href="<?php echo site_url('t_invoice/kwitansi/' . $dt->id_survei . '/' . $dt->id_buku) ?>" class=" btn btn-info btn-xs">Print</a> -->
-                                                <a href="<?php echo site_url('m_survei/printmail/' . $dt->id_survei . '/' . $dt->id_group_sub) ?>" class=" btn btn-info btn-xs" target="_blank">Print</a>
+                                                <a href="<?php echo site_url('m_survei/printmail/' . $dt->id_survei . '/' . $dt->id_group_sub . '/' . $dt->total) ?>" class=" btn btn-info btn-xs" target="_blank">Print</a>
                                             </td>
                                         </tr>
 
