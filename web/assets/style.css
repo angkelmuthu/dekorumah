@@ -8911,7 +8911,7 @@ hr {
 .popItemColumn .imageHolder {
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  min-height: 356px;
+  min-height: 200px;
   margin: 0 -10px 26px;
 }
 

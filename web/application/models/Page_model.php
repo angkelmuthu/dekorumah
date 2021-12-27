@@ -61,6 +61,47 @@ class Page_model extends CI_Model
         $this->db->where('aktif', 'Y');
         return $this->db->get('web_projek')->result();
     }
+
+    function data($number, $offset)
+    {
+        $this->db->group_by('id_projek');
+        return $query = $this->db->get('web_v_projeks', $number, $offset)->result();
+    }
+
+    function jumlah_data()
+    {
+        $this->db->group_by('id_projek');
+        return $this->db->get('web_v_projeks')->num_rows();
+    }
+
+    function get_id_projek($id_projek)
+    {
+        $this->db->where('id_projek', $id_projek);
+        return $this->db->get('web_projek')->row();
+    }
+
+    function get_id_projeks($id_projek)
+    {
+        $this->db->where('id_projek', $id_projek);
+        return $this->db->get('web_projeks')->result();
+    }
+
+    function get_about()
+    {
+        return $this->db->get('web_about')->row();
+    }
+
+    function get_team()
+    {
+        $this->db->where('aktif', 'y');
+        return $this->db->get('web_team')->result();
+    }
+
+    function get_contact()
+    {
+        $this->db->where('aktif', 'y');
+        return $this->db->get('web_cabang')->result();
+    }
 }
 
 /* End of file M_bahan_model.php */

@@ -94,3 +94,13 @@
                 <div class="dot"></div>
             </div>
         </div>
+        </div>
+        <!-- include jQuery library -->
+        <script src="<?php echo base_url(); ?>assets/js/jquery-3.3.1.min.js"></script>
+        <!-- include Plugins JavaScript -->
+        <script src="<?php echo base_url(); ?>assets/js/plugins.js"></script>
+        <!-- include custom JavaScript -->
+        <script src="<?php echo base_url(); ?>assets/js/jquery.main.js"></script>
+        </body>
+
+        </html>

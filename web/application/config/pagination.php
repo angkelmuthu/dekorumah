@@ -1,4 +1,4 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /*
  * Pagination Config Bootstrap 3 CSS Style
@@ -7,8 +7,8 @@
 
 $config['query_string_segment'] = 'start';
 
-$config['full_tag_open'] = '<div class="frame-wrap"><nav aria-label="Page navigation example"><ul class="pagination" style="margin-top:0px">';
-$config['full_tag_close'] = '</ul></nav></div>';
+$config['full_tag_open'] = '<nav aria-label="Page navigation"><ul class="pagination pagePagination justify-content-center text-center mb-0">';
+$config['full_tag_close'] = '</ul></nav>';
 
 $config['first_link'] = 'First';
 $config['first_tag_open'] = '<li class="page-item"><span class="page-link" href="#">';
@@ -26,7 +26,7 @@ $config['prev_link'] = 'Prev';
 $config['prev_tag_open'] = '<li class="page-item"><span class="page-link" href="#">';
 $config['prev_tag_close'] = '</span></li>';
 
-$config['cur_tag_open'] = '<li class="page-item active" aria-current="page"><span class="page-link">';
+$config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
 $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
 
 $config['num_tag_open'] = '<li class="page-item"><span class="page-link" href="#">';

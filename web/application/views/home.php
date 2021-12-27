@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/colors.css">
     <!-- include the site responsive stylesheet -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/responsive.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url() ?>assets/images/gd-favicon.png">
 </head>
 
 <body>
@@ -59,24 +60,40 @@
                         </div>
                         <div class="col-9 col-lg-6 d-flex justify-content-end position-static">
                             <!-- topBarSearchForm -->
-                            <!-- <form action="javascript:void(0);" class="topBarSearchForm topBarSearchForm02 d-md-none">
+                            <!--<form action="javascript:void(0);" class="topBarSearchForm topBarSearchForm02 d-md-none">
                                 <div class="form-group collapse mb-0" id="searhFormCollpase">
                                     <input type="text" class="form-control d-block" placeholder="Search&hellip;">
                                     <button type="button" class="ei_icon_search buttonReset"><span class="sr-only">search</span></button>
                                 </div>
                             </form> -->
                             <!-- loginLinksList -->
-                            <!-- <ul class="list-unstyled loginLinksList loginLinksList02 text-capitalize d-flex mb-0">
-                                <li class="hasIcon">
-                                    <a href="javascript:void(0);">
-                                        <i class="ei_icon_lock icn"><span class="sr-only">icon</span></i>
-                                        <span class="d-none d-md-block">Login</span>
-                                    </a>
-                                </li>
-                                <li class="d-none d-md-block">
-                                    <a href="javascript:void(0);">Register</a>
-                                </li>
-                            </ul> -->
+                            <div class="shareWTitleWrap d-flex align-items-center">
+                                <!-- shareTitle -->
+                                <strong class="shareTitle text-capitalize font-weight-normal d-none d-md-block">Follow Us:</strong>
+                                <!-- socialLinksSimple -->
+                                <ul class="list-unstyled socialNetworks socialLinksSimple d-flex align-items-center justify-content-end mb-0">
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="fab fa-facebook-f"><span class="sr-only">facebook</span></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="fab fa-twitter"><span class="sr-only">twitter</span></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="fab fa-pinterest"><span class="sr-only">pinterest</span></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <span class="fab fa-google-plus-g"><span class="sr-only">google plus</span></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,9 +115,9 @@
                                 <i class="fas fa-search"><span class="sr-only">icon</span></i>
                             </a>
                             <!-- pageNavBtnCart -->
-                            <a href="javascript:void(0);" class="pageNavBtnCart pageNavBtnCart02 text-center d-flex d-lg-inline align-items-center justify-content-center flex-shrink-0 position-relative order-lg-2">
+                            <!-- <a href="javascript:void(0);" class="pageNavBtnCart pageNavBtnCart02 text-center d-flex d-lg-inline align-items-center justify-content-center flex-shrink-0 position-relative order-lg-2">
                                 <i class="ei_icon_cart"><span class="sr-only">icon</span></i>
-                            </a>
+                            </a> -->
                             <!-- pageNav navbar -->
                             <nav id="pageNav" class="navbar navbar-expand-lg order-lg-1">
                                 <!-- pageMainNavOpener -->
@@ -115,120 +132,19 @@
                                             <a class="nav-link fwMedium text-uppercase" href="<?php echo site_url('Page/home'); ?>" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link fwMedium text-uppercase dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Project</a>
-                                            <!-- mainNavDropdown dropdown menu -->
-                                            <div class="dropdown-menu mainNavDropdown text-uppercase">
-                                                <!-- navDropdownList -->
-                                                <ul class="list-unstyled navDropdownList">
-                                                    <li>
-                                                        <a class="dropdown-item" href="project.html">Project 01</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="project-details.html">Project Details 01</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <a class="nav-link fwMedium text-uppercase" href="<?php echo site_url('Page/projeks'); ?>" role="button">Project</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link fwMedium text-uppercase dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Page</a>
-                                            <!-- mainNavDropdown dropdown menu -->
-                                            <div class="dropdown-menu mainNavDropdown text-uppercase">
-                                                <!-- navDropdownList -->
-                                                <ul class="list-unstyled navDropdownList">
-                                                    <li>
-                                                        <a class="dropdown-item" href="aboutus.html">About Us</a>
-                                                    </li>
-                                                    <!-- dropdown submenu -->
-                                                    <li class="dropdown-submenu">
-                                                        <a class="dropdown-item dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gallery</a>
-                                                        <!-- mainNavDropdown dropdown menu -->
-                                                        <div class="dropdown-menu mainNavDropdown text-uppercase">
-                                                            <!-- navDropdownList -->
-                                                            <ul class="list-unstyled navDropdownList">
-                                                                <li>
-                                                                    <a class="dropdown-item" href="gallery.html">Gallery 1</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                    <li class="dropdown-submenu">
-                                                        <a class="dropdown-item dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Our Services</a>
-                                                        <!-- mainNavDropdown dropdown menu -->
-                                                        <div class="dropdown-menu mainNavDropdown text-uppercase">
-                                                            <!-- navDropdownList -->
-                                                            <ul class="list-unstyled navDropdownList">
-                                                                <li>
-                                                                    <a class="dropdown-item" href="services.html">Service 1</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="booking.html">Book Design</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="404page.html">404 Page</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="comingsoon.html">Coming Soon</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <a class="nav-link fwMedium text-uppercase" href="<?php echo site_url('Page/about'); ?>" role="button">About Us</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link fwMedium text-uppercase dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Shop
-                                            </a>
-                                            <!-- mainNavDropdown dropdown menu -->
-                                            <div class="dropdown-menu mainNavDropdown text-uppercase">
-                                                <!-- navDropdownList -->
-                                                <ul class="list-unstyled navDropdownList">
-                                                    <li>
-                                                        <a class="dropdown-item" href="shopsidebar-list.html">Shop List Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="shopsidebar-listfull.html">Shop List Fullwidth</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="shopsidebar-grid.html">Shop Grid Sidebar</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="shopsidebar-gridfull.html">Shop Grid Fullwidth</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="shop-details.html">Shop Details</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="shoping-cart.html">Shoping Cart</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="checkout.html">Check Out</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <a class="nav-link fwMedium text-uppercase" href="<?php echo site_url('Page/services'); ?>" role="button">Services</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link fwMedium text-uppercase dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blog</a>
-                                            <div class="dropdown-menu mainNavDropdown text-uppercase">
-                                                <ul class="list-unstyled navDropdownList">
-                                                    <li>
-                                                        <a class="dropdown-item" href="blog.html">Blog 01</a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="dropdown-item" href="blog-detail.html">Blog Details</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <a class="nav-link fwMedium text-uppercase" href="<?php echo site_url('Page/blog'); ?>" role="button">Tips & Trik</a>
                                         </li>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link fwMedium text-uppercase dropdown-toggle" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact</a>
-                                            <div class="dropdown-menu mainNavDropdown text-uppercase">
-                                                <ul class="list-unstyled navDropdownList">
-                                                    <li>
-                                                        <a class="dropdown-item" href="contact.html">Contact 01</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                            <a class="nav-link fwMedium text-uppercase" href="<?php echo site_url('Page/contact'); ?>" role="button">Contact</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -522,6 +438,7 @@
                         <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.1s">
                             <?php
                             $this->db->where('id_produk', '1');
+                            $this->db->group_by('id_projek');
                             $projeks = $this->db->get('web_v_projeks')->result();
                             foreach ($projeks as $projek) { ?>
                                 <div class="col-12 col-md-6 col-lg-4 isoCol <?php echo $projek->id_produk ?>">
@@ -544,6 +461,7 @@
                             <?php } ?>
                             <?php
                             $this->db->where('id_produk', '4');
+                            $this->db->group_by('id_projek');
                             $projeks = $this->db->get('web_v_projeks')->result();
                             foreach ($projeks as $projek) { ?>
                                 <div class="col-12 col-md-6 col-lg-4 isoCol <?php echo $projek->id_produk ?>">
@@ -566,6 +484,7 @@
                             <?php } ?>
                             <?php
                             $this->db->where('id_produk', '5');
+                            $this->db->group_by('id_projek');
                             $projeks = $this->db->get('web_v_projeks')->result();
                             foreach ($projeks as $projek) { ?>
                                 <div class="col-12 col-md-6 col-lg-4 isoCol <?php echo $projek->id_produk ?>">
@@ -588,6 +507,7 @@
                             <?php } ?>
                             <?php
                             $this->db->where('id_produk', '6');
+                            $this->db->group_by('id_projek');
                             $projeks = $this->db->get('web_v_projeks')->result();
                             foreach ($projeks as $projek) { ?>
                                 <div class="col-12 col-md-6 col-lg-4 isoCol <?php echo $projek->id_produk ?>">
@@ -610,6 +530,7 @@
                             <?php } ?>
                             <?php
                             $this->db->where('id_produk', '7');
+                            $this->db->group_by('id_projek');
                             $projeks = $this->db->get('web_v_projeks')->result();
                             foreach ($projeks as $projek) { ?>
                                 <div class="col-12 col-md-6 col-lg-4 isoCol <?php echo $projek->id_produk ?>">
@@ -636,13 +557,3 @@
             </section>
         </main>
         <?php $this->load->view('footer'); ?>
-    </div>
-    <!-- include jQuery library -->
-    <script src="<?php echo base_url(); ?>assets/js/jquery-3.3.1.min.js"></script>
-    <!-- include Plugins JavaScript -->
-    <script src="<?php echo base_url(); ?>assets/js/plugins.js"></script>
-    <!-- include custom JavaScript -->
-    <script src="<?php echo base_url(); ?>assets/js/jquery.main.js"></script>
-</body>
-
-</html>
