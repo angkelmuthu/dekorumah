@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <form action="<?php echo $action; ?>" method="post">
+                        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 
                             <table class='table table-striped'>
 
@@ -28,7 +28,11 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>Benefit File <?php echo form_error('benefit_file') ?></td>
-                                    <td><input type="text" class="form-control" name="benefit_file" id="benefit_file" placeholder="Benefit File" value="<?php echo $benefit_file; ?>" /></td>
+                                    <td><input type="file" class="form-control" name="benefit_file" id="benefit_file" placeholder="Benefit File" value="" />
+                                        <span class="help-block">
+                                            Ukuran / resolusi gambar (470x540)
+                                        </span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Benefit Icon 1 <?php echo form_error('benefit_icon_1') ?></td>

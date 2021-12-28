@@ -10,16 +10,17 @@ class Web_services extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Web_services_model');
-        $this->load->library('form_validation');        
-	$this->load->library('datatables');
+        $this->load->library('form_validation');
+        $this->load->library('datatables');
     }
 
     public function index()
     {
-        $this->template->load('template','web_services/web_services_list');
+        $this->template->load('template', 'web_services/web_services_list');
     }
 
-    public function json() {
+    public function json()
+    {
         header('Content-Type: application/json');
         echo $this->Web_services_model->json();
     }
@@ -29,13 +30,13 @@ class Web_services extends CI_Controller
         $row = $this->Web_services_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id' => $row->id,
-		'services_icon' => $row->services_icon,
-		'services_title' => $row->services_title,
-		'services_desk' => $row->services_desk,
-		'aktif' => $row->aktif,
-	    );
-            $this->template->load('template','web_services/web_services_read', $data);
+                'id' => $row->id,
+                'services_icon' => $row->services_icon,
+                'services_title' => $row->services_title,
+                'services_desk' => $row->services_desk,
+                'aktif' => $row->aktif,
+            );
+            $this->template->load('template', 'web_services/web_services_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -50,13 +51,13 @@ class Web_services extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('web_services/create_action'),
-	    'id' => set_value('id'),
-	    'services_icon' => set_value('services_icon'),
-	    'services_title' => set_value('services_title'),
-	    'services_desk' => set_value('services_desk'),
-	    'aktif' => set_value('aktif'),
-	);
-        $this->template->load('template','web_services/web_services_form', $data);
+            'id' => set_value('id'),
+            'services_icon' => set_value('services_icon'),
+            'services_title' => set_value('services_title'),
+            'services_desk' => set_value('services_desk'),
+            'aktif' => set_value('aktif'),
+        );
+        $this->template->load('template', 'web_services/web_services_form', $data);
     }
 
     public function create_action()
@@ -67,18 +68,18 @@ class Web_services extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'services_icon' => $this->input->post('services_icon',TRUE),
-		'services_title' => $this->input->post('services_title',TRUE),
-		'services_desk' => $this->input->post('services_desk',TRUE),
-		'aktif' => $this->input->post('aktif',TRUE),
-	    );
+                'services_icon' => $this->input->post('services_icon', TRUE),
+                'services_title' => $this->input->post('services_title', TRUE),
+                'services_desk' => $this->input->post('services_desk', TRUE),
+                'aktif' => $this->input->post('aktif', TRUE),
+            );
 
             $this->Web_services_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Create Record Success 2</strong></div>');
-            redirect(site_url('web_services'));
+            redirect(site_url('web_service/read/1'));
         }
     }
 
@@ -90,19 +91,19 @@ class Web_services extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('web_services/update_action'),
-		'id' => set_value('id', $row->id),
-		'services_icon' => set_value('services_icon', $row->services_icon),
-		'services_title' => set_value('services_title', $row->services_title),
-		'services_desk' => set_value('services_desk', $row->services_desk),
-		'aktif' => set_value('aktif', $row->aktif),
-	    );
-            $this->template->load('template','web_services/web_services_form', $data);
+                'id' => set_value('id', $row->id),
+                'services_icon' => set_value('services_icon', $row->services_icon),
+                'services_title' => set_value('services_title', $row->services_title),
+                'services_desk' => set_value('services_desk', $row->services_desk),
+                'aktif' => set_value('aktif', $row->aktif),
+            );
+            $this->template->load('template', 'web_services/web_services_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Record Not Found</strong></div>');
-            redirect(site_url('web_services'));
+            redirect(site_url('web_service/read/1'));
         }
     }
 
@@ -114,18 +115,18 @@ class Web_services extends CI_Controller
             $this->update($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'services_icon' => $this->input->post('services_icon',TRUE),
-		'services_title' => $this->input->post('services_title',TRUE),
-		'services_desk' => $this->input->post('services_desk',TRUE),
-		'aktif' => $this->input->post('aktif',TRUE),
-	    );
+                'services_icon' => $this->input->post('services_icon', TRUE),
+                'services_title' => $this->input->post('services_title', TRUE),
+                'services_desk' => $this->input->post('services_desk', TRUE),
+                'aktif' => $this->input->post('aktif', TRUE),
+            );
 
             $this->Web_services_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Update Record Success</strong></div>');
-            redirect(site_url('web_services'));
+            redirect(site_url('web_service/read/1'));
         }
     }
 
@@ -145,21 +146,20 @@ class Web_services extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Record Not Found</strong></div>');
-            redirect(site_url('web_services'));
+            redirect(site_url('web_service/read/1'));
         }
     }
 
     public function _rules()
     {
-	$this->form_validation->set_rules('services_icon', 'services icon', 'trim|required');
-	$this->form_validation->set_rules('services_title', 'services title', 'trim|required');
-	$this->form_validation->set_rules('services_desk', 'services desk', 'trim|required');
-	$this->form_validation->set_rules('aktif', 'aktif', 'trim|required');
+        $this->form_validation->set_rules('services_icon', 'services icon', 'trim|required');
+        $this->form_validation->set_rules('services_title', 'services title', 'trim|required');
+        $this->form_validation->set_rules('services_desk', 'services desk', 'trim|required');
+        $this->form_validation->set_rules('aktif', 'aktif', 'trim|required');
 
-	$this->form_validation->set_rules('id', 'id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+        $this->form_validation->set_rules('id', 'id', 'trim');
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
-
 }
 
 /* End of file Web_services.php */

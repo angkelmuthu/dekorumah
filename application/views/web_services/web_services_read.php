@@ -31,7 +31,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><a href="<?php echo site_url('web_services') ?>" class="btn btn-primary waves-effect waves-themed">Kembali</a></td>
+                                <td><a href="<?php echo site_url('web_service/read/1') ?>" class="btn btn-primary waves-effect waves-themed">Kembali</a></td>
                             </tr>
                         </table>
                     </div>

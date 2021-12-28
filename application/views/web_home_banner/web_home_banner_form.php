@@ -12,7 +12,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <form action="<?php echo $action; ?>" method="post">
+                        <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 
                             <table class='table table-striped'>
 
@@ -27,7 +27,9 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>File <?php echo form_error('file') ?></td>
-                                    <td><input type="text" class="form-control" name="file" id="file" placeholder="File" value="<?php echo $file; ?>" /></td>
+                                    <td><input type="file" class="form-control" name="file" id="file" placeholder="File" value="" />
+                                        <span class="help-block">Ukuran / resolusi gambar (1920X870)</span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Aktif <?php echo form_error('aktif') ?></td>

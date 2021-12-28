@@ -39,7 +39,7 @@
                                     <td></td>
                                     <td><input type="hidden" name="id" value="<?php echo $id; ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <a href="<?php echo site_url('web_services') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
+                                        <a href="<?php echo site_url('web_service/read/1') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
                                     </td>
                                 </tr>
                             </table>
