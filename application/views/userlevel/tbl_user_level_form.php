@@ -17,9 +17,10 @@
 
                         <form action="<?php echo $action; ?>" method="post">
 
-                            <table class='table table-bordered>' <tr>
-                                <td width='200'>Nama Level <?php echo form_error('nama_level') ?></td>
-                                <td><input type="text" class="form-control" name="nama_level" id="nama_level" placeholder="Nama Level" value="<?php echo $nama_level; ?>" /></td>
+                            <table class='table table-bordered'>
+                                <tr>
+                                    <td width='200'>Nama Level <?php echo form_error('nama_level') ?></td>
+                                    <td><input type="text" class="form-control" name="nama_level" id="nama_level" placeholder="Nama Level" value="<?php echo $nama_level; ?>" /></td>
                                 </tr>
                                 <tr>
                                     <td></td>

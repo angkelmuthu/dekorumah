@@ -276,7 +276,8 @@
 					var hargax = $("#hargaxx").val();
 					var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
 					var panjang = $("#panjang").val();
-					var total = parseInt(harga) * panjang;
+					var totalx = parseInt(harga) * panjang;
+					var total = Math.ceil(totalx);
 					fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
 					$("#total").val(fixed);
 				});
@@ -288,7 +289,8 @@
 					var panjang = $("#panjang").val();
 					var tinggi = $("#tinggi").val();
 					var volume = panjang * tinggi;
-					var total = parseInt(harga) * volume;
+					var totalx = parseInt(harga) * volume;
+					var total = Math.ceil(totalx);
 					fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
 					$("#total").val(fixed);
 				});
@@ -301,7 +303,8 @@
 					var lebar = $("#lebar").val();
 					var tinggi = $("#tinggi").val();
 					var volume = panjang * lebar * tinggi;
-					var total = parseInt(harga) * volume;
+					var totalx = parseInt(harga) * volume;
+					var total = Math.ceil(totalx);
 					fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
 					$("#total").val(fixed);
 				});
@@ -311,7 +314,8 @@
 					var hargax = $("#hargaxx").val();
 					var harga = parseInt(hargax.replace(/,.*|[^0-9]/g, ''), 10);
 					var volume = $("#qty").val();
-					var total = parseInt(harga) * volume;
+					var totalx = parseInt(harga) * volume;
+					var total = Math.ceil(totalx);
 					fixed = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
 					$("#total").val(fixed);
 				});
