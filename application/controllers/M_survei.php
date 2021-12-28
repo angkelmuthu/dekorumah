@@ -424,6 +424,7 @@ class M_survei extends CI_Controller
     {
         $id_invoice = $this->input->post('id_survei');
         $id_group_sub = $this->input->post('id_group_sub');
+        $totalx = $this->input->post('total', TRUE);
         $data = array(
             'id_survei' => $this->input->post('id_survei', TRUE),
             'id_group' => $this->input->post('id_group', TRUE),
@@ -439,7 +440,7 @@ class M_survei extends CI_Controller
         //send mail
         $row = $this->M_survei_model->get_invoice($id_invoice);
         $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
-        $row3 = $this->M_survei_model->get_bayar($id_invoice, $id_group_sub, $this->input->post('total'));
+        $row3 = $this->M_survei_model->get_bayar($id_invoice, $id_group_sub, $totalx);
         $row4 = $this->M_survei_model->get_note();
         //$row4 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_group_sub);
         $data = array(
