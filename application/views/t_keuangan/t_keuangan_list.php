@@ -79,7 +79,7 @@
                                             <td><?php echo $t_keuangan->created_by ?></td>
                                             <td style="text-align:center" width="200px">
                                                 <?php
-                                                if ($t_keuangan->created_by == 1) {
+                                                if ($t_keuangan->flag == 1) {
                                                     // echo anchor(site_url('t_keuangan/read/' . $t_keuangan->id_buku), '<i class="fal fa-eye" aria-hidden="true"></i>', 'class="btn btn-info btn-xs waves-effect waves-themed"');
                                                     // echo '  ';
                                                     echo anchor(site_url('t_keuangan/update/' . $t_keuangan->id_buku), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs waves-effect waves-themed"');
