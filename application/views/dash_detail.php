@@ -96,7 +96,7 @@ if ($query->num_rows() > 0) {
                 } else {
                     $color = 'bg-warning-300';
                 }
-                ?>
+        ?>
                 <div class="col-sm-2 col-xl-2">
                     <div class="p-3 <?php echo $color; ?> rounded overflow-hidden position-relative text-white mb-g">
                         <div class="">
@@ -107,7 +107,7 @@ if ($query->num_rows() > 0) {
                         </div>
                     </div>
                 </div>
-            <?php }
+        <?php }
         } ?>
         <?php
         $kdrs = $this->uri->segment('3');
@@ -118,7 +118,7 @@ if ($query->num_rows() > 0) {
         //echo $sql;
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $data) {
-                ?>
+        ?>
                 <div class="col-sm-2 col-xl-2">
                     <div class="p-3 bg-info-300 rounded overflow-hidden position-relative text-white mb-g">
                         <div class="">
@@ -149,7 +149,7 @@ if ($query->num_rows() > 0) {
                         </div>
                     </div>
                 </div>
-            <?php }
+        <?php }
         } ?>
     </div>
     <div class="row">
@@ -185,8 +185,8 @@ if ($query->num_rows() > 0) {
         </div>
     </div>
 </main>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/vendors.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/app.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/statistics/chartjs/chartjs.bundle.js"></script>
 <script>
     var ctx = document.getElementById("linechart").getContext("2d");

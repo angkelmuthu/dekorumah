@@ -14,8 +14,8 @@
     <!-- Remove Tap Highlight on Windows Phone IE -->
     <meta name="msapplication-tap-highlight" content="no">
     <!-- base css -->
-    <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/vendors.bundle.css">
-    <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin/css/app.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin-slim/css/vendors.bundle.css">
+    <link rel="stylesheet" media="screen, print" href="<?php echo base_url() ?>assets/smartadmin-slim/css/app.bundle.css">
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" sizes="180x180" href="<?php echo base_url() ?>assets/smartadmin/img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url() ?>assets/smartadmin/img/favicon/favicon-32x32.png">

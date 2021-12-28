@@ -48,8 +48,8 @@
         </div>
     </div>
 </main>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/vendors.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/app.bundle.js"></script>
 
 <script type="text/javascript">
     function kasi_akses(id_menu) {

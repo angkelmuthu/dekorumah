@@ -55,7 +55,8 @@
                                     <td></td>
                                     <td><input type="hidden" name="id_menu" value="<?php echo $id_menu; ?>" />
                                         <button type="submit" class="btn btn-info waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <a href="<?php echo site_url('kelolamenu') ?>" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a></td>
+                                        <a href="<?php echo site_url('kelolamenu') ?>" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
+                                    </td>
                                 </tr>
                             </table>
                         </form>
@@ -66,5 +67,5 @@
         </div>
     </div>
 </main>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/vendors.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/app.bundle.js"></script>

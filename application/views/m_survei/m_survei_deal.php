@@ -85,7 +85,7 @@
                                                 echo anchor(site_url('m_survei/update/' . $m_survei->id_survei), '<i class="fal fa-pencil" aria-hidden="true"></i>', 'class="btn btn-warning btn-xs waves-effect waves-themed"');
                                                 echo '  ';
                                                 echo
-                                                    '<button type="button" class="btn btn-danger btn-xs waves-effect waves-themed" data-toggle="modal" data-target="#default-example-modal-sm' . $m_survei->id_survei . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
+                                                '<button type="button" class="btn btn-danger btn-xs waves-effect waves-themed" data-toggle="modal" data-target="#default-example-modal-sm' . $m_survei->id_survei . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
     <div class="modal fade" id="default-example-modal-sm' . $m_survei->id_survei . '" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -121,5 +121,5 @@
             </div>
         </div>
 </main>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/vendors.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/app.bundle.js"></script>

@@ -83,8 +83,8 @@
 
     </div>
 </main>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
-<script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/vendors.bundle.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin-slim/js/app.bundle.js"></script>
 <!-- plugin Chart.js : MIT license -->
 <script src="<?php echo base_url() ?>assets/smartadmin/js/statistics/chartjs/chartjs.bundle.js"></script>
 <script>
