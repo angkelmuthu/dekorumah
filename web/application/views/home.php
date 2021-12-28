@@ -9,10 +9,10 @@
     <!-- set the HandheldFriendly -->
     <meta name="HandheldFriendly" content="True">
     <!-- set the description -->
-    <meta name="description" content="Kitzen | Modern Kitchen HTML Template">
+    <meta name="description" content="gallery dekoruma">
     <!-- set the Keyword -->
     <meta name="keywords" content="">
-    <meta name="author" content="Kitzen | Modern Kitchen HTML Template">
+    <meta name="author" content="gallery dekoruma">
     <!-- include poppins google font cdn link -->
     <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,500,500i,600,600i,700,700i%7CRoboto:400,400i,500,500i,700,700i" rel="stylesheet"> -->
     <!-- set the page title -->
