@@ -424,12 +424,12 @@ class M_survei extends CI_Controller
     {
         $id_invoice = $this->input->post('id_survei');
         $id_group_sub = $this->input->post('id_group_sub');
-        $totalx = $this->input->post('total');
+        $totalx = str_replace('.', '', $this->input->post('total'));
         $data = array(
             'id_survei' => $this->input->post('id_survei', TRUE),
             'id_group' => $this->input->post('id_group', TRUE),
             'id_group_sub' => $this->input->post('id_group_sub', TRUE),
-            'total' => $this->input->post('total', TRUE),
+            'total' => str_replace('.', '', $this->input->post('total', TRUE)),
             'note' => $this->input->post('note', TRUE),
             'created_by' => $this->session->userdata('full_name'),
             'created_date' => date('Y-m-d H:i:s'),

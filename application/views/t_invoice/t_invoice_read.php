@@ -299,7 +299,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-fileinput">Nominal</label>
-                                                    <input type="number" class="form-control" name="total">
+                                                    <!-- <input type="text" data-inputmask="'mask': '$ 999.999.999'" class=" form-control uang" name="total"> -->
+                                                    <input type="text" id="tanpa-rupiah" class="form-control" name="total">
                                                 </div>
                                                 <!-- <div class="form-group">
                                                     <label class="form-label" for="example-fileinput">Note</label>
@@ -611,7 +612,7 @@
                                             </div> -->
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-fileinput">Total</label>
-                                                    <input type="number" class="form-control" name="total">
+                                                    <input type="text" class="form-control" name="total" id="tanpa-rupiah-material">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label" for="example-fileinput">Tukang</label>
@@ -737,5 +738,34 @@
         $initScope.on('onCloseAfter.lg', function(event) {
             $('body').removeClass("overflow-hidden");
         });
+
+        /* Tanpa Rupiah */
+        var tanpa_rupiah = document.getElementById('tanpa-rupiah');
+        tanpa_rupiah.addEventListener('keyup', function(e) {
+            tanpa_rupiah.value = formatRupiah(this.value);
+        });
+
+        var tanpa_rupiah_material = document.getElementById('tanpa-rupiah-material');
+        tanpa_rupiah_material.addEventListener('keyup', function(e) {
+            tanpa_rupiah_material.value = formatRupiah(this.value);
+        });
+
+        /* Fungsi */
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
+
     });
 </script>
