@@ -37,12 +37,12 @@
 						</div>
 						<div id="asal">
 							<form action="<?php echo site_url('t_pesanan/create_action_sementara') ?>" method="post">
-								<input type="text" name="id_kategorix" id="id_kategorix" required />
-								<input type="text" name="kategorix" id="kategorix" required />
-								<input type="text" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
-								<input type="text" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
-								<input type="text" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
-								<input type="text" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
+								<input type="hidden" name="id_kategorix" id="id_kategorix" required />
+								<input type="hidden" name="kategorix" id="kategorix" required />
+								<input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
+								<input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
+								<input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
+								<input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
 								<button type=" submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> Simpan</button>
 								<a href="<?php echo site_url('t_invoice/read/' . $this->uri->segment(3)) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
 							</form>
@@ -101,11 +101,11 @@
 									<tr>
 										<td width='200'>Harga (satuan) <?php echo form_error('volume') ?></td>
 										<td>
-											<input type="text" name="id_kategori" id="id_kategori" value="" required />
-											<input type="text" name="kategori" id="kategoris" value="" required />
-											<input type="text" name="id_paket" id="id_paket" value="" required />
-											<input type="text" name="nm_paket" id="nm_paket" value="" required />
-											<input type="text" name="deskripsi" id="deskripsi" value="" required />
+											<input type="hidden" name="id_kategori" id="id_kategori" value="" required />
+											<input type="hidden" name="kategori" id="kategoris" value="" required />
+											<input type="hidden" name="id_paket" id="id_paket" value="" required />
+											<input type="hidden" name="nm_paket" id="nm_paket" value="" required />
+											<input type="hidden" name="deskripsi" id="deskripsi" value="" required />
 											<input type="text" class="form-control" name="harga" id="hargaxx" placeholder="harga" value="<?php echo $harga; ?>" required />
 										</td>
 									</tr>
@@ -129,10 +129,10 @@
 											// $max = $query->row()->max;
 											// $maxx = $max + 1;
 											?>
-											<input type="text" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
-											<input type="text" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
-											<input type="text" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
-											<input type="text" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
+											<input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
+											<input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
+											<input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
+											<input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
 											<button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
 											<a href="<?php echo site_url('t_invoice/read/' . $this->uri->segment(3)) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
 										</td>
