@@ -139,13 +139,17 @@ class T_pesanan_model extends CI_Model
 
     function fetch_paket_harga($id_paket)
     {
-        $this->db->where('id_paket', $id_paket);
-        $this->db->where('aktif', 'y');
+        $this->db->select('a.*,b.kategori');
+        $this->db->from('m_produk_paket a');
+        $this->db->join('m_produk_kategori b', 'a.id_kategori=b.id_kategori', 'LEFT');
+        $this->db->where('a.id_paket', $id_paket);
+        $this->db->where('a.aktif', 'y');
         $query = $this->db->get('m_produk_paket');
         foreach ($query->result() as $row) {
             $hasil = array(
                 'id_paket' => $row->id_paket,
                 'id_kategori' => $row->id_kategori,
+                'kategori' => $row->kategori,
                 'nm_paket' => $row->nm_paket,
                 'deskripsi' => $row->deskripsi,
                 'harga' => $row->harga,

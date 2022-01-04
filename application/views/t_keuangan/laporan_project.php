@@ -91,7 +91,10 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#myTable').DataTable({
-            lengthMenu: [10, 20, 50, 100, 200, 500],
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
             //responsive: true,
             dom:
                 /*	--- Layout Structure

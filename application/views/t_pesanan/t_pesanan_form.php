@@ -21,7 +21,7 @@
 								$this->db->where('aktif', 'y');
 								$query = $this->db->get('m_produk_kategori')->result();
 								foreach ($query as $row) {
-									echo '<option value="' . $row->id_kategori . '">' . $row->kategori . '</option>';
+									echo '<option value="' . $row->id_kategori . '||' . $row->kategori . '">' . $row->kategori . '</option>';
 								}
 								?>
 							</select>
@@ -37,11 +37,12 @@
 						</div>
 						<div id="asal">
 							<form action="<?php echo site_url('t_pesanan/create_action_sementara') ?>" method="post">
-								<input type="hidden" name="id_kategorix" id="id_kategorix" required />
-								<input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
-								<input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
-								<input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
-								<input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
+								<input type="text" name="id_kategorix" id="id_kategorix" required />
+								<input type="text" name="kategorix" id="kategorix" required />
+								<input type="text" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
+								<input type="text" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
+								<input type="text" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
+								<input type="text" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
 								<button type=" submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> Simpan</button>
 								<a href="<?php echo site_url('t_invoice/read/' . $this->uri->segment(3)) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
 							</form>
@@ -100,8 +101,11 @@
 									<tr>
 										<td width='200'>Harga (satuan) <?php echo form_error('volume') ?></td>
 										<td>
-											<input type="hidden" name="id_kategori" id="id_kategori" value="" required />
-											<input type="hidden" name="id_paket" id="id_paket" value="" required />
+											<input type="text" name="id_kategori" id="id_kategori" value="" required />
+											<input type="text" name="kategori" id="kategoris" value="" required />
+											<input type="text" name="id_paket" id="id_paket" value="" required />
+											<input type="text" name="nm_paket" id="nm_paket" value="" required />
+											<input type="text" name="deskripsi" id="deskripsi" value="" required />
 											<input type="text" class="form-control" name="harga" id="hargaxx" placeholder="harga" value="<?php echo $harga; ?>" required />
 										</td>
 									</tr>
@@ -125,10 +129,10 @@
 											// $max = $query->row()->max;
 											// $maxx = $max + 1;
 											?>
-											<input type="hidden" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
-											<input type="hidden" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
-											<input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
-											<input type="hidden" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
+											<input type="text" name="created_date" value="<?php echo date('Y-m-d H:i:s'); ?>" />
+											<input type="text" name="users" value="<?php echo $this->session->userdata('full_name') ?>" readonly />
+											<input type="text" name="id_invoice" value="<?php echo $this->uri->segment(3); ?>" />
+											<input type="text" name="id_pesanan" value="<?php echo $id_pesanan; ?>" />
 											<button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
 											<a href="<?php echo site_url('t_invoice/read/' . $this->uri->segment(3)) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
 										</td>
@@ -153,20 +157,22 @@
 	$(document).ready(function() {
 		document.getElementById('divinput').style.display = 'none';
 		$('#kategori').change(function() {
-			var id_kategori = $('#kategori').val();
+			var kategorix = $('#kategori').val();
+			var kategori = kategorix.split('||');
 			if (id_kategori != '') {
 				$.ajax({
 					url: "<?php echo base_url(); ?>t_pesanan/fetch_paket",
 					method: "POST",
 					data: {
-						id_kategori: id_kategori,
+						id_kategori: kategori[0],
 					},
 					beforeSend: function() {
 						$("#loading-paket").show();
 					},
 					success: function(data) {
 						$('#paket').html(data);
-						$('#id_kategorix').val(id_kategori);
+						$('#id_kategorix').val(kategori[0]);
+						$('#kategorix').val(kategori[1]);
 					},
 					complete: function() {
 						$('#loading-paket').hide();
@@ -194,7 +200,10 @@
 						var json = data,
 							obj = JSON.parse(json);
 						$('#id_kategori').val(obj.id_kategori);
+						$('#kategoris').val(obj.kategori);
 						$('#id_paket').val(obj.id_paket);
+						$('#nm_paket').val(obj.nm_paket);
+						$('#deskripsi').val(obj.deskripsi);
 						$('#hargaxx').val(obj.harga);
 						html = '<div class="card mb-5">' +
 							'<div class="card-body">' +
