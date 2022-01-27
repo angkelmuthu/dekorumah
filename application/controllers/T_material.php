@@ -80,7 +80,11 @@ class T_material extends CI_Controller
         // } else {
         $data = array(
             'id_invoice' => $this->input->post('id_invoice', TRUE),
+            'gudang' => $this->input->post('gudang', TRUE),
+            'id_barang_jenis' => $this->input->post('id_barang_jenis', TRUE),
+            'barang_jenis' => $this->input->post('barang_jenis', TRUE),
             'id_barang' => $this->input->post('id_barang', TRUE),
+            'barang' => $this->input->post('barang', TRUE),
             'qty' => $this->input->post('qty', TRUE),
             'harga_satuan' => str_replace('.', '', $this->input->post('harga_satuan', TRUE)),
             'total' => str_replace('.', '', $this->input->post('total', TRUE)),

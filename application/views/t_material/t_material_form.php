@@ -80,6 +80,9 @@
                                         <input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment('3'); ?>" />
                                         <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('full_name') ?>" />
                                         <input type="hidden" name="create_date" value="<?php echo date('Y-m-d H:s:i'); ?>" />
+                                        <input type="hidden" name="barang" id="nmbarang" />
+                                        <input type="hidden" name="id_barang_jenis" id="id_barang_jenisx" />
+                                        <input type="hidden" name="barang_jenis" id="barang_jenisx" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
                                         <a href="<?php echo site_url('t_invoice/read/' . $this->uri->segment('3')) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
                                     </td>
@@ -179,12 +182,18 @@
                         hargax = obj.harga.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
                         stok = obj.stok.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
                         //gudangx = parseInt(obj.gudang).toLocaleString();
+                        $('#id_barang_jenisx').val(obj.id_barang_jenis);
+                        $('#barang_jenisx').val(obj.barang_jenis);
+                        $('#nmbarang').val(obj.barang);
                         $('#harga_satuan').val(hargax);
                         $('#stok').val(stok);
                         $('#gudang').val(obj.gudang);
                     }
                 });
             } else {
+                $('#id_barang_jenisx').val('');
+                $('#barang_jenisx').val('');
+                $('#nmbarang').val('');
                 $('#harga_satuan').val('');
                 $('#stok').val('');
                 $('#gudang').val('');

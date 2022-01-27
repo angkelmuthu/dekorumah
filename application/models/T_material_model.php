@@ -129,6 +129,9 @@ class T_material_model extends CI_Model
         $query = $this->db->get('v_barang');
         foreach ($query->result() as $row) {
             $hasil = array(
+                'id_barang_jenis' => $row->id_barang_jenis,
+                'barang_jenis' => $row->barang_jenis,
+                'barang' => $row->barang,
                 'harga' => $row->harga_satuan,
                 'stok' => $row->stok,
                 'gudang' => $row->gudang,
