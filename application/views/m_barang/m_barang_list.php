@@ -47,42 +47,43 @@
                                         <td><?php echo $dt->full_name ?></td>
                                         <td><?php echo tanggaljam($dt->update_date) ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#stok-example-modal-sm<?php echo $dt->id_barang ?>">Stok</button>
-                                            <div class="modal fade" id="stok-example-modal-sm<?php echo $dt->id_barang ?>" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-sm" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Tambah Stok</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                                                            </button>
+                                            <?php if ($this->session->userdata('id_user_level') == 1) { ?>
+                                                <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#stok-example-modal-sm<?php echo $dt->id_barang ?>">Stok</button>
+                                                <div class="modal fade" id="stok-example-modal-sm<?php echo $dt->id_barang ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Tambah Stok</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                                </button>
+                                                            </div>
+                                                            <form method="POST" action="<?php echo site_url('m_barang/update_stok'); ?>">
+                                                                <div class="modal-body">
+                                                                    <div class="form-group">
+                                                                        <input type="hidden" name="id_barang" value="<?php echo $dt->id_barang ?>">
+                                                                        <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_users') ?>" />
+                                                                        <input type="hidden" name="update_date" value="<?php echo date('Y-m-d H:s:i'); ?>" />
+                                                                        <label class="form-label text-muted" for="simpleinput-disabled">Barang</label>
+                                                                        <input type="text" name="brg" class="form-control" value="<?php echo $dt->barang ?>" readonly>
+                                                                        <label class="form-label text-muted" for="simpleinput-disabled">Stok Saat ini</label>
+                                                                        <input type="text" name="stok_ada" class="form-control" value="<?php echo $dt->stok ?>" readonly>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" for="simpleinput">Tambah Stok</label>
+                                                                        <input type="number" name="stok_tambah" id="simpleinput" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                        <form method="POST" action="<?php echo site_url('m_barang/update_stok'); ?>">
-                                                            <div class="modal-body">
-                                                                <div class="form-group">
-                                                                    <input type="hidden" name="id_barang" value="<?php echo $dt->id_barang ?>">
-                                                                    <input type="hidden" name="id_user" value="<?php echo $this->session->userdata('id_users') ?>" />
-                                                                    <input type="hidden" name="update_date" value="<?php echo date('Y-m-d H:s:i'); ?>" />
-                                                                    <label class="form-label text-muted" for="simpleinput-disabled">Barang</label>
-                                                                    <input type="text" name="brg" class="form-control" value="<?php echo $dt->barang ?>" readonly>
-                                                                    <label class="form-label text-muted" for="simpleinput-disabled">Stok Saat ini</label>
-                                                                    <input type="text" name="stok_ada" class="form-control" value="<?php echo $dt->stok ?>" readonly>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="form-label" for="simpleinput">Tambah Stok</label>
-                                                                    <input type="number" name="stok_tambah" id="simpleinput" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Save</button>
-                                                            </div>
-                                                        </form>
                                                     </div>
                                                 </div>
-                                            </div>
                                             <?php
-
+                                            }
                                             echo anchor(site_url('m_barang/read/' . $dt->id_barang), '<i class="fal fa-eye" aria-hidden="true"></i>', 'class="btn btn-info btn-xs"');
                                             if ($this->session->userdata('id_user_level') == 1) {
                                                 echo '  ';
