@@ -78,164 +78,166 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr text-success">
-                    <h2>
-                        Pesanan <span class="fw-300"><i>Detail</i></span>
-                    </h2>
-                </div>
-                <div class="panel-container">
-                    <div class="panel-content">
-                        <div class="text-center">
-                            <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 5) { ?>
-                                <a href="<?php echo site_url('t_pesanan/create/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Tambah Data Pesanan</a>
-                            <?php } ?>
-                            <?php if ($this->session->userdata('id_user_level') != 3) { ?>
-                                <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Print Surat Penawaran (Final)</a>
-                                <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-warning mb-2" data-toggle="modal" data-target="#spk-modal">Kirim Surat Penawaran (Final)</a>
-                                <div class="modal fade" id="spk-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">SURAT PENAWARAN (FINAL)</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
-                                                </button>
-                                            </div>
-                                            <form action="<?php echo site_url('m_survei/kirim_spk/' . $this->uri->segment(3)) ?>" method="post">
-                                                <div class="modal-body">
-                                                    <div class="card m-auto border">
-                                                        <div class="card-header py-2">
-                                                            <div class="card-title">
-                                                                Notifikasi Email & WhatsApp
+        <?php if ($this->session->userdata('id_user_level') != 3) { ?>
+            <div class="col-xl-12">
+                <div id="panel-1" class="panel">
+                    <div class="panel-hdr text-success">
+                        <h2>
+                            Pesanan <span class="fw-300"><i>Detail</i></span>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div class="text-center">
+                                <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 5) { ?>
+                                    <a href="<?php echo site_url('t_pesanan/create/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Tambah Data Pesanan</a>
+                                <?php } ?>
+                                <?php if ($this->session->userdata('id_user_level') != 3) { ?>
+                                    <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Print Surat Penawaran (Final)</a>
+                                    <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-warning mb-2" data-toggle="modal" data-target="#spk-modal">Kirim Surat Penawaran (Final)</a>
+                                    <div class="modal fade" id="spk-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">SURAT PENAWARAN (FINAL)</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                    </button>
+                                                </div>
+                                                <form action="<?php echo site_url('m_survei/kirim_spk/' . $this->uri->segment(3)) ?>" method="post">
+                                                    <div class="modal-body">
+                                                        <div class="card m-auto border">
+                                                            <div class="card-header py-2">
+                                                                <div class="card-title">
+                                                                    Notifikasi Email & WhatsApp
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <table class="table table-clean table-sm">
+                                                                    <tr>
+                                                                        <td>Email</td>
+                                                                        <td><input type="email" class="form-control" name="email" value="<?php echo $email ?>"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Hp</td>
+                                                                        <td><input type=" number" class="form-control" name="hp" value="<?php echo '62' . $hp ?>"></td>
+                                                                    </tr>
+                                                                </table>
                                                             </div>
                                                         </div>
-                                                        <div class="card-body">
-                                                            <table class="table table-clean table-sm">
-                                                                <tr>
-                                                                    <td>Email</td>
-                                                                    <td><input type="email" class="form-control" name="email" value="<?php echo $email ?>"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>Hp</td>
-                                                                    <td><input type=" number" class="form-control" name="hp" value="<?php echo '62' . $hp ?>"></td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                                </div>
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                        <table id="example" class="table table-sm table-bordered table-striped">
-                            <thead class="thead-themed">
-                                <tr>
-                                    <th rowspan="2">No.</th>
-                                    <th rowspan="2">Item Barang & Spesifikasi</th>
-                                    <th colspan="5" class="text-center">Ukuran</th>
-                                    <th rowspan="2" class="text-center">Harga</th>
-                                    <th rowspan="2" class="text-center">Jumlah</th>
-                                    <th rowspan="2"></th>
-                                </tr>
-                                <tr>
-                                    <th class="text-center">Panjang</th>
-                                    <th class="text-center">Lebar</th>
-                                    <th class="text-center">Tinggi</th>
-                                    <th class="text-center">Sum</th>
-                                    <th class="text-center">Unit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                $this->db->select('id_kategori,kategori');
-                                $this->db->where('id_invoice', $this->uri->segment(3));
-                                $this->db->group_by('id_kategori');
-                                $result = $this->db->get('v_pesanan')->result();
-                                foreach ($result as $dt) {
-                                ?>
+                                <?php } ?>
+                            </div>
+                            <table id="example" class="table table-sm table-bordered table-striped">
+                                <thead class="thead-themed">
                                     <tr>
-                                        <td><?php echo $no++; ?></td>
-                                        <td colspan="9">
-                                            <h5><?php echo $dt->kategori ?></h5>
-                                        </td>
+                                        <th rowspan="2">No.</th>
+                                        <th rowspan="2">Item Barang & Spesifikasi</th>
+                                        <th colspan="5" class="text-center">Ukuran</th>
+                                        <th rowspan="2" class="text-center">Harga</th>
+                                        <th rowspan="2" class="text-center">Jumlah</th>
+                                        <th rowspan="2"></th>
                                     </tr>
+                                    <tr>
+                                        <th class="text-center">Panjang</th>
+                                        <th class="text-center">Lebar</th>
+                                        <th class="text-center">Tinggi</th>
+                                        <th class="text-center">Sum</th>
+                                        <th class="text-center">Unit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     <?php
-                                    $no2 = 1;
-                                    //$this->db->select('id_produk_sub,nm_produk_sub,sum(total) as total');
+                                    $no = 1;
+                                    $this->db->select('id_kategori,kategori');
                                     $this->db->where('id_invoice', $this->uri->segment(3));
-                                    $this->db->where('id_kategori', $dt->id_kategori);
-                                    //$this->db->group_by('id_produk_sub');
+                                    $this->db->group_by('id_kategori');
                                     $result = $this->db->get('v_pesanan')->result();
-                                    foreach ($result as $dt2) {
-                                        if ($dt2->id_satuan == 1) {
-                                            $qty = $dt2->panjang;
-                                        } elseif ($dt2->id_satuan == 2) {
-                                            $qty = $dt2->panjang * $dt2->tinggi;
-                                        } elseif ($dt2->id_satuan == 3) {
-                                            $qty = $dt2->panjang * $dt2->lebar * $dt2->tinggi;
-                                        } else {
-                                            $qty = $dt2->qty;
-                                        }
+                                    foreach ($result as $dt) {
                                     ?>
                                         <tr>
-                                            <td></td>
-                                            <td><strong><?php echo $no2++ . '. '; ?><?php echo $dt2->nm_paket ?></strong><?php echo $dt2->deskripsi ?><br><?php echo $dt2->note ?></td>
-                                            <td class="text-center"><?php echo $qty ?></td>
-                                            <td class="text-center"><?php echo $dt2->lebar ?></td>
-                                            <td class="text-center"><?php echo $dt2->tinggi ?></td>
-                                            <td class="text-center"><?php echo $qty ?></td>
-                                            <td class="text-center"><?php echo $dt2->satuan ?></td>
-                                            <td class="text-right"><?php echo angka($dt2->harga) ?></td>
-                                            <td class="text-right"><?php echo angka($dt2->total) ?></td>
-                                            <td>
-                                                <!-- <a href="<?php echo site_url('t_pesanan/update/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a> -->
-                                                <a href="<?php echo site_url('m_survei/delete_pesanan/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
+                                            <td><?php echo $no++; ?></td>
+                                            <td colspan="9">
+                                                <h5><?php echo $dt->kategori ?></h5>
                                             </td>
                                         </tr>
-                                    <?php
-                                    }
-                                    // $this->db->select('kategori,sum(total) as ttl_produk');
-                                    // $this->db->where('id_invoice', $this->uri->segment(3));
-                                    // $this->db->where('id_kategori', $dt->id_kategori);
-                                    // $result = $this->db->get('v_pesanan')->result();
-                                    // foreach ($result as $dtx) {
-                                    ?>
-                                    <!-- <tr>
+                                        <?php
+                                        $no2 = 1;
+                                        //$this->db->select('id_produk_sub,nm_produk_sub,sum(total) as total');
+                                        $this->db->where('id_invoice', $this->uri->segment(3));
+                                        $this->db->where('id_kategori', $dt->id_kategori);
+                                        //$this->db->group_by('id_produk_sub');
+                                        $result = $this->db->get('v_pesanan')->result();
+                                        foreach ($result as $dt2) {
+                                            if ($dt2->id_satuan == 1) {
+                                                $qty = $dt2->panjang;
+                                            } elseif ($dt2->id_satuan == 2) {
+                                                $qty = $dt2->panjang * $dt2->tinggi;
+                                            } elseif ($dt2->id_satuan == 3) {
+                                                $qty = $dt2->panjang * $dt2->lebar * $dt2->tinggi;
+                                            } else {
+                                                $qty = $dt2->qty;
+                                            }
+                                        ?>
+                                            <tr>
+                                                <td></td>
+                                                <td><strong><?php echo $no2++ . '. '; ?><?php echo $dt2->nm_paket ?></strong><?php echo $dt2->deskripsi ?><br><?php echo $dt2->note ?></td>
+                                                <td class="text-center"><?php echo $qty ?></td>
+                                                <td class="text-center"><?php echo $dt2->lebar ?></td>
+                                                <td class="text-center"><?php echo $dt2->tinggi ?></td>
+                                                <td class="text-center"><?php echo $qty ?></td>
+                                                <td class="text-center"><?php echo $dt2->satuan ?></td>
+                                                <td class="text-right"><?php echo angka($dt2->harga) ?></td>
+                                                <td class="text-right"><?php echo angka($dt2->total) ?></td>
+                                                <td>
+                                                    <!-- <a href="<?php echo site_url('t_pesanan/update/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a> -->
+                                                    <a href="<?php echo site_url('m_survei/delete_pesanan/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        // $this->db->select('kategori,sum(total) as ttl_produk');
+                                        // $this->db->where('id_invoice', $this->uri->segment(3));
+                                        // $this->db->where('id_kategori', $dt->id_kategori);
+                                        // $result = $this->db->get('v_pesanan')->result();
+                                        // foreach ($result as $dtx) {
+                                        ?>
+                                        <!-- <tr>
                                             <td></td>
                                             <td colspan="6"></td>
                                             <td class="text-right"><strong>Total <?php echo $dtx->kategori ?></strong></td>
                                             <td class="text-right"><strong><?php echo angka($dtx->ttl_produk) ?></strong></td>
                                             <td></td>
                                         </tr> -->
-                                <?php
-                                    //}
-                                }
-                                $this->db->select('sum(total) as grand');
-                                $this->db->where('id_invoice', $this->uri->segment(3));
-                                $result = $this->db->get('v_pesanan')->row();
-                                $ttl_pesanan = $result->grand;
-                                ?>
-                                <tr>
-                                    <td colspan="8" class="text-right"><strong>TOTAL</strong></td>
-                                    <td class="text-right"><strong><?php echo angka($ttl_pesanan) ?></strong></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <?php
+                                        //}
+                                    }
+                                    $this->db->select('sum(total) as grand');
+                                    $this->db->where('id_invoice', $this->uri->segment(3));
+                                    $result = $this->db->get('v_pesanan')->row();
+                                    $ttl_pesanan = $result->grand;
+                                    ?>
+                                    <tr>
+                                        <td colspan="8" class="text-right"><strong>TOTAL</strong></td>
+                                        <td class="text-right"><strong><?php echo angka($ttl_pesanan) ?></strong></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php } ?>
         <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 5) { ?>
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
@@ -550,7 +552,7 @@
                 </div>
             </div>
         <?php } ?>
-        <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 3) { ?>
+        <?php if ($this->session->userdata('id_user_level') == 1) { ?>
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr text-success">
