@@ -92,7 +92,47 @@
                                 <a href="<?php echo site_url('t_pesanan/create/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-success mb-2">Tambah Data Pesanan</a>
                             <?php } ?>
                             <?php if ($this->session->userdata('id_user_level') != 3) { ?>
-                                <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Surat Penawaran</a>
+                                <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-info mb-2">Print Surat Penawaran (Final)</a>
+                                <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-warning mb-2" data-toggle="modal" data-target="#spk-modal">Kirim Surat Penawaran (Final)</a>
+                                <div class="modal fade" id="spk-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">SURAT PENAWARAN (FINAL)</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                </button>
+                                            </div>
+                                            <form action="<?php echo site_url('m_survei/kirim_spk/' . $this->uri->segment(3)) ?>" method="post">
+                                                <div class="modal-body">
+                                                    <div class="card m-auto border">
+                                                        <div class="card-header py-2">
+                                                            <div class="card-title">
+                                                                Notifikasi Email & WhatsApp
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table class="table table-clean table-sm">
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td><input type="email" class="form-control" name="email" value="<?php echo $email ?>"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Hp</td>
+                                                                    <td><input type=" number" class="form-control" name="hp" value="<?php echo '62' . $hp ?>"></td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                         <table id="example" class="table table-sm table-bordered table-striped">
@@ -157,7 +197,7 @@
                                             <td class="text-right"><?php echo angka($dt2->harga) ?></td>
                                             <td class="text-right"><?php echo angka($dt2->total) ?></td>
                                             <td>
-                                                <a href="<?php echo site_url('t_pesanan/update/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a>
+                                                <!-- <a href="<?php echo site_url('t_pesanan/update/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a> -->
                                                 <a href="<?php echo site_url('m_survei/delete_pesanan/' . $dt2->id_invoice . '/' . $dt2->id_pesanan) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>

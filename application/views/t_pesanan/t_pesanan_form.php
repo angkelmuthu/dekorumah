@@ -106,7 +106,7 @@
 											<input type="hidden" name="id_paket" id="id_paket" value="" required />
 											<input type="hidden" name="nm_paket" id="nm_paket" value="" required />
 											<input type="hidden" name="deskripsi" id="deskripsi" value="" required />
-											<input type="text" class="form-control" name="harga" id="hargaxx" placeholder="harga" value="<?php echo $harga; ?>" required />
+											<input type="text" class="form-control" name="harga" id="hargaxx" placeholder="harga" value="<?php echo $harga; ?>" required readonly />
 										</td>
 									</tr>
 									<tr>

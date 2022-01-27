@@ -110,7 +110,8 @@ class T_keuangan extends CI_Controller
             $data = array(
                 'id_group' => $this->input->post('id_group', TRUE),
                 'deskripsi' => $this->input->post('deskripsi', TRUE),
-                'total' => $this->input->post('total', TRUE),
+                //'total' => $this->input->post('total', TRUE),
+                'total' => str_replace('.', '', $this->input->post('total', TRUE)),
                 'note' => $this->input->post('note', TRUE),
                 'created_date' => $this->input->post('created_date', TRUE),
                 'created_by' => $this->input->post('created_by', TRUE),
@@ -161,7 +162,8 @@ class T_keuangan extends CI_Controller
             $data = array(
                 'id_group' => $this->input->post('id_group', TRUE),
                 'deskripsi' => $this->input->post('deskripsi', TRUE),
-                'total' => $this->input->post('total', TRUE),
+                //'total' => $this->input->post('total', TRUE),
+                'total' => str_replace('.', '', $this->input->post('total', TRUE)),
                 'note' => $this->input->post('note', TRUE),
                 'created_date' => $this->input->post('created_date', TRUE),
                 'created_by' => $this->input->post('created_by', TRUE),

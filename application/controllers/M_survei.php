@@ -354,10 +354,73 @@ class M_survei extends CI_Controller
         $data = $this->M_survei_model->fetch_produk_harga($id_produk_detail);
         echo json_encode($data);
     }
-    function print_spk()
+    function print_spk($id)
     {
-        $this->template->load('template', 'm_survei/print_spk');
+        $this->load->view('m_survei/print_spk');
     }
+
+    public function kirim_spk($id)
+    {
+        $data = array();
+
+        $isi = $this->load->view('m_survei/print_spk', $data, true);
+
+        // Konfigurasi email
+        $config = [
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'protocol'  => 'smtp',
+            'smtp_host' => 'mail.gallerydekoruma.com',
+            'smtp_user' => 'admin@gallerydekoruma.com',
+            'smtp_pass'   => 'H9hHGcW4j2L0',
+            // 'smtp_host' => 'smtp.gmail.com',
+            // 'smtp_user' => 'gdekoruma@gmail.com',
+            // 'smtp_pass'   => 'Winner09',
+            // 'smtp_host' => 'smtp.gmail.com',
+            // 'smtp_user' => 'angkel.muthu@gmail.com',
+            // 'smtp_pass'   => 'Vai073071',
+            'smtp_crypto' => 'tls',
+            'smtp_port'   => 587,
+            'crlf'    => "\r\n",
+            'newline' => "\r\n"
+        ];
+
+        // Load library email dan konfigurasinya
+        $this->load->library('email', $config);
+
+        // Email dan nama pengirim
+        //$this->email->from('angkel.muthu@gmail.com', 'gallerydekoruma');
+        //$this->email->from('gdekoruma@gmail.com', 'gallerydekoruma');
+        $this->email->from('admin@gallerydekoruma.com', 'gallerydekoruma');
+
+        // Email penerima
+        $this->email->to($this->input->post('email')); // Ganti dengan email tujuan
+        //$this->email->cc('gdekoruma@gmail.com');
+
+        // Subject email
+        $this->email->subject('Invoice');
+
+        // Isi email
+        $this->email->message($isi);
+
+        // Tampilkan pesan sukses atau error
+        if ($this->email->send()) {
+            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Insert Record Success</strong></div>');
+        } else {
+            // $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
+            // <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            //     <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            // </button><strong> Notifikasi gagal dikirim</strong></div>');
+            echo $this->email->print_debugger();
+        }
+
+        redirect(site_url('t_invoice/read/' . $id));
+        //}
+    }
+
     public function upload_gambar()
     {
 
