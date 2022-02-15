@@ -135,7 +135,61 @@
                                         </div>
                                     </div>
                                 <?php } ?>
+                                <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-sm btn-secondary mb-2" data-toggle="modal" data-target="#bast-modal">Print BAST</a>
                             </div>
+                            <div class="modal fade" id="bast-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">SURAT BERITA ACARA SERAH TERIMA</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                            </button>
+                                        </div>
+                                        <form action="<?php echo site_url('m_survei/bast') ?>" method="post">
+                                            <div class="modal-body">
+                                                <div class="alert alert-primary alert-dismissible">
+                                                    <div class="d-flex flex-start w-100">
+                                                        <div class="mr-2 hidden-md-down">
+                                                            <span class="icon-stack icon-stack-lg">
+                                                                <i class="base base-6 icon-stack-3x opacity-100 color-primary-500"></i>
+                                                                <i class="base base-10 icon-stack-2x opacity-100 color-primary-300 fa-flip-vertical"></i>
+                                                                <i class="fal fa-info icon-stack-1x opacity-100 color-white"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="d-flex flex-fill">
+                                                            <?php if ($progress == 'Kirim') { ?>
+                                                                <div class="flex-fill">
+                                                                    <span class="h5">Peringatan</span>
+                                                                    <br>
+                                                                    Silahkan klik Tombol Print Dibawah ini.
+                                                                </div>
+                                                            <?php } else { ?>
+                                                                <div class="flex-fill">
+                                                                    <span class="h5">Peringatan</span>
+                                                                    <br>
+                                                                    Maaf anda belum bisa memlakukan print BAST karena progress <?php echo '<b>' . $progress . '</b>'; ?>
+                                                                </div>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment(3) ?>">
+                                                <input type="hidden" name="bast_date" value="<?php echo date('Y-m-d') ?>">
+                                                <input type="hidden" name="bast_by" value="<?php echo $this->session->userdata('full_name') ?>">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <?php if ($progress == 'Kirim') { ?>
+                                                    <button type="submit" class="btn btn-primary">Print</button>
+                                                <?php } else {
+                                                } ?>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <table id="example" class="table table-sm table-bordered table-striped">
                                 <thead class="thead-themed">
                                     <tr>
@@ -530,8 +584,44 @@
                                             <td><?php echo $dt->create_date ?></td>
                                             <td>
                                                 <?php if ($this->session->userdata('id_user_level') != 3) { ?>
+                                                    <!-- <a href="<?php echo site_url('t_material/update/' . $dt->id_material) ?>" class=" btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a> -->
+                                                    <a href="<?php echo site_url('m_survei/print_spk/' . $this->uri->segment(3)) ?>" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#bm-modal-<?php echo $dt->id_material ?>"><i class="fal fa-pencil" aria-hidden="true"></i></a>
                                                     <a href="<?php echo site_url('t_material/delete/' . $dt->id_invoice . '/' . $dt->id_material . '/' . $dt->id_barang) ?>" class=" btn btn-danger btn-xs"><i class="fal fa-trash" aria-hidden="true"></i></a>
                                                 <?php } ?>
+
+                                                <div class="modal fade" id="bm-modal-<?php echo $dt->id_material ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Edit QTY Bahan Material</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                                </button>
+                                                            </div>
+                                                            <form action="<?php echo site_url('t_material/update_material/' . $dt->id_material) ?>" method="post">
+                                                                <div class="modal-body">
+                                                                    <input type="hidden" name="id_material" value="<?php echo $dt->id_material ?>">
+                                                                    <input type="hidden" name="id_invoice" value="<?php echo $this->uri->segment(3) ?>">
+                                                                    <input type="hidden" name="id_barang" value="<?php echo $dt->id_barang ?>">
+                                                                    <input type="hidden" name="harga_satuan" value="<?php echo $dt->harga_satuan ?>">
+                                                                    <input type="hidden" name="qty" value="<?php echo $dt->qty ?>">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" for="example-fileinput">Edit QTY</label>
+                                                                        <input type="number" class="form-control" name="qtyx" value="<?php echo $dt->qty ?>" min="1" />
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label class="form-label" for="example-fileinput">Note</label>
+                                                                        <textarea class="form-control" name="note"><?php echo $dt->note ?></textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-primary">Sumbit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php }

@@ -267,6 +267,12 @@ class M_survei_model extends CI_Model
     {
         $this->db->insert('t_file', $data);
     }
+
+    function bast($id, $data)
+    {
+        $this->db->where('id', $id);
+        $this->db->update('t_invoice', $data);
+    }
 }
 
 /* End of file M_survei_model.php */

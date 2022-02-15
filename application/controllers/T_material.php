@@ -166,6 +166,41 @@ class T_material extends CI_Controller
         }
     }
 
+    public function update_material()
+    {
+        $qty = $this->input->post('qty', TRUE);
+        $qtyx = $this->input->post('qtyx', TRUE);
+        if ($qty >= $qtyx) {
+            $stok = $qty - $qtyx;
+        } else {
+            $stok = $qtyx - $qty;
+        }
+        $data = array(
+            'qty' => $qtyx,
+            'harga_satuan' => $this->input->post('harga_satuan', TRUE),
+            'total' => $this->input->post('harga_satuan', TRUE) * $qtyx,
+            'id_user' => $this->session->userdata('full_name'),
+            'create_date' => date('Y-m-d H:i:s'),
+            'note' => $this->input->post('note', TRUE),
+        );
+        $this->T_material_model->update($this->input->post('id_material', TRUE), $data);
+
+        $this->db->where('id_barang', $this->input->post('id_barang', TRUE));
+        if ($qty >= $qtyx) {
+            $this->db->set('stok', 'stok + ' . $stok, FALSE);
+        } else {
+            $this->db->set('stok', 'stok - ' . $stok, FALSE);
+        }
+        $this->db->update('m_barang');
+
+
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Update Record Success</strong></div>');
+        redirect(site_url('t_invoice/read/' . $this->input->post('id_invoice')));
+    }
+
     public function delete($id_invoice, $id, $id_barang)
     {
         $row = $this->T_material_model->get_by_id($id);

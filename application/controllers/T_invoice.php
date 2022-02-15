@@ -199,6 +199,7 @@ class T_invoice extends CI_Controller
         }
     }
 
+
     public function _rules()
     {
         $this->form_validation->set_rules('no_invoice', 'no invoice', 'trim|required');

@@ -609,6 +609,45 @@ class M_survei extends CI_Controller
         $this->load->view('m_survei/email', $data);
     }
 
+    public function bast()
+    {
+        $id_invoice = $this->input->post('id_invoice');
+        $data = array(
+            'bast_date' => $this->input->post('bast_date', TRUE),
+            'bast_by' => $this->input->post('bast_by', TRUE),
+        );
+
+        $this->M_survei_model->bast($id_invoice, $data);
+
+        //send mail
+        $row = $this->M_survei_model->get_invoice($id_invoice);
+        $row2 = $this->M_survei_model->get_pesanan_group_ttl($id_invoice);
+        $row3 = $this->M_survei_model->get_note();
+        //$row3 = $this->M_survei_model->get_bayar($id_invoice, $id_group_sub, $total);
+        //$row4 = $this->M_survei_model->get_note();
+        //$row4 = $this->M_survei_model->get_bayar_ttl($id_invoice, $id_group_sub);
+        $data = array(
+            'no_invoice' => $row->no_invoice,
+            'tgl_invoice' => $row->tgl_invoice,
+            'users' => $row->users,
+            'create_date' => $row->create_date,
+            'id_pelanggan' => $row->id_pelanggan,
+            'nama' => $row->nama,
+            'alamat' => $row->alamat,
+            'email' => $row->email,
+            'hp' => $row->hp,
+            //'ketentuan' => $row4->note_bayar,
+            'list' => $this->M_survei_model->get_pesanan_group($id_invoice),
+            //'nm_bayar' => $row3->nm_group_sub,
+            //'total_bayar' => $row3->total,
+            'ttl' => $row2->ttl,
+            'alamat' => $row3->alamat,
+
+        );
+
+        $this->load->view('m_survei/bast', $data);
+    }
+
     public function mail()
     {
         $id_invoice = $this->input->post('id_survei');

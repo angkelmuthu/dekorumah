@@ -29,6 +29,7 @@
                                         <th>Laba/Rugi</th>
                                         <th>Persentase</th>
                                         <th>Status</th>
+                                        <th>BAST</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -70,6 +71,7 @@
                                                 } ?>
                                             </td>
                                             <td><?php echo $pro->status ?></td>
+                                            <td><?php echo $pro->bast_date ?></td>
                                             <td><a class="btn btn-xs btn-primary" href="<?php echo site_url('t_invoice/read/' . $pro->id) ?>"><i class="fal fa-eye"></i></a> </td>
                                         </tr>
                                     <?php
