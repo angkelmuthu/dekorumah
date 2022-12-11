@@ -16,7 +16,7 @@ class M_pelanggan extends CI_Controller
 
     public function index()
     {
-        $this->template->load('template', 'm_pelanggan/m_pelanggan_list');
+        $this->template->load('template', 'm_pelanggan/m_pelanggan_list_new');
     }
 
     public function json()
@@ -224,6 +224,36 @@ class M_pelanggan extends CI_Controller
 
         xlsEOF();
         exit();
+    }
+
+    public function ajax_list()
+    {
+        $list = $this->M_pelanggan_model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $res) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $res->nama;
+            $row[] = $res->alamat;
+            $row[] = $res->email;
+            $row[] = $res->hp;
+            $row[] = $res->nama_projek;
+            $row[] = $res->id_sales;
+            $row[] = '<a href="' . site_url('M_pelanggan/read/' . $res->id_pelanggan) . '" class="btn btn-primary btn-xs"><i class="fal fa-eye" aria-hidden="true"></i></a> <a href="' . site_url('M_pelanggan/update/' . $res->id_pelanggan) . '" class="btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a>';
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->M_pelanggan_model->count_all(),
+            "recordsFiltered" => $this->M_pelanggan_model->count_filtered(),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
     }
 }
 
