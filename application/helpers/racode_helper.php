@@ -211,6 +211,26 @@ function select2_dinamis_custom_remun($name, $table, $pk, $field, $selected = nu
     return $select2;
 }
 
+function select2_update($name, $table, $pk, $field, $selected = null, $where = null, $order = null)
+{
+    $ci = get_instance();
+    $select2 = '<select name="' . $name . '" id="' . $name . '" class="select2 form-control w-100">';
+    if ($where) {
+        $ci->db->where($where);
+    }
+    if ($order) {
+        $ci->db->order_by($order);
+    }
+    $data = $ci->db->get($table)->result();
+    $select2 .= "<option></option>";
+    foreach ($data as $d) {
+        $select2 .= "<option value='" . $d->$pk . "'";
+        $select2 .= $selected == $d->$pk ? " selected='selected'" : '';
+        $select2 .= ">" .  strtoupper($d->$field) . "</option>";
+    }
+    $select2 .= '</select>';
+    return $select2;
+}
 
 
 function radiobtn_dinamis($name, $table, $pk, $field, $selected = null, $where = null, $order = null)
