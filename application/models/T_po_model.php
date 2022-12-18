@@ -3,11 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class T_permintaan_model extends CI_Model
+class T_po_model extends CI_Model
 {
 
-    public $table = 't_permintaan';
-    public $id = 'id_permintaan';
+    public $table = 't_po';
+    public $id = 'id_po';
     public $order = 'DESC';
 
     function __construct()
@@ -23,13 +23,13 @@ class T_permintaan_model extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id_permintaan,jenis_permintaan,id_pelanggan,id_barang,qty,deskripsi,id_users,create_by,create_date');
-        $this->datatables->from('t_permintaan');
+        $this->datatables->select('id_po,no_po,id_distributor,id_permintaan,total,diskon,ppn,biaya_lain,grand_total,id_users,create_by,create_date');
+        $this->datatables->from('t_po');
         //add this line for join
-        //$this->datatables->join('table2', 't_permintaan.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('t_permintaan/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed')) . "
-            " . anchor(site_url('t_permintaan/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm waves-effect waves-themed')) . "
-                " . anchor(site_url('t_permintaan/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_permintaan');
+        //$this->datatables->join('table2', 't_po.field = table2.field');
+        $this->datatables->add_column('action', anchor(site_url('t_po/read/$1'), '<i class="fal fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-info btn-sm waves-effect waves-themed')) . "
+            " . anchor(site_url('t_po/update/$1'), '<i class="fal fa-pencil" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm waves-effect waves-themed')) . "
+                " . anchor(site_url('t_po/delete/$1'), '<i class="fal fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm waves-effect waves-themed" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_po');
         return $this->datatables->generate();
     }
 
@@ -40,13 +40,11 @@ class T_permintaan_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
-    // get data by id
     function get_by_id($id)
     {
         $this->db->where('id_pelanggan', $id);
         return $this->db->get('v_pelanggan')->row();
     }
-
 
     function get_permintaan($id)
     {
@@ -57,15 +55,29 @@ class T_permintaan_model extends CI_Model
         $this->db->where('a.id_pelanggan', $id);
         return $this->db->get()->result();
     }
+
+    function get_po($id)
+    {
+        $this->db->select('a.*,b.nm_distributor');
+        $this->db->from('t_po a');
+        $this->db->join('m_distributor b', 'a.id_distributor=b.id_distributor', 'left');
+        $this->db->order_by('a.create_date', 'ASC');
+        $this->db->where('a.id_pelanggan', $id);
+        return $this->db->get()->result();
+    }
+
     // get total rows
     function total_rows($q = NULL)
     {
-        $this->db->like('id_permintaan', $q);
-        $this->db->or_like('jenis_permintaan', $q);
-        $this->db->or_like('id_pelanggan', $q);
-        $this->db->or_like('id_barang', $q);
-        $this->db->or_like('qty', $q);
-        $this->db->or_like('deskripsi', $q);
+        $this->db->like('id_po', $q);
+        $this->db->or_like('no_po', $q);
+        $this->db->or_like('id_distributor', $q);
+        $this->db->or_like('id_permintaan', $q);
+        $this->db->or_like('total', $q);
+        $this->db->or_like('diskon', $q);
+        $this->db->or_like('ppn', $q);
+        $this->db->or_like('biaya_lain', $q);
+        $this->db->or_like('grand_total', $q);
         $this->db->or_like('id_users', $q);
         $this->db->or_like('create_by', $q);
         $this->db->or_like('create_date', $q);
@@ -77,12 +89,15 @@ class T_permintaan_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('id_permintaan', $q);
-        $this->db->or_like('jenis_permintaan', $q);
-        $this->db->or_like('id_pelanggan', $q);
-        $this->db->or_like('id_barang', $q);
-        $this->db->or_like('qty', $q);
-        $this->db->or_like('deskripsi', $q);
+        $this->db->like('id_po', $q);
+        $this->db->or_like('no_po', $q);
+        $this->db->or_like('id_distributor', $q);
+        $this->db->or_like('id_permintaan', $q);
+        $this->db->or_like('total', $q);
+        $this->db->or_like('diskon', $q);
+        $this->db->or_like('ppn', $q);
+        $this->db->or_like('biaya_lain', $q);
+        $this->db->or_like('grand_total', $q);
         $this->db->or_like('id_users', $q);
         $this->db->or_like('create_by', $q);
         $this->db->or_like('create_date', $q);
@@ -113,7 +128,7 @@ class T_permintaan_model extends CI_Model
     ///////////////////////////////////////////////////////////////////////////
     private function _get()
     {
-        $this->db->from("v_permintaan");
+        $this->db->from("v_po");
 
         $i = 0;
 
@@ -164,13 +179,13 @@ class T_permintaan_model extends CI_Model
 
     public function count_all()
     {
-        $this->db->from("v_permintaan");
+        $this->db->from("v_po");
         return $this->db->count_all_results();
     }
 }
 
-/* End of file T_permintaan_model.php */
-/* Location: ./application/models/T_permintaan_model.php */
+/* End of file T_po_model.php */
+/* Location: ./application/models/T_po_model.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2022-12-13 05:39:17 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2022-12-17 17:06:44 */
 /* http://harviacode.com */

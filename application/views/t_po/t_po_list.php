@@ -3,7 +3,7 @@
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>KELOLA DATA PERMINTAAN BARANG</h2>
+                    <h2>KELOLA DATA PURCHASE ORDER</h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                         <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -12,8 +12,8 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <!-- <div class="text-center">
-                            <?php echo anchor(site_url('t_permintaan/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div> -->
+                        <div class="text-center">
+                            <?php echo anchor(site_url('t_po/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
                         <table class="table table-bordered table-hover table-striped w-100" id="example">
                             <thead>
                                 <tr>
@@ -22,10 +22,12 @@
                                     <th>Alamat</th>
                                     <th>Nama Projek</th>
                                     <th>Sales</th>
-                                    <th>Ttl Permintaan</th>
+                                    <th>Ttl PO</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
+
+                        </table>
 
                         </table>
                     </div>
@@ -56,7 +58,7 @@
 
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo site_url('t_permintaan/ajax_list'); ?>",
+                "url": "<?php echo site_url('t_po/ajax_list'); ?>",
                 "type": "POST"
             },
 
