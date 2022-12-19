@@ -187,6 +187,36 @@ class T_po extends CI_Controller
         $this->load->view('t_po/modal_tambah', $data);
     }
 
+    function fetch_barang()
+    {
+        $row = $this->T_po_model->get_barang($this->input->post('id_permintaan'));
+        $data = array(
+            'id_po' => $row->id_permintaan,
+            'no_ro' => $row->no_ro,
+            'id_barang' => $row->id_barang,
+            'qty' => $row->qty,
+        );
+        echo json_encode($data);
+    }
+
+    function input_barang()
+    {
+        $data = array(
+            'id_po' => $this->input->post('id_po'),
+            'id_permintaan' => $this->input->post('id_permintaan'),
+            'id_barang' => $this->input->post('id_barang'),
+            'nm_barang' => $this->input->post('nm_barang'),
+            'qty' => $this->input->post('qty'),
+            'harga_satuan' => $this->input->post('harga_satuan'),
+            'harga_total' => $this->input->post('harga_total'),
+            'id_users' => $this->session->userdata('id_users'),
+            'create_by' => $this->session->userdata('full_name'),
+            'create_date' => date('Y-m-d H:i:s'),
+        );
+        $this->db->insert('t_po_detail', $data);
+        redirect(site_url('t_po/read/' . $this->input->post('id_pelanggan')));
+    }
+
     public function ajax_list()
     {
         $list = $this->T_po_model->get_datatables();

@@ -66,6 +66,12 @@ class T_po_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    function get_barang($id)
+    {
+        $this->db->where('id_permintaan', $id);
+        return $this->db->get('v_permintaan_barang')->row();
+    }
+
     // get total rows
     function total_rows($q = NULL)
     {
