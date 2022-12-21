@@ -11,6 +11,7 @@
             <td>
                 <input class="form-control" id="no_ro" type="text" name="no_ro" value="" readonly>
                 <input class="form-control" id="id_barang" type="hidden" name="id_barang" value="" readonly>
+                <input class="form-control" id="nm_barang" type="hidden" name="nm_barang" value="" readonly>
             </td>
         </tr>
         <tr>
@@ -46,7 +47,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#harga_satuan").inputmask({
-            //prefix: 'Rp ',
+            prefix: '',
             radixPoint: ',',
             groupSeparator: ".",
             alias: "numeric",
@@ -54,7 +55,7 @@
             digits: 0
         });
         $("#harga_total").inputmask({
-            //prefix: 'Rp ',
+            prefix: '',
             radixPoint: ',',
             groupSeparator: ".",
             alias: "numeric",
@@ -63,9 +64,12 @@
         });
         $("#qty,#harga_satuan").keyup(function() {
             var qty = $("#qty").val();
-            var harga_satuan = $("#harga_satuan").val();
-            var total = harga_satuan.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") * qty;
-            $("#harga_total").val(Math.round(total));
+            var harga_satuan1 = $("#harga_satuan").val();
+            var harga_satuan2 = harga_satuan1.replace(".", "");
+            var harga_satuan3 = harga_satuan2.replace(".", "");
+            var harga_satuan4 = harga_satuan3.replace(".", "");
+            var total = harga_satuan4 * qty;
+            $("#harga_total").val(total);
         });
 
         $('#id_permintaan').on('change', function() {
@@ -85,6 +89,7 @@
                         $('#qty').val(row.qty);
                         $('#no_ro').val(row.no_ro);
                         $('#id_barang').val(row.id_barang);
+                        $('#nm_barang').val(row.barang);
                     },
                     complete: function() {
                         $('#loading-barang').hide();
@@ -94,6 +99,7 @@
                 $('#qty').val();
                 $('#no_ro').val();
                 $('#id_barang').val();
+                $('#nm_barang').val();
             }
         });
     });

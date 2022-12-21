@@ -134,18 +134,37 @@
                                     <thead class="thead-themed">
                                         <tr>
                                             <th width="30px">No</th>
-                                            <th>No. Request</th>
                                             <th>Barang</th>
-                                            <th>Qty</th>
-                                            <th>Create By</th>
-                                            <th>Create Date</th>
-                                            <th>Action</th>
+                                            <th width="5%">Qty</th>
+                                            <th width="15%">Harga Satuan</th>
+                                            <th width="20%">Harga Total</th>
+                                            <th width="10%">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php
+                                        $no = 1;
+                                        $this->db->where('id_po', $row->id_po);
+                                        $result = $this->db->get('t_po_detail')->result();
+                                        foreach ($result as $dt) { ?>
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                <td><?= $dt->nm_barang ?></td>
+                                                <td class="text-center"><?= $dt->qty ?></td>
+                                                <td class="text-right"><?= angka($dt->harga_satuan) ?></td>
+                                                <td class="text-right"><?= angka($dt->harga_total) ?></td>
+                                                <td></td>
+                                            </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                        <div class="panel-content py-2 rounded-bottom border-faded border-left-0 border-right-0 border-bottom-0 text-muted d-flex">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#default-example-modal">Tambah PO</button>
+                                </div>
                             </div>
                         </div>
                     </div>

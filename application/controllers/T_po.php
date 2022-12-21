@@ -194,6 +194,7 @@ class T_po extends CI_Controller
             'id_po' => $row->id_permintaan,
             'no_ro' => $row->no_ro,
             'id_barang' => $row->id_barang,
+            'barang' => $row->barang,
             'qty' => $row->qty,
         );
         echo json_encode($data);
@@ -207,8 +208,8 @@ class T_po extends CI_Controller
             'id_barang' => $this->input->post('id_barang'),
             'nm_barang' => $this->input->post('nm_barang'),
             'qty' => $this->input->post('qty'),
-            'harga_satuan' => $this->input->post('harga_satuan'),
-            'harga_total' => $this->input->post('harga_total'),
+            'harga_satuan' => str_replace('.', '', $this->input->post('harga_satuan')),
+            'harga_total' => str_replace('.', '', $this->input->post('harga_total')),
             'id_users' => $this->session->userdata('id_users'),
             'create_by' => $this->session->userdata('full_name'),
             'create_date' => date('Y-m-d H:i:s'),
