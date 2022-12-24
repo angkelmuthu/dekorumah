@@ -75,6 +75,14 @@ class T_po_model extends CI_Model
         return $this->db->get()->row();
     }
 
+    function get_po_detail($id)
+    {
+        $this->db->select('sum(harga_total) as total');
+        $this->db->from('t_po_detail');
+        $this->db->where('id_po', $id);
+        return $this->db->get()->row();
+    }
+
     // get total rows
     function total_rows($q = NULL)
     {

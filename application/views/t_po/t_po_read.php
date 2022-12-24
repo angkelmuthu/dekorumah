@@ -163,7 +163,7 @@
                         <div class="panel-content py-2 rounded-bottom border-faded border-left-0 border-right-0 border-bottom-0 text-muted d-flex">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-xs btn-info" data-toggle="modal" data-target="#default-example-modal">Tambah PO</button>
+                                    <button type="button" class="btn btn-info btn-xs bayar" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">Pembayaran</button>
                                 </div>
                             </div>
                         </div>
@@ -194,6 +194,28 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="Bayar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        PURCHASE ORDER
+                        <small class="m-0 text-muted">
+                            Pembayaran
+                        </small>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="Bayar_modal">
+                        <!-- Data akan di tampilkan disini-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
@@ -217,6 +239,23 @@
                 success: function(data) {
                     $('#Tambah').modal("show");
                     $('#Tambah_modal').html(data);
+                }
+            });
+        });
+
+        $('.bayar').click(function() {
+            var id_pelanggan = $(this).attr("id_pelanggan");
+            var id_po = $(this).attr("id_po");
+            $.ajax({
+                url: '<?php echo base_url(); ?>t_po/bayar_po',
+                method: 'post',
+                data: {
+                    id_pelanggan: id_pelanggan,
+                    id_po: id_po
+                },
+                success: function(data) {
+                    $('#Bayar').modal("show");
+                    $('#Bayar_modal').html(data);
                 }
             });
         });

@@ -218,6 +218,16 @@ class T_po extends CI_Controller
         redirect(site_url('t_po/read/' . $this->input->post('id_pelanggan')));
     }
 
+    function bayar_po()
+    {
+        $data = array(
+            'id_pelanggan' => $this->input->post('id_pelanggan'),
+            'id_po' => $this->input->post('id_po'),
+            'ro' => $this->T_po_model->get_permintaan($this->input->post('id_pelanggan')),
+        );
+        $this->load->view('t_po/modal_bayar', $data);
+    }
+
     public function ajax_list()
     {
         $list = $this->T_po_model->get_datatables();
