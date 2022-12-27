@@ -58,8 +58,8 @@ class M_pelanggan extends CI_Controller
             'alamat' => set_value('alamat'),
             'email' => set_value('email'),
             'hp' => set_value('hp'),
-            'created_date' => set_value('created_date'),
-            'users' => set_value('users'),
+            'nama_projek' => set_value('nama_projek'),
+            'id_sales' => set_value('id_sales'),
         );
         $this->template->load('template', 'm_pelanggan/m_pelanggan_form', $data);
     }
@@ -76,8 +76,10 @@ class M_pelanggan extends CI_Controller
                 'alamat' => $this->input->post('alamat', TRUE),
                 'email' => $this->input->post('email', TRUE),
                 'hp' => $this->input->post('hp', TRUE),
-                'created_date' => $this->input->post('created_date', TRUE),
-                'users' => $this->input->post('users', TRUE),
+                'nama_projek' => $this->input->post('nama_projek', TRUE),
+                'id_sales' => $this->input->post('id_sales', TRUE),
+                'created_date' => date('Y-m-d H:i:s'),
+                'users' => $this->session->userdata('full_name'),
             );
 
             $this->M_pelanggan_model->insert($data);
@@ -85,11 +87,7 @@ class M_pelanggan extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Create Record Success 2</strong></div>');
-            if ($this->input->post('flag') == 'N') {
-                redirect(site_url('m_pelanggan'));
-            } else {
-                redirect(site_url('t_invoice/create/' . $this->input->post('nama')));
-            }
+            redirect(site_url('m_pelanggan'));
         }
     }
 
@@ -106,8 +104,8 @@ class M_pelanggan extends CI_Controller
                 'alamat' => set_value('alamat', $row->alamat),
                 'email' => set_value('email', $row->email),
                 'hp' => set_value('hp', $row->hp),
-                'created_date' => set_value('created_date', $row->created_date),
-                'users' => set_value('users', $row->users),
+                'nama_projek' => set_value('nama_projek', $row->nama_projek),
+                'id_sales' => set_value('id_sales', $row->id_sales),
             );
             $this->template->load('template', 'm_pelanggan/m_pelanggan_form', $data);
         } else {
@@ -131,8 +129,10 @@ class M_pelanggan extends CI_Controller
                 'alamat' => $this->input->post('alamat', TRUE),
                 'email' => $this->input->post('email', TRUE),
                 'hp' => $this->input->post('hp', TRUE),
-                'created_date' => $this->input->post('created_date', TRUE),
-                'users' => $this->input->post('users', TRUE),
+                'nama_projek' => $this->input->post('nama_projek', TRUE),
+                'id_sales' => $this->input->post('id_sales', TRUE),
+                'created_date' => date('Y-m-d H:i:s'),
+                'users' => $this->session->userdata('full_name'),
             );
 
             $this->M_pelanggan_model->update($this->input->post('id_pelanggan', TRUE), $data);
@@ -170,8 +170,8 @@ class M_pelanggan extends CI_Controller
         $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
         $this->form_validation->set_rules('email', 'email', 'trim|required');
         $this->form_validation->set_rules('hp', 'hp', 'trim|required');
-        $this->form_validation->set_rules('created_date', 'created date', 'trim|required');
-        $this->form_validation->set_rules('users', 'users', 'trim|required');
+        $this->form_validation->set_rules('nama_projek', 'nama_projek', 'trim|required');
+        $this->form_validation->set_rules('id_sales', 'id_sales', 'trim|required');
 
         $this->form_validation->set_rules('id_pelanggan', 'id_pelanggan', 'trim');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
@@ -236,11 +236,11 @@ class M_pelanggan extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = $res->nama;
-            $row[] = $res->alamat;
+            // $row[] = $res->alamat;
             $row[] = $res->email;
             $row[] = $res->hp;
             $row[] = $res->nama_projek;
-            $row[] = $res->id_sales;
+            $row[] = $res->nm_sales;
             $row[] = '<a href="' . site_url('M_pelanggan/read/' . $res->id_pelanggan) . '" class="btn btn-primary btn-xs"><i class="fal fa-eye" aria-hidden="true"></i></a> <a href="' . site_url('M_pelanggan/update/' . $res->id_pelanggan) . '" class="btn btn-warning btn-xs"><i class="fal fa-pencil" aria-hidden="true"></i></a>';
 
             $data[] = $row;

@@ -62,7 +62,7 @@
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>KELOLA DATA PESANAN</h2>
+                    <h2>DATA PENJUALAN</h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                         <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
@@ -71,12 +71,39 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="text-center">
+                        <div class="text-center mb-2">
                             <?php echo anchor(site_url('t_penjualan/create/' . $this->uri->segment(3)), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Pesanan', 'class="btn btn-primary btn-sm"'); ?>
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#rab">RAB</button>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="rab" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">
+                                            Rencana Anggaran Biaya
+                                            <small class="m-0 text-muted">
+                                                File RAB
+                                            </small>
+                                        </h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    <form action="<?php echo site_url('t_po/update_action') ?>" method="post">
+                                        <div class="modal-body">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped w-100" id="example">
-                                <thead>
+                                <thead class="thead-themed">
                                     <tr>
                                         <th width="30px">No</th>
                                         <th>Produk</th>
@@ -109,7 +136,9 @@
                     </div>
                 </div>
             </div>
+            <a href="<?php echo site_url('t_penjualan') ?>" class="btn btn-block btn-sm btn-secondary">Kembali</a>
         </div>
+
     </div>
 </main>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>

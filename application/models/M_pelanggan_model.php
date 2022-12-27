@@ -16,8 +16,8 @@ class M_pelanggan_model extends CI_Model
         $this->load->database();
     }
 
-    var $column_order = array(null, 'id_pelanggan', 'nama', 'alamat', 'email', 'hp', 'nama_projek', 'id_sales');
-    var $column_search = array('id_pelanggan', 'nama', 'alamat', 'email', 'hp', 'nama_projek', 'id_sales');
+    var $column_order = array(null, 'id_pelanggan', 'nama', 'alamat', 'email', 'hp', 'nama_projek', 'nm_sales');
+    var $column_search = array('id_pelanggan', 'nama', 'alamat', 'email', 'hp', 'nama_projek', 'nm_sales');
     var $order_by = array('id_pelanggan' => 'DESC');
 
     // datatables

@@ -76,7 +76,7 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="text-center">
+                        <div class="text-center mb-2">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#default-example-modal">Tambah Barang</button>
                         </div>
                         <!-- Modal -->
@@ -115,8 +115,8 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                     </form>
                                 </div>
@@ -124,12 +124,13 @@
                         </div>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped w-100" id="example">
-                                <thead>
+                                <thead class="thead-themed">
                                     <tr>
                                         <th width="30px">No</th>
                                         <th>No. Request</th>
                                         <th>Barang</th>
                                         <th>Qty</th>
+                                        <th>Deskripsi</th>
                                         <th>Create By</th>
                                         <th>Create Date</th>
                                         <th>Action</th>
@@ -144,6 +145,7 @@
                                             <td><?php echo $row->no_ro ?></td>
                                             <td><?php echo $row->barang ?></td>
                                             <td><?php echo $row->qty ?></td>
+                                            <td><?php echo $row->deskripsi ?></td>
                                             <td><?php echo $row->create_by ?></td>
                                             <td><?php echo tanggaljam($row->create_date) ?></td>
                                             <td>

@@ -105,7 +105,7 @@ class T_penjualan extends CI_Controller
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Create Record Success 2</strong></div>');
-        redirect(site_url('t_penjualan'));
+        redirect(site_url('t_penjualan/read/' . $this->input->post('id_pelanggan')));
     }
 
     public function update($id)

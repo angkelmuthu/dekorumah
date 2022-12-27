@@ -34,18 +34,18 @@
                                     <td><input type="number" class="form-control" name="hp" id="hp" placeholder="Hp" value="<?php echo $hp; ?>" /></td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Created Date <?php echo form_error('created_date') ?></td>
-                                    <td><input type="text" class="form-control" name="created_date" id="created_date" placeholder="Created Date" value="<?php echo date('Y-m-d H:s:i'); ?>" /></td>
+                                    <td width='200'>Nama Projek <?php echo form_error('nama') ?></td>
+                                    <td><input type="text" class="form-control" name="nama_projek" id="nama_projek" placeholder="nama_projek" value="<?php echo $nama_projek; ?>" /></td>
                                 </tr>
                                 <tr>
-                                    <td width='200'>Users <?php echo form_error('users') ?></td>
-                                    <td><input type="text" class="form-control" name="users" id="users" placeholder="Users" value="<?php echo $this->session->userdata('full_name') ?>" readonly /></td>
+                                    <td width='200'>Sales</td>
+                                    <td><?php echo select2_dinamis('id_sales', 'm_sales', 'id_sales', 'nm_sales', $id_sales, 'group ="SALES" and aktif="Y"', 'nm_sales ASC') ?></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td><input type="hidden" name="id_pelanggan" value="<?php echo $id_pelanggan; ?>" />
-                                        <button type="submit" name="flag" value="N" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <button type="submit" name="flag" value="Y" class="btn btn-success waves-effect waves-themed"><i class="fal fa-save"></i> Simpan & Buat Invoice</button>
+                                        <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
+                                        <!-- <button type="submit" name="flag" value="Y" class="btn btn-success waves-effect waves-themed"><i class="fal fa-save"></i> Simpan & Buat Invoice</button> -->
                                         <a href="<?php echo site_url('m_pelanggan') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
                                     </td>
                                 </tr>

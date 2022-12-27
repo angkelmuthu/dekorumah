@@ -24,7 +24,7 @@
                                     <tr>
                                         <th width="30px">No</th>
                                         <th>Nama</th>
-                                        <th>Alamat</th>
+                                        <!-- <th>Alamat</th> -->
                                         <th>Email</th>
                                         <th>Hp</th>
                                         <th>Nama Projek</th>

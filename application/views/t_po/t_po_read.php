@@ -88,8 +88,8 @@
 
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
                                         </form>
                                     </div>
@@ -114,7 +114,72 @@
                             <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit<?php echo $row->id_po ?>">Edit PO</button>
                         </div>
                         <div class="panel-toolbar ml-2">
-                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#edit<?php echo $row->id_po ?>">Hapus PO</button>
+                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#hapus<?php echo $row->id_po ?>">Hapus PO</button>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="edit<?php echo $row->id_po ?>" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">
+                                        PURCHASE ORDER
+                                        <small class="m-0 text-muted">
+                                            Edit PO
+                                        </small>
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                    </button>
+                                </div>
+                                <form action="<?php echo site_url('t_po/update_action') ?>" method="post">
+                                    <div class="modal-body">
+                                        <input type="hidden" name="id_po" value="<?php echo $row->id_po ?>">
+                                        <input type="hidden" name="id_pelanggan" value="<?php echo $this->uri->segment(3) ?>">
+                                        <table class='table table-striped'>
+                                            <tr>
+                                                <td width='200'>Barang</td>
+                                                <td><?php echo select2_dinamis('id_distributor', 'm_distributor', 'id_distributor', 'nm_distributor', $row->id_distributor, 'aktif="y"', 'nm_distributor ASC') ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td width='200'>Tgl. PO</td>
+                                                <td><input class="form-control" id="example-date" type="date" name="tgl_po" value="<?php echo $row->tgl_po ?>"></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">SImpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="hapus<?php echo $row->id_po ?>" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-xs" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">
+                                        PURCHASE ORDER
+                                        <small class="m-0 text-muted">
+                                            Hapus PO
+                                        </small>
+                                    </h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                    </button>
+                                </div>
+                                <form action="<?php echo site_url('t_po/delete/' . $row->id_po . '/' . $row->id_pelanggan) ?>" method="post">
+                                    <div class="modal-body">
+                                        <p>Apakah Anda yakin ingin Menghapus Data ini?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Ya</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-container show">
@@ -158,12 +223,46 @@
                                         <?php } ?>
                                     </tbody>
                                 </table>
+                                <?php if (!empty($row->grand_total)) { ?>
+                                    <div class="col-sm-4 ml-sm-auto">
+                                        <table class="table table-sm table-clean">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <strong>Subtotal</strong>
+                                                    </td>
+                                                    <td class="text-right">Rp. <?php echo angka($row->total) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <strong>Diskon</strong>
+                                                    </td>
+                                                    <td class="text-right">Rp. <?php echo angka($row->diskon) ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <strong>Ppn</strong>
+                                                    </td>
+                                                    <td class="text-right">Rp. <?php echo angka($row->ppn) ?></td>
+                                                </tr>
+                                                <tr class="table-scale-border-top border-left-0 border-right-0 border-bottom-0">
+
+                                                    <td class="text-left">
+                                                        <strong>Total</strong>
+                                                    </td>
+                                                    <td class="text-right fw-700">Rp. <?php echo angka($row->grand_total) ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="panel-content py-2 rounded-bottom border-faded border-left-0 border-right-0 border-bottom-0 text-muted d-flex">
                             <div class="col-md-12">
                                 <div class="text-center">
                                     <button type="button" class="btn btn-info btn-xs bayar" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">Pembayaran</button>
+                                    <button type="button" class="btn btn-info btn-xs file" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">File Bukti</button>
                                 </div>
                             </div>
                         </div>
@@ -172,6 +271,7 @@
             </div>
         <?php } ?>
     </div>
+
     <div class="modal fade" id="Tambah" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -195,7 +295,7 @@
         </div>
     </div>
     <div class="modal fade" id="Bayar" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
@@ -216,6 +316,28 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="File" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        PURCHASE ORDER
+                        <small class="m-0 text-muted">
+                            File Bukti
+                        </small>
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="File_modal">
+                        <!-- Data akan di tampilkan disini-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/vendors.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/app.bundle.js"></script>
@@ -223,9 +345,12 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#id_barang').select2({
-            dropdownParent: $('#default-example-modal .modal-content')
-        });
+        $('.modal').on('shown.bs.modal', function(e) {
+            $(this).find('.select2').select2({
+                dropdownParent: $(this).find('.modal-content')
+            });
+        })
+
         $('.tambah').click(function() {
             var id_pelanggan = $(this).attr("id_pelanggan");
             var id_po = $(this).attr("id_po");
@@ -256,6 +381,23 @@
                 success: function(data) {
                     $('#Bayar').modal("show");
                     $('#Bayar_modal').html(data);
+                }
+            });
+        });
+
+        $('.file').click(function() {
+            var id_pelanggan = $(this).attr("id_pelanggan");
+            var id_po = $(this).attr("id_po");
+            $.ajax({
+                url: '<?php echo base_url(); ?>t_po/get_file',
+                method: 'post',
+                data: {
+                    id_pelanggan: id_pelanggan,
+                    id_po: id_po
+                },
+                success: function(data) {
+                    $('#File').modal("show");
+                    $('#File_modal').html(data);
                 }
             });
         });

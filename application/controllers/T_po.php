@@ -129,52 +129,31 @@ class T_po extends CI_Controller
 
     public function update_action()
     {
-        //$this->_rules();
+        $data = array(
+            'id_distributor' => $this->input->post('id_distributor', TRUE),
+            'tgl_po' => $this->input->post('tgl_po', TRUE),
+            'id_users' => $this->session->userdata('id_users'),
+            'create_by' => $this->session->userdata('full_name'),
+            'create_date' => date('Y-m-d H:i:s'),
+        );
 
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_po', TRUE));
-        } else {
-            $data = array(
-                'no_po' => $this->input->post('no_po', TRUE),
-                'id_distributor' => $this->input->post('id_distributor', TRUE),
-                'id_permintaan' => $this->input->post('id_permintaan', TRUE),
-                'total' => $this->input->post('total', TRUE),
-                'diskon' => $this->input->post('diskon', TRUE),
-                'ppn' => $this->input->post('ppn', TRUE),
-                'biaya_lain' => $this->input->post('biaya_lain', TRUE),
-                'grand_total' => $this->input->post('grand_total', TRUE),
-                'id_users' => $this->input->post('id_users', TRUE),
-                'create_by' => $this->input->post('create_by', TRUE),
-                'create_date' => $this->input->post('create_date', TRUE),
-            );
-
-            $this->T_po_model->update($this->input->post('id_po', TRUE), $data);
-            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+        $this->T_po_model->update($this->input->post('id_po', TRUE), $data);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>
             </button><strong> Update Record Success</strong></div>');
-            redirect(site_url('t_po'));
-        }
+        redirect(site_url('t_po/read/' . $this->input->post('id_pelanggan')));
     }
 
-    public function delete($id)
+    public function delete($id, $id_pelanggan)
     {
-        $row = $this->T_po_model->get_by_id($id);
+        $this->db->where('id_po', $id);
+        $this->db->delete('t_po_detail');
 
-        if ($row) {
-            $this->T_po_model->delete($id);
-            $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-            </button><strong> Delete Record Success</strong></div>');
-            redirect(site_url('t_po'));
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert bg-warning-500" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true"><i class="fal fa-times"></i></span>
-            </button><strong> Record Not Found</strong></div>');
-            redirect(site_url('t_po'));
-        }
+        $this->db->where('id_po', $id);
+        $this->db->delete('t_po');
+
+        redirect(site_url('t_po/read/' . $id_pelanggan));
     }
 
     function tambah_barang()
@@ -220,12 +199,48 @@ class T_po extends CI_Controller
 
     function bayar_po()
     {
+        $row = $this->T_po_model->get_po_total($this->input->post('id_po'));
+        $row2 = $this->T_po_model->get_po_id($this->input->post('id_po'));
         $data = array(
             'id_pelanggan' => $this->input->post('id_pelanggan'),
             'id_po' => $this->input->post('id_po'),
-            'ro' => $this->T_po_model->get_permintaan($this->input->post('id_pelanggan')),
+            'jumlah' => $row->total,
+            'diskon' => $row2->diskon,
+            'ppn' => $row2->ppn,
+            'grand_total' => $row2->grand_total,
         );
         $this->load->view('t_po/modal_bayar', $data);
+    }
+
+    function bayar()
+    {
+        $data = array(
+            'total' => str_replace('.', '', $this->input->post('total')),
+            'diskon' => str_replace('.', '', $this->input->post('diskon')),
+            'ppn' => str_replace('.', '', $this->input->post('ppn')),
+            'grand_total' => str_replace('.', '', $this->input->post('grand_total')),
+            'id_users' => $this->session->userdata('id_users'),
+            'create_by' => $this->session->userdata('full_name'),
+            'create_date' => date('Y-m-d H:i:s'),
+        );
+        $this->db->where('id_po', $this->input->post('id_po'));
+        $this->db->update('t_po', $data);
+        redirect(site_url('t_po/read/' . $this->input->post('id_pelanggan')));
+    }
+
+    function get_file()
+    {
+        $row = $this->T_po_model->get_po_total($this->input->post('id_po'));
+        $row2 = $this->T_po_model->get_po_id($this->input->post('id_po'));
+        $data = array(
+            'id_pelanggan' => $this->input->post('id_pelanggan'),
+            'id_po' => $this->input->post('id_po'),
+            'jumlah' => $row->total,
+            'diskon' => $row2->diskon,
+            'ppn' => $row2->ppn,
+            'grand_total' => $row2->grand_total,
+        );
+        $this->load->view('t_po/modal_file', $data);
     }
 
     public function ajax_list()

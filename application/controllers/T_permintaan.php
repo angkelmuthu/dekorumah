@@ -69,7 +69,7 @@ class T_permintaan extends CI_Controller
 
     public function create_action()
     {
-        $no_ro = 'RO' . date('YmdHis');
+        $no_ro = 'RO' . date('ymdHis');
         $data = array(
             'jenis_permintaan' => $this->input->post('jenis_permintaan', TRUE),
             'no_ro' => $no_ro,

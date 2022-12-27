@@ -61,7 +61,7 @@ class T_po_model extends CI_Model
         $this->db->select('a.*,b.nm_distributor');
         $this->db->from('t_po a');
         $this->db->join('m_distributor b', 'a.id_distributor=b.id_distributor', 'left');
-        $this->db->order_by('a.create_date', 'ASC');
+        $this->db->order_by('a.id_po', 'ASC');
         $this->db->where('a.id_pelanggan', $id);
         return $this->db->get()->result();
     }
@@ -75,12 +75,26 @@ class T_po_model extends CI_Model
         return $this->db->get()->row();
     }
 
-    function get_po_detail($id)
+    function get_po_total($id)
     {
         $this->db->select('sum(harga_total) as total');
         $this->db->from('t_po_detail');
         $this->db->where('id_po', $id);
         return $this->db->get()->row();
+    }
+
+    function get_po_id($id)
+    {
+        $this->db->select('ifnull(diskon,0) as diskon,ifnull(ppn,0) as ppn,ifnull(grand_total,0) as grand_total');
+        $this->db->where('id_po', $id);
+        return $this->db->get('t_po')->row();
+    }
+
+    function get_file($id)
+    {
+        $this->db->select('ifnull(diskon,0) as diskon,ifnull(ppn,0) as ppn,ifnull(grand_total,0) as grand_total');
+        $this->db->where('id_po', $id);
+        return $this->db->get('t_po')->row();
     }
 
     // get total rows
