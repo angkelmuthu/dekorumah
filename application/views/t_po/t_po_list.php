@@ -15,7 +15,7 @@
                         <div class="text-center">
                             <?php echo anchor(site_url('t_po/create'), '<i class="fal fa-plus-square" aria-hidden="true"></i> Tambah Data', 'class="btn btn-primary btn-sm waves-effect waves-themed"'); ?></div>
                         <table class="table table-bordered table-hover table-striped w-100" id="example">
-                            <thead>
+                            <thead class="thead-themed">
                                 <tr>
                                     <th width="30px">No</th>
                                     <th>Nama Pelanggan</th>

@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <table class="table table-bordered table-hover table-striped w-100" id="example">
-                            <thead>
+                            <thead class="thead-themed">
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="13%">Tanggal</th>
