@@ -1,4 +1,4 @@
-<form action="<?php echo site_url('m_survei/upload_gambar') ?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo site_url('t_pembayaran/update_action') ?>" method="post" enctype="multipart/form-data">
     <input class="form-control" type="hidden" name="id_bayar" value="<?php echo $id_bayar ?>">
     <table class='table table-striped'>
         <tr>

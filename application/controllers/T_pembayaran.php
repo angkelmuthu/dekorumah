@@ -35,7 +35,9 @@ class T_pembayaran extends CI_Controller
             $row[] = $res->title;
             $row[] = '<div class="text-right">' . angka($res->total) . '</div>';
             $row[] = $res->keterangan;
-            $row[] = '<button type="button" class="view_bayar btn btn-info btn-xs" id_bayar="' . $res->id_bayar . '"><i class="fal fa-eye" aria-hidden="true"></i></button>
+            $row[] = '
+            <a href="#" class="btn btn-success btn-xs" id_bayar="' . $res->id_bayar . '"><i class="fal fa-file-pdf" aria-hidden="true"></i></a>
+            <button type="button" class="view_bayar btn btn-info btn-xs" id_bayar="' . $res->id_bayar . '"><i class="fal fa-eye" aria-hidden="true"></i></button>
             <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#default' . $res->id_bayar . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
             <div class="modal fade" id="default' . $res->id_bayar . '" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-xs" role="document">
@@ -138,7 +140,7 @@ class T_pembayaran extends CI_Controller
 
     public function update_action()
     {
-        if (isset($_FILES["gambar"]["name"])) {
+        if (isset($_FILES["image"]) && !empty($_FILES["image"]["name"])) {
             if (isset($_FILES["gambar"]["name"])) {
                 $config['upload_path'] = './assets/gambar/';
                 $config['allowed_types'] = 'jpg|pdf';
@@ -165,8 +167,8 @@ class T_pembayaran extends CI_Controller
 
             $no_bayar = 'INV.' . date('ymdHis');
             $data = array(
-                'no_bayar' => $no_bayar,
-                'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
+                // 'no_bayar' => $no_bayar,
+                // 'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
                 'title' => $this->input->post('title', TRUE),
                 'keterangan' => $this->input->post('keterangan', TRUE),
                 'total' => str_replace('.', '', $this->input->post('total')),
@@ -178,8 +180,8 @@ class T_pembayaran extends CI_Controller
         } else {
             $no_bayar = 'INV.' . date('ymdHis');
             $data = array(
-                'no_bayar' => $no_bayar,
-                'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
+                // 'no_bayar' => $no_bayar,
+                // 'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
                 'title' => $this->input->post('title', TRUE),
                 'keterangan' => $this->input->post('keterangan', TRUE),
                 'total' => str_replace('.', '', $this->input->post('total')),
@@ -188,7 +190,7 @@ class T_pembayaran extends CI_Controller
                 'create_date' => date('Y-m-d H:i:s'),
             );
         }
-        $this->T_pembayaran_model->insert($data);
+        $this->T_pembayaran_model->update($this->input->post('id_bayar', TRUE), $data);
         $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>

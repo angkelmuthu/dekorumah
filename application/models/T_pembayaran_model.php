@@ -39,7 +39,7 @@ class T_pembayaran_model extends CI_Model
     // update data
     function update($id, $data)
     {
-        $this->db->where($this->id, $id);
+        $this->db->where('id_bayar', $id);
         $this->db->update($this->table, $data);
     }
 
