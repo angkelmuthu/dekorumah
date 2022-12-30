@@ -6,8 +6,8 @@ if (!defined('BASEPATH'))
 class T_pembayaran_model extends CI_Model
 {
 
-    public $table = 't_po';
-    public $id = 'id_po';
+    public $table = 't_pembayaran';
+    public $id = 'id_pembayaran';
     public $order = 'DESC';
 
     function __construct()
@@ -16,9 +16,19 @@ class T_pembayaran_model extends CI_Model
         $this->load->database();
     }
 
-    var $column_order = array(null, 'a.create_date', 'b.nama_projek', 'a.no_bayar', 'a.total');
-    var $column_search = array('a.create_date', 'b.nama_projek', 'a.no_bayar', 'a.total');
+    var $column_order = array(null, 'a.create_date', 'a.no_bayar', 'b.nama_projek', 'a.title', 'a.total', 'a.keterangan');
+    var $column_search = array('a.create_date', 'a.no_bayar', 'b.nama_projek', 'a.title', 'a.total', 'a.keterangan');
     var $order_by = array('a.create_date' => 'DESC');
+
+    function get_pembayaran($id)
+    {
+        $this->db->select("a.*,b.nama_projek");
+        $this->db->from("t_pembayaran a");
+        $this->db->join("m_pelanggan b", "a.id_pelanggan=b.id_pelanggan", "LEFT");
+        $this->db->where('a.id_bayar', $id);
+        return $this->db->get($this->table)->row();
+    }
+
 
     // insert data
     function insert($data)
