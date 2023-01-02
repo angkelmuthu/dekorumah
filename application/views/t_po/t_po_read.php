@@ -100,13 +100,16 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
         <?php
         $no = 1;
         foreach ($list as $row) { ?>
             <div class="col-xl-12">
                 <div id="panel-1" class="panel">
                     <div class="panel-hdr">
-                        <h2>No. <?php echo $row->no_po ?></h2>
+                        <h2>No. <?php echo $row->no_po ?>
+                        </h2>
                         <div class="panel-toolbar">
                             <button type="button" class="btn btn-info btn-xs tambah" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">Pilih Barang</button>
                         </div>
@@ -184,45 +187,68 @@
                     </div>
                     <div class="panel-container show">
                         <div class="panel-content">
-                            <table class="table table-clean table-sm">
-                                <tr>
-                                    <td>Tgl PO</td>
-                                    <td>: <?php echo tanggal($row->tgl_po) ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Distributor</td>
-                                    <td>: <?php echo $row->nm_distributor ?></td>
-                                </tr>
-                            </table>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover table-striped w-100" id="example">
-                                    <thead class="thead-themed">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <table class="table table-clean table-sm">
                                         <tr>
-                                            <th width="30px">No</th>
-                                            <th>Barang</th>
-                                            <th width="5%">Qty</th>
-                                            <th width="15%">Harga Satuan</th>
-                                            <th width="20%">Harga Total</th>
-                                            <th width="10%">Action</th>
+                                            <td>Tgl PO</td>
+                                            <td>: <?php echo tanggal($row->tgl_po) ?></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $no = 1;
-                                        $this->db->where('id_po', $row->id_po);
-                                        $result = $this->db->get('t_po_detail')->result();
-                                        foreach ($result as $dt) { ?>
-                                            <tr>
-                                                <td><?= $no++; ?></td>
-                                                <td><?= $dt->nm_barang ?></td>
-                                                <td class="text-center"><?= $dt->qty ?></td>
-                                                <td class="text-right"><?= angka($dt->harga_satuan) ?></td>
-                                                <td class="text-right"><?= angka($dt->harga_total) ?></td>
-                                                <td></td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
+                                        <tr>
+                                            <td>Distributor</td>
+                                            <td>: <?php echo $row->nm_distributor ?></td>
+                                        </tr>
+                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped w-100" id="example">
+                                            <thead class="thead-themed">
+                                                <tr>
+                                                    <th width="30px">No</th>
+                                                    <th>Barang</th>
+                                                    <th width="5%">Qty</th>
+                                                    <th width="15%">Harga Satuan</th>
+                                                    <th width="20%">Harga Total</th>
+                                                    <th width="10%">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $no = 1;
+                                                $this->db->where('id_po', $row->id_po);
+                                                $result = $this->db->get('t_po_detail')->result();
+                                                foreach ($result as $dt) { ?>
+                                                    <tr>
+                                                        <td><?= $no++; ?></td>
+                                                        <td><?= $dt->nm_barang ?></td>
+                                                        <td class="text-center"><?= $dt->qty ?></td>
+                                                        <td class="text-right"><?= angka($dt->harga_satuan) ?></td>
+                                                        <td class="text-right"><?= angka($dt->harga_total) ?></td>
+                                                        <td></td>
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <?php if ($row->status == 1) { ?>
+                                        <div class="alert bg-success-500" role="alert">
+                                            <strong>Verifikasi!</strong> PO sudah di setujui, silahkan diproses.
+                                        </div>
+                                    <?php } elseif ($row->status == 2) { ?>
+                                        <div class="alert bg-info-500" role="alert">
+                                            <strong>Selesai!</strong> PO sudah dibayar.
+                                        </div>
+                                    <?php } elseif ($row->status == 9) { ?>
+                                        <div class="alert bg-danger-500" role="alert">
+                                            <strong>Selesai!</strong> PO sudah Tidak disetujui.
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="alert bg-warning-500" role="alert">
+                                            <strong>Menunggu!</strong> Menunggu Verifikasi, selama belum diverifikasi PO tidak bisa diproses.
+                                        </div>
+                                    <?php } ?>
+                                </div>
                                 <?php if (!empty($row->grand_total)) { ?>
                                     <div class="col-sm-4 ml-sm-auto">
                                         <table class="table table-sm table-clean">
@@ -261,8 +287,33 @@
                         <div class="panel-content py-2 rounded-bottom border-faded border-left-0 border-right-0 border-bottom-0 text-muted d-flex">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-info btn-xs bayar" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">Pembayaran</button>
-                                    <button type="button" class="btn btn-info btn-xs file" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">File Bukti</button>
+                                    <?php if ($row->status == 1) { ?>
+                                        <button type="button" class="btn btn-info btn-xs bayar" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">Pembayaran</button>
+                                        <button type="button" class="btn btn-info btn-xs file" id_pelanggan="<?php echo $row->id_pelanggan ?>" id_po="<?php echo $row->id_po ?>">File Bukti</button>
+                                    <?php } else { ?>
+                                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#verif<?php echo $row->id_po ?>">Verifikasi</button>
+                                    <?php } ?>
+                                </div>
+                                <div class="modal fade" id="verif<?php echo $row->id_po ?>" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">
+                                                    PURCHASE ORDER
+                                                    <small class="m-0 text-muted">
+                                                        Approve PO
+                                                    </small>
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fal fa-times"></i></span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <a href="<?php echo site_url('t_po/verif/' . $this->uri->segment(3) . '/' . $row->id_po . '/1') ?>" class="btn btn-block btn-info">Approve</a>
+                                                <a href="<?php echo site_url('t_po/verif/' . $this->uri->segment(3) . '/' . $row->id_po . '/9') ?>" class="btn btn-block btn-danger">Don't Agree</a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

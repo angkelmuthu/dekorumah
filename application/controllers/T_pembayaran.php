@@ -30,6 +30,7 @@ class T_pembayaran extends CI_Controller
             $row = array();
             $row[] = $no;
             $row[] = tanggaljam($res->create_date);
+            $row[] = $res->nama_dana . ' - ' . $res->norek;
             $row[] = $res->no_bayar;
             $row[] = $res->nama_projek;
             $row[] = $res->title;
@@ -107,6 +108,7 @@ class T_pembayaran extends CI_Controller
             $no_bayar = 'INV.' . date('ymdHis');
             $data = array(
                 'no_bayar' => $no_bayar,
+                'id_dana' => $this->input->post('id_dana', TRUE),
                 'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
                 'title' => $this->input->post('title', TRUE),
                 'keterangan' => $this->input->post('keterangan', TRUE),
@@ -120,6 +122,7 @@ class T_pembayaran extends CI_Controller
             $no_bayar = 'INV.' . date('ymdHis');
             $data = array(
                 'no_bayar' => $no_bayar,
+                'id_dana' => $this->input->post('id_dana', TRUE),
                 'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
                 'title' => $this->input->post('title', TRUE),
                 'keterangan' => $this->input->post('keterangan', TRUE),
@@ -169,6 +172,7 @@ class T_pembayaran extends CI_Controller
             $data = array(
                 // 'no_bayar' => $no_bayar,
                 // 'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
+                'id_dana' => $this->input->post('id_dana', TRUE),
                 'title' => $this->input->post('title', TRUE),
                 'keterangan' => $this->input->post('keterangan', TRUE),
                 'total' => str_replace('.', '', $this->input->post('total')),
@@ -182,6 +186,7 @@ class T_pembayaran extends CI_Controller
             $data = array(
                 // 'no_bayar' => $no_bayar,
                 // 'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
+                'id_dana' => $this->input->post('id_dana', TRUE),
                 'title' => $this->input->post('title', TRUE),
                 'keterangan' => $this->input->post('keterangan', TRUE),
                 'total' => str_replace('.', '', $this->input->post('total')),

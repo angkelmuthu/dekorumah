@@ -38,6 +38,10 @@
                                         <div class="modal-body">
                                             <table class='table table-striped'>
                                                 <tr>
+                                                    <td width='200'>Rekening</td>
+                                                    <td><?php echo cmb_dinamis_concate('id_dana', 't_sumber_dana', 'id_dana', 'nama_dana', 'norek', '', '', 'id_dana DESC') ?></td>
+                                                </tr>
+                                                <tr>
                                                     <td width='200'>Nama Projek</td>
                                                     <td><?php echo select2_dinamis('id_pelanggan', 'm_pelanggan', 'id_pelanggan', 'nama_projek', '', '', 'id_pelanggan DESC') ?></td>
                                                 </tr>
@@ -73,13 +77,14 @@
                             <thead class="thead-themed">
                                 <tr>
                                     <th width="5%">No</th>
-                                    <th width="13%">Tanggal</th>
+                                    <th width="10%">Tanggal</th>
+                                    <th width="10%">Rekening</th>
                                     <th width="7%">No. Bayar</th>
                                     <th width="10%">Nama Projek</th>
                                     <th width="15%">Perihal</th>
                                     <th width="10%" class="text-right">Nominal</th>
-                                    <th width="25%">Keterangan</th>
-                                    <th width="15%">Action</th>
+                                    <th width="20%">Keterangan</th>
+                                    <th width="13%">Action</th>
                                 </tr>
                             </thead>
 

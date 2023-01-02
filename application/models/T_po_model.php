@@ -85,7 +85,7 @@ class T_po_model extends CI_Model
 
     function get_po_id($id)
     {
-        $this->db->select('ifnull(diskon,0) as diskon,ifnull(ppn,0) as ppn,ifnull(grand_total,0) as grand_total');
+        $this->db->select('id_dana, ifnull(diskon,0) as diskon, ifnull(ppn,0) as ppn, ifnull(grand_total,0) as grand_total');
         $this->db->where('id_po', $id);
         return $this->db->get('t_po')->row();
     }

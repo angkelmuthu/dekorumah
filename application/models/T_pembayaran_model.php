@@ -25,6 +25,7 @@ class T_pembayaran_model extends CI_Model
         $this->db->select("a.*,b.nama_projek");
         $this->db->from("t_pembayaran a");
         $this->db->join("m_pelanggan b", "a.id_pelanggan=b.id_pelanggan", "LEFT");
+        //$this->db->join("t_sumber_dana c", "a.id_dana=c.id_dana", "LEFT");
         $this->db->where('a.id_bayar', $id);
         return $this->db->get($this->table)->row();
     }
@@ -53,9 +54,10 @@ class T_pembayaran_model extends CI_Model
     ///////////////////////////////////////////////////////////////////////////
     private function _get()
     {
-        $this->db->select("a.*,b.nama_projek");
+        $this->db->select("a.*,b.nama_projek,c.nama_dana,c.norek");
         $this->db->from("t_pembayaran a");
         $this->db->join("m_pelanggan b", "a.id_pelanggan=b.id_pelanggan", "LEFT");
+        $this->db->join("t_sumber_dana c", "a.id_dana=c.id_dana", "LEFT");
 
         $i = 0;
 
@@ -106,9 +108,10 @@ class T_pembayaran_model extends CI_Model
 
     public function count_all()
     {
-        $this->db->select("a.*,b.nama_projek");
+        $this->db->select("a.*,b.nama_projek,c.nama_dana,c.norek");
         $this->db->from("t_pembayaran a");
         $this->db->join("m_pelanggan b", "a.id_pelanggan=b.id_pelanggan", "LEFT");
+        $this->db->join("t_sumber_dana c", "a.id_dana=c.id_dana", "LEFT");
         return $this->db->count_all_results();
     }
 }

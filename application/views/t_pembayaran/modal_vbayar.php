@@ -6,6 +6,10 @@
             <td colspan="2"><input class="form-control" type="text" name="no_bayar" value="<?php echo $bayar->no_bayar ?>" readonly></td>
         </tr>
         <tr>
+            <td width='200'>Rekening</td>
+            <td><?php echo cmb_dinamis_concate('id_dana', 't_sumber_dana', 'id_dana', 'nama_dana', 'norek', $bayar->id_dana, '', 'id_dana DESC') ?></td>
+        </tr>
+        <tr>
             <td width='200'>Nama Projek</td>
             <td colspan="2"><input class="form-control" type="text" name="nama_projek" value="<?php echo $bayar->nama_projek ?>" readonly></td>
         </tr>

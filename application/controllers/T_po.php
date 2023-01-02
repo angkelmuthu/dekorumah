@@ -204,6 +204,7 @@ class T_po extends CI_Controller
         $data = array(
             'id_pelanggan' => $this->input->post('id_pelanggan'),
             'id_po' => $this->input->post('id_po'),
+            'id_dana' => $row2->id_dana,
             'jumlah' => $row->total,
             'diskon' => $row2->diskon,
             'ppn' => $row2->ppn,
@@ -215,10 +216,12 @@ class T_po extends CI_Controller
     function bayar()
     {
         $data = array(
+            'id_dana' => $this->input->post('id_dana'),
             'total' => str_replace('.', '', $this->input->post('total')),
             'diskon' => str_replace('.', '', $this->input->post('diskon')),
             'ppn' => str_replace('.', '', $this->input->post('ppn')),
             'grand_total' => str_replace('.', '', $this->input->post('grand_total')),
+            'status' => '2',
             'id_users' => $this->session->userdata('id_users'),
             'create_by' => $this->session->userdata('full_name'),
             'create_date' => date('Y-m-d H:i:s'),
@@ -226,6 +229,17 @@ class T_po extends CI_Controller
         $this->db->where('id_po', $this->input->post('id_po'));
         $this->db->update('t_po', $data);
         redirect(site_url('t_po/read/' . $this->input->post('id_pelanggan')));
+    }
+
+
+    function verif($id_pelanggan, $id_po, $status)
+    {
+        $data = array(
+            'status' => $status,
+        );
+        $this->db->where('id_po', $id_po);
+        $this->db->update('t_po', $data);
+        redirect(site_url('t_po/read/' . $id_pelanggan));
     }
 
     function get_file()

@@ -3,6 +3,10 @@
         <input class="form-control" id="id_po" type="hidden" name="id_po" value="<?php echo $id_po ?>">
         <input class="form-control" id="id_pelanggan" type="hidden" name="id_pelanggan" value="<?php echo $id_pelanggan ?>">
         <tr>
+            <td width='200'>Rekening</td>
+            <td><?php echo cmb_dinamis_concate('id_dana', 't_sumber_dana', 'id_dana', 'nama_dana', 'norek', $id_dana, '', 'id_dana DESC') ?></td>
+        </tr>
+        <tr>
             <td width='200'>Jumlah</td>
             <td>
                 <input class="form-control rupiah" id="total" type="text" name="total" value="<?php echo $jumlah ?>" required>
