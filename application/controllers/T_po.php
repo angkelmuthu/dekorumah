@@ -12,6 +12,7 @@ class T_po extends CI_Controller
         $this->load->model('T_po_model');
         $this->load->library('form_validation');
         $this->load->library('datatables');
+        $this->load->library('upload');
     }
 
     public function index()
@@ -244,17 +245,60 @@ class T_po extends CI_Controller
 
     function get_file()
     {
-        $row = $this->T_po_model->get_po_total($this->input->post('id_po'));
-        $row2 = $this->T_po_model->get_po_id($this->input->post('id_po'));
         $data = array(
             'id_pelanggan' => $this->input->post('id_pelanggan'),
             'id_po' => $this->input->post('id_po'),
-            'jumlah' => $row->total,
-            'diskon' => $row2->diskon,
-            'ppn' => $row2->ppn,
-            'grand_total' => $row2->grand_total,
+            'list' => $this->T_po_model->get_file($this->input->post('id_po')),
         );
         $this->load->view('t_po/modal_file', $data);
+    }
+
+    public function create_file()
+    {
+        if (isset($_FILES["gambar"]["name"])) {
+            $config['upload_path'] = './assets/rab/';
+            $config['allowed_types'] = 'jpg|pdf';
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('gambar')) {
+                $this->upload->display_errors();
+                return FALSE;
+            } else {
+                $data = $this->upload->data();
+                //Compress Image
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './assets/rab/' . $data['file_name'];
+                $config['create_thumb'] = FALSE;
+                // $config['maintain_ratio'] = TRUE;
+                // $config['quality'] = '60%';
+                // $config['width'] = 800;
+                // $config['height'] = 800;
+                $config['new_image'] = './assets/rab/' . $data['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+                $image = $data['file_name'];
+            }
+        }
+        $data = array(
+            'id_po' => $this->input->post('id_po', TRUE),
+            'keterangan' => $this->input->post('keterangan', TRUE),
+            'file' => $image,
+            'id_users' => $this->session->userdata('id_users'),
+            'create_by' => $this->session->userdata('full_name'),
+            'create_date' => date('Y-m-d H:i:s'),
+        );
+
+        $this->db->insert('t_po_file', $data);
+        redirect(site_url('t_po/read/' . $this->input->post('id_pelanggan')));
+    }
+
+    public function delete_file($id, $id_pelanggan)
+    {
+        $this->T_po_model->delete_file($id);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Delete Record Success</strong></div>');
+        redirect(site_url('T_po/read/' . $id_pelanggan));
     }
 
     public function ajax_list()

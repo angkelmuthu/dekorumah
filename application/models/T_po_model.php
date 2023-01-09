@@ -92,9 +92,8 @@ class T_po_model extends CI_Model
 
     function get_file($id)
     {
-        $this->db->select('ifnull(diskon,0) as diskon,ifnull(ppn,0) as ppn,ifnull(grand_total,0) as grand_total');
         $this->db->where('id_po', $id);
-        return $this->db->get('t_po')->row();
+        return $this->db->get('t_po_file')->result();
     }
 
     // get total rows
@@ -156,6 +155,11 @@ class T_po_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function delete_file($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('t_po_file');
+    }
     ///////////////////////////////////////////////////////////////////////////
     private function _get()
     {

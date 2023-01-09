@@ -28,7 +28,7 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>Harga Satuan <?php echo form_error('harga_satuan') ?></td>
-                                    <td><input type="number" class="form-control" name="harga_satuan" id="harga_satuan" placeholder="Harga Satuan" value="<?php echo $harga_satuan; ?>" /></td>
+                                    <td><input type="test" class="form-control rupiah" name="harga_satuan" id="harga_satuan" value="<?php echo $harga_satuan; ?>" /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Qty <?php echo form_error('qty') ?></td>
@@ -36,7 +36,7 @@
                                 </tr>
                                 <tr>
                                     <td width='200'>Harga Total <?php echo form_error('harga_total') ?></td>
-                                    <td><input type="number" class="form-control" name="harga_total" id="harga_total" placeholder="Harga Total" value="<?php echo $harga_total; ?>" /></td>
+                                    <td><input type="text" class="form-control rupiah" name="harga_total" id="harga_total" value="<?php echo $harga_total; ?>" /></td>
                                 </tr>
                                 <tr>
                                     <td width='200'>Deskripsi <?php echo form_error('deskripsi') ?></td>
@@ -47,7 +47,7 @@
                                     <td><input type="hidden" name="id_order" value="<?php echo $id_order ?>" />
                                         <input type="hidden" name="id_pelanggan" value="<?php echo $this->uri->segment(3) ?>" />
                                         <button type="submit" class="btn btn-warning waves-effect waves-themed"><i class="fal fa-save"></i> <?php echo $button ?></button>
-                                        <a href="<?php echo site_url('t_penjualan') ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
+                                        <a href="<?php echo site_url('t_penjualan/read/' . $this->uri->segment(3)) ?>" class="btn btn-info waves-effect waves-themed"><i class="fal fa-sign-out"></i> Kembali</a>
                                     </td>
                                 </tr>
                             </table>
@@ -64,3 +64,16 @@
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/select2/select2.bundle.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
 <script src="<?php echo base_url() ?>assets/smartadmin/js/kostum.js"></script>
+<script src="<?php echo base_url() ?>assets/smartadmin/js/formplugins/inputmask/inputmask.bundle.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".rupiah").inputmask({
+            prefix: '',
+            radixPoint: ',',
+            groupSeparator: ".",
+            alias: "numeric",
+            autoGroup: true,
+            digits: 0
+        });
+    });
+</script>

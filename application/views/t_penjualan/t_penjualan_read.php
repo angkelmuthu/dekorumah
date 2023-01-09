@@ -90,14 +90,61 @@
                                             <span aria-hidden="true"><i class="fal fa-times"></i></span>
                                         </button>
                                     </div>
-                                    <form action="<?php echo site_url('t_po/update_action') ?>" method="post">
-                                        <div class="modal-body">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
-                                    </form>
+
+                                    <div class="modal-body">
+                                        <form action="<?php echo site_url('t_penjualan/create_rab') ?>" method="post" enctype="multipart/form-data">
+                                            <input class="form-control" type="hidden" name="id_pelanggan" value="<?php echo $this->uri->segment(3) ?>">
+                                            <table class='table table-striped'>
+                                                <tr>
+                                                    <td width='200'>Keterangan</td>
+                                                    <td><textarea class="form-control" type="text" name="keterangan" value="" required></textarea></td>
+                                                </tr>
+                                                <tr>
+                                                    <td width='200'>File</td>
+                                                    <td><input type="file" class="form-control-file" name="gambar" required></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <button type="submit" class="btn btn-block btn-warning">Simpan</button>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered table-hover table-striped w-100">
+                                                    <thead class="thead-themed">
+                                                        <tr>
+                                                            <th width="30px">No</th>
+                                                            <th>Keterangan</th>
+                                                            <th>File</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $no = 1;
+                                                        $this->db->where('id_pelanggan', $this->uri->segment(3));
+                                                        $this->db->order_by('id', 'ASC');
+                                                        $sql = $this->db->get('t_rab')->result();
+                                                        foreach ($sql as $row) { ?>
+                                                            <tr>
+                                                                <td><?php echo $no++; ?></td>
+                                                                <td><?php echo $row->keterangan ?></td>
+                                                                <td><a href="<?php echo site_url('assets/rab/' . $row->file) ?>" target="_blank" class="btn btn-xs btn-success">Lihat</a></td>
+                                                                <td>
+                                                                    <a href="<?php echo site_url('T_penjualan/delete_rab/' . $row->id . '/' . $row->id_pelanggan); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure ?');"><i class="fal fa-trash" aria-hidden="true"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

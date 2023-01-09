@@ -218,4 +218,13 @@ class T_pembayaran extends CI_Controller
         );
         $this->load->view('t_pembayaran/modal_vbayar', $data);
     }
+
+    function kwitansi()
+    {
+        // $this->load->library('pdf');
+        // $this->pdf->setPaper('A4', 'potrait');
+        // $this->pdf->filename = "tes.pdf";
+        // $this->pdf->load_view('t_pembayaran/kwitansi_pdf');
+        $this->load->view('t_pembayaran/kwitansi_pdf');
+    }
 }

@@ -64,6 +64,12 @@ class T_penjualan_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function delete_rab($id)
+    {
+        $this->db->where($this->id, $id);
+        $this->db->delete('t_rab');
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     private function _get()
     {

@@ -12,6 +12,7 @@ class T_penjualan extends CI_Controller
         $this->load->model('T_penjualan_model');
         $this->load->library('form_validation');
         $this->load->library('datatables');
+        $this->load->library('upload');
     }
 
     public function index()
@@ -92,14 +93,13 @@ class T_penjualan extends CI_Controller
             'id_produk' => $this->input->post('id_produk', TRUE),
             'id_satuan' => $this->input->post('id_satuan', TRUE),
             'qty' => $this->input->post('qty', TRUE),
-            'harga_satuan' => $this->input->post('harga_satuan', TRUE),
-            'harga_total' => $this->input->post('harga_total', TRUE),
+            'harga_satuan' => str_replace('.', '', $this->input->post('harga_satuan', TRUE)),
+            'harga_total' => str_replace('.', '', $this->input->post('harga_total', TRUE)),
             'deskripsi' => $this->input->post('deskripsi', TRUE),
             'id_users' => $this->session->userdata('id_users'),
             'create_by' => $this->session->userdata('full_name'),
             'create_date' => date('Y-m-d H:i:s'),
         );
-
         $this->T_penjualan_model->insert($data);
         $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -171,6 +171,54 @@ class T_penjualan extends CI_Controller
     public function delete($id, $id_pelanggan)
     {
         $this->T_penjualan_model->delete($id);
+        $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="fal fa-times"></i></span>
+            </button><strong> Delete Record Success</strong></div>');
+        redirect(site_url('T_penjualan/read/' . $id_pelanggan));
+    }
+
+    public function create_rab()
+    {
+        if (isset($_FILES["gambar"]["name"])) {
+            $config['upload_path'] = './assets/rab/';
+            $config['allowed_types'] = 'jpg|pdf';
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('gambar')) {
+                $this->upload->display_errors();
+                return FALSE;
+            } else {
+                $data = $this->upload->data();
+                //Compress Image
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './assets/rab/' . $data['file_name'];
+                $config['create_thumb'] = FALSE;
+                // $config['maintain_ratio'] = TRUE;
+                // $config['quality'] = '60%';
+                // $config['width'] = 800;
+                // $config['height'] = 800;
+                $config['new_image'] = './assets/rab/' . $data['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+                $image = $data['file_name'];
+            }
+        }
+        $data = array(
+            'id_pelanggan' => $this->input->post('id_pelanggan', TRUE),
+            'keterangan' => $this->input->post('keterangan', TRUE),
+            'file' => $image,
+            'id_users' => $this->session->userdata('id_users'),
+            'create_by' => $this->session->userdata('full_name'),
+            'create_date' => date('Y-m-d H:i:s'),
+        );
+
+        $this->db->insert('t_rab', $data);
+        redirect(site_url('t_penjualan/read/' . $this->input->post('id_pelanggan')));
+    }
+
+    public function delete_rab($id, $id_pelanggan)
+    {
+        $this->T_penjualan_model->delete_rab($id);
         $this->session->set_flashdata('message', '<div class="alert bg-info-500" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="fal fa-times"></i></span>

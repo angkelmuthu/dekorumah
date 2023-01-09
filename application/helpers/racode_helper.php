@@ -368,7 +368,7 @@ function formatRP($angka)
 function formatRP0($angka)
 {
     $angka = intval($angka);
-    $angka = "" . number_format($angka, 2, ',', '.');
+    $angka = "" . number_format($angka, 0, ',', '.');
     return $angka;
 }
 
