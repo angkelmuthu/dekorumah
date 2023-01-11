@@ -17,7 +17,13 @@ class T_keuangan_new extends CI_Controller
 
     public function index()
     {
-        $this->template->load('template', 'T_keuangan_new/T_keuangan_new_list');
+        $row = $this->T_keuangan_new_model->get_total();
+        $data = array(
+            'debit' => $row->debit,
+            'kredit' => $row->kredit,
+            'detail' => $this->T_keuangan_new_model->get_group_total(),
+        );
+        $this->template->load('template', 'T_keuangan_new/T_keuangan_new_list', $data);
     }
 
     public function ajax_list()

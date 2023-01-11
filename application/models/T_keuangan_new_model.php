@@ -33,6 +33,23 @@ class T_keuangan_new_model extends CI_Model
     }
 
 
+    function get_total()
+    {
+        $this->db->select("SUM(debit) as debit,SUM(kredit) as kredit");
+        $this->db->from("v_keuangan_new");
+        $this->db->where('year(create_date)', date('Y'));
+        return $this->db->get()->row();
+    }
+
+    function get_group_total()
+    {
+        $this->db->select("rek,SUM(kredit)-SUM(debit) as ttl");
+        $this->db->from("v_keuangan_new");
+        $this->db->where('year(create_date)', date('Y'));
+        $this->db->group_by('rek');
+        return $this->db->get()->result();
+    }
+
     // insert data
     function insert($data)
     {
@@ -57,6 +74,7 @@ class T_keuangan_new_model extends CI_Model
     private function _get()
     {
         $this->db->from("v_keuangan_new");
+        $this->db->where('year(create_date)', date('Y'));
 
         $i = 0;
 
@@ -108,6 +126,7 @@ class T_keuangan_new_model extends CI_Model
     public function count_all()
     {
         $this->db->from("v_keuangan_new");
+        $this->db->where('year(create_date)', date('Y'));
         return $this->db->count_all_results();
     }
 }

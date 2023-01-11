@@ -4,11 +4,54 @@
     }
 </style>
 <main id="js-page-content" role="main" class="page-content">
+    <div class="subheader">
+        <h1 class="subheader-title">
+            <i class='subheader-icon fal fa-chart-area'></i> TRANSAKSI <span class='fw-300'>KEUANGAN</span>
+        </h1>
+        <div class="d-flex mr-4">
+            <div>
+                <label class="fs-sm mb-0 mt-2 mt-md-0">DATA TAHUN</label>
+                <h4 class="text-right font-weight-bold mb-0"><?php echo date('Y'); ?></h4>
+            </div>
+        </div>
+        <div class="d-flex mr-4">
+            <div>
+                <label class="fs-sm mb-0 mt-2 mt-md-0">DEBIT</label>
+                <h4 class="text-right font-weight-bold mb-0"><?php echo formatRP($debit) ?></h4>
+            </div>
+        </div>
+        <div class="d-flex mr-4">
+            <div>
+                <label class="fs-sm mb-0 mt-2 mt-md-0">KREDIT</label>
+                <h4 class="text-right font-weight-bold mb-0"><?php echo formatRP($kredit) ?></h4>
+            </div>
+        </div>
+        <div class="d-flex mr-0">
+            <div>
+                <label class="fs-sm mb-0 mt-2 mt-md-0">LABA / RUGI</label>
+                <h4 class="text-right font-weight-bold mb-0">Rp. <?php echo formatRP($kredit - $debit) ?></h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <?php foreach ($detail as $dt) { ?>
+            <div class="col-sm-6 col-xl-3">
+                <div class="p-3 bg-primary-300 rounded overflow-hidden position-relative text-white mb-g">
+                    <div class="">
+                        <h3 class="display-5 d-block l-h-n m-0 fw-500">
+                            <?php echo formatRP($dt->ttl) ?>
+                            <small class="m-0 l-h-n"><?php echo $dt->rek ?></small>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
     <div class="row">
         <div class="col-xl-12">
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
-                    <h2>PEMBAYARAN</h2>
+                    <h2>Data Transaksi</h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
                         <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
