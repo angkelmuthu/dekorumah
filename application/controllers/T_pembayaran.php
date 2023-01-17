@@ -80,7 +80,7 @@ class T_pembayaran extends CI_Controller
 
     public function create_action()
     {
-
+        $no_bayar = 'INV.' . date('ymdHis');
         if (isset($_FILES["gambar"]["name"])) {
             $config['upload_path'] = './assets/gambar/';
             $config['allowed_types'] = 'jpg|pdf';
@@ -104,7 +104,7 @@ class T_pembayaran extends CI_Controller
                 $image = $data['file_name'];
             }
 
-            $no_bayar = 'INV.' . date('ymdHis');
+
             $data = array(
                 'no_bayar' => $no_bayar,
                 'id_dana' => $this->input->post('id_dana', TRUE),
@@ -118,7 +118,7 @@ class T_pembayaran extends CI_Controller
                 'create_date' => date('Y-m-d H:i:s'),
             );
         } else {
-            $no_bayar = 'INV.' . date('ymdHis');
+
             $data = array(
                 'no_bayar' => $no_bayar,
                 'id_dana' => $this->input->post('id_dana', TRUE),
