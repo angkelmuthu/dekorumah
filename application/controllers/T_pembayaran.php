@@ -80,29 +80,28 @@ class T_pembayaran extends CI_Controller
 
     public function create_action()
     {
-        if (isset($_FILES["image"]) && !empty($_FILES["image"]["name"])) {
-            if (isset($_FILES["gambar"]["name"])) {
-                $config['upload_path'] = './assets/gambar/';
-                $config['allowed_types'] = 'jpg|pdf';
-                $this->upload->initialize($config);
-                if (!$this->upload->do_upload('gambar')) {
-                    $this->upload->display_errors();
-                    return FALSE;
-                } else {
-                    $data = $this->upload->data();
-                    //Compress Image
-                    $config['image_library'] = 'gd2';
-                    $config['source_image'] = './assets/gambar/' . $data['file_name'];
-                    $config['create_thumb'] = FALSE;
-                    // $config['maintain_ratio'] = TRUE;
-                    // $config['quality'] = '60%';
-                    // $config['width'] = 800;
-                    // $config['height'] = 800;
-                    $config['new_image'] = './assets/gambar/' . $data['file_name'];
-                    $this->load->library('image_lib', $config);
-                    $this->image_lib->resize();
-                    $image = $data['file_name'];
-                }
+
+        if (isset($_FILES["gambar"]["name"])) {
+            $config['upload_path'] = './assets/gambar/';
+            $config['allowed_types'] = 'jpg|pdf';
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('gambar')) {
+                $this->upload->display_errors();
+                return FALSE;
+            } else {
+                $data = $this->upload->data();
+                //Compress Image
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './assets/gambar/' . $data['file_name'];
+                $config['create_thumb'] = FALSE;
+                // $config['maintain_ratio'] = TRUE;
+                // $config['quality'] = '60%';
+                // $config['width'] = 800;
+                // $config['height'] = 800;
+                $config['new_image'] = './assets/gambar/' . $data['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+                $image = $data['file_name'];
             }
 
             $no_bayar = 'INV.' . date('ymdHis');
