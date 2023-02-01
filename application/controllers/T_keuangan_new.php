@@ -106,7 +106,7 @@ class T_keuangan_new extends CI_Controller
         if (isset($_FILES["gambar"]["name"])) {
             //if (isset($_FILES["gambar"]["name"])) {
             $config['upload_path'] = './assets/gambar/';
-            $config['allowed_types'] = 'jpg|pdf';
+            $config['allowed_types'] = 'jpg|jpeg|pdf';
             $this->upload->initialize($config);
             if (!$this->upload->do_upload('gambar')) {
                 $this->upload->display_errors();

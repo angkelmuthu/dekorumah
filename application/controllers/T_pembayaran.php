@@ -37,7 +37,7 @@ class T_pembayaran extends CI_Controller
             $row[] = '<div class="text-right">' . angka($res->total) . '</div>';
             $row[] = $res->keterangan;
             $row[] = '
-            <a href="#" class="btn btn-success btn-xs" id_bayar="' . $res->id_bayar . '"><i class="fal fa-file-pdf" aria-hidden="true"></i></a>
+            <a href="' . site_url('t_pembayaran/kwitansi/' . $res->id_bayar) . '" target="_blank" class="btn btn-success btn-xs"><i class="fal fa-file-pdf" aria-hidden="true"></i></a>
             <button type="button" class="view_bayar btn btn-info btn-xs" id_bayar="' . $res->id_bayar . '"><i class="fal fa-eye" aria-hidden="true"></i></button>
             <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#default' . $res->id_bayar . '"><i class="fal fa-trash" aria-hidden="true"></i></button>
             <div class="modal fade" id="default' . $res->id_bayar . '" role="dialog" aria-hidden="true">
@@ -83,7 +83,7 @@ class T_pembayaran extends CI_Controller
         $no_bayar = 'INV.' . date('ymdHis');
         if (isset($_FILES["gambar"]["name"])) {
             $config['upload_path'] = './assets/gambar/';
-            $config['allowed_types'] = 'jpg|pdf';
+            $config['allowed_types'] = 'jpg|jpeg|pdf';
             $this->upload->initialize($config);
             if (!$this->upload->do_upload('gambar')) {
                 $this->upload->display_errors();
@@ -145,7 +145,7 @@ class T_pembayaran extends CI_Controller
         if (isset($_FILES["image"]) && !empty($_FILES["image"]["name"])) {
             if (isset($_FILES["gambar"]["name"])) {
                 $config['upload_path'] = './assets/gambar/';
-                $config['allowed_types'] = 'jpg|pdf';
+                $config['allowed_types'] = 'jpg|jpeg|pdf';
                 $this->upload->initialize($config);
                 if (!$this->upload->do_upload('gambar')) {
                     $this->upload->display_errors();
@@ -218,12 +218,15 @@ class T_pembayaran extends CI_Controller
         $this->load->view('t_pembayaran/modal_vbayar', $data);
     }
 
-    function kwitansi()
+    function kwitansi($id_bayar)
     {
-        // $this->load->library('pdf');
-        // $this->pdf->setPaper('A4', 'potrait');
-        // $this->pdf->filename = "tes.pdf";
-        // $this->pdf->load_view('t_pembayaran/kwitansi_pdf');
-        $this->load->view('t_pembayaran/kwitansi_pdf');
+        // $data=array(
+        //     'id_bayar'
+        // )
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "tes.pdf";
+        $this->pdf->load_view('t_pembayaran/kwitansi_pdf');
+        //$this->load->view('t_pembayaran/kwitansi_pdf');
     }
 }
