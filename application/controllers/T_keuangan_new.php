@@ -1,3 +1,4 @@
+application/x-httpd-php T_keuangan_new.php ( C++ source, ASCII text )
 <?php
 
 if (!defined('BASEPATH'))
@@ -23,7 +24,7 @@ class T_keuangan_new extends CI_Controller
             'kredit' => $row->kredit,
             'detail' => $this->T_keuangan_new_model->get_group_total(),
         );
-        $this->template->load('template', 'T_keuangan_new/T_keuangan_new_list', $data);
+        $this->template->load('template', 't_keuangan_new/t_keuangan_new_list', $data);
     }
 
     public function ajax_list()
@@ -174,7 +175,7 @@ class T_keuangan_new extends CI_Controller
         if (isset($_FILES["gambar"]["name"])) {
             //if (isset($_FILES["gambar"]["name"])) {
             $config['upload_path'] = './assets/gambar/';
-            $config['allowed_types'] = 'jpg|pdf';
+            $config['allowed_types'] = 'jpg|jpeg|pdf';
             $this->upload->initialize($config);
             if (!$this->upload->do_upload('gambar')) {
                 $this->upload->display_errors();

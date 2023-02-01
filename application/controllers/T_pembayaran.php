@@ -1,3 +1,4 @@
+text/x-generic T_pembayaran.php ( C++ source, ASCII text )
 <?php
 
 if (!defined('BASEPATH'))
@@ -17,7 +18,7 @@ class T_pembayaran extends CI_Controller
 
     public function index()
     {
-        $this->template->load('template', 'T_pembayaran/t_pembayaran_list');
+        $this->template->load('template', 't_pembayaran/t_pembayaran_list');
     }
 
     public function ajax_list()
@@ -80,7 +81,6 @@ class T_pembayaran extends CI_Controller
 
     public function create_action()
     {
-        $no_bayar = 'INV.' . date('ymdHis');
         if (isset($_FILES["gambar"]["name"])) {
             $config['upload_path'] = './assets/gambar/';
             $config['allowed_types'] = 'jpg|jpeg|pdf';
@@ -104,7 +104,7 @@ class T_pembayaran extends CI_Controller
                 $image = $data['file_name'];
             }
 
-
+            $no_bayar = 'INV.' . date('ymdHis');
             $data = array(
                 'no_bayar' => $no_bayar,
                 'id_dana' => $this->input->post('id_dana', TRUE),
@@ -118,7 +118,7 @@ class T_pembayaran extends CI_Controller
                 'create_date' => date('Y-m-d H:i:s'),
             );
         } else {
-
+            $no_bayar = 'INV.' . date('ymdHis');
             $data = array(
                 'no_bayar' => $no_bayar,
                 'id_dana' => $this->input->post('id_dana', TRUE),
@@ -220,9 +220,6 @@ class T_pembayaran extends CI_Controller
 
     function kwitansi($id_bayar)
     {
-        // $data=array(
-        //     'id_bayar'
-        // )
         $this->load->library('pdf');
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->filename = "tes.pdf";
