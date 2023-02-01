@@ -1,4 +1,3 @@
-text/x-generic T_pembayaran.php ( C++ source, ASCII text )
 <?php
 
 if (!defined('BASEPATH'))

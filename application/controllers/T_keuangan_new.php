@@ -1,4 +1,3 @@
-application/x-httpd-php T_keuangan_new.php ( C++ source, ASCII text )
 <?php
 
 if (!defined('BASEPATH'))
