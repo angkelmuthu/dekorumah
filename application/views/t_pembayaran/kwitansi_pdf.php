@@ -123,7 +123,7 @@ $cos = $this->db->get('m_pelanggan')->row();
                         <tr>
                             <td>
                                 <h3 style="margin-bottom: 0px;">PT. DIA Inti Dekorasi</h3>
-                                <p style="margin-top: 0px;">Jl. Tanjung Barat Raya</p>
+                                <p style="margin-top: 0px;">Jl Raya Setu No 85B Cipayung Jakarta Timur.</p>
                             </td>
 
                             <td class="title">
@@ -214,7 +214,7 @@ $cos = $this->db->get('m_pelanggan')->row();
 
                 <td><?php echo angka($bayar->total) ?></td>
             </tr> -->
-            <!-- 
+            <!--
             <tr class="total">
                 <td></td>
 
